@@ -17,6 +17,7 @@ import 'package:rooya_app/GlobalClass/TextFieldsCustom.dart';
 import 'package:image/image.dart' as imageLib;
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
 import 'package:rooya_app/rooya_post/CreatePost/create_post.dart';
+import 'package:rooya_app/story/StoryImageUpload.dart';
 import 'package:rooya_app/story/uploadStroy.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/ProgressHUD.dart';
@@ -25,7 +26,6 @@ import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/SnackbarCustom.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:video_player/video_player.dart';
-import 'package:video_trimmer/video_trimmer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../../../main.dart';
 import 'ReelCameraController.dart';
@@ -390,110 +390,108 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                                               spinSize: 50,
                                             )));
                               } else {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (c) => EditImage(
-                                              path: path,
-                                            ))).then((value) {
-                                  Get.back();
-                                });
+                                uploadImage(path, context);
                               }
                             } catch (e) {}
                           },
                         ),
-                        InkWell(
-                          onTap: () {
-                            if (!controller!.value.isRecordingVideo) {
-                              ambiguate(WidgetsBinding.instance)
-                                  ?.removeObserver(this);
-                              _flashModeControlRowAnimationController.dispose();
-                              _exposureModeControlRowAnimationController
-                                  .dispose();
-                              onTakePictureButtonPressed(context);
-                            } else {
-                              doneVideo(context);
-                            }
-                          },
-                          onLongPress: () {
-                            onVideoMode = true;
-                            setState(() {});
-                            controller != null &&
-                                    controller!.value.isInitialized &&
-                                    !controller!.value.isRecordingVideo
-                                ? onVideoRecordButtonPressed()
-                                : doneVideo(context);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              onVideoMode
-                                  ? Container(
-                                      height: height * 0.090,
-                                      width: width * 0.180,
-                                      child: !isrecordingStart
-                                          ? Padding(
-                                              padding: EdgeInsets.all(10.0),
-                                              child: SvgPicture.asset(
-                                                  'assets/svg/VideoIcon.svg'),
-                                            )
-                                          : Container(
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                              child: Center(
-                                                child: Text(
-                                                  '$elapsedTime',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12),
+                        Listener(
+                          onPointerDown: (_) => _pointers++,
+                          onPointerUp: (_) => _pointers--,
+                          child: InkWell(
+                            onTap: () {
+                              if (!controller!.value.isRecordingVideo) {
+                                ambiguate(WidgetsBinding.instance)
+                                    ?.removeObserver(this);
+                                _flashModeControlRowAnimationController
+                                    .dispose();
+                                _exposureModeControlRowAnimationController
+                                    .dispose();
+                                onTakePictureButtonPressed(context);
+                              } else {
+                                doneVideo(context);
+                              }
+                            },
+                            onLongPress: () {
+                              onVideoMode = true;
+                              setState(() {});
+                              controller != null &&
+                                      controller!.value.isInitialized &&
+                                      !controller!.value.isRecordingVideo
+                                  ? onVideoRecordButtonPressed()
+                                  : doneVideo(context);
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                onVideoMode
+                                    ? Container(
+                                        height: height * 0.090,
+                                        width: width * 0.180,
+                                        child: !isrecordingStart
+                                            ? Padding(
+                                                padding: EdgeInsets.all(10.0),
+                                                child: SvgPicture.asset(
+                                                    'assets/svg/VideoIcon.svg'),
+                                              )
+                                            : Container(
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                                child: Center(
+                                                  child: Text(
+                                                    '$elapsedTime',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12),
+                                                  ),
                                                 ),
+                                                decoration: BoxDecoration(
+                                                    color: greenColor,
+                                                    shape: BoxShape.circle),
                                               ),
-                                              decoration: BoxDecoration(
-                                                  color: greenColor,
-                                                  shape: BoxShape.circle),
-                                            ),
-                                      padding: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle),
-                                    )
-                                  : Container(
-                                      height: height * 0.090,
-                                      width: width * 0.180,
-                                      child: Icon(
-                                        Icons.camera_enhance_sharp,
-                                        color: greenColor,
-                                        size: 40,
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle),
+                                      )
+                                    : Container(
+                                        height: height * 0.090,
+                                        width: width * 0.180,
+                                        child: Icon(
+                                          Icons.camera_enhance_sharp,
+                                          color: greenColor,
+                                          size: 40,
+                                        ),
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle),
                                       ),
-                                      padding: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle),
-                                    ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    if (onVideoMode) {
-                                      onVideoMode = false;
-                                    } else {
-                                      onVideoMode = true;
-                                    }
-                                  });
-                                },
-                                child: Text(
-                                  !onVideoMode
-                                      ? 'Long press to create video'
-                                      : '',
-                                  style: TextStyle(
-                                      fontFamily: AppFonts.segoeui,
-                                      fontSize: 12,
-                                      color: Colors.white),
+                                SizedBox(
+                                  height: 5,
                                 ),
-                              )
-                            ],
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (onVideoMode) {
+                                        onVideoMode = false;
+                                      } else {
+                                        onVideoMode = true;
+                                      }
+                                    });
+                                  },
+                                  child: Text(
+                                    !onVideoMode
+                                        ? 'Long press to create video'
+                                        : '',
+                                    style: TextStyle(
+                                        fontFamily: AppFonts.segoeui,
+                                        fontSize: 12,
+                                        color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         InkWell(
@@ -595,7 +593,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     if (controller == null || _pointers != 2) {
       return;
     }
-
     _currentScale = (_baseScale * details.scale)
         .clamp(_minAvailableZoom, _maxAvailableZoom);
 
@@ -907,7 +904,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
         );
       }
     }
-
     return Row(children: toggles);
   }
 
@@ -1044,16 +1040,47 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
           videoController?.dispose();
           videoController = null;
         });
+        uploadImage(file!.path, context);
         // if (file != null) showInSnackBar('Picture saved to ${file.path}');
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (c) => EditImage(
-                      path: file!.path,
-                    ))).then((value) {
-          Get.back();
-        });
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (c) => EditImage(
+        //               path: file!.path,
+        //             ))).then((value) {
+        //   Get.back();
+        // });
       }
+    });
+  }
+
+  uploadImage(String path, BuildContext context) async {
+    File imageFile;
+    String fileName;
+    imageFile = new File(path);
+    fileName = basename(imageFile.path);
+    var image = imageLib.decodeImage(await imageFile.readAsBytes());
+    image = imageLib.copyResize(image!, width: 600);
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new StoryImageUpload(
+          title: Text("Rooya Editor"),
+          image: image!,
+          filters: presetFiltersList,
+          filename: fileName,
+          imagePath: path,
+          loader: Center(
+              child: ShimerEffect(
+            child: Container(
+              color: Colors.blueGrey,
+            ),
+          )),
+          fit: BoxFit.cover,
+        ),
+      ),
+    ).then((value) {
+      Get.back();
     });
   }
 
@@ -1888,7 +1915,7 @@ class TrimmerViewforVideo extends StatefulWidget {
 }
 
 class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
-  final Trimmer _trimmer = Trimmer();
+  // final Trimmer _trimmer = Trimmer();
 
   double _startValue = 0.0;
   double _endValue = 0.0;
@@ -1896,33 +1923,33 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
   bool _isPlaying = false;
   bool _progressVisibility = false;
 
-  Future<String?> _saveVideo() async {
-    setState(() {
-      _progressVisibility = true;
-    });
-
-    String? _value;
-
-    await _trimmer
-        .saveTrimmedVideo(startValue: _startValue, endValue: _endValue)
-        .then((value) {
-      setState(() {
-        _progressVisibility = false;
-        _value = value;
-      });
-    });
-
-    return _value;
-  }
-
-  void _loadVideo() {
-    _trimmer.loadVideo(videoFile: widget.file!);
-  }
+  // Future<String?> _saveVideo() async {
+  //   setState(() {
+  //     _progressVisibility = true;
+  //   });
+  //
+  //   String? _value;
+  //
+  //   await _trimmer
+  //       .saveTrimmedVideo(startValue: _startValue, endValue: _endValue)
+  //       .then((value) {
+  //     setState(() {
+  //       _progressVisibility = false;
+  //       _value = value;
+  //     });
+  //   });
+  //
+  //   return _value;
+  // }
+  //
+  // void _loadVideo() {
+  //   _trimmer.loadVideo(videoFile: widget.file!);
+  // }
 
   @override
   void initState() {
     super.initState();
-    _loadVideo();
+    // _loadVideo();
   }
 
   TextEditingController controller = TextEditingController();
@@ -1951,24 +1978,24 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            _saveVideo().then((outputPath) async {
-              setState(() {
-                isLoading = true;
-              });
-              List listofurl = [];
-              String value = await createStory(outputPath!);
-              listofurl.add(value);
-              print('listofurl= $listofurl');
-              await uploadStoryData(
-                  text: controller.text, listOfUrl: listofurl);
-              setState(() {
-                isLoading = false;
-              });
-              snackBarSuccess('Story post successfully');
-              Future.delayed(Duration(seconds: 2), () {
-                Get.offAll(() => BottomSheetCustom());
-              });
-            });
+            // _saveVideo().then((outputPath) async {
+            //   setState(() {
+            //     isLoading = true;
+            //   });
+            //   List listofurl = [];
+            //   String value = await createStory(outputPath!);
+            //   listofurl.add(value);
+            //   print('listofurl= $listofurl');
+            //   await uploadStoryData(
+            //       text: controller.text, listOfUrl: listofurl);
+            //   setState(() {
+            //     isLoading = false;
+            //   });
+            //   snackBarSuccess('Story post successfully');
+            //   Future.delayed(Duration(seconds: 2), () {
+            //     Get.offAll(() => BottomSheetCustom());
+            //   });
+            // });
           },
           backgroundColor: greenColor,
           child: Center(
@@ -1980,98 +2007,100 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
         ),
         body: Builder(
           builder: (context) => Center(
-            child: Container(
-              width: Get.width,
-              height: Get.height,
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.030),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Visibility(
-                      visible: _progressVisibility,
-                      child: LinearProgressIndicator(
-                        backgroundColor: primaryColor,
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.010,
-                    ),
-                    TextFieldsProfile(
-                      controller: controller,
-                      hint: 'Write your comment'.tr,
-                      uperhint: 'Write your comment'.tr,
-                      width: Get.width,
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.030,
-                    ),
-                    Container(
-                      height: Get.height * 0.5,
-                      width: Get.width,
-                      child: VideoViewer(trimmer: _trimmer),
-                    ),
-                    Center(
-                      child: TrimEditor(
-                        trimmer: _trimmer,
-                        viewerHeight: 50.0,
-                        circlePaintColor: greenColor,
-                        scrubberPaintColor: greenColor,
-                        borderPaintColor: greenColor,
-                        viewerWidth: MediaQuery.of(context).size.width -
-                            Get.width * 0.030,
-                        maxVideoLength: Duration(seconds: 10),
-                        onChangeStart: (value) {
-                          _startValue = value;
-                        },
-                        onChangeEnd: (value) {
-                          _endValue = value;
-                        },
-                        onChangePlaybackState: (value) {
-                          setState(() {
-                            _isPlaying = value;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.030,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: greenColor, shape: BoxShape.circle),
-                      child: TextButton(
-                        child: _isPlaying
-                            ? Icon(
-                                Icons.pause,
-                                size: 40.0,
-                                color: Colors.white,
-                              )
-                            : Icon(
-                                Icons.play_arrow,
-                                size: 40.0,
-                                color: Colors.white,
-                              ),
-                        onPressed: () async {
-                          bool playbackState =
-                              await _trimmer.videPlaybackControl(
-                            startValue: _startValue,
-                            endValue: _endValue,
-                          );
-                          setState(() {
-                            _isPlaying = playbackState;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.050,
-                    ),
-                  ],
-                ),
+              // child: Container(
+              //   width: Get.width,
+              //   height: Get.height,
+              //   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.030),
+              //   child: SingleChildScrollView(
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: <Widget>[
+              //         Visibility(
+              //           visible: _progressVisibility,
+              //           child: LinearProgressIndicator(
+              //             backgroundColor: primaryColor,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: Get.height * 0.010,
+              //         ),
+              //         TextFieldsProfile(
+              //           controller: controller,
+              //           hint: 'Write your comment'.tr,
+              //           uperhint: 'Write your comment'.tr,
+              //           width: Get.width,
+              //         ),
+              //         SizedBox(
+              //           height: Get.height * 0.030,
+              //         ),
+              //         Container(
+              //           height: Get.height * 0.5,
+              //           width: Get.width,
+              //           child: VideoViewer(
+              //              // trimmer: _trimmer
+              //           ),
+              //         ),
+              //         Center(
+              //           child: TrimEditor(
+              //             //trimmer: _trimmer,
+              //             viewerHeight: 50.0,
+              //             circlePaintColor: greenColor,
+              //             scrubberPaintColor: greenColor,
+              //             borderPaintColor: greenColor,
+              //             viewerWidth: MediaQuery.of(context).size.width -
+              //                 Get.width * 0.030,
+              //             maxVideoLength: Duration(seconds: 10),
+              //             onChangeStart: (value) {
+              //               _startValue = value;
+              //             },
+              //             onChangeEnd: (value) {
+              //               _endValue = value;
+              //             },
+              //             onChangePlaybackState: (value) {
+              //               setState(() {
+              //                 _isPlaying = value;
+              //               });
+              //             },
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: Get.height * 0.030,
+              //         ),
+              //         Container(
+              //           decoration: BoxDecoration(
+              //               color: greenColor, shape: BoxShape.circle),
+              //           child: TextButton(
+              //             child: _isPlaying
+              //                 ? Icon(
+              //                     Icons.pause,
+              //                     size: 40.0,
+              //                     color: Colors.white,
+              //                   )
+              //                 : Icon(
+              //                     Icons.play_arrow,
+              //                     size: 40.0,
+              //                     color: Colors.white,
+              //                   ),
+              //             onPressed: () async {
+              //               bool playbackState =
+              //                   await _trimmer.videPlaybackControl(
+              //                 startValue: _startValue,
+              //                 endValue: _endValue,
+              //               );
+              //               setState(() {
+              //                 _isPlaying = playbackState;
+              //               });
+              //             },
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: Get.height * 0.050,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               ),
-            ),
-          ),
         ),
       ),
     );
