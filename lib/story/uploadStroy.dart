@@ -69,3 +69,28 @@ Future uploadStoryData(
   if (data['result'] == 'success') {
   } else {}
 }
+
+Future<String> uploadReelFiles(String path) async {
+  List<MultipartFile> listofFile = <MultipartFile>[];
+  String fileName = path.split('/').last;
+  listofFile.add(await MultipartFile.fromFile(
+    path,
+    filename: '$fileName',
+  ));
+  FormData formData = new FormData.fromMap({"files[]": listofFile});
+  String url = '';
+  try {
+    final response = await Dio().post('https://rooyapis.rooyatech.com/Alphaapis/uploadReelsfiles?code=ROOYA-5574499',
+        options: Options(headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": '${await getToken()}'
+        }),
+        data: formData);
+    print('response data is = ${response.data}');
+    url = response.data['file_url'];
+    return url;
+  } catch (e) {
+    print('Exception is = $e');
+    return url;
+  }
+}

@@ -13,7 +13,8 @@ PersistentTabController? persistentcontroller;
 bool selectHome = true;
 
 class BottomSheetCustom extends StatefulWidget {
-  const BottomSheetCustom({Key? key}) : super(key: key);
+  final int? index;
+  const BottomSheetCustom({Key? key, this.index=0}) : super(key: key);
 
   @override
   _BottomSheetCustomState createState() => _BottomSheetCustomState();
@@ -22,7 +23,7 @@ class BottomSheetCustom extends StatefulWidget {
 class _BottomSheetCustomState extends State<BottomSheetCustom> {
   @override
   void initState() {
-    persistentcontroller = PersistentTabController(initialIndex: 0);
+    persistentcontroller = PersistentTabController(initialIndex: widget.index!);
     super.initState();
   }
 

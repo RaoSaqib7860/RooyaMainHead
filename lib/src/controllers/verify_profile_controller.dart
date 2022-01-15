@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:leuke/src/repositories/settings_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:rooya_app/src/repositories/settings_repository.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../controllers/user_controller.dart';
 import '../helpers/global_keys.dart';
 import '../models/gender.dart';

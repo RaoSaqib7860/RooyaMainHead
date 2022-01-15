@@ -93,7 +93,7 @@ class VideoRecorderController extends ControllerMVC {
   ValueNotifier<DateTime> endShift = ValueNotifier(DateTime.now());
   DateTime pauseTime = DateTime.now();
   DateTime playTime = DateTime.now();
-  ValueNotifier<List<double>> videoTimerLimit = new ValueNotifier([]);
+  ValueNotifier<List<double>> videoTimerLimit = new ValueNotifier([15, 30, 60]);
   ValueNotifier<bool> cameraPreview = new ValueNotifier(false);
   int pointers = 0;
   bool enableAudio = true;
@@ -107,6 +107,7 @@ class VideoRecorderController extends ControllerMVC {
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
   final Trimmer _trimmer = Trimmer();
+
   @override
   void dispose() {
     super.dispose();
@@ -130,7 +131,8 @@ class VideoRecorderController extends ControllerMVC {
 
   void showInSnackBar(String message) {
     // ignore: deprecated_member_use
-    ScaffoldMessenger.of(GlobalVariable.navState.currentContext!).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(GlobalVariable.navState.currentContext!)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   void _handleScaleStart(ScaleStartDetails details) {
@@ -143,7 +145,8 @@ class VideoRecorderController extends ControllerMVC {
       return;
     }
 
-    currentScale = (baseScale * details.scale).clamp(minAvailableZoom, maxAvailableZoom);
+    currentScale =
+        (baseScale * details.scale).clamp(minAvailableZoom, maxAvailableZoom);
 
     await controller!.setZoomLevel(currentScale);
   }
@@ -184,7 +187,8 @@ class VideoRecorderController extends ControllerMVC {
     // If the controller is updated then update the UI.
     cameraController.addListener(() {
       if (cameraController.value.hasError) {
-        showInSnackBar('Camera error ${cameraController.value.errorDescription}');
+        showInSnackBar(
+            'Camera error ${cameraController.value.errorDescription}');
       }
     });
 
@@ -193,10 +197,21 @@ class VideoRecorderController extends ControllerMVC {
       await Future.wait([
         // The exposure mode is currently not supported on the web.
         ...(!kIsWeb
-            ? [cameraController.getMinExposureOffset().then((value) => minAvailableExposureOffset = value), cameraController.getMaxExposureOffset().then((value) => maxAvailableExposureOffset = value)]
+            ? [
+                cameraController
+                    .getMinExposureOffset()
+                    .then((value) => minAvailableExposureOffset = value),
+                cameraController
+                    .getMaxExposureOffset()
+                    .then((value) => maxAvailableExposureOffset = value)
+              ]
             : []),
-        cameraController.getMaxZoomLevel().then((value) => maxAvailableZoom = value),
-        cameraController.getMinZoomLevel().then((value) => minAvailableZoom = value),
+        cameraController
+            .getMaxZoomLevel()
+            .then((value) => maxAvailableZoom = value),
+        cameraController
+            .getMinZoomLevel()
+            .then((value) => minAvailableZoom = value),
       ]);
     } on CameraException catch (e) {
       _showCameraException(e);
@@ -273,7 +288,11 @@ class VideoRecorderController extends ControllerMVC {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: new Text("Camera Error", style: TextStyle(fontSize: 20.0, color: settingRepo.setting.value.textColor, fontWeight: FontWeight.bold)),
+                    child: new Text("Camera Error",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            color: settingRepo.setting.value.textColor,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
                 Center(
@@ -368,7 +387,8 @@ class VideoRecorderController extends ControllerMVC {
             isUploading.notifyListeners();
             showLoader = false;
           });
-          Navigator.of(scaffoldKey.currentContext!).popAndPushNamed('/my-profile');
+          Navigator.of(scaffoldKey.currentContext!)
+              .popAndPushNamed('/my-profile');
         } else {
           var msg = response.data['msg'];
           scaffoldKey.currentState!.showSnackBar(
@@ -442,7 +462,6 @@ class VideoRecorderController extends ControllerMVC {
       videoRepo.homeCon.value.showFollowingPage.value = false;
       videoRepo.homeCon.value.showFollowingPage.notifyListeners();
       videoRepo.homeCon.value.getVideos();
-      Navigator.of(context).pushReplacementNamed('/home');
       return Future.value(true);
     }
   }
@@ -482,10 +501,13 @@ class VideoRecorderController extends ControllerMVC {
                         onTap: () async {
                           videoRepo.isOnRecordingPage.value = false;
                           videoRepo.isOnRecordingPage.notifyListeners();
-                          soundRepo.currentSound = new ValueNotifier(SoundData(soundId: 0, title: ""));
+                          soundRepo.currentSound =
+                              new ValueNotifier(SoundData(id: 0, title: ""));
                           soundRepo.currentSound.notifyListeners();
-                          videoRepo.homeCon.value.showFollowingPage.value = false;
-                          videoRepo.homeCon.value.showFollowingPage.notifyListeners();
+                          videoRepo.homeCon.value.showFollowingPage.value =
+                              false;
+                          videoRepo.homeCon.value.showFollowingPage
+                              .notifyListeners();
                           videoRepo.homeCon.value.getVideos();
                           Navigator.of(context).pushReplacementNamed('/home');
                         },
@@ -494,25 +516,32 @@ class VideoRecorderController extends ControllerMVC {
                           height: 35,
                           decoration: BoxDecoration(
                             color: settingRepo.setting.value.accentColor,
-                            borderRadius: BorderRadius.all(new Radius.circular(5.0)),
+                            borderRadius:
+                                BorderRadius.all(new Radius.circular(5.0)),
                           ),
                           child: Center(
                             child: Text(
                               "Yes",
-                              style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'RockWellStd'),
+                              style: TextStyle(
+                                  color: settingRepo.setting.value.textColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'RockWellStd'),
                             ),
                           ),
                         )),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context, rootNavigator: true).pop("Discard");
+                        Navigator.of(context, rootNavigator: true)
+                            .pop("Discard");
                       },
                       child: Container(
                         width: 100,
                         height: 35,
                         decoration: BoxDecoration(
                           color: settingRepo.setting.value.accentColor,
-                          borderRadius: BorderRadius.all(new Radius.circular(5.0)),
+                          borderRadius:
+                              BorderRadius.all(new Radius.circular(5.0)),
                         ),
                         child: Center(
                           child: Text(
@@ -592,11 +621,17 @@ class VideoRecorderController extends ControllerMVC {
               isProcessing = true;
               // });
               if (watermark != "") {
-                _flutterFFmpeg.execute("-i $videoPath -i $watermark -filter_complex 'overlay=W-w-5:5' -c:a copy -preset ultrafast $outputVideo").then((rc) async {
+                _flutterFFmpeg
+                    .execute(
+                        "-i $videoPath -i $watermark -filter_complex 'overlay=W-w-5:5' -c:a copy -preset ultrafast $outputVideo")
+                    .then((rc) async {
                   // setState(() {
                   videoPath = outputVideo;
                   // });
-                  _flutterFFmpeg.execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg").then((rc) async {
+                  _flutterFFmpeg
+                      .execute(
+                          "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+                      .then((rc) async {
                     thumbPath = thumbImg;
 
                     isProcessing = false;
@@ -605,7 +640,10 @@ class VideoRecorderController extends ControllerMVC {
                   });
                 });
               } else {
-                _flutterFFmpeg.execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg").then((rc) async {
+                _flutterFFmpeg
+                    .execute(
+                        "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+                    .then((rc) async {
                   thumbPath = thumbImg;
                   isProcessing = false;
 
@@ -640,8 +678,10 @@ class VideoRecorderController extends ControllerMVC {
     String videoFileName = videoFilePath.split('/').last;
     String thumbFileName = thumbFilePath.split('/').last;
     FormData formData = FormData.fromMap({
-      "video": await MultipartFile.fromFile(videoFilePath, filename: videoFileName),
-      "thumbnail_file": await MultipartFile.fromFile(thumbFilePath, filename: thumbFileName),
+      "video":
+          await MultipartFile.fromFile(videoFilePath, filename: videoFileName),
+      "thumbnail_file":
+          await MultipartFile.fromFile(thumbFilePath, filename: thumbFileName),
       "privacy": privacy,
     });
     var response = await Dio().post(
@@ -657,8 +697,8 @@ class VideoRecorderController extends ControllerMVC {
         "description": description,
         "sound_id": soundRepo.mic.value
             ? 0
-            : soundRepo.currentSound.value.soundId > 0
-                ? soundRepo.currentSound.value.soundId
+            : soundRepo.currentSound.value.id! > 0
+                ? soundRepo.currentSound.value.id
                 : audioId
       },
       onSendProgress: (int sent, int total) {
@@ -672,7 +712,7 @@ class VideoRecorderController extends ControllerMVC {
         // });
       },
     );
-    soundRepo.currentSound = new ValueNotifier(SoundData(soundId: 0, title: ""));
+    soundRepo.currentSound = new ValueNotifier(SoundData(id: 0, title: ""));
     soundRepo.currentSound.notifyListeners();
     if (response.statusCode == 200) {
       if (response.data['status'] == 'success') {
@@ -728,14 +768,22 @@ class VideoRecorderController extends ControllerMVC {
                     videoRepo.homeCon.value.showFollowingPage.value = false;
                     videoRepo.homeCon.value.showFollowingPage.notifyListeners();
                     videoRepo.homeCon.value.getVideos();
-                    Navigator.of(scaffoldKey.currentContext!).pushReplacementNamed('/home');
+                    Navigator.of(scaffoldKey.currentContext!)
+                        .pushReplacementNamed('/home');
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: settingRepo.setting.value.accentColor,
                     ),
-                    child: "Close".text.size(18).center.color(settingRepo.setting.value.textColor!).make().centered().pSymmetric(h: 10, v: 10),
+                    child: "Close"
+                        .text
+                        .size(18)
+                        .center
+                        .color(settingRepo.setting.value.textColor!)
+                        .make()
+                        .centered()
+                        .pSymmetric(h: 10, v: 10),
                   ),
                 )
               ],
@@ -790,7 +838,7 @@ class VideoRecorderController extends ControllerMVC {
 
   void onStopButtonPressed() {
     timer.cancel();
-    if (soundRepo.currentSound.value.soundId > 0) {
+    if (soundRepo.currentSound.value.id! > 0) {
       assetsAudioPlayer.pause();
     }
 
@@ -805,7 +853,8 @@ class VideoRecorderController extends ControllerMVC {
   Future<void> _startVideoPlayer(outputVideo) async {
     showLoader = true;
     isProcessing = false;
-    final VideoPlayerController vController = VideoPlayerController.file(new File(outputVideo));
+    final VideoPlayerController vController =
+        VideoPlayerController.file(new File(outputVideo));
 
     videoPlayerListener = () {
       if (videoController != null && videoController!.value.size != null) {
@@ -828,7 +877,7 @@ class VideoRecorderController extends ControllerMVC {
   }
 
   void onPauseButtonPressed(BuildContext context) {
-    if (soundRepo.currentSound.value.soundId > 0) {
+    if (soundRepo.currentSound.value.id! > 0) {
       assetsAudioPlayer.pause();
     }
     // setState(() {
@@ -848,7 +897,8 @@ class VideoRecorderController extends ControllerMVC {
     playTime = DateTime.now();
     isRecordingPaused = false;
     try {
-      endShift.value.add(Duration(milliseconds: playTime.difference(pauseTime).inMilliseconds));
+      endShift.value.add(Duration(
+          milliseconds: playTime.difference(pauseTime).inMilliseconds));
       endShift.notifyListeners();
     } catch (e) {
       print("endShift.value error $e");
@@ -879,7 +929,9 @@ class VideoRecorderController extends ControllerMVC {
 
     try {
       await controller!.startVideoRecording();
-      endShift.value = DateTime.now().add(Duration(milliseconds: videoLength.toInt() * 1000 + int.parse((videoLength.toInt() / 15).toStringAsFixed(0)) * 104));
+      endShift.value = DateTime.now().add(Duration(
+          milliseconds: videoLength.toInt() * 1000 +
+              int.parse((videoLength.toInt() / 15).toStringAsFixed(0)) * 104));
       endShift.notifyListeners();
     } on CameraException catch (e) {
       showCameraException(e, context);
@@ -914,22 +966,29 @@ class VideoRecorderController extends ControllerMVC {
   }
 
   Future<String> stopVideoRecording() async {
+    print('1');
     assetsAudioPlayer.pause();
+    print('pass');
     if (!controller!.value.isRecordingVideo) {
+      print('2');
       return "";
     }
-    if (!videoRepo.isOnRecordingPage.value) {
-      return "";
-    }
-
+    print('11111');
+    // if (!videoRepo.isOnRecordingPage.value) {
+    //   return "";
+    // }
+    print('2222222');
     try {
       await controller!.stopVideoRecording().then((file) {
         videoPath = file.path;
+        print('3');
       });
     } on CameraException catch (e) {
       showCameraException(e, scaffoldKey.currentContext!);
+      print('3');
       return "";
     }
+    print('3333333333');
     Directory appDirectory;
     if (!Platform.isAndroid) {
       appDirectory = await getApplicationDocumentsDirectory();
@@ -937,6 +996,7 @@ class VideoRecorderController extends ControllerMVC {
     } else {
       appDirectory = (await getExternalStorageDirectory())!;
     }
+    print('4');
     final String outputDirectory = '${appDirectory.path}/outputVideos';
     await Directory(outputDirectory).create(recursive: true);
     final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
@@ -952,32 +1012,42 @@ class VideoRecorderController extends ControllerMVC {
       watermark = " -i $watermark";
       watermarkArgs = ",overlay=W-w-5:5";
     }
+    print('5');
     if (audioFile != '') {
       audioFile = " -i $audioFile";
       audioFileArgs = "-c:a aac -ac 2 -ar 22050";
       audioFileArgs2 = "-shortest";
     }
+    print('6');
     if (soundRepo.mic.value && audioFile != '') {
       audioFileArgs = '';
     }
+    print('7');
     try {
+      print('8');
       _flutterFFmpeg
           .execute(
               '-i $videoPath $watermark $audioFile  -filter_complex "$mergeAudioArgs[0:v]scale=720:-2$watermarkArgs" $mergeAudioArgs2 $audioFileArgs -c:v libx264 -preset ultrafast -crf 33  $audioFileArgs2 $outputVideo')
           .then((rc) async {
+        print('9');
         setState(() {
           videoPath = outputVideo;
         });
-        _flutterFFmpeg.execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg").then((rc) async {
+        _flutterFFmpeg
+            .execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+            .then((rc) async {
           thumbPath = thumbImg;
+          print('10');
           try {
             await _trimmer.loadVideo(videoFile: File(videoPath));
           } catch (e) {
             print("videoPath error : $e");
           }
+          print('11');
           setState(() {
             isProcessing = false;
           });
+          print('12');
           Navigator.of(scaffoldKey.currentContext!).push(
             MaterialPageRoute(builder: (context) {
               return TrimmerView(

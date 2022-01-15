@@ -1,93 +1,216 @@
 class SoundModelList {
-  int totalRecord = 0;
-  String status = "";
-  List<SoundData>? data;
+  List<SoundData>? soundData=[];
+  int? total;
+  String? next;
 
-  SoundModelList({this.totalRecord = 0, this.status = "", this.data});
+  SoundModelList({this.soundData, this.total, this.next});
 
-  SoundModelList.fromJSON(Map<String, dynamic> json) {
-    totalRecord = json['total_record'] ?? 0;
-    status = json['status'];
+  SoundModelList.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = [];
+      soundData = <SoundData>[];
       json['data'].forEach((v) {
-        data!.add(new SoundData.fromJSON(v));
+        soundData!.add(new SoundData.fromJson(v));
       });
     }
+    total = json['total'];
+    next = json['next'];
   }
 
-  Map<String, dynamic> toJSON() {
-    Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total_record'] = this.totalRecord;
-    data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJSON()).toList();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.soundData != null) {
+      data['data'] = this.soundData!.map((v) => v.toJson()).toList();
     }
+    data['total'] = this.total;
+    data['next'] = this.next;
     return data;
   }
 }
 
 class SoundData {
-  int soundId = 0;
-  String title = "";
-  String url = "";
-  int userId = 0;
-  String tags = "";
-  String imageUrl = "";
-  String category = "";
-  String catId = "";
-  String album = "";
-  String createdAt = "";
-  int duration = 0;
-  int usedTimes = 0;
-  int fav = 0;
-  SoundData({
-    this.soundId = 0,
-    this.title = "",
-    this.url = "",
-    this.userId = 0,
-    this.tags = "",
-    this.imageUrl = "",
-    this.duration = 0,
-    this.fav = 0,
-    this.category = "",
-    this.album = "",
-    this.catId = "",
-    this.usedTimes = 0,
-    this.createdAt = "",
-  });
+  int? id;
+  bool? readable;
+  String? title;
+  String? titleShort;
+  String? titleVersion;
+  String? link;
+  int? duration;
+  int? rank;
+  bool? explicitLyrics;
+  int? explicitContentLyrics;
+  int? explicitContentCover;
+  String? preview;
+  String? md5Image;
+  Artist? artist;
+  Album? album;
+  String? type;
 
-  SoundData.fromJSON(Map<String, dynamic> json) {
-    soundId = json["sound_id"] == null ? 0 : json["sound_id"];
-    userId = json['user_id'] == null ? 0 : json["user_id"];
-    title = json['title'] == null ? "" : json["title"];
-    url = json['sound_url'] == null ? "" : json["sound_url"];
-    tags = json['tags'] == null ? "" : json["tags"];
-    fav = json['fav'] == null ? 0 : json["fav"];
-    duration = json['duration'] == null ? 0 : json["duration"];
-    category = json['category'] == null ? "" : json["category"];
-    catId = json['cat_id'] == null ? "" : json["cat_id"];
-    album = json['album'] == null ? "" : json["album"];
-    usedTimes = json['used_times'] == null ? 0 : json["used_times"];
-    imageUrl = json['image_url'] == null ? "" : json["image_url"];
-    createdAt = json['created_at'] == null ? "" : json["created_at"];
+  SoundData(
+      {this.id,
+        this.readable,
+        this.title,
+        this.titleShort,
+        this.titleVersion,
+        this.link,
+        this.duration,
+        this.rank,
+        this.explicitLyrics,
+        this.explicitContentLyrics,
+        this.explicitContentCover,
+        this.preview,
+        this.md5Image,
+        this.artist,
+        this.album,
+        this.type});
+
+  SoundData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    readable = json['readable'];
+    title = json['title'];
+    titleShort = json['title_short'];
+    titleVersion = json['title_version'];
+    link = json['link'];
+    duration = json['duration'];
+    rank = json['rank'];
+    explicitLyrics = json['explicit_lyrics'];
+    explicitContentLyrics = json['explicit_content_lyrics'];
+    explicitContentCover = json['explicit_content_cover'];
+    preview = json['preview'];
+    md5Image = json['md5_image'];
+    artist =
+    json['artist'] != null ? new Artist.fromJson(json['artist']) : null;
+    album = json['album'] != null ? new Album.fromJson(json['album']) : null;
+    type = json['type'];
   }
 
-  Map<String, dynamic> toJSON() {
-    Map<String, dynamic> data = new Map<String, dynamic>();
-    data["sound_id"] = this.soundId;
-    data['user_id'] = this.userId;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['readable'] = this.readable;
     data['title'] = this.title;
-    data['sound_url'] = this.url;
-    data['tags'] = this.tags;
-    data['fav'] = this.fav;
+    data['title_short'] = this.titleShort;
+    data['title_version'] = this.titleVersion;
+    data['link'] = this.link;
     data['duration'] = this.duration;
-    data['category'] = this.category;
-    data['cat_id'] = this.catId;
-    data['album'] = this.album;
-    data['used_times'] = this.usedTimes;
-    data['image_url'] = this.imageUrl;
-    data['created_at'] = this.createdAt;
+    data['rank'] = this.rank;
+    data['explicit_lyrics'] = this.explicitLyrics;
+    data['explicit_content_lyrics'] = this.explicitContentLyrics;
+    data['explicit_content_cover'] = this.explicitContentCover;
+    data['preview'] = this.preview;
+    data['md5_image'] = this.md5Image;
+    if (this.artist != null) {
+      data['artist'] = this.artist!.toJson();
+    }
+    if (this.album != null) {
+      data['album'] = this.album!.toJson();
+    }
+    data['type'] = this.type;
+    return data;
+  }
+}
+
+class Artist {
+  int? id;
+  String? name;
+  String? link;
+  String? picture;
+  String? pictureSmall;
+  String? pictureMedium;
+  String? pictureBig;
+  String? pictureXl;
+  String? tracklist;
+  String? type;
+
+  Artist(
+      {this.id,
+        this.name,
+        this.link,
+        this.picture,
+        this.pictureSmall,
+        this.pictureMedium,
+        this.pictureBig,
+        this.pictureXl,
+        this.tracklist,
+        this.type});
+
+  Artist.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    link = json['link'];
+    picture = json['picture'];
+    pictureSmall = json['picture_small'];
+    pictureMedium = json['picture_medium'];
+    pictureBig = json['picture_big'];
+    pictureXl = json['picture_xl'];
+    tracklist = json['tracklist'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['link'] = this.link;
+    data['picture'] = this.picture;
+    data['picture_small'] = this.pictureSmall;
+    data['picture_medium'] = this.pictureMedium;
+    data['picture_big'] = this.pictureBig;
+    data['picture_xl'] = this.pictureXl;
+    data['tracklist'] = this.tracklist;
+    data['type'] = this.type;
+    return data;
+  }
+}
+
+class Album {
+  int? id;
+  String? title;
+  String? cover;
+  String? coverSmall;
+  String? coverMedium;
+  String? coverBig;
+  String? coverXl;
+  String? md5Image;
+  String? tracklist;
+  String? type;
+
+  Album(
+      {this.id,
+        this.title,
+        this.cover,
+        this.coverSmall,
+        this.coverMedium,
+        this.coverBig,
+        this.coverXl,
+        this.md5Image,
+        this.tracklist,
+        this.type});
+
+  Album.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    cover = json['cover'];
+    coverSmall = json['cover_small'];
+    coverMedium = json['cover_medium'];
+    coverBig = json['cover_big'];
+    coverXl = json['cover_xl'];
+    md5Image = json['md5_image'];
+    tracklist = json['tracklist'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['cover'] = this.cover;
+    data['cover_small'] = this.coverSmall;
+    data['cover_medium'] = this.coverMedium;
+    data['cover_big'] = this.coverBig;
+    data['cover_xl'] = this.coverXl;
+    data['md5_image'] = this.md5Image;
+    data['tracklist'] = this.tracklist;
+    data['type'] = this.type;
     return data;
   }
 }

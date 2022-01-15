@@ -78,12 +78,12 @@ class _MoreStoriesState extends State<MoreStories> {
                   //       controller.currentIndex.value + 1;
                   // }
                 },
-                currentindex: (v) {
-                  print('current index is = $v');
-                  Future.delayed(Duration(milliseconds: 300), () {
-                    controller.currentIndex.value = v;
-                  });
-                },
+                // currentindex: (v) {
+                //   print('current index is = $v');
+                //   Future.delayed(Duration(milliseconds: 300), () {
+                //     controller.currentIndex.value = v;
+                //   });
+                // },
                 onComplete: () {
                   Navigator.pop(context);
                 },

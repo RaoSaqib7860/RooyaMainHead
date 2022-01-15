@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:rooya_app/utils/colors.dart';
 import "package:velocity_x/velocity_x.dart";
 
 import '../controllers/sound_list_controller.dart';
@@ -25,12 +26,14 @@ import '../widgets/MarqueWidget.dart';
 
 class SoundList extends StatefulWidget {
   SoundList();
+
   @override
   _SoundListState createState() => _SoundListState();
 }
 
 class _SoundListState extends StateMVC<SoundList> {
   SoundListController _con = SoundListController();
+
   _SoundListState() : super(SoundListController()) {
     _con = SoundListController();
   }
@@ -59,17 +62,19 @@ class _SoundListState extends StateMVC<SoundList> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Color(0xff2d3d44), statusBarIconBrightness: Brightness.light),
+      SystemUiOverlayStyle(
+          statusBarColor: Color(0xff2d3d44),
+          statusBarIconBrightness: Brightness.light),
     );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: settingRepo.setting.value.bgColor,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           elevation: 0,
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: settingRepo.setting.value.iconColor,
+                color: Colors.white,
               ),
               onPressed: () async {
                 videoRepo.isOnRecordingPage.value = true;
@@ -78,9 +83,13 @@ class _SoundListState extends StateMVC<SoundList> {
               }),
           iconTheme: IconThemeData(
             size: 16,
-            color: settingRepo.setting.value.textColor, //change your color here
+            color: Colors.white, //change your color here
           ),
-          backgroundColor: settingRepo.setting.value.appbarColor,
+          title: Text(
+            'Sound',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
         body: Container(
@@ -91,7 +100,7 @@ class _SoundListState extends StateMVC<SoundList> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  color: settingRepo.setting.value.appbarColor,
+                  color: Color(0xff4A4545).withOpacity(0.5),
                   child: TabBar(
                     onTap: (index) {
                       if (index == 1) {
@@ -102,16 +111,17 @@ class _SoundListState extends StateMVC<SoundList> {
                     },
                     indicatorColor: settingRepo.setting.value.dividerColor,
                     labelColor: settingRepo.setting.value.textColor,
-                    unselectedLabelColor: settingRepo.setting.value.textColor!.withOpacity(0.3),
+                    unselectedLabelColor:
+                        settingRepo.setting.value.textColor!.withOpacity(0.3),
                     indicatorWeight: 1,
                     tabs: [
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "Discover",
+                            "Explore",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 14,
                               fontFamily: 'RockWellStd',
                             ),
                           ),
@@ -126,18 +136,10 @@ class _SoundListState extends StateMVC<SoundList> {
                               Text(
                                 "Favorites",
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 14,
                                   fontFamily: 'RockWellStd',
                                   color: settingRepo.setting.value.textColor,
                                 ),
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Icon(
-                                Icons.favorite,
-                                size: 20,
-                                color: settingRepo.setting.value.iconColor,
                               ),
                             ],
                           ),
@@ -166,7 +168,8 @@ class _SoundListState extends StateMVC<SoundList> {
                                   child: TextField(
                                     controller: _con.textController1,
                                     style: TextStyle(
-                                      color: settingRepo.setting.value.textColor,
+                                      color:
+                                          settingRepo.setting.value.textColor,
                                       fontSize: 16.0,
                                     ),
                                     obscureText: false,
@@ -194,19 +197,22 @@ class _SoundListState extends StateMVC<SoundList> {
                                       ),
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: settingRepo.setting.value.buttonColor!,
+                                          color: settingRepo
+                                              .setting.value.buttonColor!,
                                           width: 0.3,
                                         ),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: settingRepo.setting.value.buttonColor!,
+                                          color: settingRepo
+                                              .setting.value.buttonColor!,
                                           width: 0.3,
                                         ),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: settingRepo.setting.value.buttonColor!,
+                                          color: settingRepo
+                                              .setting.value.buttonColor!,
                                           width: 0.3,
                                         ),
                                       ),
@@ -225,7 +231,10 @@ class _SoundListState extends StateMVC<SoundList> {
                                         },
                                         icon: Icon(
                                           Icons.clear,
-                                          color: _con.searchKeyword != "" ? settingRepo.setting.value.iconColor : Colors.transparent,
+                                          color: _con.searchKeyword != ""
+                                              ? settingRepo
+                                                  .setting.value.iconColor
+                                              : Colors.transparent,
                                           size: 16,
                                         ),
                                       ),
@@ -234,68 +243,57 @@ class _SoundListState extends StateMVC<SoundList> {
                                 ).pSymmetric(h: 10),
                                 ValueListenableBuilder(
                                     valueListenable: soundRepo.soundsData,
-                                    builder: (context, SoundModelList _sounds, _) {
-                                      if ((_sounds.data != null)) {
-                                        if (_sounds.data!.length > 0) {
+                                    builder:
+                                        (context, SoundModelList _sounds, _) {
+                                      if ((_sounds.soundData != null)) {
+                                        if (_sounds.soundData!.length > 0) {
                                           return Column(
                                             children: <Widget>[
                                               SizedBox(
-                                                height: MediaQuery.of(context).size.height - 200,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height -
+                                                    200,
                                                 child: ModalProgressHUD(
-                                                  progressIndicator: _con.showLoaderSpinner(),
+                                                  progressIndicator:
+                                                      _con.showLoaderSpinner(),
                                                   inAsyncCall: loader,
                                                   opacity: 1.0,
-                                                  color: settingRepo.setting.value.bgColor!.withOpacity(0.5),
-                                                  child: GroupedListView<SoundData, String>(
+                                                  color: settingRepo
+                                                      .setting.value.bgColor!
+                                                      .withOpacity(0.5),
+                                                  child: GroupedListView<
+                                                      SoundData, String>(
                                                     shrinkWrap: true,
-                                                    controller: _con.scrollController,
-                                                    elements: _sounds.data!,
-                                                    groupBy: (element) => element.category + "_" + element.catId,
-                                                    order: GroupedListOrder.DESC,
-                                                    groupSeparatorBuilder: (String value) {
-                                                      var full = value.split("_");
+                                                    controller:
+                                                        _con.scrollController,
+                                                    elements:
+                                                        _sounds.soundData!,
+                                                    groupBy: (element) =>
+                                                        element.link! +
+                                                        "_" +
+                                                        element.link!,
+                                                    order:
+                                                        GroupedListOrder.DESC,
+                                                    groupSeparatorBuilder:
+                                                        (String value) {
+                                                      var full =
+                                                          value.split("_");
                                                       return Container(
-                                                        color: settingRepo.setting.value.bgColor,
+                                                        color: settingRepo
+                                                            .setting
+                                                            .value
+                                                            .bgColor,
                                                         child: Padding(
-                                                          padding: const EdgeInsets.all(10.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: <Widget>[
-                                                              Text(
-                                                                full[0],
-                                                                textAlign: TextAlign.left,
-                                                                style: TextStyle(
-                                                                  fontSize: 22,
-                                                                  color: settingRepo.setting.value.textColor,
-                                                                ),
-                                                              ),
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder: (context) => SoundCatList(int.parse(full[1]), full[0]),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                child: Container(
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(7),
-                                                                    color: settingRepo.setting.value.bgColor!.withOpacity(0.5),
-                                                                  ),
-                                                                  child: Padding(
-                                                                    padding: const EdgeInsets.all(4.0),
-                                                                    child: Text(
-                                                                      "View More",
-                                                                      style: TextStyle(
-                                                                        fontSize: 10,
-                                                                        color: settingRepo.setting.value.textColor,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            ],
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: <
+                                                                Widget>[],
                                                           ),
                                                         ),
                                                       );
@@ -314,14 +312,25 @@ class _SoundListState extends StateMVC<SoundList> {
                                           if (!loader) {
                                             return Center(
                                               child: Container(
-                                                height: MediaQuery.of(context).size.height - 185,
-                                                width: MediaQuery.of(context).size.width,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height -
+                                                    185,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Text(
                                                       "No Sounds found",
-                                                      style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 15),
+                                                      style: TextStyle(
+                                                          color: settingRepo
+                                                              .setting
+                                                              .value
+                                                              .textColor,
+                                                          fontSize: 15),
                                                     )
                                                   ],
                                                 ),
@@ -329,14 +338,22 @@ class _SoundListState extends StateMVC<SoundList> {
                                             );
                                           } else {
                                             return Container(
-                                              color: settingRepo.setting.value.bgColor,
+                                              color: settingRepo
+                                                  .setting.value.bgColor,
                                               child: Center(
                                                 child: Container(
                                                   width: 20,
                                                   height: 20,
-                                                  child: CircularProgressIndicator(
+                                                  child:
+                                                      CircularProgressIndicator(
                                                     strokeWidth: 2,
-                                                    valueColor: new AlwaysStoppedAnimation<Color>(settingRepo.setting.value.iconColor!),
+                                                    valueColor:
+                                                        new AlwaysStoppedAnimation<
+                                                                Color>(
+                                                            settingRepo
+                                                                .setting
+                                                                .value
+                                                                .iconColor!),
                                                   ),
                                                 ),
                                               ),
@@ -347,14 +364,25 @@ class _SoundListState extends StateMVC<SoundList> {
                                         if (!loader) {
                                           return Center(
                                             child: Container(
-                                              height: MediaQuery.of(context).size.height - 185,
-                                              width: MediaQuery.of(context).size.width,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height -
+                                                  185,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: <Widget>[
                                                   Text(
                                                     "No Sounds found",
-                                                    style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 15),
+                                                    style: TextStyle(
+                                                        color: settingRepo
+                                                            .setting
+                                                            .value
+                                                            .textColor,
+                                                        fontSize: 15),
                                                   )
                                                 ],
                                               ),
@@ -362,15 +390,20 @@ class _SoundListState extends StateMVC<SoundList> {
                                           );
                                         } else {
                                           return Container(
-                                            color: settingRepo.setting.value.bgColor,
+                                            color: settingRepo
+                                                .setting.value.bgColor,
                                             child: Center(
                                               child: Container(
                                                 width: 20,
                                                 height: 20,
-                                                child: CircularProgressIndicator(
+                                                child:
+                                                    CircularProgressIndicator(
                                                   strokeWidth: 2,
-                                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                                    settingRepo.setting.value.iconColor!,
+                                                  valueColor:
+                                                      new AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    settingRepo.setting.value
+                                                        .iconColor!,
                                                   ),
                                                 ),
                                               ),
@@ -397,7 +430,8 @@ class _SoundListState extends StateMVC<SoundList> {
                                     child: TextField(
                                       controller: _con.textController2,
                                       style: TextStyle(
-                                        color: settingRepo.setting.value.textColor,
+                                        color:
+                                            settingRepo.setting.value.textColor,
                                         fontSize: 16.0,
                                       ),
                                       obscureText: false,
@@ -410,7 +444,8 @@ class _SoundListState extends StateMVC<SoundList> {
                                           });
                                         }
                                         if (val.length == 0) {
-                                          Timer(Duration(milliseconds: 1000), () {
+                                          Timer(Duration(milliseconds: 1000),
+                                              () {
                                             _con.getFavSounds();
                                           });
                                         }
@@ -424,19 +459,22 @@ class _SoundListState extends StateMVC<SoundList> {
                                         ),
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: settingRepo.setting.value.buttonColor!,
+                                            color: settingRepo
+                                                .setting.value.buttonColor!,
                                             width: 0.3,
                                           ),
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: settingRepo.setting.value.buttonColor!,
+                                            color: settingRepo
+                                                .setting.value.buttonColor!,
                                             width: 0.3,
                                           ),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: settingRepo.setting.value.buttonColor!,
+                                            color: settingRepo
+                                                .setting.value.buttonColor!,
                                             width: 0.3,
                                           ),
                                         ),
@@ -456,7 +494,10 @@ class _SoundListState extends StateMVC<SoundList> {
                                           },
                                           icon: Icon(
                                             Icons.clear,
-                                            color: _con.searchKeyword2 != "" ? settingRepo.setting.value.iconColor : Colors.transparent,
+                                            color: _con.searchKeyword2 != ""
+                                                ? settingRepo
+                                                    .setting.value.iconColor
+                                                : Colors.transparent,
                                             size: 16,
                                           ),
                                         ),
@@ -464,47 +505,85 @@ class _SoundListState extends StateMVC<SoundList> {
                                     ),
                                   ).pSymmetric(h: 10),
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 48.0),
+                                    padding:
+                                        const EdgeInsets.only(bottom: 48.0),
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height * .8 - 90,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                                  .8 -
+                                              90,
                                       child: ValueListenableBuilder(
-                                          valueListenable: soundRepo.favSoundsData,
-                                          builder: (context, SoundModelList _favSounds, _) {
-                                            return (_favSounds.data != null && _favSounds.data!.length > 0)
+                                          valueListenable:
+                                              soundRepo.favSoundsData,
+                                          builder: (context,
+                                              SoundModelList _favSounds, _) {
+                                            return (_favSounds.soundData !=
+                                                        null &&
+                                                    _favSounds
+                                                            .soundData!.length >
+                                                        0)
                                                 ? ListView.builder(
                                                     shrinkWrap: true,
-                                                    controller: _con.scrollController1,
-                                                    itemCount: _favSounds.data!.length,
-                                                    itemBuilder: (context, index) {
+                                                    controller:
+                                                        _con.scrollController1,
+                                                    itemCount: _favSounds
+                                                        .soundData!.length,
+                                                    itemBuilder:
+                                                        (context, index) {
                                                       return PlayerWidget(
-                                                        sound: _favSounds.data![index],
+                                                        sound: _favSounds
+                                                            .soundData![index],
                                                       );
                                                     })
                                                 : (!loader)
                                                     ? Center(
                                                         child: Container(
-                                                          height: MediaQuery.of(context).size.height - 360,
-                                                          width: MediaQuery.of(context).size.width,
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height -
+                                                              360,
+                                                          width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width,
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: <Widget>[
                                                               Text(
                                                                 "No favourite sounds found",
-                                                                style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 15),
+                                                                style: TextStyle(
+                                                                    color: settingRepo
+                                                                        .setting
+                                                                        .value
+                                                                        .textColor,
+                                                                    fontSize:
+                                                                        15),
                                                               )
                                                             ],
                                                           ),
                                                         ),
                                                       )
                                                     : Container(
-                                                        color: settingRepo.setting.value.bgColor,
+                                                        color: settingRepo
+                                                            .setting
+                                                            .value
+                                                            .bgColor,
                                                         child: Center(
                                                           child: Container(
                                                             width: 20,
                                                             height: 20,
-                                                            child: CircularProgressIndicator(
+                                                            child:
+                                                                CircularProgressIndicator(
                                                               strokeWidth: 2,
-                                                              valueColor: new AlwaysStoppedAnimation<Color>(settingRepo.setting.value.iconColor!),
+                                                              valueColor: new AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                  settingRepo
+                                                                      .setting
+                                                                      .value
+                                                                      .iconColor!),
                                                             ),
                                                           ),
                                                         ),
@@ -532,6 +611,7 @@ class _SoundListState extends StateMVC<SoundList> {
 
 class PlayerWidget extends StatefulWidget {
   final SoundData sound;
+
   @override
   _PlayerWidgetState createState() => _PlayerWidgetState();
 
@@ -548,6 +628,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
   SoundListController _con = SoundListController();
   int isFav = 0;
   bool showLoading = false;
+
   _PlayerWidgetState() : super(SoundListController()) {
     _con = SoundListController();
   }
@@ -557,7 +638,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
     print(222222);
     print(currentUser.value.token);
     //setState(() {
-    isFav = widget.sound.fav;
+    isFav = 0;
     //});
     super.initState();
   }
@@ -582,7 +663,8 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: settingRepo.setting.value.dividerColor!.withOpacity(0.3),
+                  color:
+                      settingRepo.setting.value.dividerColor!.withOpacity(0.3),
                   width: 1,
                 ),
               ),
@@ -599,255 +681,487 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () async {
-                              if (assetsAudioPlayer.current.first == null) {
-                                AssetsAudioPlayer.allPlayers().forEach((key, value) {
-                                  value.pause();
-                                });
-                                setState(() {
-                                  showLoading = true;
-                                });
-                                await DefaultCacheManager().getSingleFile(widget.sound.url).then((file) {
-                                  AssetsAudioPlayer.allPlayers().forEach((key, value) {
-                                    value.pause();
-                                  });
-                                  assetsAudioPlayer.open(
-                                    Audio.file(file.path),
-                                    autoStart: true,
-                                  );
-                                  setState(() {
-                                    showLoading = false;
-                                  });
-                                });
-                              } else {
-                                AssetsAudioPlayer.allPlayers().forEach((key, value) {
-                                  value.pause();
-                                });
-                                assetsAudioPlayer.playOrPause();
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(2),
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  image: new DecorationImage(
-                                    image: CachedNetworkImageProvider(
-                                      widget.sound.imageUrl,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  // gradient: Gradients.blush,
-                                ),
-                                child: Center(
-                                  child: showLoading
-                                      ? Container(width: 40, height: 40, child: Helper.showLoaderSpinner(Colors.white))
-                                      : IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(
-                                            isPlaying ? Icons.pause_circle_outline_rounded : Icons.play_circle_outline,
-                                            size: 40,
-                                            color: settingRepo.setting.value.iconColor,
-                                          ),
-                                          onPressed: () async {
-                                            AssetsAudioPlayer.allPlayers().forEach((key, value) {
-                                              value.pause();
-                                            });
-                                            if (!isPlaying) {
-                                              final List<StreamSubscription> _subscriptions = [];
-                                              _subscriptions.add(assetsAudioPlayer.isBuffering.listen((isBuffering) {
-                                                if (isBuffering) {
-                                                  setState(() {
-                                                    showLoading = true;
-                                                  });
-                                                } else {
-                                                  setState(() {
-                                                    showLoading = false;
-                                                  });
-                                                }
-                                              }));
-                                              assetsAudioPlayer.open(
-                                                Audio.network(widget.sound.url),
-                                                autoStart: true,
-                                              );
-                                            } else {
-                                              assetsAudioPlayer.pause();
-                                            }
-                                          },
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: InkWell(
-                                onTap: () async {
-                                  AssetsAudioPlayer.allPlayers().forEach((key, value) {
-                                    value.pause();
-                                  });
-                                  showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          backgroundColor: settingRepo.setting.value.accentColor,
-                                          insetPadding: EdgeInsets.zero,
-                                          content: Container(
-                                            height: 50,
-                                            color: settingRepo.setting.value.accentColor,
-                                            child: Row(
-                                              children: [
-                                                Helper.showLoaderSpinner(settingRepo.setting.value.iconColor!),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  "Downloading.. Please wait...",
-                                                  style: TextStyle(fontSize: 15, color: settingRepo.setting.value.textColor),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                  print("this.widget.sound");
-                                  print(this.widget.sound.url);
-                                  _con.selectSound(this.widget.sound);
-                                  videoRepo.isOnRecordingPage.value = true;
-                                  videoRepo.isOnRecordingPage.notifyListeners();
-                                  DefaultCacheManager().getSingleFile(widget.sound.url).then((file) {
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      '/video-recorder',
-                                    );
-                                  });
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Container(
-                                        width: config.App(context).appWidth(100),
-                                        child: MarqueeWidget(
-                                          child: Text(
-                                            this.widget.sound.title,
-                                            style: TextStyle(
-                                              color: settingRepo.setting.value.textColor,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
+                    InkWell(
+                      onTap: () {
+                        AssetsAudioPlayer.allPlayers().forEach((key, value) {
+                          value.pause();
+                        });
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor:Colors.white,
+                                insetPadding: EdgeInsets.zero,
+                                content: Container(
+                                  height: 50,
+                                  color: Colors.white,
+                                  child: Row(
+                                    children: [
+                                      Helper.showLoaderSpinner(primaryColor),
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          child: MarqueeWidget(
-                                            child: Text(
-                                              widget.sound.album,
-                                              style: TextStyle(
-                                                color: settingRepo.setting.value.textColor,
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          //width: config.App(context).appWidth(40),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                widget.sound.duration.toString() + " sec",
-                                                style: TextStyle(
-                                                  color: settingRepo.setting.value.textColor,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                              widget.sound.usedTimes > 0
-                                                  ? Container(
-                                                      child: Align(
-                                                        alignment: Alignment.bottomCenter,
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Text(
-                                                            "Used " + widget.sound.usedTimes.toString(),
-                                                            style: TextStyle(
-                                                              color: settingRepo.setting.value.textColor,
-                                                              fontSize: 11,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : Container(),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                      Text(
+                                        "Downloading.. Please wait...",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: primaryColor),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 0,
+                              );
+                            });
+                        print("this.widget.sound");
+                        print(this.widget.sound.preview);
+                        _con.selectSound(this.widget.sound);
+                        videoRepo.isOnRecordingPage.value = true;
+                        videoRepo.isOnRecordingPage.notifyListeners();
+                        DefaultCacheManager()
+                            .getSingleFile(widget.sound.preview!)
+                            .then((file) {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/video-recorder',
+                          );
+                        });
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(2),
                         child: Container(
-                          width: 40,
-                          height: 40,
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            icon: SvgPicture.asset(
-                              'assets/icons/liked.svg',
-                              width: 25.0,
-                              color: isFav > 0 ? settingRepo.setting.value.accentColor : settingRepo.setting.value.iconColor,
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            image: new DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                widget.sound.artist!.pictureSmall!,
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            onPressed: () async {
-                              setState(() {
-                                isFav = isFav == 1 ? 0 : 1;
-                              });
-                              String msg = await _con.setFavSounds(widget.sound.soundId, widget.sound.fav > 0 ? "false" : "true");
-                              if (msg != null && msg.contains('set')) {
-                                setState(() {
-                                  isFav = 1;
-                                  widget.sound.fav = 1;
-                                });
-                              } else {
-                                setState(() {
-                                  isFav = 0;
-                                  widget.sound.fav = 0;
-                                });
-                              }
-                              ScaffoldMessenger.of(GlobalVariable.navState.currentContext!).showSnackBar(SnackBar(content: Text(msg)));
-                            },
+                            // gradient: Gradients.blush,
                           ),
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          AssetsAudioPlayer.allPlayers().forEach((key, value) {
+                            value.pause();
+                          });
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor:Colors.white,
+                                  insetPadding: EdgeInsets.zero,
+                                  content: Container(
+                                    height: 50,
+                                    color:Colors.white,
+                                    child: Row(
+                                      children: [
+                                        Helper.showLoaderSpinner(primaryColor),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          "Downloading.. Please wait...",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color:primaryColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                          print("this.widget.sound");
+                          print(this.widget.sound.preview);
+                          _con.selectSound(this.widget.sound);
+                          videoRepo.isOnRecordingPage.value = true;
+                          videoRepo.isOnRecordingPage.notifyListeners();
+                          DefaultCacheManager()
+                              .getSingleFile(widget.sound.preview!)
+                              .then((file) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              '/video-recorder',
+                            );
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: 150,
+                                  child: MarqueeWidget(
+                                    child: Text(
+                                      this.widget.sound.artist!.name!,
+                                      style: TextStyle(
+                                        color:
+                                            settingRepo.setting.value.textColor,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 150,
+                                  child: MarqueeWidget(
+                                    child: Text(
+                                      widget.sound.album!.title!,
+                                      style: TextStyle(
+                                        color: Color(0xff707070),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    widget.sound.duration.toString() + " sec",
+                                    style: TextStyle(
+                                      color:
+                                          settingRepo.setting.value.textColor,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      if (assetsAudioPlayer.current.first ==
+                                          null) {
+                                        AssetsAudioPlayer.allPlayers()
+                                            .forEach((key, value) {
+                                          value.pause();
+                                        });
+                                        setState(() {
+                                          showLoading = true;
+                                        });
+                                        await DefaultCacheManager()
+                                            .getSingleFile(
+                                                widget.sound.preview!)
+                                            .then((file) {
+                                          AssetsAudioPlayer.allPlayers()
+                                              .forEach((key, value) {
+                                            value.pause();
+                                          });
+                                          assetsAudioPlayer.open(
+                                            Audio.file(file.path),
+                                            autoStart: true,
+                                          );
+                                          setState(() {
+                                            showLoading = false;
+                                          });
+                                        });
+                                      } else {
+                                        AssetsAudioPlayer.allPlayers()
+                                            .forEach((key, value) {
+                                          value.pause();
+                                        });
+                                        assetsAudioPlayer.playOrPause();
+                                      }
+                                    },
+                                    child: Center(
+                                        child: showLoading
+                                            ? Container(
+                                                width: 40,
+                                                height: 40,
+                                                child: Helper.showLoaderSpinner(
+                                                    Colors.white))
+                                            : IconButton(
+                                                padding: EdgeInsets.zero,
+                                                icon: Icon(
+                                                  isPlaying
+                                                      ? Icons
+                                                          .pause_circle_outline_rounded
+                                                      : Icons
+                                                          .play_circle_outline,
+                                                  size: 40,
+                                                  color: settingRepo
+                                                      .setting.value.iconColor,
+                                                ),
+                                                onPressed: () async {
+                                                  AssetsAudioPlayer.allPlayers()
+                                                      .forEach((key, value) {
+                                                    value.pause();
+                                                  });
+                                                  if (!isPlaying) {
+                                                    final List<
+                                                            StreamSubscription>
+                                                        _subscriptions = [];
+                                                    _subscriptions.add(
+                                                        assetsAudioPlayer
+                                                            .isBuffering
+                                                            .listen(
+                                                                (isBuffering) {
+                                                      if (isBuffering) {
+                                                        setState(() {
+                                                          showLoading = true;
+                                                        });
+                                                      } else {
+                                                        setState(() {
+                                                          showLoading = false;
+                                                        });
+                                                      }
+                                                    }));
+                                                    assetsAudioPlayer.open(
+                                                      Audio.network(widget
+                                                          .sound.preview!),
+                                                      autoStart: true,
+                                                    );
+                                                  } else {
+                                                    assetsAudioPlayer.pause();
+                                                  }
+                                                },
+                                              )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                        ),
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     children: <Widget>[
+                    //       Expanded(
+                    //         child: InkWell(
+                    //           onTap: () async {
+                    //             AssetsAudioPlayer.allPlayers()
+                    //                 .forEach((key, value) {
+                    //               value.pause();
+                    //             });
+                    //             showDialog(
+                    //                 barrierDismissible: false,
+                    //                 context: context,
+                    //                 builder: (BuildContext context) {
+                    //                   return AlertDialog(
+                    //                     backgroundColor: settingRepo
+                    //                         .setting.value.accentColor,
+                    //                     insetPadding: EdgeInsets.zero,
+                    //                     content: Container(
+                    //                       height: 50,
+                    //                       color: settingRepo
+                    //                           .setting.value.accentColor,
+                    //                       child: Row(
+                    //                         children: [
+                    //                           Helper.showLoaderSpinner(
+                    //                               settingRepo.setting.value
+                    //                                   .iconColor!),
+                    //                           SizedBox(
+                    //                             width: 10,
+                    //                           ),
+                    //                           Text(
+                    //                             "Downloading.. Please wait...",
+                    //                             style: TextStyle(
+                    //                                 fontSize: 15,
+                    //                                 color: settingRepo.setting
+                    //                                     .value.textColor),
+                    //                           ),
+                    //                         ],
+                    //                       ),
+                    //                     ),
+                    //                   );
+                    //                 });
+                    //             print("this.widget.sound");
+                    //             print(this.widget.sound.preview);
+                    //             _con.selectSound(this.widget.sound);
+                    //             videoRepo.isOnRecordingPage.value = true;
+                    //             videoRepo.isOnRecordingPage.notifyListeners();
+                    //             DefaultCacheManager()
+                    //                 .getSingleFile(widget.sound.preview!)
+                    //                 .then((file) {
+                    //               Navigator.pushReplacementNamed(
+                    //                 context,
+                    //                 '/video-recorder',
+                    //               );
+                    //             });
+                    //           },
+                    //           child: Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             children: [
+                    //               Container(
+                    //                 width: config.App(context).appWidth(100),
+                    //                 child: MarqueeWidget(
+                    //                   child: Text(
+                    //                     this.widget.sound.artist!.name!,
+                    //                     style: TextStyle(
+                    //                       color: settingRepo
+                    //                           .setting.value.textColor,
+                    //                       fontSize: 14,
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //               Row(
+                    //                 mainAxisAlignment:
+                    //                     MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   Container(
+                    //                     width: 100,
+                    //                     child: MarqueeWidget(
+                    //                       child: Text(
+                    //                         widget.sound.album!.title!,
+                    //                         style: TextStyle(
+                    //                           color: Color(0xff707070),
+                    //                           fontSize: 12,
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                   Container(
+                    //                     //width: config.App(context).appWidth(40),
+                    //                     child: Row(
+                    //                       mainAxisAlignment:
+                    //                           MainAxisAlignment.start,
+                    //                       children: [
+                    //                         Text(
+                    //                           widget.sound.duration.toString() +
+                    //                               " sec",
+                    //                           style: TextStyle(
+                    //                             color: settingRepo
+                    //                                 .setting.value.textColor,
+                    //                             fontSize: 11,
+                    //                           ),
+                    //                         ),
+                    //                         GestureDetector(
+                    //                           onTap: () async {
+                    //                             if (assetsAudioPlayer
+                    //                                     .current.first ==
+                    //                                 null) {
+                    //                               AssetsAudioPlayer.allPlayers()
+                    //                                   .forEach((key, value) {
+                    //                                 value.pause();
+                    //                               });
+                    //                               setState(() {
+                    //                                 showLoading = true;
+                    //                               });
+                    //                               await DefaultCacheManager()
+                    //                                   .getSingleFile(
+                    //                                       widget.sound.preview!)
+                    //                                   .then((file) {
+                    //                                 AssetsAudioPlayer
+                    //                                         .allPlayers()
+                    //                                     .forEach((key, value) {
+                    //                                   value.pause();
+                    //                                 });
+                    //                                 assetsAudioPlayer.open(
+                    //                                   Audio.file(file.path),
+                    //                                   autoStart: true,
+                    //                                 );
+                    //                                 setState(() {
+                    //                                   showLoading = false;
+                    //                                 });
+                    //                               });
+                    //                             } else {
+                    //                               AssetsAudioPlayer.allPlayers()
+                    //                                   .forEach((key, value) {
+                    //                                 value.pause();
+                    //                               });
+                    //                               assetsAudioPlayer
+                    //                                   .playOrPause();
+                    //                             }
+                    //                           },
+                    //                           child: Center(
+                    //                             child: showLoading
+                    //                                 ? Container(
+                    //                                     width: 40,
+                    //                                     height: 40,
+                    //                                     child: Helper
+                    //                                         .showLoaderSpinner(
+                    //                                             Colors.white))
+                    //                                 : IconButton(
+                    //                                     padding:
+                    //                                         EdgeInsets.zero,
+                    //                                     icon: Icon(
+                    //                                       isPlaying
+                    //                                           ? Icons
+                    //                                               .pause_circle_outline_rounded
+                    //                                           : Icons
+                    //                                               .play_circle_outline,
+                    //                                       size: 40,
+                    //                                       color: settingRepo
+                    //                                           .setting
+                    //                                           .value
+                    //                                           .iconColor,
+                    //                                     ),
+                    //                                     onPressed: () async {
+                    //                                       AssetsAudioPlayer
+                    //                                               .allPlayers()
+                    //                                           .forEach(
+                    //                                               (key, value) {
+                    //                                         value.pause();
+                    //                                       });
+                    //                                       if (!isPlaying) {
+                    //                                         final List<
+                    //                                                 StreamSubscription>
+                    //                                             _subscriptions =
+                    //                                             [];
+                    //                                         _subscriptions.add(
+                    //                                             assetsAudioPlayer
+                    //                                                 .isBuffering
+                    //                                                 .listen(
+                    //                                                     (isBuffering) {
+                    //                                           if (isBuffering) {
+                    //                                             setState(() {
+                    //                                               showLoading =
+                    //                                                   true;
+                    //                                             });
+                    //                                           } else {
+                    //                                             setState(() {
+                    //                                               showLoading =
+                    //                                                   false;
+                    //                                             });
+                    //                                           }
+                    //                                         }));
+                    //                                         assetsAudioPlayer
+                    //                                             .open(
+                    //                                           Audio.network(
+                    //                                               widget.sound
+                    //                                                   .preview!),
+                    //                                           autoStart: true,
+                    //                                         );
+                    //                                       } else {
+                    //                                         assetsAudioPlayer
+                    //                                             .pause();
+                    //                                       }
+                    //                                     },
+                    //                                   ),
+                    //                           ),
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -864,7 +1178,9 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
 class SoundCatList extends StatefulWidget {
   final int catId;
   final String catName;
+
   SoundCatList(this.catId, this.catName);
+
   @override
   _SoundCatListState createState() => _SoundCatListState();
 }
@@ -875,15 +1191,18 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
   List soundsList = [];
   var _textController = TextEditingController();
   SoundListController _con = SoundListController();
+
   _SoundCatListState() : super(SoundListController()) {
     _con = SoundListController();
   }
+
   static String searchKeyword = '';
 
   int page = 1;
   bool moreResults = true;
 
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer.withId("4234234323asdsad");
+  final AssetsAudioPlayer _assetsAudioPlayer =
+      AssetsAudioPlayer.withId("4234234323asdsad");
 
   @override
   void initState() {
@@ -920,7 +1239,8 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
       key: _con.soundScaffoldKey,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: settingRepo.setting.value.iconColor),
+          icon: Icon(Icons.arrow_back_ios,
+              color: settingRepo.setting.value.iconColor),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
@@ -1013,7 +1333,9 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
                               },
                               icon: Icon(
                                 Icons.clear,
-                                color: _con.searchKeyword2 != "" ? settingRepo.setting.value.iconColor : Colors.transparent,
+                                color: _con.searchKeyword2 != ""
+                                    ? settingRepo.setting.value.iconColor
+                                    : Colors.transparent,
                                 size: 16,
                               ),
                             ),
@@ -1027,17 +1349,18 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
                         return ValueListenableBuilder(
                           valueListenable: _con.showLoader,
                           builder: (context, bool loader, _) {
-                            return (_catSounds.data != null && _catSounds.data!.length > 0)
+                            return (_catSounds.soundData != null &&
+                                    _catSounds.soundData!.length > 0)
                                 ? SingleChildScrollView(
                                     child: Container(
                                       color: settingRepo.setting.value.bgColor,
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         controller: _con.catScrollController,
-                                        itemCount: _catSounds.data!.length,
+                                        itemCount: _catSounds.soundData!.length,
                                         itemBuilder: (context, index) {
                                           return PlayerWidget(
-                                            sound: _catSounds.data![index],
+                                            sound: _catSounds.soundData![index],
                                           );
                                         },
                                       ),
@@ -1046,10 +1369,15 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
                                 : (!loader)
                                     ? Center(
                                         child: Container(
-                                          height: MediaQuery.of(context).size.height - 360,
-                                          width: MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              360,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: <Widget>[
                                               Text(
                                                 "No favourite sounds found",
@@ -1063,14 +1391,17 @@ class _SoundCatListState extends StateMVC<SoundCatList> {
                                         ),
                                       )
                                     : Container(
-                                        color: settingRepo.setting.value.bgColor,
+                                        color:
+                                            settingRepo.setting.value.bgColor,
                                         child: Center(
                                           child: Container(
                                             width: 20,
                                             height: 20,
                                             child: CircularProgressIndicator(
                                               strokeWidth: 2,
-                                              valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                                              valueColor:
+                                                  new AlwaysStoppedAnimation<
+                                                      Color>(Colors.white),
                                             ),
                                           ),
                                         ),

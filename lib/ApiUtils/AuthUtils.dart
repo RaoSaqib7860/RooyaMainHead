@@ -6,6 +6,7 @@ import 'package:rooya_app/Screens/AuthScreens/SignIn/SignInController.dart';
 import 'package:http/http.dart' as http;
 import 'package:rooya_app/Screens/AuthScreens/SignUp/SignUpController.dart';
 import 'package:rooya_app/Screens/AuthScreens/VerifyOtp/verify_otp.dart';
+import 'package:rooya_app/Screens/Reel/ReelController.dart';
 import 'package:rooya_app/Screens/Settings/General/CountryModel.dart';
 import 'package:rooya_app/Screens/Settings/General/GeneralController.dart';
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
@@ -40,6 +41,8 @@ class AuthUtils {
   static final getAllStoriesEventID = 'getAllStoriesEventID';
   static final getCountryList = 'getCountryList';
   static final generalSetting = 'generalSetting';
+  static final ggetRooyaReelByLimite = 'getRooyaReelByLimite';
+  static final addNewReelPost ='addNewReelPost';
 
   static Future signIn({SignInController? controller}) async {
     controller!.isLoading.value = true;
@@ -277,7 +280,8 @@ class AuthUtils {
     var data = jsonDecode(response.body);
     print('getgetHomeBanner =$data');
     if (data['result'] == 'success') {
-      controller!.listofbanner.value = List<EventBannerModel>.from(data['data'][0]['attachment']
+      controller!.listofbanner.value = List<EventBannerModel>.from(data['data']
+              [0]['attachment']
           .map((model) => EventBannerModel.fromJson(model)));
     }
   }
@@ -380,6 +384,7 @@ class AuthUtils {
     }
   }
 
+
 //https://apis.rooya.com/Alphaapis/generalSetting?code=ROOYA-5574499
   static Future getgeneralSetting(
       {GeneralController? controller,
@@ -410,6 +415,7 @@ class AuthUtils {
     );
     var data = jsonDecode(response.body);
     print('getAllStoriesAPI =$data');
+
     if (data['result'] == 'success') {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('user_name',
@@ -424,5 +430,45 @@ class AuthUtils {
       prefs.setString('user_firstname', '${controller.fNameCont.text}');
       prefs.setString('user_lastname', '${controller.lNameCont.text}');
     }
+  }
+
+  static Future<List> getReelData() async {
+    print('call story');
+    log('token is =  ${await getToken()}');
+    GetStorage storage = GetStorage();
+    final response = await http.post(
+      Uri.parse('https://rooyapis.rooyatech.com/Alphaapis/getRooyaReelByLimite?code=ROOYA-5574499'),
+      body: jsonEncode({
+        "page_size": "10",
+        "user_id": storage.read('userID'),
+        'page_number': '0'
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJmdXJxYW5tdXN0YWZhIiwidXNlcl9lbWFpbCI6Im5ldGJlZTI0N0BnbWFpbC5jb20ifQ.iliVzz1MBZeuHoX0EHzYAbl0bHfSMtzuaO9xdZ0-po8',
+      },
+    );
+    var data = jsonDecode(response.body);
+    print('getAllStoriesAPI =$data');
+    if (data['result'] == 'success') {
+      return data['data'];
+    } else {
+      return [];
+    }
+  }
+
+  static Future uploadReel({Map? mapdata}) async {
+    print('call story');
+    log('token is =  ${await getToken()}');
+    final response = await http.post(
+      Uri.parse('https://rooyapis.rooyatech.com/Alphaapis/addNewReelPost?code=ROOYA-5574499'),
+      body: jsonEncode(mapdata),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJmdXJxYW5tdXN0YWZhIiwidXNlcl9lbWFpbCI6Im5ldGJlZTI0N0BnbWFpbC5jb20ifQ.iliVzz1MBZeuHoX0EHzYAbl0bHfSMtzuaO9xdZ0-po8'
+      },
+    );
+    var data = jsonDecode(response.body);
+    print('uploadReel =$data');
   }
 }

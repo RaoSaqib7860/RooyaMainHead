@@ -3,39 +3,47 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:rooya_app/ApiUtils/AuthUtils.dart';
 
 import '../helpers/helper.dart';
 import '../models/sound_model.dart';
 import 'user_repository.dart';
 
 ValueNotifier<SoundModelList> soundsData = new ValueNotifier(SoundModelList());
-ValueNotifier<SoundModelList> catSoundsData = new ValueNotifier(SoundModelList());
+ValueNotifier<SoundModelList> catSoundsData =
+    new ValueNotifier(SoundModelList());
 ValueNotifier<bool> mic = new ValueNotifier(true);
-ValueNotifier<SoundModelList> favSoundsData = new ValueNotifier(SoundModelList());
-ValueNotifier<SoundData> currentSound = new ValueNotifier(SoundData(soundId: 0, title: ""));
+ValueNotifier<SoundModelList> favSoundsData =
+    new ValueNotifier(SoundModelList());
+ValueNotifier<SoundData> currentSound =
+    new ValueNotifier(SoundData(id: 0, title: ""));
 
 Future<SoundModelList> getData(page, searchKeyword) async {
-  Uri uri = Helper.getUri('get-sounds');
-  uri = uri.replace(queryParameters: {'page': page.toString(), 'search': searchKeyword});
   try {
-    Map<String, String> headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer ' + currentUser.value.token,
-    };
-    var response = await http.get(uri, headers: headers);
+    var response = await http.post(
+        Uri.parse(
+            'https://rooyapis.rooyatech.com/Alphaapis/getDeezerSounds?code=ROOYA-5574499'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode({"search": '$searchKeyword', "index": '0', "limit": '10'}));
     if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      if (jsonData['status'] == 'success') {
+      if (response.statusCode == 200) {
         if (page > 1) {
-          soundsData.value.data!.addAll(SoundModelList.fromJSON(json.decode(response.body)).data!.toList());
+          soundsData.value.soundData!.addAll(
+              SoundModelList.fromJson(json.decode(response.body))
+                  .soundData!
+                  .toList());
         } else {
-          soundsData.value = SoundModelList.fromJSON(json.decode(response.body));
+          soundsData.value =
+              SoundModelList.fromJson(json.decode(response.body));
         }
       }
     }
   } catch (e) {
     print(e.toString());
-    soundsData.value = SoundModelList.fromJSON({});
+    soundsData.value = SoundModelList.fromJson({});
   }
   soundsData.notifyListeners();
   return soundsData.value;
@@ -43,11 +51,12 @@ Future<SoundModelList> getData(page, searchKeyword) async {
 
 Future<SoundModelList> getCatData(catId, page, searchKeyword) async {
   if (searchKeyword != '' && searchKeyword != null) {
-    catSoundsData.value = SoundModelList.fromJSON({});
+    catSoundsData.value = SoundModelList.fromJson({});
     catSoundsData.notifyListeners();
   }
   Uri uri = Helper.getUri('get-cat-sounds');
-  uri = uri.replace(queryParameters: {'cat_id': catId.toString(), 'search': searchKeyword});
+  uri = uri.replace(
+      queryParameters: {'cat_id': catId.toString(), 'search': searchKeyword});
   try {
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -58,42 +67,53 @@ Future<SoundModelList> getCatData(catId, page, searchKeyword) async {
       var jsonData = json.decode(response.body);
       if (jsonData['status'] == 'success') {
         if (page > 1) {
-          catSoundsData.value.data!.addAll(SoundModelList.fromJSON(json.decode(response.body)).data!.toList());
+          catSoundsData.value.soundData!.addAll(
+              SoundModelList.fromJson(json.decode(response.body))
+                  .soundData!
+                  .toList());
         } else {
-          catSoundsData.value = SoundModelList.fromJSON(json.decode(response.body));
+          catSoundsData.value =
+              SoundModelList.fromJson(json.decode(response.body));
         }
       }
     }
   } catch (e) {
     print(e.toString());
-    soundsData.value = SoundModelList.fromJSON({});
+    soundsData.value = SoundModelList.fromJson({});
   }
   catSoundsData.notifyListeners();
   return catSoundsData.value;
 }
 
 Future<SoundModelList> getFavData(page, searchKeyword2) async {
-  Uri uri = Helper.getUri('fav-sounds');
-  uri = uri.replace(queryParameters: {'page': page.toString(), 'search': searchKeyword2});
+  print('searchKeyword2 = $searchKeyword2');
   try {
-    Map<String, String> headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer ' + currentUser.value.token,
-    };
-    var response = await http.get(uri, headers: headers);
+    var response = await http.post(
+        Uri.parse(
+            'https://rooyapis.rooyatech.com/Alphaapis/getDeezerSounds?code=ROOYA-5574499'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode(
+            {"search": '$searchKeyword2', "index": '0', "limit": '10'}));
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);
       if (jsonData['status'] == 'success') {
         if (page > 1) {
-          favSoundsData.value.data!.addAll(SoundModelList.fromJSON(json.decode(response.body)).data!.toList());
+          favSoundsData.value.soundData!.addAll(
+              SoundModelList.fromJson(json.decode(response.body))
+                  .soundData!
+                  .toList());
         } else {
-          favSoundsData.value = SoundModelList.fromJSON(json.decode(response.body));
+          favSoundsData.value =
+              SoundModelList.fromJson(json.decode(response.body));
         }
       }
     }
   } catch (e) {
     print(e.toString());
-    favSoundsData.value = SoundModelList.fromJSON({});
+    favSoundsData.value = SoundModelList.fromJson({});
   }
   favSoundsData.notifyListeners();
   return favSoundsData.value;
@@ -128,7 +148,7 @@ Future<String> setFavSound(soundId, set) async {
 }
 
 Future<SoundData> getSound(soundId) async {
-  SoundData sound = SoundData.fromJSON({});
+  SoundData sound = SoundData.fromJson({});
   try {
     String apiUrl = Helper.getUri("get-sound").toString();
     var response = await Dio().post(
@@ -148,12 +168,12 @@ Future<SoundData> getSound(soundId) async {
       print(response.data);
       if (response.data['status'] == 'success') {
         var map = Map<String, dynamic>.from(response.data['data']);
-        sound = SoundData.fromJSON(map);
+        sound = SoundData.fromJson(map);
       }
     }
   } catch (e) {
     print(e);
-    sound = SoundData.fromJSON({});
+    sound = SoundData.fromJson({});
   }
   return sound;
 }

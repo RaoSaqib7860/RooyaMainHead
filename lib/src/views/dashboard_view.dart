@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +10,13 @@ import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:leuke/src/models/user_video_args.dart';
 import 'package:like_button/like_button.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pedantic/pedantic.dart';
+import 'package:rooya_app/src/models/user_video_args.dart';
 import 'package:share/share.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../controllers/dashboard_controller.dart';
 import '../helpers/app_config.dart' as config;
 import '../helpers/helper.dart';

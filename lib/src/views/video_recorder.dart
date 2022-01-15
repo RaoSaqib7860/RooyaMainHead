@@ -4,15 +4,21 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:rooya_app/ApiUtils/AuthUtils.dart';
+import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
+import 'package:rooya_app/story/uploadStroy.dart';
+import 'package:rooya_app/utils/SizedConfig.dart';
+import 'package:rooya_app/utils/colors.dart';
 import "package:velocity_x/velocity_x.dart";
 import 'package:video_player/video_player.dart';
 import 'package:video_trimmer/video_trimmer.dart';
-
+import 'package:get/get.dart';
 import '../controllers/video_recorder_controller.dart';
 import '../models/sound_model.dart';
 import '../repositories/settings_repository.dart' as settingRepo;
@@ -23,8 +29,11 @@ import '../views/video_submit.dart';
 import '../widgets/MarqueWidget.dart';
 
 class VideoRecorder extends StatefulWidget {
+  final bool? isInnitial;
+
   VideoRecorder({
     Key? key,
+    this.isInnitial = false,
   }) {}
 
   @override
@@ -51,10 +60,13 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
 
   @override
   void initState() {
+    if (widget.isInnitial!) {
+      soundRepo.currentSound = new ValueNotifier(SoundData(id: 0, title: ""));
+    }
     _con.getTimeLimits();
     _con.initCamera();
-    if (soundRepo.currentSound.value.soundId > 0) {
-      _con.saveAudio(soundRepo.currentSound.value.url);
+    if (soundRepo.currentSound.value.id! > 0) {
+      _con.saveAudio(soundRepo.currentSound.value.preview);
     }
     super.initState();
     _con.animationController = AnimationController(
@@ -153,7 +165,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                   onPressed: () {
                     _con.videoController!.pause();
                     soundRepo.currentSound =
-                        new ValueNotifier(SoundData(soundId: 0, title: ""));
+                        new ValueNotifier(SoundData(id: 0, title: ""));
                     soundRepo.currentSound.notifyListeners();
                     videoRepo.homeCon.value.showFollowingPage.value = false;
                     videoRepo.homeCon.value.showFollowingPage.notifyListeners();
@@ -575,11 +587,16 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.black54),
       );
-      return ModalProgressHUD(
-        progressIndicator: showLoaderSpinner(),
-        inAsyncCall: _con.showLoader,
-        child: WillPopScope(
-          onWillPop: () async => _con.willPopScope(context),
+      return WillPopScope(
+        onWillPop: () async {
+          Get.offAll(() => BottomSheetCustom(
+                index: 2,
+              ));
+          return true;
+        },
+        child: ModalProgressHUD(
+          progressIndicator: showLoaderSpinner(),
+          inAsyncCall: _con.showLoader,
           child: Scaffold(
             backgroundColor: Colors.transparent,
             key: _con.scaffoldKey,
@@ -617,11 +634,11 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                       // _con.onSwitchCamera();
                     },
                   ),
-                  Positioned(
-                    bottom: 35,
-                    left: 85,
-                    child: _cameraFlashRowWidget(),
-                  ),
+                  // Positioned(
+                  //   bottom: 35,
+                  //   left: 85,
+                  //   child: _cameraFlashRowWidget(),
+                  // ),
                   Positioned(
                     bottom: 20,
                     child: Container(
@@ -645,7 +662,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                           !_con.controller!.value.isInitialized ||
                           !_con.controller!.value.isRecordingVideo)
                       ? Positioned(
-                          bottom: 110,
+                          bottom: 100,
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             child: Center(
@@ -692,14 +709,16 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                                           MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          soundRepo.currentSound.value.title ==
+                                          soundRepo.currentSound.value.title! ==
                                                       null ||
                                                   soundRepo.currentSound.value
-                                                          .title ==
+                                                          .title! ==
                                                       ""
                                               ? "Select Sound "
                                               : soundRepo
-                                                  .currentSound.value.title,
+                                                  .currentSound.value.title!
+                                                  .replaceAll('Null', '')
+                                                  .trim(),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -768,12 +787,11 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                                             height: 30,
                                             child: SvgPicture.asset(
                                               !_con.videoRecorded
-                                                  ? 'assets/icons/play.svg'
-                                                  : 'assets/icons/pause.svg',
+                                                  ? 'assets/reelAssets/icons/play.svg'
+                                                  : 'assets/reelAssets/icons/pause.svg',
                                               width: 30,
                                               height: 30,
-                                              color: settingRepo
-                                                  .setting.value.accentColor,
+                                              color: primaryColor,
                                             ).centered()),
                                       ),
                                     ),
@@ -789,7 +807,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                     right: 20,
                     child: InkWell(
                       child: SvgPicture.asset(
-                        'assets/icons/add_photo.svg',
+                        'assets/reelAssets/icons/add_photo.svg',
                         width: 40,
                         color: settingRepo.setting.value.iconColor,
                       ),
@@ -860,11 +878,11 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                                           width: 35,
                                           child: enableMic
                                               ? Image.asset(
-                                                  "assets/icons/microphone.png",
+                                                  "assets/reelAssets/icons/microphone.png",
                                                   height: 30,
                                                 )
                                               : Image.asset(
-                                                  "assets/icons/microphone-mute.png",
+                                                  "assets/reelAssets/icons/microphone-mute.png",
                                                   height: 30,
                                                 ),
                                         ),
@@ -1030,7 +1048,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
         return (!disableButton)
             ? InkWell(
                 child: SvgPicture.asset(
-                  'assets/icons/flip.svg',
+                  'assets/reelAssets/icons/flip.svg',
                   width: 30,
                   color: settingRepo.setting.value.iconColor,
                 ).pOnly(left: 25),
@@ -1070,18 +1088,19 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                           print("else Camera Testing");
                         }
                       },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Center(
-                            child: SvgPicture.asset(
-                              "assets/icons/create-video.svg",
-                              width: 70,
-                              height: 70,
-                              color: settingRepo.setting.value.accentColor,
-                            ),
-                          ), // icon
-                        ],
+                      child: Container(
+                        height: height * 0.1,
+                        width: width * 0.2,
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: primaryColor.withOpacity(0.5),
+                                width: 5)),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: primaryColor),
+                        ),
                       ),
                     ),
                   ),
@@ -1107,11 +1126,18 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                         print("else Camera Testing");
                       }
                     },
-                    child: SvgPicture.asset(
-                      "assets/icons/video-stop.svg",
-                      width: 50,
-                      height: 50,
-                      color: Colors.redAccent,
+                    child: Container(
+                      height: height * 0.1,
+                      width: width * 0.2,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: Colors.red.withOpacity(0.5), width: 5)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.red),
+                      ),
                     ),
                   ),
                 ),
@@ -1139,29 +1165,29 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                   },
                   child: Container(
                     margin: EdgeInsets.only(
-                      right: 18,
+                      right: 15,
                     ),
-                    height: 45,
+                    height: 40,
                     constraints: BoxConstraints(
-                      minWidth: 45,
+                      minWidth: 40,
                     ),
                     padding: EdgeInsets.all(3),
                     decoration: BoxDecoration(
                       color: (_con.videoLength == timers[i])
-                          ? settingRepo.setting.value.accentColor
-                          : Colors.white.withOpacity(0.6),
+                          ? Colors.white.withOpacity(0.5)
+                          : Colors.white.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(6),
                       border: (_con.videoLength == timers[i])
-                          ? Border.all(color: Colors.white, width: 2)
-                          : Border.all(color: Colors.white70, width: 0),
+                          ? Border.all(color: primaryColor, width: 2)
+                          : Border.all(color: Colors.white, width: 0),
                     ),
                     child: Center(
                       child: Text(
                         "${timers[i].toInt() > 300 ? 300 : timers[i].toInt()}s",
                         style: TextStyle(
                           color: (_con.videoLength == timers[i])
-                              ? settingRepo.setting.value.buttonTextColor
-                              : Colors.black,
+                              ? Colors.white
+                              : Colors.white,
                           fontSize: 12,
                         ),
                       ),
@@ -1239,6 +1265,7 @@ class _TrimmerViewState extends State<TrimmerView> {
   Color curveColor = Color(0xff1c262d);
   Color textFieldBorderColor = Color(0xff01a684);
   Color buttonColor = Color(0xff01a684);
+  var isloadinng = false.obs;
 
   @override
   void initState() {
@@ -1277,6 +1304,8 @@ class _TrimmerViewState extends State<TrimmerView> {
     return _value;
   }
 
+  TextEditingController textCon = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -1284,135 +1313,162 @@ class _TrimmerViewState extends State<TrimmerView> {
           statusBarColor: Color(0xff2d3d44),
           statusBarIconBrightness: Brightness.light),
     );
-    return Scaffold(
-      backgroundColor: settingRepo.setting.value.bgColor,
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: settingRepo.setting.value.iconColor,
-            ),
-            onPressed: () async {
-              videoRepo.isOnRecordingPage.value = true;
-              videoRepo.isOnRecordingPage.notifyListeners();
-              Navigator.pushReplacementNamed(context, '/video-recorder');
-            }),
-        iconTheme: IconThemeData(
-          size: 16,
-          color: settingRepo.setting.value.textColor, //change your color here
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAll(() => BottomSheetCustom(
+              index: 2,
+            ));
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: settingRepo.setting.value.bgColor,
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: settingRepo.setting.value.iconColor,
+              ),
+              onPressed: () async {
+                videoRepo.isOnRecordingPage.value = true;
+                videoRepo.isOnRecordingPage.notifyListeners();
+                Navigator.pushReplacementNamed(context, '/video-recorder');
+              }),
+          iconTheme: IconThemeData(
+            size: 16,
+            color: settingRepo.setting.value.textColor, //change your color here
+          ),
+          title: "Post"
+              .text
+              .uppercase
+              .bold
+              .size(18)
+              .color(settingRepo.setting.value.textColor!)
+              .make(),
+          backgroundColor: appbarColor,
+          centerTitle: true,
         ),
-        title: "Post"
-            .text
-            .uppercase
-            .bold
-            .size(18)
-            .color(settingRepo.setting.value.textColor!)
-            .make(),
-        backgroundColor: appbarColor,
-        centerTitle: true,
-      ),
-      body: Builder(
-        builder: (context) => Center(
-          child: Container(
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Visibility(
-                  visible: _progressVisibility,
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: VideoViewer(
-                      //trimmer: widget.trimmer,
+        body: Stack(
+          children: [
+            Builder(
+              builder: (context) => Center(
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 30.0),
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
                       ),
-                ),
-                Center(
-                  child: TrimEditor(
-                    // trimmer: widget.trimmer,
-                    viewerHeight: 50.0,
-                    viewerWidth: MediaQuery.of(context).size.width - 50,
-                    maxVideoLength: Duration(seconds: widget.maxLength.toInt()),
-                    onChangeStart: (value) {
-                      _startValue = value;
-                    },
-                    onChangeEnd: (value) {
-                      _endValue = value;
-                    },
-                    onChangePlaybackState: (value) {
-                      if (_endValue - _startValue >=
-                          widget.maxLength * 1000 + 0.1) {
-                        setState(() {
-                          _endValue = _startValue + widget.maxLength * 1000;
-                        });
-                      }
-                      setState(() {
-                        _isPlaying = value;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () async {
-                          bool playbackState =
-                              await widget.trimmer.videPlaybackControl(
-                            startValue: _startValue,
-                            endValue: _endValue,
-                          );
-
-                          setState(() {
-                            _isPlaying = playbackState;
-                          });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 80,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3.0),
-                              color: buttonColor),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  _isPlaying ? "Pause" : "Play",
-                                  style: TextStyle(
-                                    color: settingRepo
-                                        .setting.value.buttonTextColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    fontFamily: 'RockWellStd',
-                                  ),
-                                ),
-                              ],
+                      Container(
+                        height: 45,
+                        child: TextField(
+                          controller: textCon,
+                          style: TextStyle(
+                            color: settingRepo.setting.value.textColor,
+                            fontSize: 16.0,
+                          ),
+                          obscureText: false,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              wordSpacing: 2.0,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: settingRepo.setting.value.buttonColor!,
+                                width: 0.3,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: settingRepo.setting.value.buttonColor!,
+                                width: 0.3,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: settingRepo.setting.value.buttonColor!,
+                                width: 0.3,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.all(10),
+                            hintText: "Enter Description",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
+                      ).pSymmetric(h: 10),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: widget.showSkip
-                          ? InkWell(
-                              onTap: () {
-                                widget.onSkip();
+                      Visibility(
+                        visible: _progressVisibility,
+                        child: LinearProgressIndicator(
+                          backgroundColor: Colors.red,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(
+                        child: VideoViewer(
+                            //trimmer: widget.trimmer,
+                            ),
+                      ),
+                      Center(
+                        child: TrimEditor(
+                          // trimmer: widget.trimmer,
+                          viewerHeight: 50.0,
+                          viewerWidth: MediaQuery.of(context).size.width - 50,
+                          maxVideoLength:
+                              Duration(seconds: widget.maxLength.toInt()),
+                          onChangeStart: (value) {
+                            _startValue = value;
+                          },
+                          onChangeEnd: (value) {
+                            _endValue = value;
+                          },
+                          onChangePlaybackState: (value) {
+                            if (_endValue - _startValue >=
+                                widget.maxLength * 1000 + 0.1) {
+                              setState(() {
+                                _endValue =
+                                    _startValue + widget.maxLength * 1000;
+                              });
+                            }
+                            setState(() {
+                              _isPlaying = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                bool playbackState =
+                                    await widget.trimmer.videPlaybackControl(
+                                  startValue: _startValue,
+                                  endValue: _endValue,
+                                );
+
+                                setState(() {
+                                  _isPlaying = playbackState;
+                                });
                               },
                               child: Container(
                                 height: 40,
@@ -1426,7 +1482,7 @@ class _TrimmerViewState extends State<TrimmerView> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Text(
-                                        "Skip",
+                                        _isPlaying ? "Pause" : "Play",
                                         style: TextStyle(
                                           color: settingRepo
                                               .setting.value.buttonTextColor,
@@ -1439,58 +1495,125 @@ class _TrimmerViewState extends State<TrimmerView> {
                                   ),
                                 ),
                               ),
-                            )
-                          : Container(),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: _progressVisibility
-                            ? null
-                            : () async {
-                                _saveVideo().then((outputPath) {
-                                  print('OUTPUT PATH: $outputPath');
-                                  final snackBar = SnackBar(
-                                    content: Text('Video Saved successfully'),
-                                  );
-                                  widget.onVideoSaved(outputPath);
-                                  Scaffold.of(context).showSnackBar(snackBar);
-                                });
-                              },
-                        child: Container(
-                          height: 40,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3.0),
-                            color: buttonColor,
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  "Save",
-                                  style: TextStyle(
-                                    color: settingRepo
-                                        .setting.value.buttonTextColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    fontFamily: 'RockWellStd',
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ).pSymmetric(h: 34, v: 5),
-              ],
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: _progressVisibility
+                                  ? null
+                                  : () async {
+                                      _saveVideo().then((outputPath) async {
+                                        // widget.onVideoSaved(outputPath);
+                                        isloadinng.value = true;
+                                        setState(() {});
+                                        if (soundRepo.currentSound.value.id! >
+                                            0) {
+                                          print('OUTPUT PATH: $outputPath');
+                                          String value =
+                                              await uploadReelFiles(outputPath);
+                                          // widget.onVideoSaved(outputPath);
+                                          GetStorage storage = GetStorage();
+                                          Map mapData = {
+                                            "post_type": "reel",
+                                            "user_type": "user",
+                                            "user_id": storage.read('userID'),
+                                            "privacy": "public",
+                                            "song_id": UniqueKey().toString(),
+                                            "title_short":
+                                                "${soundRepo.currentSound.value.title}",
+                                            "cover_xl":
+                                                "${soundRepo.currentSound.value.album!.coverMedium}",
+                                            "duration": '321',
+                                            "post_description":
+                                                "${textCon.text}",
+                                            "hashtag": ["hhello"],
+                                            "tagusers": [],
+                                            "files": ["$value", ""]
+                                          };
+                                          await AuthUtils.uploadReel(
+                                              mapdata: mapData);
+                                          isloadinng.value = false;
+                                          Get.offAll(() => BottomSheetCustom(
+                                                index: 2,
+                                              ));
+                                        } else {
+                                          print('OUTPUT PATH: $outputPath');
+                                          String value =
+                                              await uploadReelFiles(outputPath);
+                                          // widget.onVideoSaved(outputPath);
+                                          GetStorage storage = GetStorage();
+                                          Map mapData = {
+                                            "post_type": "reel",
+                                            "user_type": "user",
+                                            "user_id": storage.read('userID'),
+                                            "privacy": "public",
+                                            "song_id": UniqueKey().toString(),
+                                            "title_short": "10ein93330239",
+                                            "cover_xl": "",
+                                            "duration": '321',
+                                            "post_description":
+                                                "${textCon.text}",
+                                            "hashtag": ["hhello"],
+                                            "tagusers": [],
+                                            "files": ["$value", ""]
+                                          };
+                                          await AuthUtils.uploadReel(
+                                              mapdata: mapData);
+                                          isloadinng.value = false;
+                                          Get.offAll(() => BottomSheetCustom(
+                                                index: 2,
+                                              ));
+                                        }
+                                      });
+                                    },
+                              child: Container(
+                                height: 40,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3.0),
+                                  color: buttonColor,
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Text(
+                                        "Save",
+                                        style: TextStyle(
+                                          color: settingRepo
+                                              .setting.value.buttonTextColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          fontFamily: 'RockWellStd',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ).pSymmetric(h: 34, v: 5),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+            Obx(() => isloadinng.value
+                ? Container(
+                    height: height,
+                    width: width,
+                    decoration:
+                        BoxDecoration(color: Colors.black.withOpacity(0.5)),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : SizedBox())
+          ],
         ),
       ),
     );

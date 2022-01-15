@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'src/views/conversations_view.dart';
-import 'src/views/dashboard_view.dart';
-import 'src/views/hash_videos_view.dart';
-import 'src/views/my_profile_view.dart';
-import 'src/views/password_login_view.dart';
-import 'src/views/sign_up_view.dart';
-import 'src/views/splash_screen_view.dart';
-import 'src/views/users_view.dart';
-import 'src/views/verify_otp_screen.dart';
-import 'src/views/verify_profile.dart';
-import 'src/views/video_recorder.dart';
+import 'package:rooya_app/src/views/splash_screen_view.dart';
+import 'views/conversations_view.dart';
+import 'views/dashboard_view.dart';
+import 'views/hash_videos_view.dart';
+import 'views/my_profile_view.dart';
+import 'views/password_login_view.dart';
+import 'views/sign_up_view.dart';
+import 'views/users_view.dart';
+import 'views/verify_otp_screen.dart';
+import 'views/verify_profile.dart';
+import 'views/video_recorder.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

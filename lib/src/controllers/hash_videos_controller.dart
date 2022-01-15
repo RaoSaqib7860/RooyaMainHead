@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:leuke/src/models/search_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:rooya_app/src/models/search_model.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../repositories/hash_repository.dart' as hashRepo;

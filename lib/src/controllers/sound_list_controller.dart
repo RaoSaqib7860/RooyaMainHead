@@ -76,7 +76,7 @@ class SoundListController extends ControllerMVC {
       showLoader.value = false;
       showLoader.notifyListeners();
 
-      if (value.data!.isNotEmpty) {
+      if (value.soundData!.isNotEmpty) {
         showLoadMore = true;
       } else {
         showLoadMore = false;
@@ -116,7 +116,7 @@ class SoundListController extends ControllerMVC {
     soundRepo.getFavData(favPage, searchKeyword).then((value) {
       showLoader.value = false;
       showLoader.notifyListeners();
-      if (value.data!.isNotEmpty) {
+      if (value.soundData!.isNotEmpty) {
         showLoadMore = true;
       } else {
         showLoadMore = false;
@@ -150,7 +150,7 @@ class SoundListController extends ControllerMVC {
     soundRepo.getCatData(catId, catPage, searchKeyword).then((value) {
       showLoader.value = false;
       showLoader.notifyListeners();
-      if (value.data!.isNotEmpty) {
+      if (value.soundData!.isNotEmpty) {
         showLoadMore = true;
       } else {
         showLoadMore = false;

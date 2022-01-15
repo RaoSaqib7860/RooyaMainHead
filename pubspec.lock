@@ -267,20 +267,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
-  ffmpeg_kit_flutter:
-    dependency: transitive
-    description:
-      name: ffmpeg_kit_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.5.0"
-  ffmpeg_kit_flutter_platform_interface:
-    dependency: transitive
-    description:
-      name: ffmpeg_kit_flutter_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   file:
     dependency: transitive
     description:
@@ -1477,13 +1463,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  video_editor:
-    dependency: "direct main"
-    description:
-      name: video_editor
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.2"
   video_player:
     dependency: "direct main"
     description:

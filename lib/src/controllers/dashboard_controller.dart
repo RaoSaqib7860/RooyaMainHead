@@ -1,22 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:leuke/src/models/user_video_args.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pedantic/pedantic.dart';
-//import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rooya_app/src/models/user_video_args.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:video_player/video_player.dart';
-
 import '../models/comment_model.dart';
 import '../models/videos_model.dart';
 import '../repositories/comment_repository.dart' as commentRepo;
@@ -791,12 +787,12 @@ class DashboardController extends ControllerMVC {
                       ),
                     ),
                   ),
-                  body: SingleChildScrollView(
-                    child: Html(
-                      shrinkWrap: true,
-                      data: data['content'],
-                    ),
-                  ),
+                  // body: SingleChildScrollView(
+                  //   child: Html(
+                  //     shrinkWrap: true,
+                  //     data: data['content'],
+                  //   ),
+                  // ),
                   floatingActionButton: FloatingActionButton.extended(
                     backgroundColor: Colors.blueAccent,
                     onPressed: () async {
