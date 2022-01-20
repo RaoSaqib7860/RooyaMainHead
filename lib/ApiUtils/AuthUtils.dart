@@ -43,6 +43,7 @@ class AuthUtils {
   static final generalSetting = 'generalSetting';
   static final ggetRooyaReelByLimite = 'getRooyaReelByLimite';
   static final addNewReelPost ='addNewReelPost';
+  static final getRooyaPostBySingle = 'getRooyaPostBySingle';
 
   static Future signIn({SignInController? controller}) async {
     controller!.isLoading.value = true;
@@ -192,6 +193,24 @@ class AuthUtils {
       controller.listofSearch.value = List<RooyaPostModel>.from(
           data['data'].map((model) => RooyaPostModel.fromJson(model)));
     }
+  }
+
+  static Future getgetRooyaPostBySingle({String? postId}) async {
+    print('call story');
+    print('token is =  ${await getToken()}');
+    GetStorage storage = GetStorage();
+    final response = await http.post(
+        Uri.parse('$baseUrl$getRooyaPostBySingle$code'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode({
+          "post_id": postId,
+          "user_id": await storage.read('userID')
+        }));
+    var data = jsonDecode(response.body);
+    print('getgetRooyaPostBySingle =$data');
   }
 
   static Future getgetRooyaPostByLimite({HomeController? controller}) async {

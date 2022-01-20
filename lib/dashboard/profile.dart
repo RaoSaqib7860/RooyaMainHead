@@ -1100,51 +1100,48 @@ class _ProfileState extends State<Profile> {
                         SizedBox(
                           height: 2.0.h,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 2.0.w),
-                          child: selectedValue == 0
-                              ? Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      height: 5.5.h,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
-                                      child: Center(
-                                        child: TextFormField(
-                                          // controller: mMobileNumber,
-                                          cursorColor: Colors.black,
-                                          keyboardType: TextInputType.text,
-                                          style: TextStyle(
+                        selectedValue == 0
+                            ? Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    height: 5.5.h,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 4.0.w),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
+                                    child: Center(
+                                      child: TextFormField(
+                                        // controller: mMobileNumber,
+                                        cursorColor: Colors.black,
+                                        keyboardType: TextInputType.text,
+                                        style: TextStyle(
+                                          fontFamily: AppFonts.segoeui,
+                                          fontSize: 10.0.sp,
+                                          color: const Color(0xff1e1e1e),
+                                        ),
+                                        decoration: new InputDecoration(
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          isDense: true,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          contentPadding: EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          hintText: 'Search here...',
+                                          hintStyle: TextStyle(
                                             fontFamily: AppFonts.segoeui,
-                                            fontSize: 10.0.sp,
+                                            fontSize: 9.0.sp,
                                             color: const Color(0xff1e1e1e),
-                                          ),
-                                          decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            isDense: true,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            contentPadding: EdgeInsets.only(
-                                                left: 15, right: 15),
-                                            hintText: 'Search here...',
-                                            hintStyle: TextStyle(
-                                              fontFamily: AppFonts.segoeui,
-                                              fontSize: 9.0.sp,
-                                              color: const Color(0xff1e1e1e),
-                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    Flexible(
-                                        child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 2.0.w),
+                                  ),
+                                  Flexible(
                                       child: ListView.builder(
                                           physics:
                                               NeverScrollableScrollPhysics(),
@@ -1308,169 +1305,564 @@ class _ProfileState extends State<Profile> {
                                                     mRooyaPostsList[index],
                                               );
                                             }
-                                          }),
-                                    ))
-                                  ],
-                                )
-                              : selectedValue == 1
-                                  ? Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          height: 5.5.h,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: Center(
-                                            child: TextFormField(
-                                              // controller: mMobileNumber,
-                                              cursorColor: Colors.black,
-                                              keyboardType: TextInputType.text,
-                                              style: TextStyle(
+                                          }))
+                                ],
+                              )
+                            : selectedValue == 1
+                                ? Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        height: 5.5.h,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            borderRadius:
+                                                BorderRadius.circular(25)),
+                                        child: Center(
+                                          child: TextFormField(
+                                            // controller: mMobileNumber,
+                                            cursorColor: Colors.black,
+                                            keyboardType: TextInputType.text,
+                                            style: TextStyle(
+                                              fontFamily: AppFonts.segoeui,
+                                              fontSize: 10.0.sp,
+                                              color: const Color(0xff1e1e1e),
+                                            ),
+                                            decoration: new InputDecoration(
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              isDense: true,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder:
+                                                  InputBorder.none,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 15, right: 15),
+                                              hintText: 'Search here...',
+                                              hintStyle: TextStyle(
                                                 fontFamily: AppFonts.segoeui,
-                                                fontSize: 10.0.sp,
-                                                color: const Color(0xff1e1e1e),
-                                              ),
-                                              decoration: new InputDecoration(
-                                                border: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                isDense: true,
-                                                enabledBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
-                                                disabledBorder:
-                                                    InputBorder.none,
-                                                contentPadding: EdgeInsets.only(
-                                                    left: 15, right: 15),
-                                                hintText: 'Search here...',
-                                                hintStyle: TextStyle(
-                                                  fontFamily: AppFonts.segoeui,
-                                                  fontSize: 9.0.sp,
-                                                  color:
-                                                      const Color(0xff1e1e1e),
-                                                ),
+                                                fontSize: 9.0.sp,
+                                                color:
+                                                    const Color(0xff1e1e1e),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        Flexible(
-                                            child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.0.w),
-                                          child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: mRooyaPostsList.length,
-                                              itemBuilder: (context, index) {
-                                                return UserPost(
-                                                  rooyaPostModel:
-                                                      mRooyaPostsList[index],
-                                                );
-                                              }),
-                                        ))
-                                      ],
-                                    )
-                                  : selectedValue == 2
-                                      ? Column(
-                                          children: [
-                                            userID == widget.userID
-                                                ? InkWell(
-                                                    onTap: () {
+                                      ),
+                                      Flexible(
+                                          child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.0.w),
+                                        child: ListView.builder(
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: mRooyaPostsList.length,
+                                            itemBuilder: (context, index) {
+                                              return UserPost(
+                                                rooyaPostModel:
+                                                    mRooyaPostsList[index],
+                                              );
+                                            }),
+                                      ))
+                                    ],
+                                  )
+                                : selectedValue == 2
+                                    ? Column(
+                                        children: [
+                                          userID == widget.userID
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    fromHomeStory = '0';
+                                                    Get.to(CameraApp(
+                                                      fromStory: true,
+                                                    ))!
+                                                        .then((value) {
                                                       fromHomeStory = '0';
-                                                      Get.to(CameraApp(
-                                                        fromStory: true,
+                                                      getStories();
+                                                    });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add_circle,
+                                                        color: primaryColor,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text(
+                                                        'ADD STORY',
+                                                        style: TextStyle(
+                                                          fontFamily: AppFonts
+                                                              .segoeui,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 9.0.sp,
+                                                          color:
+                                                              selectedValue ==
+                                                                      4
+                                                                  ? primaryColor
+                                                                  : Colors
+                                                                      .black,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : SizedBox(),
+                                          SizedBox(
+                                            height: height * 0.010,
+                                          ),
+                                          GridView.builder(
+                                            shrinkWrap: true,
+                                            physics: BouncingScrollPhysics(),
+                                            itemCount: userStoryModel == null
+                                                ? 0
+                                                : userStoryModel!
+                                                    .items!.length,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    childAspectRatio: 0.8,
+                                                    // crossAxisSpacing: 5.0.w,
+                                                    mainAxisSpacing: 2.0.w,
+                                                    crossAxisCount: 4),
+                                            itemBuilder:
+                                                (BuildContext context,
+                                                    int index) {
+                                              return Stack(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(ViewStory(
+                                                        model: userStoryModel,
+                                                        index: index,
                                                       ))!
                                                           .then((value) {
-                                                        fromHomeStory = '0';
-                                                        getStories();
+                                                        if (value is int) {
+                                                          userStoryModel!
+                                                              .items!
+                                                              .removeAt(
+                                                                  value);
+                                                          setState(() {});
+                                                        }
                                                       });
                                                     },
+                                                    child: Container(
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: userStoryModel!
+                                                                    .items![
+                                                                        index]
+                                                                    .type ==
+                                                                'photo'
+                                                            ? CachedNetworkImage(
+                                                                imageUrl:
+                                                                    '$baseImageUrl${userStoryModel!.items![index].src}',
+                                                                width: double
+                                                                    .infinity,
+                                                                height: double
+                                                                    .infinity,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                progressIndicatorBuilder: (context,
+                                                                        url,
+                                                                        downloadProgress) =>
+                                                                    ShimerEffect(
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/home_banner.png',
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Image
+                                                                        .asset(
+                                                                  'assets/images/home_banner.png',
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              )
+                                                            : Container(
+                                                                child: Center(
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .play_circle_fill,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        color:
+                                                                            Colors.black),
+                                                              ),
+                                                      ),
+                                                      margin: EdgeInsets
+                                                          .symmetric(
+                                                              horizontal:
+                                                                  0.8.h),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 8, top: 5),
+                                                    width: 20.0.w,
                                                     child: Row(
                                                       children: [
-                                                        Icon(
-                                                          Icons.add_circle,
-                                                          color: primaryColor,
+                                                        CircularProfileAvatar(
+                                                          '',
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: userStoryModel!
+                                                                        .userPicture ==
+                                                                    null
+                                                                ? 'https://www.gravatar.com/avatar/test@test.com.jpg?s=200&d=mm'
+                                                                : "$baseImageUrl${userStoryModel!.userPicture}",
+                                                            fit: BoxFit.cover,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    ShimerEffect(
+                                                              child:
+                                                                  Image.asset(
+                                                                'assets/images/home_banner.png',
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                Image.asset(
+                                                              'assets/images/home_banner.png',
+                                                              fit: BoxFit
+                                                                  .cover,
+                                                            ),
+                                                          ),
+                                                          borderColor:
+                                                              primaryColor,
+                                                          elevation: 5,
+                                                          borderWidth: 1,
+                                                          radius: 10,
                                                         ),
                                                         SizedBox(
-                                                          width: 5,
+                                                          width: 3,
                                                         ),
-                                                        Text(
-                                                          'ADD STORY',
-                                                          style: TextStyle(
-                                                            fontFamily: AppFonts
-                                                                .segoeui,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 9.0.sp,
-                                                            color:
-                                                                selectedValue ==
-                                                                        4
-                                                                    ? primaryColor
-                                                                    : Colors
-                                                                        .black,
+                                                        Expanded(
+                                                          child: Text(
+                                                            '${userStoryModel!.userFirstname} ${userStoryModel!.userLastname}',
+                                                            maxLines: 2,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 8),
                                                           ),
-                                                          textAlign:
-                                                              TextAlign.center,
                                                         )
                                                       ],
                                                     ),
-                                                  )
-                                                : SizedBox(),
-                                            SizedBox(
-                                              height: height * 0.010,
-                                            ),
-                                            GridView.builder(
-                                              shrinkWrap: true,
-                                              physics: BouncingScrollPhysics(),
-                                              itemCount: userStoryModel == null
-                                                  ? 0
-                                                  : userStoryModel!
-                                                      .items!.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      childAspectRatio: 0.8,
-                                                      // crossAxisSpacing: 5.0.w,
-                                                      mainAxisSpacing: 2.0.w,
-                                                      crossAxisCount: 4),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Stack(
-                                                  children: [
-                                                    InkWell(
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      )
+                                    : selectedValue == 3
+                                        ? Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              userID == widget.userID
+                                                  ? InkWell(
                                                       onTap: () {
-                                                        Get.to(ViewStory(
-                                                          model: userStoryModel,
-                                                          index: index,
-                                                        ))!
-                                                            .then((value) {
-                                                          if (value is int) {
-                                                            userStoryModel!
-                                                                .items!
-                                                                .removeAt(
-                                                                    value);
-                                                            setState(() {});
-                                                          }
-                                                        });
+                                                        Get.to(() =>
+                                                            CreateNewEvent());
                                                       },
-                                                      child: Container(
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          child: userStoryModel!
-                                                                      .items![
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_circle,
+                                                            color:
+                                                                primaryColor,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'ROOYA EVENT',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  AppFonts
+                                                                      .segoeui,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize:
+                                                                  9.0.sp,
+                                                              color: selectedValue ==
+                                                                      4
+                                                                  ? primaryColor
+                                                                  : Colors
+                                                                      .black,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .center,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : SizedBox(),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              GridView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    BouncingScrollPhysics(),
+                                                itemCount:
+                                                    listofUpcommingEvents
+                                                            .isEmpty
+                                                        ? 6
+                                                        : listofUpcommingEvents
+                                                            .length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisSpacing:
+                                                            3.0.w,
+                                                        mainAxisSpacing:
+                                                            3.0.w,
+                                                        childAspectRatio: 1.8,
+                                                        crossAxisCount: 2),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return listofUpcommingEvents
+                                                          .isEmpty
+                                                      ? ShimerEffect(
+                                                          child: Container(
+                                                            height: 15.0.h,
+                                                            width: 100.0.w,
+                                                            color:
+                                                                Colors.blue,
+                                                          ),
+                                                        )
+                                                      : InkWell(
+                                                          onTap: () {
+                                                            Get.to(() =>
+                                                                EventDetails(
+                                                                  eventId: listofUpcommingEvents[
                                                                           index]
-                                                                      .type ==
-                                                                  'photo'
-                                                              ? CachedNetworkImage(
+                                                                      .eventId,
+                                                                ));
+                                                          },
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                '$baseImageUrl' +
+                                                                    '${listofUpcommingEvents[index].eventCover}',
+                                                            imageBuilder:
+                                                                (context,
+                                                                        imageProvider) =>
+                                                                    Container(
+                                                              height: 25.0.h,
+                                                              width: 100.0.w,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          10),
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image:
+                                                                          imageProvider)),
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .bottomLeft,
+                                                                child:
+                                                                    Padding(
+                                                                  padding:
+                                                                      EdgeInsets.all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    children: [
+                                                                      Text(
+                                                                        '${listofUpcommingEvents[index].eventTitle}',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontFamily:
+                                                                              AppFonts.segoeui,
+                                                                          fontSize:
+                                                                              11.0.sp,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ),
+                                                                      Container(
+                                                                        width:
+                                                                            double.infinity,
+                                                                        child:
+                                                                            Text(
+                                                                          '${listofUpcommingEvents[index].eventDescription}',
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          maxLines:
+                                                                              1,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontFamily: AppFonts.segoeui,
+                                                                            fontSize: 7.0.sp,
+                                                                            color: Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            placeholder: (context,
+                                                                    url) =>
+                                                                ShimerEffect(
+                                                              child:
+                                                                  Container(
+                                                                height:
+                                                                    15.0.h,
+                                                                width:
+                                                                    100.0.w,
+                                                                color: Colors
+                                                                    .blue,
+                                                              ),
+                                                            ),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                Icon(Icons
+                                                                    .error),
+                                                          ),
+                                                        );
+                                                },
+                                              ),
+                                            ],
+                                          )
+                                        : selectedValue == 4
+                                            ? Column(
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  userID == widget.userID
+                                                      ? InkWell(
+                                                          onTap: () {
+                                                            Get.to(() =>
+                                                                CreateSouq());
+                                                          },
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons
+                                                                    .add_circle,
+                                                                color:
+                                                                    primaryColor,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              Text(
+                                                                'ROOYA SOUQ',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      AppFonts
+                                                                          .segoeui,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      9.0.sp,
+                                                                  color: selectedValue ==
+                                                                          4
+                                                                      ? primaryColor
+                                                                      : Colors
+                                                                          .black,
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : SizedBox(),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Flexible(
+                                                    child: GridView.builder(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          NeverScrollableScrollPhysics(),
+                                                      itemCount:
+                                                          mRooyaSouqList
+                                                              .length,
+                                                      gridDelegate:
+                                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                                              crossAxisSpacing:
+                                                                  5.0.w,
+                                                              mainAxisSpacing:
+                                                                  2.0.w,
+                                                              crossAxisCount:
+                                                                  2),
+                                                      itemBuilder:
+                                                          (BuildContext
+                                                                  context,
+                                                              int index) {
+                                                        return InkWell(
+                                                          onTap: () {
+                                                            Get.to(() =>
+                                                                    RooyaAdDisplay(
+                                                                      rooyaSouqModel:
+                                                                          mRooyaSouqList[index],
+                                                                    ))!
+                                                                .then(
+                                                                    (value) {
+                                                              if (value
+                                                                  is bool) {
+                                                                getRooyaSouqbyLimit();
+                                                              }
+                                                            });
+                                                          },
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Container(
+                                                                height:
+                                                                    15.0.h,
+                                                                width:
+                                                                    100.0.w,
+                                                                child:
+                                                                    CachedNetworkImage(
                                                                   imageUrl:
-                                                                      '$baseImageUrl${userStoryModel!.items![index].src}',
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: double
-                                                                      .infinity,
+                                                                      '$baseImageUrl${mRooyaSouqList[index].images![0].attachment}',
                                                                   fit: BoxFit
                                                                       .cover,
                                                                   progressIndicatorBuilder: (context,
@@ -1493,500 +1885,103 @@ class _ProfileState extends State<Profile> {
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
-                                                                )
-                                                              : Container(
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .play_circle_fill,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                  ),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                          color:
-                                                                              Colors.black),
-                                                                ),
-                                                        ),
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    0.8.h),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 8, top: 5),
-                                                      width: 20.0.w,
-                                                      child: Row(
-                                                        children: [
-                                                          CircularProfileAvatar(
-                                                            '',
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              imageUrl: userStoryModel!
-                                                                          .userPicture ==
-                                                                      null
-                                                                  ? 'https://www.gravatar.com/avatar/test@test.com.jpg?s=200&d=mm'
-                                                                  : "$baseImageUrl${userStoryModel!.userPicture}",
-                                                              fit: BoxFit.cover,
-                                                              progressIndicatorBuilder:
-                                                                  (context, url,
-                                                                          downloadProgress) =>
-                                                                      ShimerEffect(
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/home_banner.png',
-                                                                  fit: BoxFit
-                                                                      .cover,
                                                                 ),
                                                               ),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  Image.asset(
-                                                                'assets/images/home_banner.png',
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                              SizedBox(
+                                                                height: 0.5.h,
                                                               ),
-                                                            ),
-                                                            borderColor:
-                                                                primaryColor,
-                                                            elevation: 5,
-                                                            borderWidth: 1,
-                                                            radius: 10,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 3,
-                                                          ),
-                                                          Expanded(
-                                                            child: Text(
-                                                              '${userStoryModel!.userFirstname} ${userStoryModel!.userLastname}',
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 8),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        )
-                                      : selectedValue == 3
-                                          ? Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                userID == widget.userID
-                                                    ? InkWell(
-                                                        onTap: () {
-                                                          Get.to(() =>
-                                                              CreateNewEvent());
-                                                        },
-                                                        child: Row(
-                                                          children: [
-                                                            Icon(
-                                                              Icons.add_circle,
-                                                              color:
-                                                                  primaryColor,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 5,
-                                                            ),
-                                                            Text(
-                                                              'ROOYA EVENT',
-                                                              style: TextStyle(
-                                                                fontFamily:
-                                                                    AppFonts
-                                                                        .segoeui,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize:
-                                                                    9.0.sp,
-                                                                color: selectedValue ==
-                                                                        4
-                                                                    ? primaryColor
-                                                                    : Colors
-                                                                        .black,
+                                                              Text(
+                                                                '${mRooyaSouqList[index].name} (${mRooyaSouqList[index].categoryName})',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Segoe UI',
+                                                                  fontSize: 9,
+                                                                  color: const Color(
+                                                                      0xff000000),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
                                                               ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    : SizedBox(),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                GridView.builder(
-                                                  shrinkWrap: true,
-                                                  physics:
-                                                      BouncingScrollPhysics(),
-                                                  itemCount:
-                                                      listofUpcommingEvents
-                                                              .isEmpty
-                                                          ? 6
-                                                          : listofUpcommingEvents
-                                                              .length,
-                                                  gridDelegate:
-                                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisSpacing:
-                                                              3.0.w,
-                                                          mainAxisSpacing:
-                                                              3.0.w,
-                                                          childAspectRatio: 1.8,
-                                                          crossAxisCount: 2),
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return listofUpcommingEvents
-                                                            .isEmpty
-                                                        ? ShimerEffect(
-                                                            child: Container(
-                                                              height: 15.0.h,
-                                                              width: 100.0.w,
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
-                                                          )
-                                                        : InkWell(
-                                                            onTap: () {
-                                                              Get.to(() =>
-                                                                  EventDetails(
-                                                                    eventId: listofUpcommingEvents[
-                                                                            index]
-                                                                        .eventId,
-                                                                  ));
-                                                            },
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              imageUrl:
-                                                                  '$baseImageUrl' +
-                                                                      '${listofUpcommingEvents[index].eventCover}',
-                                                              imageBuilder:
-                                                                  (context,
-                                                                          imageProvider) =>
-                                                                      Container(
-                                                                height: 25.0.h,
-                                                                width: 100.0.w,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                    image: DecorationImage(
-                                                                        fit: BoxFit
-                                                                            .fill,
-                                                                        image:
-                                                                            imageProvider)),
-                                                                child: Align(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .bottomLeft,
-                                                                  child:
-                                                                      Padding(
-                                                                    padding:
-                                                                        EdgeInsets.all(
-                                                                            8.0),
+                                                              SizedBox(
+                                                                height: 0.5.h,
+                                                              ),
+                                                              Text(
+                                                                '${mRooyaSouqList[index].text}',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 1,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Segoe UI',
+                                                                  fontSize: 9,
+                                                                  color: const Color(
+                                                                      0xff000000),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Expanded(
                                                                     child:
-                                                                        Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .min,
+                                                                        Row(
                                                                       children: [
                                                                         Text(
-                                                                          '${listofUpcommingEvents[index].eventTitle}',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontFamily:
-                                                                                AppFonts.segoeui,
-                                                                            fontSize:
-                                                                                11.0.sp,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                        ),
-                                                                        Container(
+                                                                            'AED ${mRooyaSouqList[index].price}',
+                                                                            overflow: TextOverflow.ellipsis,
+                                                                            style: TextStyle(color: const Color(0xff0bab0d), fontWeight: FontWeight.w600, fontSize: 8.0.sp)),
+                                                                        SizedBox(
                                                                           width:
-                                                                              double.infinity,
-                                                                          child:
-                                                                              Text(
-                                                                            '${listofUpcommingEvents[index].eventDescription}',
-                                                                            overflow:
-                                                                                TextOverflow.ellipsis,
-                                                                            maxLines:
-                                                                                1,
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontFamily: AppFonts.segoeui,
-                                                                              fontSize: 7.0.sp,
-                                                                              color: Colors.white,
-                                                                            ),
-                                                                          ),
+                                                                              5,
                                                                         ),
+                                                                        Icon(
+                                                                          mRooyaSouqList[index].isLike!
+                                                                              ? Icons.favorite
+                                                                              : Icons.favorite_border,
+                                                                          color:
+                                                                              primaryColor,
+                                                                          size:
+                                                                              2.0.h,
+                                                                        )
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              placeholder: (context,
-                                                                      url) =>
-                                                                  ShimerEffect(
-                                                                child:
-                                                                    Container(
-                                                                  height:
-                                                                      15.0.h,
-                                                                  width:
-                                                                      100.0.w,
-                                                                  color: Colors
-                                                                      .blue,
-                                                                ),
-                                                              ),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  Icon(Icons
-                                                                      .error),
-                                                            ),
-                                                          );
-                                                  },
-                                                ),
-                                              ],
-                                            )
-                                          : selectedValue == 4
-                                              ? Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    userID == widget.userID
-                                                        ? InkWell(
-                                                            onTap: () {
-                                                              Get.to(() =>
-                                                                  CreateSouq());
-                                                            },
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons
-                                                                      .add_circle,
-                                                                  color:
-                                                                      primaryColor,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 5,
-                                                                ),
-                                                                Text(
-                                                                  'ROOYA SOUQ',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        AppFonts
-                                                                            .segoeui,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        9.0.sp,
-                                                                    color: selectedValue ==
-                                                                            4
-                                                                        ? primaryColor
-                                                                        : Colors
-                                                                            .black,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        : SizedBox(),
-                                                    SizedBox(
-                                                      height: 10,
+                                                                  Text(
+                                                                      '${mRooyaSouqList[index].status}',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontFamily:
+                                                                            'Segoe UI',
+                                                                        fontSize:
+                                                                            8.0.sp,
+                                                                        color:
+                                                                            const Color(0xff5a5a5a),
+                                                                      ))
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
                                                     ),
-                                                    Flexible(
-                                                      child: GridView.builder(
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            mRooyaSouqList
-                                                                .length,
-                                                        gridDelegate:
-                                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                                crossAxisSpacing:
-                                                                    5.0.w,
-                                                                mainAxisSpacing:
-                                                                    2.0.w,
-                                                                crossAxisCount:
-                                                                    2),
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              Get.to(() =>
-                                                                      RooyaAdDisplay(
-                                                                        rooyaSouqModel:
-                                                                            mRooyaSouqList[index],
-                                                                      ))!
-                                                                  .then(
-                                                                      (value) {
-                                                                if (value
-                                                                    is bool) {
-                                                                  getRooyaSouqbyLimit();
-                                                                }
-                                                              });
-                                                            },
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Container(
-                                                                  height:
-                                                                      15.0.h,
-                                                                  width:
-                                                                      100.0.w,
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    imageUrl:
-                                                                        '$baseImageUrl${mRooyaSouqList[index].images![0].attachment}',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    progressIndicatorBuilder: (context,
-                                                                            url,
-                                                                            downloadProgress) =>
-                                                                        ShimerEffect(
-                                                                      child: Image
-                                                                          .asset(
-                                                                        'assets/images/home_banner.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Image
-                                                                            .asset(
-                                                                      'assets/images/home_banner.png',
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 0.5.h,
-                                                                ),
-                                                                Text(
-                                                                  '${mRooyaSouqList[index].name} (${mRooyaSouqList[index].categoryName})',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'Segoe UI',
-                                                                    fontSize: 9,
-                                                                    color: const Color(
-                                                                        0xff000000),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 0.5.h,
-                                                                ),
-                                                                Text(
-                                                                  '${mRooyaSouqList[index].text}',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  maxLines: 1,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'Segoe UI',
-                                                                    fontSize: 9,
-                                                                    color: const Color(
-                                                                        0xff000000),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          Row(
-                                                                        children: [
-                                                                          Text(
-                                                                              'AED ${mRooyaSouqList[index].price}',
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              style: TextStyle(color: const Color(0xff0bab0d), fontWeight: FontWeight.w600, fontSize: 8.0.sp)),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                5,
-                                                                          ),
-                                                                          Icon(
-                                                                            mRooyaSouqList[index].isLike!
-                                                                                ? Icons.favorite
-                                                                                : Icons.favorite_border,
-                                                                            color:
-                                                                                primaryColor,
-                                                                            size:
-                                                                                2.0.h,
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                        '${mRooyaSouqList[index].status}',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontFamily:
-                                                                              'Segoe UI',
-                                                                          fontSize:
-                                                                              8.0.sp,
-                                                                          color:
-                                                                              const Color(0xff5a5a5a),
-                                                                        ))
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
-                                              : Container(),
-                        )
+                                                  )
+                                                ],
+                                              )
+                                            : Container()
                       ],
                     ),
                   ),

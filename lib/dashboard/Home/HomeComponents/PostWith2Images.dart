@@ -22,45 +22,45 @@ class _PostWith2ImagesState extends State<PostWith2Images> {
         Row(
           children: [
             Expanded(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: widget.rooyaPostModel!.attachment![0].type == 'image'
-                  ? CachedNetworkImage(
-                      imageUrl:
-                          "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
-                      height: 40.0.w,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => ShimerEffect(
-                        child: Container(
+                child: widget.rooyaPostModel!.attachment![0].type == 'image'
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
                           height: 40.0.w,
-                          child: Image.asset(
-                            'assets/images/home_banner.png',
-                            fit: BoxFit.cover,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => ShimerEffect(
+                            child: Container(
+                              height: 40.0.w,
+                              child: Image.asset(
+                                'assets/images/home_banner.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                              height: 40.0.w,
+                              child: Center(child: Icon(Icons.image))),
+                        ),
+                      )
+                    : Container(
+                        height: 40.0.w,
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Center(
+                          child: Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.white,
+                            size: 40,
                           ),
                         ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                          height: 40.0.w,
-                          child: Center(child: Icon(Icons.image))),
-                    )
-                  : Container(
-                      height: 40.0.w,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: Center(
-                        child: Icon(
-                          Icons.play_circle_fill,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ),
-                    ),
-            )),
+                      )),
             SizedBox(
               width: 3,
             ),
             Expanded(
                 child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5),
               child: widget.rooyaPostModel!.attachment![1].type == 'image'
                   ? CachedNetworkImage(
                       imageUrl:

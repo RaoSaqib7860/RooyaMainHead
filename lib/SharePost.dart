@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,308 +58,296 @@ class _SharePostState extends State<SharePost> {
         Container(
           padding:
               EdgeInsets.symmetric(vertical: 1.0.h, horizontal: width * 0.030),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(width: 1, color: Colors.black38)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                children: [
-                  widget.rooyaPostModel!.pre_user_picture == null
-                      ? CircularProfileAvatar(
-                          '',
-                          child: Image.asset('assets/images/logo.png'),
-                          elevation: 5,
-                          radius: 18,
-                          onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (c) => Profile(
-                            //           userID:
-                            //               '${widget.rooyaPostModel!.userPosted}',
-                            //         )));
-                          },
-                          borderColor: primaryColor,
-                          borderWidth: 1,
-                        )
-                      : CircularProfileAvatar(
-                          '$baseImageUrl${widget.rooyaPostModel!.pre_user_picture}',
-                          elevation: 5,
-                          radius: 18,
-                          onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (c) => Profile(
-                            //           userID:
-                            //               '${widget.rooyaPostModel!.userPosted}',
-                            //         )));
-                          },
-                          borderColor: primaryColor,
-                          borderWidth: 1,
-                        ),
-                  SizedBox(
-                    width: 4.0.w,
-                  ),
-                  Expanded(
-                      child: InkWell(
-                    onTap: () {
-                      // print('Click on profile');
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (c) => Profile(
-                      //           userID: '${widget.rooyaPostModel!.userPosted}',
-                      //         )));
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text('${widget.rooyaPostModel!.pre_user_name}',
-                                style: TextStyle(
-                                  fontFamily: AppFonts.segoeui,
-                                  fontSize: 12,
-                                  color: const Color(0xff000000),
-                                  fontWeight: FontWeight.w600,
-                                )),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                    '  ${widget.rooyaPostModel!.event_id == '0' ? 'Add a post' : 'Add post in a Event ${widget.rooyaPostModel!.event_name}'}',
-                                    style: TextStyle(
-                                      fontFamily: AppFonts.segoeui,
-                                      fontSize: 11,
-                                      color: Colors.black38,
-                                    )),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Text(
-                          '@${widget.rooyaPostModel!.pre_user_name}',
-                          style: TextStyle(
-                            fontFamily: AppFonts.segoeui,
-                            fontSize: 9,
-                            color: const Color(0xff000000),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.050),
+                child: Row(
+                  children: [
+                    widget.rooyaPostModel!.pre_user_picture == null
+                        ? CircularProfileAvatar(
+                            '',
+                            child: Image.asset('assets/images/logo.png'),
+                            elevation: 5,
+                            radius: 18,
+                            onTap: () {
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (c) => Profile(
+                              //           userID:
+                              //               '${widget.rooyaPostModel!.userPosted}',
+                              //         )));
+                            },
+                            borderColor: primaryColor,
+                            borderWidth: 1,
+                          )
+                        : CircularProfileAvatar(
+                            '$baseImageUrl${widget.rooyaPostModel!.pre_user_picture}',
+                            elevation: 5,
+                            radius: 18,
+                            onTap: () {
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (c) => Profile(
+                              //           userID:
+                              //               '${widget.rooyaPostModel!.userPosted}',
+                              //         )));
+                            },
+                            borderColor: primaryColor,
+                            borderWidth: 1,
                           ),
-                          textAlign: TextAlign.left,
-                        )
-                      ],
+                    SizedBox(
+                      width: 4.0.w,
                     ),
-                  )),
-                  Text(
-                    '${timeago.format(DateTime.parse(widget.rooyaPostModel!.pre_time!), locale: 'en_short')} ago',
-                    style: TextStyle(
-                      fontFamily: AppFonts.segoeui,
-                      fontSize: 10,
-                      color: const Color(0xff000000),
-                      height: 1.8,
-                    ),
-                    textAlign: TextAlign.right,
-                  )
-                ],
+                    Expanded(
+                        child: InkWell(
+                      onTap: () {
+                        // print('Click on profile');
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (c) => Profile(
+                        //           userID: '${widget.rooyaPostModel!.userPosted}',
+                        //         )));
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text('${widget.rooyaPostModel!.pre_user_name}',
+                                  style: TextStyle(
+                                    fontFamily: AppFonts.segoeui,
+                                    fontSize: 12,
+                                    color: const Color(0xff000000),
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                      '  ${widget.rooyaPostModel!.event_id == '0' ? 'Add a post' : 'Add post in a Event ${widget.rooyaPostModel!.event_name}'}',
+                                      style: TextStyle(
+                                        fontFamily: AppFonts.segoeui,
+                                        fontSize: 11,
+                                        color: Colors.black38,
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '@${widget.rooyaPostModel!.pre_user_name}',
+                            style: TextStyle(
+                              fontFamily: AppFonts.segoeui,
+                              fontSize: 9,
+                              color: const Color(0xff000000),
+                            ),
+                            textAlign: TextAlign.left,
+                          )
+                        ],
+                      ),
+                    )),
+                    Text(
+                      '',
+                      //'${timeago.format(DateTime.parse(widget.rooyaPostModel!.pre_time!), locale: 'en_short')} ago',
+                      style: TextStyle(
+                        fontFamily: AppFonts.segoeui,
+                        fontSize: 10,
+                        color: const Color(0xff000000),
+                        height: 1.8,
+                      ),
+                      textAlign: TextAlign.right,
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 height: 1.0.h,
               ),
               Container(
-                // decoration: BoxDecoration(
-                //     border: widget.rooyaPostModel!.attachment!.isNotEmpty
-                //         ? Border.all(color: Colors.grey)
-                //         : Border.all(color: Colors.white),
-                //     borderRadius: BorderRadius.circular(7)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      widget.rooyaPostModel!.attachment!.length > 0
-                          ? InkWell(
-                              onTap: () {
-                                // Get.to(ViewPic(
-                                //   attachment: widget.rooyaPostModel!.attachment!,
-                                // ));
-                              },
-                              child: widget
-                                          .rooyaPostModel!.attachment!.length ==
-                                      1
-                                  ? PostWith1Image(
-                                      rooyaPostModel: widget.rooyaPostModel,
-                                    )
-                                  : widget.rooyaPostModel!.attachment!.length ==
-                                          2
-                                      ? PostWith2Images(
-                                          rooyaPostModel: widget.rooyaPostModel,
-                                        )
-                                      : widget.rooyaPostModel!.attachment!
-                                                  .length ==
-                                              3
-                                          ? PostWith3Images(
-                                              rooyaPostModel:
-                                                  widget.rooyaPostModel,
-                                            )
-                                          : widget.rooyaPostModel!.attachment!
-                                                      .length ==
-                                                  4
-                                              ? PostWith4Images(
-                                                  rooyaPostModel:
-                                                      widget.rooyaPostModel,
-                                                )
-                                              : PostWith5Images(
-                                                  rooyaPostModel:
-                                                      widget.rooyaPostModel,
-                                                ),
-                            )
-                          : Container(),
-                      '${widget.rooyaPostModel!.pre_text}'
-                              .split('\n')[0]
-                              .trim()
-                              .isEmpty
-                          ? SizedBox()
-                          : Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 3),
-                              child: Text(
-                                '${widget.rooyaPostModel!.pre_text}'
-                                    .split('\n')[0],
-                                style: TextStyle(
-                                  fontFamily: AppFonts.segoeui,
-                                  fontSize: 12,
-                                  color: const Color(0xff000000),
-                                  fontWeight: FontWeight.w300,
-                                ),
-                                textAlign: TextAlign.left,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.rooyaPostModel!.attachment!.length > 0
+                        ? InkWell(
+                            onTap: () {
+                              // Get.to(ViewPic(
+                              //   attachment: widget.rooyaPostModel!.attachment!,
+                              // ));
+                            },
+                            child: widget.rooyaPostModel!.attachment!.length ==
+                                    1
+                                ? PostWith1Image(
+                                    rooyaPostModel: widget.rooyaPostModel,
+                                  )
+                                : widget.rooyaPostModel!.attachment!.length == 2
+                                    ? PostWith2Images(
+                                        rooyaPostModel: widget.rooyaPostModel,
+                                      )
+                                    : widget.rooyaPostModel!.attachment!
+                                                .length ==
+                                            3
+                                        ? PostWith3Images(
+                                            rooyaPostModel:
+                                                widget.rooyaPostModel,
+                                          )
+                                        : widget.rooyaPostModel!.attachment!
+                                                    .length ==
+                                                4
+                                            ? PostWith4Images(
+                                                rooyaPostModel:
+                                                    widget.rooyaPostModel,
+                                              )
+                                            : PostWith5Images(
+                                                rooyaPostModel:
+                                                    widget.rooyaPostModel,
+                                              ),
+                          )
+                        : Container(),
+                    '${widget.rooyaPostModel!.pre_text}'
+                            .split('\n')[0]
+                            .trim()
+                            .isEmpty
+                        ? SizedBox()
+                        : Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 3),
+                            child: Text(
+                              '${widget.rooyaPostModel!.pre_text}'
+                                  .split('\n')[0],
+                              style: TextStyle(
+                                fontFamily: AppFonts.segoeui,
+                                fontSize: 12,
+                                color: const Color(0xff000000),
+                                fontWeight: FontWeight.w300,
                               ),
+                              textAlign: TextAlign.left,
                             ),
-                      widget.rooyaPostModel!.posthashtags!.isNotEmpty
-                          ? widget.rooyaPostModel!.posthashtags!.length == 1 &&
-                                  widget
-                                      .rooyaPostModel!.posthashtags![0].hashtag
-                                      .toString()
-                                      .trim()
-                                      .isEmpty
-                              ? SizedBox()
-                              : Container(
-                                  width: 100.0.w,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 2.0.w, vertical: 2.0.w),
-                                  child: Wrap(
-                                    children: widget
-                                        .rooyaPostModel!.posthashtags!
-                                        .map((hashTag) {
-                                      return InkWell(
-                                        onTap: () {
-                                          // print('${'${widget.rooyaPostModel!.postId}'}');
-                                          // Navigator.of(context)
-                                          //     .push(MaterialPageRoute(
-                                          //         builder: (c) => Profile(
-                                          //               userID:
-                                          //                   '${widget.rooyaPostModel!.postId}',
-                                          //             )));
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 1.0.w),
-                                          child: Text('${hashTag.hashtag}',
-                                              style: TextStyle(
-                                                fontFamily: AppFonts.segoeui,
-                                                fontSize: 12,
-                                                color: const Color(0xff5a5a5a),
-                                              )),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                )
-                          : Container(),
-                      SizedBox(
-                        height: !widget.rooyaPostModel!.postusertags!.isNotEmpty
-                            ? 0
-                            : 1.0.h,
-                      ),
-                      widget.rooyaPostModel!.postusertags!.isNotEmpty
-                          ? Container(
-                              width: 100.0.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(1.5.h),
-                                    bottomRight: Radius.circular(1.5.h)),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 2.0.w, vertical: 2.0.w),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 0,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 4.0.h,
-                                      width: 4.0.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(1.5.h),
-                                            bottomRight:
-                                                Radius.circular(1.5.h)),
+                          ),
+                    widget.rooyaPostModel!.posthashtags!.isNotEmpty
+                        ? widget.rooyaPostModel!.posthashtags!.length == 1 &&
+                                widget.rooyaPostModel!.posthashtags![0].hashtag
+                                    .toString()
+                                    .trim()
+                                    .isEmpty
+                            ? SizedBox()
+                            : Container(
+                                width: 100.0.w,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 2.0.w, vertical: 2.0.w),
+                                child: Wrap(
+                                  children: widget.rooyaPostModel!.posthashtags!
+                                      .map((hashTag) {
+                                    return InkWell(
+                                      onTap: () {
+                                        // print('${'${widget.rooyaPostModel!.postId}'}');
+                                        // Navigator.of(context)
+                                        //     .push(MaterialPageRoute(
+                                        //         builder: (c) => Profile(
+                                        //               userID:
+                                        //                   '${widget.rooyaPostModel!.postId}',
+                                        //             )));
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 1.0.w),
+                                        child: Text('${hashTag.hashtag}',
+                                            style: TextStyle(
+                                              fontFamily: AppFonts.segoeui,
+                                              fontSize: 12,
+                                              color: const Color(0xff5a5a5a),
+                                            )),
                                       ),
-                                      child: ListView.builder(
-                                        itemBuilder: (c, i) {
-                                          return Container(
-                                            margin: EdgeInsets.only(right: 5),
-                                            child: widget
-                                                            .rooyaPostModel!
-                                                            .postusertags![i]
-                                                            .userPicture !=
-                                                        null &&
-                                                    widget
-                                                            .rooyaPostModel!
-                                                            .postusertags![i]
-                                                            .userPicture !=
-                                                        ''
-                                                ? CircularProfileAvatar(
-                                                    '$baseImageUrl${widget.rooyaPostModel!.postusertags![i].userPicture}',
-                                                    radius: 15,
-                                                    onTap: () {
-                                                      // Navigator.of(context).push(
-                                                      //     MaterialPageRoute(
-                                                      //         builder: (c) =>
-                                                      //             Profile(
-                                                      //               userID:
-                                                      //                   '${widget.rooyaPostModel!.postusertags![i].userId}',
-                                                      //             )));
-                                                    },
-                                                  )
-                                                : CircularProfileAvatar(
-                                                    '',
-                                                    child: Image.asset(
-                                                        'assets/images/logo.png'),
-                                                    radius: 15,
-                                                    onTap: () {
-                                                      // Navigator.of(context).push(
-                                                      //     MaterialPageRoute(
-                                                      //         builder: (c) =>
-                                                      //             Profile(
-                                                      //               userID:
-                                                      //                   '${widget.rooyaPostModel!.postusertags![i].userId}',
-                                                      //             )));
-                                                    },
-                                                  ),
-                                          );
-                                        },
-                                        itemCount: widget.rooyaPostModel!
-                                            .postusertags!.length,
-                                        scrollDirection: Axis.horizontal,
-                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                        : Container(),
+                    SizedBox(
+                      height: !widget.rooyaPostModel!.postusertags!.isNotEmpty
+                          ? 0
+                          : 1.0.h,
+                    ),
+                    widget.rooyaPostModel!.postusertags!.isNotEmpty
+                        ? Container(
+                            width: 100.0.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(1.5.h),
+                                  bottomRight: Radius.circular(1.5.h)),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.0.w),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 0,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    height: 4.0.h,
+                                    width: 4.0.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(1.5.h),
+                                          bottomRight: Radius.circular(1.5.h)),
+                                    ),
+                                    child: ListView.builder(
+                                      itemBuilder: (c, i) {
+                                        return Container(
+                                          margin: EdgeInsets.only(right: 5),
+                                          child: widget
+                                                          .rooyaPostModel!
+                                                          .postusertags![i]
+                                                          .userPicture !=
+                                                      null &&
+                                                  widget
+                                                          .rooyaPostModel!
+                                                          .postusertags![i]
+                                                          .userPicture !=
+                                                      ''
+                                              ? CircularProfileAvatar(
+                                                  '$baseImageUrl${widget.rooyaPostModel!.postusertags![i].userPicture}',
+                                                  radius: 15,
+                                                  onTap: () {
+                                                    // Navigator.of(context).push(
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (c) =>
+                                                    //             Profile(
+                                                    //               userID:
+                                                    //                   '${widget.rooyaPostModel!.postusertags![i].userId}',
+                                                    //             )));
+                                                  },
+                                                )
+                                              : CircularProfileAvatar(
+                                                  '',
+                                                  child: Image.asset(
+                                                      'assets/images/logo.png'),
+                                                  radius: 15,
+                                                  onTap: () {
+                                                    // Navigator.of(context).push(
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (c) =>
+                                                    //             Profile(
+                                                    //               userID:
+                                                    //                   '${widget.rooyaPostModel!.postusertags![i].userId}',
+                                                    //             )));
+                                                  },
+                                                ),
+                                        );
+                                      },
+                                      itemCount: widget
+                                          .rooyaPostModel!.postusertags!.length,
+                                      scrollDirection: Axis.horizontal,
                                     ),
                                   ),
-                                ],
-                              ),
-                            )
-                          : Container(),
-                      // SizedBox(height: 2.0.h,),
-                    ],
-                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                    // SizedBox(height: 2.0.h,),
+                  ],
                 ),
               ),
             ],
@@ -368,7 +358,8 @@ class _SharePostState extends State<SharePost> {
             : Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.030, vertical: 3),
                   child: Text(
                     '${widget.rooyaPostModel!.text}'.split('\n')[0],
                     style: TextStyle(
@@ -385,7 +376,8 @@ class _SharePostState extends State<SharePost> {
           height: 0.50.w,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 2.0.w, horizontal: 2.0.w),
+          padding:
+              EdgeInsets.symmetric(vertical: 2.0.w, horizontal: width * 0.030),
           child: Row(
             children: [
               InkWell(
@@ -404,87 +396,61 @@ class _SharePostState extends State<SharePost> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 3, right: 5),
-                      child: Text(
-                        '${widget.rooyaPostModel!.likecount}',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black54,
-                            fontFamily: AppFonts.segoeui),
+                      child: Icon(
+                        widget.rooyaPostModel!.islike!
+                            ? CupertinoIcons.heart_fill
+                            : CupertinoIcons.heart,
+                        color: widget.rooyaPostModel!.islike!
+                            ? primaryColor
+                            : Colors.black54,
+                        size: 20,
                       ),
                     ),
-                    Image.asset(
-                      'assets/icons/like.png',
-                      height: 2.h,
-                      color: widget.rooyaPostModel!.islike!
-                          ? primaryColor
-                          : Colors.black54,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 3.0.w,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 3, right: 5),
-                    child: Text(
-                      '${widget.rooyaPostModel!.comments}',
+                    Text(
+                      '${widget.rooyaPostModel!.likecount}',
                       style: TextStyle(
                           fontSize: 12,
                           color: Colors.black54,
                           fontFamily: AppFonts.segoeui),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(ViewAllComments(
-                        comments: widget.rooyaPostModel!.commentsText,
-                        postID: widget.rooyaPostModel!.postId.toString(),
-                      ))!
-                          .then((value) {
-                        widget.comment!.call();
-                      });
-                    },
-                    child: Image.asset(
-                      'assets/icons/comment.png',
-                      height: 2.h,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(
-                width: 3.0.w,
+                width: 4.0.w,
               ),
               Row(
                 children: [
-                  // Padding(
-                  //   padding: EdgeInsets.only(top: 3, right: 5),
-                  //   child: Text(
-                  //     '${widget.rooyaPostModel!.userPosted}',
-                  //     style: TextStyle(
-                  //         fontSize: 12,
-                  //         color: Colors.black54,
-                  //         fontFamily: AppFonts.segoeui),
-                  //   ),
-                  // ),
-                  InkWell(
-                    onTap: () {
-                      SharePost();
-                    },
-                    child: Image.asset(
-                      'assets/icons/repeat.png',
-                      height: 2.0.h,
-                      width: 3.0.h,
-                      color: Colors.black54,
+                  Padding(
+                    padding: EdgeInsets.only(top: 3, right: 5),
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(ViewAllComments(
+                          comments: widget.rooyaPostModel!.commentsText,
+                          postID: widget.rooyaPostModel!.postId.toString(),
+                        ))!
+                            .then((value) {
+                          widget.comment!.call();
+                        });
+                      },
+                      child: Image.asset(
+                        'assets/icons/comment.png',
+                        height: 2.h,
+                        color: Colors.black54,
+                      ),
                     ),
+                  ),
+                  Text(
+                    '${widget.rooyaPostModel!.comments}',
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black54,
+                        fontFamily: AppFonts.segoeui),
                   ),
                 ],
               ),
               SizedBox(
-                width: 3.0.w,
+                width: 4.0.w,
               ),
               Row(
                 children: [
@@ -604,24 +570,39 @@ class _SharePostState extends State<SharePost> {
                   ),
                 ],
               ),
+              Expanded(
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/svg/SharePost.svg',
+                      height: 17,
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.end,
+                ),
+              ),
+              SizedBox(
+                width: Get.width * 0.030,
+              )
             ],
           ),
         ),
         SizedBox(
           height: 0.50.w,
         ),
-        Container(
-          height: height * 0.055,
-          width: width,
-          decoration: BoxDecoration(
-              border: Border.all(color: primaryColor, width: 1),
-              borderRadius: BorderRadius.circular(25)),
-          child: CommentPostFields(
-            sendCommit: (text) {
-              rooyaPostComment(text: text);
-            },
-          ),
-        ),
+        // Container(
+        //   height: height * 0.055,
+        //   width: width,
+        //   margin: EdgeInsets.symmetric(horizontal: width * 0.030),
+        //   decoration: BoxDecoration(
+        //       border: Border.all(color: primaryColor, width: 1),
+        //       borderRadius: BorderRadius.circular(25)),
+        //   child: CommentPostFields(
+        //     sendCommit: (text) {
+        //       rooyaPostComment(text: text);
+        //     },
+        //   ),
+        // ),
         Column(
           children: widget.rooyaPostModel!.commentsText!.map((e) {
             int index = widget.rooyaPostModel!.commentsText!.indexOf(e);

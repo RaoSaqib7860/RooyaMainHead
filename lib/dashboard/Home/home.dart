@@ -898,6 +898,11 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 5,
+                      ),
+                    ),
                     !controller.storyLoad.value
                         ? SliverToBoxAdapter(
                             child: Container(
@@ -953,18 +958,18 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               )
-                            : SliverPadding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: width * 0.030),
-                                sliver: SliverList(
-                                  delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                      if (controller
-                                              .listofpost[index].origin_id !=
-                                          '0') {
-                                        return Column(
-                                          children: [
-                                            Row(
+                            : SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  (BuildContext context, int index) {
+                                    if (controller
+                                            .listofpost[index].origin_id !=
+                                        '0') {
+                                      return Column(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: width * 0.030),
+                                            child: Row(
                                               children: [
                                                 controller.listofpost[index]
                                                             .userPicture ==
@@ -1094,80 +1099,79 @@ class _HomeState extends State<Home> {
                                                 )
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 1.0.h,
-                                            ),
-                                            SharePost(
-                                              rooyaPostModel:
-                                                  controller.listofpost[index],
-                                              onPostLike: () {
-                                                setState(() {
-                                                  controller.listofpost[index]
-                                                      .islike = true;
-                                                  controller.listofpost[index]
-                                                      .likecount = controller
-                                                          .listofpost[index]
-                                                          .likecount! +
-                                                      1;
-                                                });
-                                              },
-                                              onPostUnLike: () {
-                                                setState(() {
-                                                  controller.listofpost[index]
-                                                      .islike = false;
-                                                  controller.listofpost[index]
-                                                      .likecount = controller
-                                                          .listofpost[index]
-                                                          .likecount! -
-                                                      1;
-                                                });
-                                              },
-                                              comment: () {
-                                                AuthUtils
-                                                    .getgetRooyaPostByLimite(
-                                                        controller: controller);
-                                              },
-                                            ),
-                                            SizedBox(
-                                              height: height * 0.020,
-                                            )
-                                          ],
-                                        );
-                                      } else {
-                                        return UserPost(
-                                          rooyaPostModel:
-                                              controller.listofpost[index],
-                                          onPostLike: () {
-                                            setState(() {
-                                              controller.listofpost[index]
-                                                  .islike = true;
-                                              controller.listofpost[index]
-                                                  .likecount = controller
-                                                      .listofpost[index]
-                                                      .likecount! +
-                                                  1;
-                                            });
-                                          },
-                                          onPostUnLike: () {
-                                            setState(() {
-                                              controller.listofpost[index]
-                                                  .islike = false;
-                                              controller.listofpost[index]
-                                                  .likecount = controller
-                                                      .listofpost[index]
-                                                      .likecount! -
-                                                  1;
-                                            });
-                                          },
-                                          comment: () {
-                                            AuthUtils.getgetRooyaPostByLimite(
-                                                controller: controller);
-                                          },
-                                        );
-                                      }
-                                    },
-                                    childCount: controller.listofpost.length,
-                                  ),
+                                          ),
+                                          SizedBox(
+                                            height: 1.0.h,
+                                          ),
+                                          SharePost(
+                                            rooyaPostModel:
+                                                controller.listofpost[index],
+                                            onPostLike: () {
+                                              setState(() {
+                                                controller.listofpost[index]
+                                                    .islike = true;
+                                                controller.listofpost[index]
+                                                    .likecount = controller
+                                                        .listofpost[index]
+                                                        .likecount! +
+                                                    1;
+                                              });
+                                            },
+                                            onPostUnLike: () {
+                                              setState(() {
+                                                controller.listofpost[index]
+                                                    .islike = false;
+                                                controller.listofpost[index]
+                                                    .likecount = controller
+                                                        .listofpost[index]
+                                                        .likecount! -
+                                                    1;
+                                              });
+                                            },
+                                            comment: () {
+                                              AuthUtils.getgetRooyaPostByLimite(
+                                                  controller: controller);
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: height * 0.020,
+                                          )
+                                        ],
+                                      );
+                                    } else {
+                                      return UserPost(
+                                        rooyaPostModel:
+                                            controller.listofpost[index],
+                                        onPostLike: () {
+                                          setState(() {
+                                            controller.listofpost[index]
+                                                .islike = true;
+                                            controller.listofpost[index]
+                                                .likecount = controller
+                                                    .listofpost[index]
+                                                    .likecount! +
+                                                1;
+                                          });
+                                        },
+                                        onPostUnLike: () {
+                                          setState(() {
+                                            controller.listofpost[index]
+                                                .islike = false;
+                                            controller.listofpost[index]
+                                                .likecount = controller
+                                                    .listofpost[index]
+                                                    .likecount! -
+                                                1;
+                                          });
+                                        },
+                                        comment: () {
+                                          AuthUtils.getgetRooyaPostByLimite(
+                                              controller: controller);
+                                        },
+                                      );
+                                    }
+                                  },
+                                  childCount: controller.listofpost.length,
                                 ),
                               ),
                   ],

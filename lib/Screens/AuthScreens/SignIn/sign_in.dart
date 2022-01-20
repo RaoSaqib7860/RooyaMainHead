@@ -162,29 +162,29 @@ class _SignInState extends State<SignIn> {
                       SizedBox(
                         height: 3.0.h,
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'or join with',
-                            style: TextStyle(
-                              fontFamily: AppFonts.segoeui,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff000000),
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(
-                            width: 5.0.w,
-                          ),
-                          SvgPicture.asset('assets/svg/fb.svg'),
-                          SizedBox(
-                            width: 5.0.w,
-                          ),
-                          SvgPicture.asset('assets/svg/google.svg'),
-                        ],
-                      )
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     Text(
+                      //       'or join with',
+                      //       style: TextStyle(
+                      //         fontFamily: AppFonts.segoeui,
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: const Color(0xff000000),
+                      //       ),
+                      //       textAlign: TextAlign.left,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 5.0.w,
+                      //     ),
+                      //     SvgPicture.asset('assets/svg/fb.svg'),
+                      //     SizedBox(
+                      //       width: 5.0.w,
+                      //     ),
+                      //     SvgPicture.asset('assets/svg/google.svg'),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),

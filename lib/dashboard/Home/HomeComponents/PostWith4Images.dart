@@ -21,12 +21,14 @@ class _PostWith4ImagesState extends State<PostWith4Images> {
     return Column(
       children: [
         ClipRRect(
+          borderRadius: BorderRadius.circular(5),
           child: widget.rooyaPostModel!.attachment![0].type == 'image'
               ? CachedNetworkImage(
                   imageUrl:
                       "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
                   fit: BoxFit.cover,
                   width: double.infinity,
+                  height: height * 0.3,
                   placeholder: (context, url) => ShimerEffect(
                     child: Container(
                       height: 30.0.h,
@@ -54,8 +56,6 @@ class _PostWith4ImagesState extends State<PostWith4Images> {
                     ),
                   ),
                 ),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
         ),
         SizedBox(
           height: 3,
@@ -63,110 +63,110 @@ class _PostWith4ImagesState extends State<PostWith4Images> {
         Row(
           children: [
             Expanded(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: widget.rooyaPostModel!.attachment![1].type == 'image'
-                  ? CachedNetworkImage(
-                      imageUrl:
-                          "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
-                      fit: BoxFit.cover,
-                      height: height * 0.140,
-                      placeholder: (context, url) => Container(
+                child: widget.rooyaPostModel!.attachment![1].type == 'image'
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
+                          fit: BoxFit.cover,
                           height: height * 0.140,
-                          child: ShimerEffect(
-                            child: Image.asset(
-                              'assets/images/home_banner.png',
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                      errorWidget: (context, url, error) => Container(
-                          height: height * 0.140,
-                          child: Center(child: Icon(Icons.image))),
-                    )
-                  : Container(
-                      height: height * 0.140,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: Center(
-                        child: Icon(
-                          Icons.play_circle_fill,
-                          color: Colors.white,
-                          size: 40,
+                          placeholder: (context, url) => Container(
+                              height: height * 0.140,
+                              child: ShimerEffect(
+                                child: Image.asset(
+                                  'assets/images/home_banner.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
+                          errorWidget: (context, url, error) => Container(
+                              height: height * 0.140,
+                              child: Center(child: Icon(Icons.image))),
                         ),
-                      ),
-                    ),
-            )),
+                      )
+                    : Container(
+                        height: height * 0.140,
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Center(
+                          child: Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
+                      )),
             SizedBox(
               width: 5,
             ),
             Expanded(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: widget.rooyaPostModel!.attachment![2].type == 'image'
-                  ? CachedNetworkImage(
-                      imageUrl:
-                          "$baseImageUrl${widget.rooyaPostModel!.attachment![2].attachment}",
-                      fit: BoxFit.cover,
-                      height: height * 0.140,
-                      placeholder: (context, url) => Container(
+                child: widget.rooyaPostModel!.attachment![2].type == 'image'
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "$baseImageUrl${widget.rooyaPostModel!.attachment![2].attachment}",
+                          fit: BoxFit.cover,
                           height: height * 0.140,
-                          child: ShimerEffect(
-                            child: Image.asset(
-                              'assets/images/home_banner.png',
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                      errorWidget: (context, url, error) => Container(
-                          height: height * 0.140,
-                          child: Center(child: Icon(Icons.image))),
-                    )
-                  : Container(
-                      height: height * 0.140,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: Center(
-                        child: Icon(
-                          Icons.play_circle_fill,
-                          color: Colors.white,
-                          size: 40,
+                          placeholder: (context, url) => Container(
+                              height: height * 0.140,
+                              child: ShimerEffect(
+                                child: Image.asset(
+                                  'assets/images/home_banner.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
+                          errorWidget: (context, url, error) => Container(
+                              height: height * 0.140,
+                              child: Center(child: Icon(Icons.image))),
                         ),
-                      ),
-                    ),
-            )),
+                      )
+                    : Container(
+                        height: height * 0.140,
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Center(
+                          child: Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
+                      )),
             SizedBox(
               width: 5,
             ),
             Expanded(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: widget.rooyaPostModel!.attachment![3].type == 'image'
-                  ? CachedNetworkImage(
-                      imageUrl:
-                          "$baseImageUrl${widget.rooyaPostModel!.attachment![3].attachment}",
-                      fit: BoxFit.cover,
-                      height: height * 0.140,
-                      placeholder: (context, url) => Container(
+                child: widget.rooyaPostModel!.attachment![3].type == 'image'
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "$baseImageUrl${widget.rooyaPostModel!.attachment![3].attachment}",
+                          fit: BoxFit.cover,
                           height: height * 0.140,
-                          child: ShimerEffect(
-                            child: Image.asset(
-                              'assets/images/home_banner.png',
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                      errorWidget: (context, url, error) => Container(
-                          height: height * 0.140,
-                          child: Center(child: Icon(Icons.image))),
-                    )
-                  : Container(
-                      height: height * 0.140,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: Center(
-                        child: Icon(
-                          Icons.play_circle_fill,
-                          color: Colors.white,
-                          size: 40,
+                          placeholder: (context, url) => Container(
+                              height: height * 0.140,
+                              child: ShimerEffect(
+                                child: Image.asset(
+                                  'assets/images/home_banner.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
+                          errorWidget: (context, url, error) => Container(
+                              height: height * 0.140,
+                              child: Center(child: Icon(Icons.image))),
                         ),
-                      ),
-                    ),
-            ))
+                      )
+                    : Container(
+                        height: height * 0.140,
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Center(
+                          child: Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
+                      ))
           ],
         )
       ],
