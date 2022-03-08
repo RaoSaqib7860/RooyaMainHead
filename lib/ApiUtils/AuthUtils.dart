@@ -492,7 +492,7 @@ class AuthUtils {
       },
     );
     var data = jsonDecode(response.body);
-    print('getAllStoriesAPI =$data');
+    log('All Reel data =$data');
     if (data['result'] == 'success') {
       return data['data'];
     } else {

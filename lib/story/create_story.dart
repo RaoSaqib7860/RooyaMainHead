@@ -574,10 +574,6 @@ class _ThumbnailsState extends State<Thumbnails> {
   bool isload = false;
 
   getThubnail() async {
-    print('video path is = ${widget.thumb}');
-    if(File('${widget.thumb}').existsSync()){
-      print('video file is exists now');
-    }
     uint8list = await VideoThumbnail.thumbnailData(
       video: '${widget.thumb}',
       imageFormat: ImageFormat.PNG,

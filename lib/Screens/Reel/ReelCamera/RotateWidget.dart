@@ -15,7 +15,11 @@ class _RotateWidgetState extends State<RotateWidget>
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: Duration(seconds: 9))
         ..repeat();
-
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(

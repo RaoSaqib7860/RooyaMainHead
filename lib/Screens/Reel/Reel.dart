@@ -49,314 +49,336 @@ class _ReelPageState extends State<ReelPage> {
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     var height = Get.height;
     var width = Get.width;
     return SafeArea(
+        key: _scaffoldKey,
         child: Scaffold(
-      backgroundColor: Colors.black,
-      body: Obx(() => Stack(
-            children: [
-              RefreshIndicator(
-                onRefresh: () async {
-                  await controller.getReelData();
-                  setState(() {});
-                },
-                child: Container(
-                  height: height,
-                  width: width,
-                  child: !controller.loadReels.value
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : PageView.builder(
-                          itemBuilder: (c, i) {
-                            return Stack(
-                              children: [
-                                Container(
-                                  height: height,
-                                  width: width,
-                                  child: VideoApp(
-                                    assetsPath:
-                                        'https://s3.me-south-1.amazonaws.com/rooya-stage-uploads/${controller.listofReels[i].videoAttachment![0].attachment}',
-                                  ),
-                                  decoration:
-                                      BoxDecoration(color: Colors.black),
-                                ),
-                                Column(
+          backgroundColor: Colors.black,
+          body: Obx(() => Stack(
+                children: [
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      await controller.getReelData();
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: height,
+                      width: width,
+                      child: !controller.loadReels.value
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : PageView.builder(
+                              itemBuilder: (c, i) {
+                                return Stack(
                                   children: [
                                     Container(
+                                      height: height,
                                       width: width,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: width * 0.050),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              CircularProfileAvatar(
-                                                '$baseReelPath${controller.listofReels[i].userPicture}',
-                                                // child: Image.asset(
-                                                //   'assets/images/model.jpeg',
-                                                //   fit: BoxFit.cover,
-                                                // ),
-                                                borderColor: Colors.white,
-                                                borderWidth: 1,
-                                                elevation: 2,
-                                                radius: 20,
-                                              ),
-                                              SizedBox(
-                                                width: width * 0.040,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    '${controller.listofReels[i].userName}',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily:
-                                                            AppFonts.segoeui,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        fontSize: 14),
-                                                  ),
-                                                  Text(
-                                                    '${timeago.format(DateTime.parse(controller.listofReels[i].time!), locale: 'en_short')} ago',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            AppFonts.segoeui,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text(
-                                            '${controller.listofReels[i].text!}'
-                                                .replaceAll('\n', ' ')
-                                                .trim()
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontFamily: AppFonts.segoeui,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 14),
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                      child: VideoApp(
+                                        assetsPath: controller
+                                                    .listofReels[i]
+                                                    .videoAttachment![0]
+                                                    .attachment
+                                                    .toString()
+                                                    .trim() ==
+                                                ''
+                                            ? '${controller.listofReels[i].attachment![0].attachment}'
+                                            : 'https://s3.me-south-1.amazonaws.com/rooya-stage-uploads/${controller.listofReels[i].videoAttachment![0].attachment}',
+                                      ),
+                                      decoration:
+                                          BoxDecoration(color: Colors.black),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          width: width,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: width * 0.050),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
-                                                  RotateWidget(
-                                                    child: controller
-                                                                .listofReels[i]
-                                                                .attachment![0]
-                                                                .musicCover ==
-                                                            ''
-                                                        ? CircularProfileAvatar(
-                                                            '',
-                                                            child: Image.asset(
-                                                                'assets/images/logo.png'),
-                                                            radius: 15,
-                                                            borderColor:
-                                                                primaryColor,
-                                                            borderWidth: 1,
-                                                          )
-                                                        : CircularProfileAvatar(
-                                                            '${controller.listofReels[i].attachment![0].musicCover}',
-                                                            borderColor:
-                                                                Colors.white,
-                                                            borderWidth: 1,
-                                                            elevation: 2,
-                                                            radius: 15,
-                                                          ),
+                                                  CircularProfileAvatar(
+                                                    '$baseReelPath${controller.listofReels[i].userPicture}',
+                                                    // child: Image.asset(
+                                                    //   'assets/images/model.jpeg',
+                                                    //   fit: BoxFit.cover,
+                                                    // ),
+                                                    borderColor: Colors.white,
+                                                    borderWidth: 1,
+                                                    elevation: 2,
+                                                    radius: 20,
                                                   ),
                                                   SizedBox(
-                                                    width: width * 0.010,
+                                                    width: width * 0.040,
                                                   ),
-                                                  Icon(
-                                                    Icons.music_note,
-                                                    color: Colors.white,
-                                                    size: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: width * 0.010,
-                                                  ),
-                                                  Text(
-                                                    '${controller.listofReels[i].attachment![0].musicName}'
-                                                        .replaceAll('Null', '')
-                                                        .trim(),
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            AppFonts.segoeui,
-                                                        color: Colors.white,
-                                                        fontSize: 12),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        '${controller.listofReels[i].userName}',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily: AppFonts
+                                                                .segoeui,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            fontSize: 14),
+                                                      ),
+                                                      Text(
+                                                        '${timeago.format(DateTime.parse(controller.listofReels[i].time!), locale: 'en_short')} ago',
+                                                        style: TextStyle(
+                                                            fontFamily: AppFonts
+                                                                .segoeui,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            fontSize: 12),
+                                                      ),
+                                                    ],
                                                   )
                                                 ],
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  Get.to(VideoRecorder(
-                                                    isInnitial: true,
-                                                  ));
-                                                },
-                                                child: Container(
-                                                  child: Icon(
-                                                    Icons.add,
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                '${controller.listofReels[i].text!}'
+                                                    .replaceAll('\n', ' ')
+                                                    .trim()
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        AppFonts.segoeui,
                                                     color: Colors.white,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 14),
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      RotateWidget(
+                                                        child: controller
+                                                                    .listofReels[
+                                                                        i]
+                                                                    .attachment![
+                                                                        0]
+                                                                    .musicCover ==
+                                                                ''
+                                                            ? CircularProfileAvatar(
+                                                                '',
+                                                                child: Image.asset(
+                                                                    'assets/images/logo.png'),
+                                                                radius: 15,
+                                                                borderColor:
+                                                                    primaryColor,
+                                                                borderWidth: 1,
+                                                              )
+                                                            : CircularProfileAvatar(
+                                                                '${controller.listofReels[i].attachment![0].musicCover}',
+                                                                borderColor:
+                                                                    Colors
+                                                                        .white,
+                                                                borderWidth: 1,
+                                                                elevation: 2,
+                                                                radius: 15,
+                                                              ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: width * 0.010,
+                                                      ),
+                                                      Icon(
+                                                        Icons.music_note,
+                                                        color: Colors.white,
+                                                        size: 20,
+                                                      ),
+                                                      SizedBox(
+                                                        width: width * 0.010,
+                                                      ),
+                                                      Text(
+                                                        '${controller.listofReels[i].attachment![0].musicName}'
+                                                            .replaceAll(
+                                                                'Null', '')
+                                                            .trim(),
+                                                        style: TextStyle(
+                                                            fontFamily: AppFonts
+                                                                .segoeui,
+                                                            color: Colors.white,
+                                                            fontSize: 12),
+                                                      )
+                                                    ],
                                                   ),
-                                                  padding: EdgeInsets.all(7),
-                                                  decoration: BoxDecoration(
-                                                      color: greenColor,
-                                                      shape: BoxShape.circle),
-                                                ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(VideoRecorder(
+                                                        isInnitial: true,
+                                                      ));
+                                                    },
+                                                    child: Container(
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        color: Colors.white,
+                                                      ),
+                                                      padding:
+                                                          EdgeInsets.all(7),
+                                                      decoration: BoxDecoration(
+                                                          color: greenColor,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                    ),
+                                                  )
+                                                ],
                                               )
                                             ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: height * 0.010,
-                                    ),
-                                    Container(
-                                      height: height * 0.080,
-                                      width: width,
-                                      // padding:
-                                      //     EdgeInsets.symmetric(horizontal: width * 0.060),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                            sigmaX: 10.0,
-                                            sigmaY: 10.0,
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: width * 0.060),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                bottomIcon(
-                                                    text:
-                                                        '${controller.listofReels[i].shares}',
-                                                    svg: 'share'),
-                                                InkWell(
-                                                  child: bottomIcon(
-                                                      text:
-                                                          '${controller.listofReels[i].comments}',
-                                                      svg: 'message'),
-                                                  onTap: () {
-                                                    Get.to(
-                                                            ViewAllComments(
-                                                              comments: controller
-                                                                  .listofReels[
-                                                                      i]
-                                                                  .commentsText,
-                                                              postID: controller
-                                                                  .listofReels[
-                                                                      i]
-                                                                  .postId
-                                                                  .toString(),
-                                                            ),
-                                                            transition:
-                                                                Transition
-                                                                    .downToUp)!
-                                                        .then((value) {
-                                                      controller.getReelData();
-                                                    });
-                                                  },
-                                                ),
-                                                bottomIcon(
-                                                    text:
-                                                        '${controller.listofReels[i].likecount}',
-                                                    svg: 'like'),
-                                                bottomIcon(
-                                                    text:
-                                                        '${controller.listofReels[i].views}',
-                                                    svg: 'watch'),
-                                                SvgPicture.asset(
-                                                    'assets/svg/more.svg'),
-                                              ],
-                                            ),
                                           ),
                                         ),
-                                      ),
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: width * 0.090),
+                                        SizedBox(
+                                          height: height * 0.010,
+                                        ),
+                                        Container(
+                                          height: height * 0.080,
+                                          width: width,
+                                          // padding:
+                                          //     EdgeInsets.symmetric(horizontal: width * 0.060),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                sigmaX: 10.0,
+                                                sigmaY: 10.0,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: width * 0.060),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    bottomIcon(
+                                                        text:
+                                                            '${controller.listofReels[i].shares}',
+                                                        svg: 'share'),
+                                                    InkWell(
+                                                      child: bottomIcon(
+                                                          text:
+                                                              '${controller.listofReels[i].comments}',
+                                                          svg: 'message'),
+                                                      onTap: () {
+                                                        Get.to(
+                                                                ViewAllComments(
+                                                                  comments: controller
+                                                                      .listofReels[
+                                                                          i]
+                                                                      .commentsText,
+                                                                  postID: controller
+                                                                      .listofReels[
+                                                                          i]
+                                                                      .postId
+                                                                      .toString(),
+                                                                ),
+                                                                transition:
+                                                                    Transition
+                                                                        .downToUp)!
+                                                            .then((value) {
+                                                          controller
+                                                              .getReelData();
+                                                        });
+                                                      },
+                                                    ),
+                                                    bottomIcon(
+                                                        text:
+                                                            '${controller.listofReels[i].likecount}',
+                                                        svg: 'like'),
+                                                    bottomIcon(
+                                                        text:
+                                                            '${controller.listofReels[i].views}',
+                                                        svg: 'watch'),
+                                                    SvgPicture.asset(
+                                                        'assets/svg/more.svg'),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: width * 0.090),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.020,
+                                        )
+                                      ],
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                     ),
-                                    SizedBox(
-                                      height: height * 0.020,
-                                    )
                                   ],
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                ),
-                              ],
-                            );
-                          },
-                          itemCount: controller.listofReels.length,
-                          scrollDirection: Axis.vertical,
+                                );
+                              },
+                              itemCount: controller.listofReels.length,
+                              scrollDirection: Axis.vertical,
+                            ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: height * 0.030),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Following',
+                          style: TextStyle(
+                            fontFamily: AppFonts.segoeui,
+                            color: Colors.white,
+                            letterSpacing: 0.7,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
                         ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: height * 0.030),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Following',
-                      style: TextStyle(
-                        fontFamily: AppFonts.segoeui,
-                        color: Colors.white,
-                        letterSpacing: 0.7,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 15,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'For You',
+                          style: TextStyle(
+                              fontFamily: AppFonts.segoeui,
+                              color: Colors.white.withOpacity(0.5),
+                              letterSpacing: 0.7,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 1,
-                      height: 15,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'For You',
-                      style: TextStyle(
-                          fontFamily: AppFonts.segoeui,
-                          color: Colors.white.withOpacity(0.5),
-                          letterSpacing: 0.7,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17),
-                    )
-                  ],
-                ),
-              )
-            ],
-          )),
-    ));
+                  )
+                ],
+              )),
+        ));
   }
 
   Widget bottomIcon({String? svg, String? text}) {

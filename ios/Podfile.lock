@@ -62,12 +62,12 @@ PODS:
   - FBSDKCoreKit_Basics (12.0.2)
   - FBSDKLoginKit (12.0.2):
     - FBSDKCoreKit (= 12.0.2)
-  - ffmpeg-kit-ios-https (4.5.LTS)
-  - ffmpeg_kit_flutter (4.5.0):
-    - ffmpeg_kit_flutter/https-lts (= 4.5.0)
+  - ffmpeg-kit-ios-min-gpl (4.5.1.LTS)
+  - ffmpeg_kit_flutter_min_gpl (4.5.1.LTS):
+    - ffmpeg_kit_flutter_min_gpl/min-gpl-lts (= 4.5.1.LTS)
     - Flutter
-  - ffmpeg_kit_flutter/https-lts (4.5.0):
-    - ffmpeg-kit-ios-https (= 4.5.LTS)
+  - ffmpeg_kit_flutter_min_gpl/min-gpl-lts (4.5.1.LTS):
+    - ffmpeg-kit-ios-min-gpl (= 4.5.1.LTS)
     - Flutter
   - file_picker (0.0.1):
     - DKImagePickerController/PhotoGallery
@@ -112,6 +112,12 @@ PODS:
     - FBSDKCoreKit (~> 12.0.2)
     - FBSDKLoginKit (~> 12.0.2)
     - Flutter
+  - flutter_ffmpeg (0.4.2):
+    - Flutter
+    - flutter_ffmpeg/https (= 0.4.2)
+  - flutter_ffmpeg/https (0.4.2):
+    - Flutter
+    - mobile-ffmpeg-https (= 4.4)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
   - flutter_local_notifications (0.0.1):
@@ -218,6 +224,7 @@ PODS:
   - libwebp/mux (1.2.1):
     - libwebp/demux
   - libwebp/webp (1.2.1)
+  - mobile-ffmpeg-https (4.4)
   - modal_progress_hud_nsn (0.0.1):
     - Flutter
   - nanopb (2.30908.0):
@@ -302,12 +309,13 @@ DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - emoji_picker_flutter (from `.symlinks/plugins/emoji_picker_flutter/ios`)
-  - ffmpeg_kit_flutter (from `.symlinks/plugins/ffmpeg_kit_flutter/ios`)
+  - ffmpeg_kit_flutter_min_gpl (from `.symlinks/plugins/ffmpeg_kit_flutter_min_gpl/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_facebook_auth (from `.symlinks/plugins/flutter_facebook_auth/ios`)
+  - flutter_ffmpeg (from `.symlinks/plugins/flutter_ffmpeg/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_timezone (from `.symlinks/plugins/flutter_native_timezone/ios`)
@@ -355,7 +363,7 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKCoreKit_Basics
     - FBSDKLoginKit
-    - ffmpeg-kit-ios-https
+    - ffmpeg-kit-ios-min-gpl
     - Firebase
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -375,6 +383,7 @@ SPEC REPOS:
     - HLSCachingReverseProxyServer
     - libPhoneNumber-iOS
     - libwebp
+    - mobile-ffmpeg-https
     - nanopb
     - PINCache
     - PINOperation
@@ -403,8 +412,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info/ios"
   emoji_picker_flutter:
     :path: ".symlinks/plugins/emoji_picker_flutter/ios"
-  ffmpeg_kit_flutter:
-    :path: ".symlinks/plugins/ffmpeg_kit_flutter/ios"
+  ffmpeg_kit_flutter_min_gpl:
+    :path: ".symlinks/plugins/ffmpeg_kit_flutter_min_gpl/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   firebase_core:
@@ -415,6 +424,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_facebook_auth:
     :path: ".symlinks/plugins/flutter_facebook_auth/ios"
+  flutter_ffmpeg:
+    :path: ".symlinks/plugins/flutter_ffmpeg/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_local_notifications:
@@ -504,8 +515,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 506c0fd1c09a3075f62be8fa36bdd921c563daa9
   FBSDKCoreKit_Basics: c0701d1634c944d60dd3c6361d66dbd0e707a456
   FBSDKLoginKit: d7c9f6ddff20d7b04c94d1f1f065dc7a441d44a0
-  ffmpeg-kit-ios-https: 420b7d6e105f4b872d048a84f4f713479bea8b2b
-  ffmpeg_kit_flutter: 4475e259bfc0e495d1db6559d0ecf0ebfa1215c7
+  ffmpeg-kit-ios-min-gpl: 074814f41eeb3d4980a3051c46f05b18b1d5b2e3
+  ffmpeg_kit_flutter_min_gpl: 1507ed8e57a2a9f09a8c96834a115c8301f0d468
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
   firebase_core: c263d7daf1dc92fcd9895e6abdc04872b0ee07ff
@@ -516,6 +527,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 82c4a48638f53f7b184f3cc9f6cd2cbe533ab316
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_facebook_auth: 5638a1a8cc23016ec6f72945ba879f4482870c69
+  flutter_ffmpeg: 3ec3912c74649851e6c3b1885511eef78142ac4f
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_timezone: 5f05b2de06c9776b4cc70e1839f03de178394d22
@@ -544,6 +556,7 @@ SPEC CHECKSUMS:
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
+  mobile-ffmpeg-https: 311fc4a8f671cf36d1d6b8f421e8246b790978d9
   modal_progress_hud_nsn: f6fb744cd060653d66ed8f325360ef3650eb2fde
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
