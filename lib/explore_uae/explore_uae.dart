@@ -5,7 +5,7 @@ import 'package:rooya_app/explore_uae/explore_all.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
-import '../create_all.dart';
+import '../AllCreatePosts/CreateAllView/create_all.dart';
 
 class ExploreUAE extends StatefulWidget {
   @override

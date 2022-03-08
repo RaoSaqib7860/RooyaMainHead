@@ -18,6 +18,7 @@ import 'package:rooya_app/utils/ProgressHUD.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/cupertino.dart';
 
 class General extends StatefulWidget {
   const General({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class _GeneralState extends State<General> {
             backgroundColor: Colors.white,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
+              icon: Icon(CupertinoIcons.back, color: Colors.black),
               onPressed: () {
                 Get.back();
               },

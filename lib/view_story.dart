@@ -14,6 +14,7 @@ import 'ApiUtils/AuthUtils.dart';
 import 'ApiUtils/baseUrl.dart';
 import 'dashboard/profile.dart';
 import 'models/UserStoryModel.dart';
+import 'package:flutter/cupertino.dart';
 
 class ViewStory extends StatefulWidget {
   final UserStoryModel? model;
@@ -76,7 +77,7 @@ class _ViewStoryState extends State<ViewStory> {
                                 Get.back();
                               },
                               icon: Icon(
-                                Icons.arrow_back,
+                                CupertinoIcons.back,
                                 color: Colors.white,
                               )),
                           CircularProfileAvatar(

@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rooya_app/ApiUtils/baseUrl.dart';
 import 'package:rooya_app/dashboard/Home/Models/RooyaPostModel.dart';
 import 'package:rooya_app/utils/ShimmerEffect.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../view_pic.dart';
 
 class PostWith5Images extends StatefulWidget {
   final RooyaPostModel? rooyaPostModel;
@@ -20,59 +23,64 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        widget.rooyaPostModel!.attachment![0].type == 'image'
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: CachedNetworkImage(
-                  imageUrl:
-                      "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: height * 0.3,
-                  placeholder: (context, url) => ShimerEffect(
-                    child: Container(
-                      height: 30.0.h,
-                      width: 100.0.w,
-                      child: Image.asset(
-                        'assets/images/home_banner.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                      height: 30.0.h,
-                      width: 100.0.w,
-                      child: Center(child: Icon(Icons.image))),
-                ),
-              )
-            : Container(
-                height: 30.0.h,
-                width: 100.0.w,
-                decoration: BoxDecoration(color: Colors.black),
-                child: Center(
-                  child: Icon(
-                    Icons.play_circle_fill,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-              ),
-        SizedBox(
-          height: 3,
-        ),
         Row(
           children: [
             Expanded(
+              child: widget.rooyaPostModel!.attachment![0].type == 'image'
+                  ? InkWell(
+                      onTap: () {
+                        Get.to(ViewPic(
+                          attachment: widget.rooyaPostModel!.attachment!,
+                          position: 0,
+                        ));
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+                        fit: BoxFit.cover,
+                        height: height * 0.150,
+                        placeholder: (context, url) => ShimerEffect(
+                          child: Container(
+                            height: height * 0.150,
+                            child: Image.asset(
+                              'assets/images/home_banner.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                            height: height * 0.150,
+                            child: Center(child: Icon(Icons.image))),
+                      ),
+                    )
+                  : Container(
+                      height: height * 0.150,
+                      decoration: BoxDecoration(color: Colors.black),
+                      child: Center(
+                        child: Icon(
+                          Icons.play_circle_fill,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+            ),
+            Expanded(
                 child: widget.rooyaPostModel!.attachment![1].type == 'image'
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(ViewPic(
+                            attachment: widget.rooyaPostModel!.attachment!,
+                            position: 1,
+                          ));
+                        },
                         child: CachedNetworkImage(
                           imageUrl:
                               "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
                           fit: BoxFit.cover,
-                          height: height * 0.140,
+                          height: height * 0.150,
                           placeholder: (context, url) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: ShimerEffect(
                                 child: Image.asset(
                                   'assets/images/home_banner.png',
@@ -80,12 +88,12 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                                 ),
                               )),
                           errorWidget: (context, url, error) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: Center(child: Icon(Icons.image))),
                         ),
                       )
                     : Container(
-                        height: height * 0.140,
+                        height: height * 0.150,
                         decoration: BoxDecoration(color: Colors.black),
                         child: Center(
                           child: Icon(
@@ -94,21 +102,30 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                             size: 40,
                           ),
                         ),
-                      )),
-            SizedBox(
-              width: 3,
-            ),
+                      ))
+          ],
+        ),
+        SizedBox(
+          height: 1,
+        ),
+        Row(
+          children: [
             Expanded(
                 child: widget.rooyaPostModel!.attachment![2].type == 'image'
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(ViewPic(
+                            attachment: widget.rooyaPostModel!.attachment!,
+                            position: 2,
+                          ));
+                        },
                         child: CachedNetworkImage(
                           imageUrl:
                               "$baseImageUrl${widget.rooyaPostModel!.attachment![2].attachment}",
                           fit: BoxFit.cover,
-                          height: height * 0.140,
+                          height: height * 0.150,
                           placeholder: (context, url) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: ShimerEffect(
                                 child: Image.asset(
                                   'assets/images/home_banner.png',
@@ -116,12 +133,12 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                                 ),
                               )),
                           errorWidget: (context, url, error) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: Center(child: Icon(Icons.image))),
                         ),
                       )
                     : Container(
-                        height: height * 0.140,
+                        height: height * 0.150,
                         decoration: BoxDecoration(color: Colors.black),
                         child: Center(
                           child: Icon(
@@ -132,22 +149,27 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                         ),
                       )),
             SizedBox(
-              width: 3,
+              width: 1,
             ),
             Expanded(
                 child: Stack(
               children: [
                 widget.rooyaPostModel!.attachment![3].type == 'image'
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(ViewPic(
+                            attachment: widget.rooyaPostModel!.attachment!,
+                            position: 3,
+                          ));
+                        },
                         child: CachedNetworkImage(
                           imageUrl:
                               "$baseImageUrl${widget.rooyaPostModel!.attachment![3].attachment}",
                           fit: BoxFit.cover,
-                          height: height * 0.140,
+                          height: height * 0.150,
                           width: double.infinity,
                           placeholder: (context, url) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: ShimerEffect(
                                 child: Image.asset(
                                   'assets/images/home_banner.png',
@@ -155,12 +177,12 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                                 ),
                               )),
                           errorWidget: (context, url, error) => Container(
-                              height: height * 0.140,
+                              height: height * 0.150,
                               child: Center(child: Icon(Icons.image))),
                         ),
                       )
                     : Container(
-                        height: height * 0.140,
+                        height: height * 0.150,
                         decoration: BoxDecoration(color: Colors.black),
                         child: Center(
                           child: Icon(
@@ -170,17 +192,14 @@ class _PostWith5ImagesState extends State<PostWith5Images> {
                           ),
                         ),
                       ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                    height: height * 0.140,
-                    color: Colors.black.withOpacity(0.5),
-                    child: Center(
-                        child: Text(
-                      '+${widget.rooyaPostModel!.attachment!.length - 4}',
-                      style: TextStyle(fontSize: 18.0.sp, color: Colors.white),
-                    )),
-                  ),
+                Container(
+                  height: height * 0.150,
+                  color: Colors.black.withOpacity(0.5),
+                  child: Center(
+                      child: Text(
+                    '+${widget.rooyaPostModel!.attachment!.length - 4}',
+                    style: TextStyle(fontSize: 18.0.sp, color: Colors.white),
+                  )),
                 )
               ],
             ))

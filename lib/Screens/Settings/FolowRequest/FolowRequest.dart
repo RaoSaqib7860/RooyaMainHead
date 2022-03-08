@@ -10,7 +10,7 @@ import 'package:rooya_app/utils/ProgressHUD.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter/cupertino.dart';
 class FolowRequest extends StatefulWidget {
   const FolowRequest({Key? key}) : super(key: key);
 
@@ -45,7 +45,7 @@ class _FolowRequestState extends State<FolowRequest> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(CupertinoIcons.back, color: Colors.black),
             onPressed: () {
               Get.back();
             },

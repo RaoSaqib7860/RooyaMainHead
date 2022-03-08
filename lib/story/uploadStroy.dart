@@ -25,7 +25,7 @@ Future<String> createStory(String path) async {
         }),
         data: formData);
     print('response data is = ${response.data}');
-    url = response.data['file_url'];
+    url = response.data['main_url'];
     return url;
   } catch (e) {
     print('Exception is = $e');
@@ -34,40 +34,61 @@ Future<String> createStory(String path) async {
 }
 
 Future uploadStoryData(
-    {String? text, List? listOfUrl, String? eventID = '0'}) async {
+    {String? text,
+    List? listOfUrl,
+    String? eventID = '0',
+    String? myEventid = '-1'}) async {
   print('call story');
   print('token is =  ${await getToken()}');
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userId = prefs.getString('user_id');
   print('userId is = $userId');
   var dt = DateTime.now();
-  final response = await http.post(
-      Uri.parse(
-          '$baseUrl${fromHomeStory == '0' ? 'addStory' : 'addStoryEvent'}$code'),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": '${await getToken()}'
-      },
-      body: fromHomeStory == '0'
-          ? jsonEncode({
-              "user_id": int.parse(userId!),
-              "text": text,
-              'files': listOfUrl,
-              'time':
-                  '${dt.year}-${dt.month}-${dt.day} ${dt.hour}:${dt.minute}:${dt.second}'
-            })
-          : jsonEncode({
-              "user_id": int.parse(userId!),
-              "text": text,
-              'files': listOfUrl,
-              'event_id': fromHomeStory,
-              'time':
-                  '${dt.year}-${dt.month}-${dt.day} ${dt.hour}:${dt.minute}:${dt.second}'
-            }));
-  var data = jsonDecode(response.body);
-  print('addStory =$data');
-  if (data['result'] == 'success') {
-  } else {}
+  if (myEventid == '-1') {
+    final response = await http.post(
+        Uri.parse(
+            '$baseUrl${fromHomeStory == '0' ? 'addStory' : 'addStoryEvent'}$code'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: fromHomeStory == '0'
+            ? jsonEncode({
+                "user_id": int.parse(userId!),
+                "text": text,
+                'files': listOfUrl,
+                'time':
+                    '${dt.year}-${dt.month}-${dt.day} ${dt.hour}:${dt.minute}:${dt.second}'
+              })
+            : jsonEncode({
+                "user_id": int.parse(userId!),
+                "text": text,
+                'files': listOfUrl,
+                'event_id': fromHomeStory,
+                'time':
+                    '${dt.year}-${dt.month}-${dt.day} ${dt.hour}:${dt.minute}:${dt.second}'
+              }));
+    var data = jsonDecode(response.body);
+    print('addStory =$data');
+  } else {
+    final response = await http.post(
+        Uri.parse('${baseUrl}addStoryMyEvent$code'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode({
+          "user_id": int.parse(userId!),
+          "text": text,
+          'files': listOfUrl,
+          "type": "1",
+          "my_event_id": "$myEventid",
+          'time':
+              '${dt.year}-${dt.month}-${dt.day} ${dt.hour}:${dt.minute}:${dt.second}'
+        }));
+    var data = jsonDecode(response.body);
+    print('addStory =$data');
+  }
 }
 
 Future<String> uploadReelFiles(String path) async {
@@ -80,14 +101,15 @@ Future<String> uploadReelFiles(String path) async {
   FormData formData = new FormData.fromMap({"files[]": listofFile});
   String url = '';
   try {
-    final response = await Dio().post('https://rooyapis.rooyatech.com/Alphaapis/uploadReelsfiles?code=ROOYA-5574499',
+    final response = await Dio().post(
+        'https://rooyapis.rooyatech.com/Alphaapis/uploadReelsfiles?code=ROOYA-5574499',
         options: Options(headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": '${await getToken()}'
         }),
         data: formData);
     print('response data is = ${response.data}');
-    url = response.data['file_url'];
+    url = response.data['main_url'];
     return url;
   } catch (e) {
     print('Exception is = $e');

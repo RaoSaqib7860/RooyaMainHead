@@ -78,7 +78,7 @@ class _PasswordLoginViewState extends StateMVC<PasswordLoginView> {
                               Navigator.of(context).pushReplacementNamed('/home');
                             },
                             child: Icon(
-                              Icons.arrow_back,
+                              CupertinoIcons.back,
                               color: settingRepo.setting.value.iconColor,
                             ),
                           ),

@@ -7,14 +7,14 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:reorderables/reorderables.dart';
+import 'package:rooya_app/AllCreatePosts/CreatePost/add_hastags.dart';
+import 'package:rooya_app/AllCreatePosts/CreatePost/add_usertags.dart';
 import 'package:rooya_app/Screens/Reel/ReelCamera/ReelCamera.dart';
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
 import 'package:rooya_app/dashboard/Home/Models/RooyaPostModel.dart';
 import 'package:rooya_app/models/FileUploadModel.dart';
 import 'package:rooya_app/models/HashTagModel.dart';
 import 'package:rooya_app/models/UserTagModel.dart';
-import 'package:rooya_app/rooya_post/CreatePost/add_hastags.dart';
-import 'package:rooya_app/rooya_post/CreatePost/add_usertags.dart';
 import 'package:rooya_app/rooya_post/CreateRooyaPostController.dart';
 import 'package:rooya_app/story/create_story.dart';
 import 'package:rooya_app/story/uploadStroy.dart';
@@ -64,9 +64,8 @@ class _EditPostState extends State<EditPost> {
 
   @override
   void initState() {
-    controller.getImagePath();
-    controller.getVideoPath();
-    controller.getFilesPath();
+    // controller.getImagePath();
+    // controller.getVideoPath();
     getPath();
     descriptionController.text = widget.postModel!.text.toString();
     super.initState();
@@ -169,7 +168,7 @@ class _EditPostState extends State<EditPost> {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.black)),
+                  icon: Icon(CupertinoIcons.back, color: Colors.black)),
               actions: [
                 InkWell(
                   onTap: () {

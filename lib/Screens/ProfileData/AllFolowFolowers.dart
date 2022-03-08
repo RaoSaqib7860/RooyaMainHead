@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../../ApiUtils/baseUrl.dart';
 import '../../SharePost.dart';
 import 'Models/FolowModel.dart';
+import 'package:flutter/cupertino.dart';
 
 class AllFolowFolowers extends StatefulWidget {
   final bool? folowers;
@@ -73,7 +74,7 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                 onPressed: () {
                   Get.back();
                 },
-                icon: Icon(Icons.arrow_back, color: Colors.black)),
+                icon: Icon(CupertinoIcons.back, color: Colors.black)),
           ),
           body: Column(
             children: [

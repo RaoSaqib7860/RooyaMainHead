@@ -30,7 +30,7 @@ class _HashTageExploreState extends State<HashTageExplore> {
               ),
               Row(
                 children: [
-                  Icon(Icons.arrow_back),
+                  Icon(CupertinoIcons.back),
                   SizedBox(
                     width: 6,
                   ),

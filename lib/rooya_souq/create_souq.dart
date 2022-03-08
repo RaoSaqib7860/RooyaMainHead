@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reorderables/reorderables.dart';
+import 'package:rooya_app/AllCreatePosts/CreatePost/add_hastags.dart';
 import 'package:rooya_app/CreateSouq/RooyaSouqController.dart';
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
 import 'package:rooya_app/models/FileUploadModel.dart';
 import 'package:rooya_app/models/HashTagModel.dart';
 import 'package:rooya_app/models/RooyaCategoryModel.dart';
-import 'package:rooya_app/rooya_post/CreatePost/add_hastags.dart';
 import 'package:rooya_app/story/uploadStroy.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/ProgressHUD.dart';
@@ -23,6 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 
 class CreateSouq extends StatefulWidget {
   @override
@@ -88,7 +89,7 @@ class _CreateSouqState extends State<CreateSouq> {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.black)),
+                  icon: Icon(CupertinoIcons.back, color: Colors.black)),
               actions: [
                 InkWell(
                   onTap: () {

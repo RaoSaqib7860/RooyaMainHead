@@ -296,7 +296,7 @@ class _FriendsListViewState extends StateMVC<FriendsListView> {
                                                 child: IconButton(
                                                   color: settingRepo.setting.value.iconColor,
                                                   icon: new Icon(
-                                                    Icons.arrow_back,
+                                                    CupertinoIcons.back,
                                                     size: 18,
                                                   ),
                                                   onPressed: () {

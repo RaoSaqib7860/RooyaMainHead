@@ -21,6 +21,7 @@ class RooyaPostModel {
   String? pre_time;
   String? pre_text;
   String? event_name;
+  String? post_postion;
 
   RooyaPostModel(
       {this.postId,
@@ -44,7 +45,8 @@ class RooyaPostModel {
       this.attachment,
       this.pre_time,
       this.pre_user_picture,
-      this.pre_text});
+      this.pre_text,
+      this.post_postion});
 
   RooyaPostModel.fromJson(Map<String, dynamic> json) {
     pre_text = json['pre_text'].toString();
@@ -65,6 +67,7 @@ class RooyaPostModel {
     userPicture = json['user_picture'];
     text = json['text'].toString();
     time = json['time'];
+    post_postion = json['post_postion'].toString();
     if (json['posthashtags'] != null) {
       posthashtags = <Posthashtags>[];
       json['posthashtags'].forEach((v) {

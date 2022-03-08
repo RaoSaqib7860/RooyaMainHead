@@ -10,7 +10,7 @@ import 'package:rooya_app/utils/ShimmerEffect.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'Models/UpCommingEventModel.dart';
 
 class UpComingEvents extends StatefulWidget {
@@ -60,7 +60,7 @@ class _UpComingEventsState extends State<UpComingEvents> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(CupertinoIcons.back, color: Colors.black)),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.5.h, vertical: 1.5.w),

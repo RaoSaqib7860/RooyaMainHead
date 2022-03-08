@@ -5,17 +5,23 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:rooya_app/AllCreatePosts/CreatePost/create_post.dart';
+import 'package:rooya_app/ChatModule/Home/chat_screen.dart';
 import 'package:rooya_app/Screens/Reel/ReelCamera/ReelCamera.dart';
 import 'package:rooya_app/Screens/Settings/Settings.dart';
 import 'package:rooya_app/events/CreateNewEvent/CreateNewEvent.dart';
 import 'package:rooya_app/events/Models/UpCommingEventModel.dart';
 import 'package:rooya_app/events/event_detail.dart';
+import 'package:rooya_app/models/MyEventModel.dart';
 import 'package:rooya_app/models/ProfileInfoModel.dart';
 import 'package:rooya_app/dashboard/Home/Models/RooyaPostModel.dart';
 import 'package:rooya_app/models/RooyaSouqModel.dart';
 import 'package:rooya_app/models/UserStoryModel.dart';
 import 'package:rooya_app/rooya_souq/create_souq.dart';
 import 'package:rooya_app/rooya_souq/rooya_ad_display.dart';
+import 'package:rooya_app/src/repositories/user_repository.dart';
 import 'package:rooya_app/story/create_story.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/ApiUtils/baseUrl.dart';
@@ -34,6 +40,10 @@ import '../view_story.dart';
 import 'Home/home.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'ProfileComponents/CreateMyEvent.dart';
+import 'ProfileComponents/CreateMyEventsCards.dart';
+import 'ProfileComponents/EditMyEventsCard.dart';
+
 class Profile extends StatefulWidget {
   final String? userID;
 
@@ -46,11 +56,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool isLoading = false;
   bool isLoadingProfile = false;
+  List<MyEventModel> myEvetModel = [];
   List<RooyaPostModel> mRooyaPostsList = [];
+  List<RooyaPostModel> myEventPostsList = [];
   List<RooyaSouqModel> mRooyaSouqList = [];
   List<UpComingEventsModel> listofUpcommingEvents = [];
   ProfileInfoModel? profileInfoModel;
   UserStoryModel? userStoryModel;
+  UserStoryModel? myEventStoryModel = UserStoryModel(items: []);
   List<Items>? listofStoryItem;
   String? userID = '';
   String displayName = '';
@@ -101,6 +114,7 @@ class _ProfileState extends State<Profile> {
     getRooyaSouqbyLimit();
     getStories();
     createEvent();
+    getAllEvent();
     super.initState();
   }
 
@@ -108,6 +122,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: offWhiteColor2,
         body: isLoadingProfile
             ? ShimerEffect(
                 child: Container(
@@ -827,7 +842,16 @@ class _ProfileState extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                pushNewScreen(
+                                  context,
+                                  screen: ChatScreen(),
+                                  withNavBar: false,
+                                  // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              },
                               child: Container(
                                 height: height * 0.045,
                                 width: width * 0.2,
@@ -848,7 +872,7 @@ class _ProfileState extends State<Profile> {
                                 decoration: BoxDecoration(
                                     color: userID != widget.userID
                                         ? greenColor
-                                        : Colors.white,
+                                        : offWhiteColor2,
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
@@ -873,7 +897,7 @@ class _ProfileState extends State<Profile> {
                                     decoration: BoxDecoration(
                                         color: userID != widget.userID
                                             ? greenColor
-                                            : Colors.white,
+                                            : offWhiteColor2,
                                         borderRadius: BorderRadius.circular(5)),
                                   )
                                 : InkWell(
@@ -937,7 +961,7 @@ class _ProfileState extends State<Profile> {
                                       decoration: BoxDecoration(
                                           color: userID != widget.userID
                                               ? greenColor
-                                              : Colors.white,
+                                              : offWhiteColor2,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                     ),
@@ -1106,8 +1130,8 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   Container(
                                     height: 5.5.h,
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 4.0.w),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 4.0.w),
                                     decoration: BoxDecoration(
                                         color: Colors.grey[200],
                                         borderRadius:
@@ -1140,6 +1164,9 @@ class _ProfileState extends State<Profile> {
                                         ),
                                       ),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
                                   ),
                                   Flexible(
                                       child: ListView.builder(
@@ -1334,16 +1361,14 @@ class _ProfileState extends State<Profile> {
                                               isDense: true,
                                               enabledBorder: InputBorder.none,
                                               errorBorder: InputBorder.none,
-                                              disabledBorder:
-                                                  InputBorder.none,
+                                              disabledBorder: InputBorder.none,
                                               contentPadding: EdgeInsets.only(
                                                   left: 15, right: 15),
                                               hintText: 'Search here...',
                                               hintStyle: TextStyle(
                                                 fontFamily: AppFonts.segoeui,
                                                 fontSize: 9.0.sp,
-                                                color:
-                                                    const Color(0xff1e1e1e),
+                                                color: const Color(0xff1e1e1e),
                                               ),
                                             ),
                                           ),
@@ -1394,14 +1419,13 @@ class _ProfileState extends State<Profile> {
                                                       Text(
                                                         'ADD STORY',
                                                         style: TextStyle(
-                                                          fontFamily: AppFonts
-                                                              .segoeui,
+                                                          fontFamily:
+                                                              AppFonts.segoeui,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontSize: 9.0.sp,
                                                           color:
-                                                              selectedValue ==
-                                                                      4
+                                                              selectedValue == 4
                                                                   ? primaryColor
                                                                   : Colors
                                                                       .black,
@@ -1421,17 +1445,15 @@ class _ProfileState extends State<Profile> {
                                             physics: BouncingScrollPhysics(),
                                             itemCount: userStoryModel == null
                                                 ? 0
-                                                : userStoryModel!
-                                                    .items!.length,
+                                                : userStoryModel!.items!.length,
                                             gridDelegate:
                                                 SliverGridDelegateWithFixedCrossAxisCount(
                                                     childAspectRatio: 0.8,
                                                     // crossAxisSpacing: 5.0.w,
                                                     mainAxisSpacing: 2.0.w,
                                                     crossAxisCount: 4),
-                                            itemBuilder:
-                                                (BuildContext context,
-                                                    int index) {
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
                                               return Stack(
                                                 children: [
                                                   InkWell(
@@ -1442,10 +1464,8 @@ class _ProfileState extends State<Profile> {
                                                       ))!
                                                           .then((value) {
                                                         if (value is int) {
-                                                          userStoryModel!
-                                                              .items!
-                                                              .removeAt(
-                                                                  value);
+                                                          userStoryModel!.items!
+                                                              .removeAt(value);
                                                           setState(() {});
                                                         }
                                                       });
@@ -1469,10 +1489,11 @@ class _ProfileState extends State<Profile> {
                                                                     .infinity,
                                                                 fit: BoxFit
                                                                     .cover,
-                                                                progressIndicatorBuilder: (context,
-                                                                        url,
-                                                                        downloadProgress) =>
-                                                                    ShimerEffect(
+                                                                progressIndicatorBuilder:
+                                                                    (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        ShimerEffect(
                                                                   child: Image
                                                                       .asset(
                                                                     'assets/images/home_banner.png',
@@ -1483,8 +1504,7 @@ class _ProfileState extends State<Profile> {
                                                                 errorWidget: (context,
                                                                         url,
                                                                         error) =>
-                                                                    Image
-                                                                        .asset(
+                                                                    Image.asset(
                                                                   'assets/images/home_banner.png',
                                                                   fit: BoxFit
                                                                       .cover,
@@ -1499,14 +1519,13 @@ class _ProfileState extends State<Profile> {
                                                                         .white,
                                                                   ),
                                                                 ),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                        color:
-                                                                            Colors.black),
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .black),
                                                               ),
                                                       ),
-                                                      margin: EdgeInsets
-                                                          .symmetric(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
                                                               horizontal:
                                                                   0.8.h),
                                                     ),
@@ -1538,13 +1557,12 @@ class _ProfileState extends State<Profile> {
                                                                     .cover,
                                                               ),
                                                             ),
-                                                            errorWidget: (context,
-                                                                    url,
-                                                                    error) =>
-                                                                Image.asset(
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Image.asset(
                                                               'assets/images/home_banner.png',
-                                                              fit: BoxFit
-                                                                  .cover,
+                                                              fit: BoxFit.cover,
                                                             ),
                                                           ),
                                                           borderColor:
@@ -1582,191 +1600,428 @@ class _ProfileState extends State<Profile> {
                                         ? Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              userID == widget.userID
-                                                  ? InkWell(
+                                              Container(
+                                                height: height * 0.050,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                child: ListView.builder(
+                                                  itemBuilder: (c, i) {
+                                                    return InkWell(
                                                       onTap: () {
-                                                        Get.to(() =>
-                                                            CreateNewEvent());
+                                                        if (selected_event_id !=
+                                                            '${myEvetModel[i].eventId}') {
+                                                          selected_event_id =
+                                                              '${myEvetModel[i].eventId}';
+                                                          loadEvent = false;
+                                                          setState(() {});
+                                                          getMyEventPosts(
+                                                              '${myEvetModel[i].eventId}');
+                                                          getMyEventStories(
+                                                              '${myEvetModel[i].eventId}');
+                                                        }
                                                       },
-                                                      child: Row(
-                                                        children: [
-                                                          Icon(
-                                                            Icons.add_circle,
-                                                            color:
-                                                                primaryColor,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            'ROOYA EVENT',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  AppFonts
-                                                                      .segoeui,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize:
-                                                                  9.0.sp,
-                                                              color: selectedValue ==
-                                                                      4
-                                                                  ? primaryColor
-                                                                  : Colors
-                                                                      .black,
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign
-                                                                    .center,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  : SizedBox(),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              GridView.builder(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                itemCount:
-                                                    listofUpcommingEvents
-                                                            .isEmpty
-                                                        ? 6
-                                                        : listofUpcommingEvents
-                                                            .length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisSpacing:
-                                                            3.0.w,
-                                                        mainAxisSpacing:
-                                                            3.0.w,
-                                                        childAspectRatio: 1.8,
-                                                        crossAxisCount: 2),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return listofUpcommingEvents
-                                                          .isEmpty
-                                                      ? ShimerEffect(
-                                                          child: Container(
-                                                            height: 15.0.h,
-                                                            width: 100.0.w,
-                                                            color:
-                                                                Colors.blue,
-                                                          ),
-                                                        )
-                                                      : InkWell(
-                                                          onTap: () {
-                                                            Get.to(() =>
-                                                                EventDetails(
-                                                                  eventId: listofUpcommingEvents[
-                                                                          index]
-                                                                      .eventId,
-                                                                ));
-                                                          },
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            imageUrl:
-                                                                '$baseImageUrl' +
-                                                                    '${listofUpcommingEvents[index].eventCover}',
-                                                            imageBuilder:
-                                                                (context,
-                                                                        imageProvider) =>
-                                                                    Container(
-                                                              height: 25.0.h,
-                                                              width: 100.0.w,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          10),
-                                                                  image: DecorationImage(
-                                                                      fit: BoxFit
-                                                                          .fill,
-                                                                      image:
-                                                                          imageProvider)),
-                                                              child: Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .bottomLeft,
+                                                      onLongPress: () {
+                                                        if (userID ==
+                                                            widget.userID) {
+                                                          showCupertinoModalBottomSheet(
+                                                            expand: false,
+                                                            context: context,
+                                                            enableDrag: true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            builder: (context) {
+                                                              return Material(
                                                                 child:
-                                                                    Padding(
-                                                                  padding:
-                                                                      EdgeInsets.all(
-                                                                          8.0),
-                                                                  child:
-                                                                      Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
+                                                                    Container(
+                                                                  height:
+                                                                      height *
+                                                                          0.2,
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              15,
+                                                                          horizontal:
+                                                                              5),
+                                                                  child: Column(
                                                                     children: [
-                                                                      Text(
-                                                                        '${listofUpcommingEvents[index].eventTitle}',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontFamily:
-                                                                              AppFonts.segoeui,
-                                                                          fontSize:
-                                                                              11.0.sp,
-                                                                          color:
-                                                                              Colors.white,
+                                                                      Expanded(
+                                                                        child:
+                                                                            InkWell(
+                                                                          child:
+                                                                              Container(
+                                                                            decoration:
+                                                                                BoxDecoration(color: Colors.blueGrey[50]!.withOpacity(0.5)),
+                                                                            child:
+                                                                                Center(
+                                                                              child: Text(
+                                                                                'Edit Event',
+                                                                                style: TextStyle(fontFamily: AppFonts.segoeui),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          onTap:
+                                                                              () {
+                                                                            showCupertinoModalBottomSheet(
+                                                                              expand: false,
+                                                                              context: context,
+                                                                              enableDrag: true,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              builder: (context) {
+                                                                                return Container(
+                                                                                  height: height * 0.7,
+                                                                                  child: EditMyEventCard(
+                                                                                    onCreateCall: () async {
+                                                                                      myEventStoryModel = UserStoryModel(items: []);
+                                                                                      await getAllEvent();
+                                                                                      Navigator.of(context).pop();
+                                                                                    },
+                                                                                    model: myEvetModel[i],
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            ).then((value) {
+                                                                              Navigator.of(context).pop();
+                                                                            });
+                                                                          },
                                                                         ),
                                                                       ),
-                                                                      Container(
-                                                                        width:
-                                                                            double.infinity,
+                                                                      SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+                                                                      Expanded(
                                                                         child:
-                                                                            Text(
-                                                                          '${listofUpcommingEvents[index].eventDescription}',
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          maxLines:
-                                                                              1,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontFamily: AppFonts.segoeui,
-                                                                            fontSize: 7.0.sp,
-                                                                            color: Colors.white,
+                                                                            InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            await deleteMyEvent('${myEvetModel[i].eventId}');
+                                                                            myEvetModel.removeAt(i);
+                                                                            myEventStoryModel =
+                                                                                UserStoryModel(items: []);
+                                                                            await getAllEvent();
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            decoration:
+                                                                                BoxDecoration(color: Colors.blueGrey[50]!.withOpacity(0.5)),
+                                                                            child:
+                                                                                Center(
+                                                                              child: Text('Delete Event', style: TextStyle(fontFamily: AppFonts.segoeui)),
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
                                                                     ],
                                                                   ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color:
+                                                                              Colors.white),
                                                                 ),
+                                                              );
+                                                            },
+                                                          ).then((value) {
+                                                            setState(() {});
+                                                          });
+                                                        }
+                                                      },
+                                                      child: Card(
+                                                          elevation: 3,
+                                                          child: Container(
+                                                            constraints:
+                                                                BoxConstraints(
+                                                                    minWidth:
+                                                                        width *
+                                                                            0.2),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        5),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '${myEvetModel[i].eventTitle}',
+                                                                maxLines: 1,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        AppFonts
+                                                                            .segoeui,
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: selected_event_id !=
+                                                                            '${myEvetModel[i].eventId}'
+                                                                        ? Colors
+                                                                            .black
+                                                                        : primaryColor),
                                                               ),
                                                             ),
-                                                            placeholder: (context,
-                                                                    url) =>
-                                                                ShimerEffect(
-                                                              child:
-                                                                  Container(
-                                                                height:
-                                                                    15.0.h,
-                                                                width:
-                                                                    100.0.w,
-                                                                color: Colors
-                                                                    .blue,
-                                                              ),
-                                                            ),
-                                                            errorWidget: (context,
-                                                                    url,
-                                                                    error) =>
-                                                                Icon(Icons
-                                                                    .error),
+                                                          )),
+                                                    );
+                                                  },
+                                                  itemCount: myEvetModel.length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Visibility(
+                                                visible: userID == widget.userID
+                                                    ? true
+                                                    : false,
+                                                child: CreateEvetCards(
+                                                  addTimeLineButton: () {
+                                                    showCupertinoModalBottomSheet(
+                                                      expand: false,
+                                                      context: context,
+                                                      enableDrag: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      builder: (context) {
+                                                        return Container(
+                                                          height: height * 0.6,
+                                                          child: CreateMyEvet(
+                                                            onCreateCall:
+                                                                () async {
+                                                              getAllEvent();
+                                                              setState(() {});
+                                                            },
                                                           ),
                                                         );
-                                                },
+                                                      },
+                                                    );
+                                                  },
+                                                  addPostButton: () {
+                                                    Get.to(CreatePost());
+                                                  },
+                                                  addStoryButton: () {
+                                                    fromHomeStory = '0';
+                                                    Get.to(CameraApp(
+                                                      fromStory: true,
+                                                    ))!
+                                                        .then((value) {
+                                                      fromHomeStory = '0';
+                                                    });
+                                                  },
+                                                  showCreate:
+                                                      myEvetModel.isEmpty
+                                                          ? false
+                                                          : true,
+                                                ),
                                               ),
+                                              myEventStoryModel == null ||
+                                                      myEventStoryModel!
+                                                          .items!.isEmpty
+                                                  ? SizedBox()
+                                                  : Column(
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Container(
+                                                          height:
+                                                              height * 0.170,
+                                                          width: width,
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 5),
+                                                          child:
+                                                              ListView.builder(
+                                                            itemBuilder:
+                                                                (context,
+                                                                    index) {
+                                                              return Stack(
+                                                                children: [
+                                                                  InkWell(
+                                                                    onTap: () {
+                                                                      Get.to(
+                                                                              ViewStory(
+                                                                        model:
+                                                                            myEventStoryModel,
+                                                                        index:
+                                                                            index,
+                                                                      ))!
+                                                                          .then(
+                                                                              (value) {
+                                                                        if (value
+                                                                            is int) {
+                                                                          myEventStoryModel!
+                                                                              .items!
+                                                                              .removeAt(value);
+                                                                          setState(
+                                                                              () {});
+                                                                        }
+                                                                      });
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      height: height *
+                                                                          0.170,
+                                                                      width: width *
+                                                                          0.230,
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        child: myEventStoryModel!.items![index].type ==
+                                                                                'photo'
+                                                                            ? CachedNetworkImage(
+                                                                                imageUrl: '$baseImageUrl${myEventStoryModel!.items![index].src}',
+                                                                                width: double.infinity,
+                                                                                height: double.infinity,
+                                                                                fit: BoxFit.cover,
+                                                                                progressIndicatorBuilder: (context, url, downloadProgress) => ShimerEffect(
+                                                                                  child: Image.asset(
+                                                                                    'assets/images/home_banner.png',
+                                                                                    fit: BoxFit.cover,
+                                                                                  ),
+                                                                                ),
+                                                                                errorWidget: (context, url, error) => Image.asset(
+                                                                                  'assets/images/home_banner.png',
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
+                                                                              )
+                                                                            : Container(
+                                                                                child: Center(
+                                                                                  child: Icon(
+                                                                                    Icons.play_circle_fill,
+                                                                                    color: Colors.white,
+                                                                                  ),
+                                                                                ),
+                                                                                decoration: BoxDecoration(color: Colors.black),
+                                                                              ),
+                                                                      ),
+                                                                      margin: EdgeInsets.symmetric(
+                                                                          horizontal:
+                                                                              0.8.h),
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 8,
+                                                                        top: 5),
+                                                                    width:
+                                                                        20.0.w,
+                                                                    child: Row(
+                                                                      children: [
+                                                                        CircularProfileAvatar(
+                                                                          '',
+                                                                          child:
+                                                                              CachedNetworkImage(
+                                                                            imageUrl: myEventStoryModel!.userPicture == null
+                                                                                ? 'https://www.gravatar.com/avatar/test@test.com.jpg?s=200&d=mm'
+                                                                                : "$baseImageUrl${myEventStoryModel!.userPicture}",
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                                                ShimerEffect(
+                                                                              child: Image.asset(
+                                                                                'assets/images/home_banner.png',
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            ),
+                                                                            errorWidget: (context, url, error) =>
+                                                                                Image.asset(
+                                                                              'assets/images/home_banner.png',
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                          ),
+                                                                          borderColor:
+                                                                              primaryColor,
+                                                                          elevation:
+                                                                              5,
+                                                                          borderWidth:
+                                                                              1,
+                                                                          radius:
+                                                                              10,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              3,
+                                                                        ),
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            '${userProfile.value.username}',
+                                                                            maxLines:
+                                                                                2,
+                                                                            overflow:
+                                                                                TextOverflow.ellipsis,
+                                                                            style:
+                                                                                TextStyle(color: Colors.white, fontSize: 8),
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                            itemCount:
+                                                                myEventStoryModel ==
+                                                                        null
+                                                                    ? 0
+                                                                    : myEventStoryModel!
+                                                                        .items!
+                                                                        .length,
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                      ],
+                                                    ),
+                                              !loadEvent
+                                                  ? SizedBox(
+                                                      height: height / 3,
+                                                      width: width,
+                                                    )
+                                                  : myEventPostsList.isEmpty
+                                                      ? SizedBox(
+                                                          height: height / 3,
+                                                          width: width,
+                                                          child: Center(
+                                                            child:
+                                                                Text('Empty'),
+                                                          ),
+                                                        )
+                                                      : Flexible(
+                                                          child: Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      2.0.w),
+                                                          child:
+                                                              ListView.builder(
+                                                                  physics:
+                                                                      NeverScrollableScrollPhysics(),
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  itemCount:
+                                                                      myEventPostsList
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    return UserPost(
+                                                                      rooyaPostModel:
+                                                                          myEventPostsList[
+                                                                              index],
+                                                                    );
+                                                                  }),
+                                                        )),
                                             ],
                                           )
                                         : selectedValue == 4
                                             ? Column(
-                                                mainAxisSize:
-                                                    MainAxisSize.min,
+                                                mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   userID == widget.userID
                                                       ? InkWell(
@@ -1820,8 +2075,7 @@ class _ProfileState extends State<Profile> {
                                                       physics:
                                                           NeverScrollableScrollPhysics(),
                                                       itemCount:
-                                                          mRooyaSouqList
-                                                              .length,
+                                                          mRooyaSouqList.length,
                                                       gridDelegate:
                                                           SliverGridDelegateWithFixedCrossAxisCount(
                                                               crossAxisSpacing:
@@ -1831,18 +2085,17 @@ class _ProfileState extends State<Profile> {
                                                               crossAxisCount:
                                                                   2),
                                                       itemBuilder:
-                                                          (BuildContext
-                                                                  context,
+                                                          (BuildContext context,
                                                               int index) {
                                                         return InkWell(
                                                           onTap: () {
                                                             Get.to(() =>
                                                                     RooyaAdDisplay(
                                                                       rooyaSouqModel:
-                                                                          mRooyaSouqList[index],
+                                                                          mRooyaSouqList[
+                                                                              index],
                                                                     ))!
-                                                                .then(
-                                                                    (value) {
+                                                                .then((value) {
                                                               if (value
                                                                   is bool) {
                                                                 getRooyaSouqbyLimit();
@@ -1855,10 +2108,8 @@ class _ProfileState extends State<Profile> {
                                                                     .start,
                                                             children: [
                                                               Container(
-                                                                height:
-                                                                    15.0.h,
-                                                                width:
-                                                                    100.0.w,
+                                                                height: 15.0.h,
+                                                                width: 100.0.w,
                                                                 child:
                                                                     CachedNetworkImage(
                                                                   imageUrl:
@@ -1937,13 +2188,16 @@ class _ProfileState extends State<Profile> {
                                                               Row(
                                                                 children: [
                                                                   Expanded(
-                                                                    child:
-                                                                        Row(
+                                                                    child: Row(
                                                                       children: [
                                                                         Text(
                                                                             'AED ${mRooyaSouqList[index].price}',
-                                                                            overflow: TextOverflow.ellipsis,
-                                                                            style: TextStyle(color: const Color(0xff0bab0d), fontWeight: FontWeight.w600, fontSize: 8.0.sp)),
+                                                                            overflow: TextOverflow
+                                                                                .ellipsis,
+                                                                            style: TextStyle(
+                                                                                color: const Color(0xff0bab0d),
+                                                                                fontWeight: FontWeight.w600,
+                                                                                fontSize: 8.0.sp)),
                                                                         SizedBox(
                                                                           width:
                                                                               5,
@@ -1968,8 +2222,8 @@ class _ProfileState extends State<Profile> {
                                                                             'Segoe UI',
                                                                         fontSize:
                                                                             8.0.sp,
-                                                                        color:
-                                                                            const Color(0xff5a5a5a),
+                                                                        color: const Color(
+                                                                            0xff5a5a5a),
                                                                       ))
                                                                 ],
                                                               )
@@ -2002,6 +2256,118 @@ class _ProfileState extends State<Profile> {
               ),
       ),
     );
+  }
+
+  bool loadEvent = false;
+  String selected_event_id = '';
+
+  Future<void> deleteMyEvent(String event_id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = await prefs.getString('token');
+    String? userId = await prefs.getString('user_id');
+    final response = await http.post(
+        Uri.parse('${baseUrl}RemoveRooyaMyEvent$code'),
+        headers: {"Content-Type": "application/json", "Authorization": token!},
+        body: jsonEncode({"event_admin": userId, "event_id": event_id}));
+    print(response.request);
+    print(response.statusCode);
+    print('deleteMyEvent all data  = ${response.body}');
+  }
+
+  Future<void> getMyEventStories(String event_id) async {
+    print('Event story call');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = await prefs.getString('token');
+    String? userId = await prefs.getString('user_id');
+    final response = await http.post(
+        Uri.parse('${baseUrl}getMyEventStories$code'),
+        headers: {"Content-Type": "application/json", "Authorization": token!},
+        body: jsonEncode({"user_id": widget.userID, "my_event_id": event_id}));
+    print(response.request);
+    print(response.statusCode);
+    print('getMyEventStories all data  = ${response.body}');
+    log(response.body);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['result'] == 'success') {
+        myEventStoryModel = UserStoryModel.fromJson(data['data'][0], false);
+        setState(() {
+          List<UserStoryModel> storystory = List<UserStoryModel>.from(
+              data['data']
+                  .map((model) => UserStoryModel.fromJson(model, true)));
+          for (var i in storystory) {
+            myEventStoryModel!.items!.addAll(i.items!);
+          }
+        });
+      } else {
+        myEventStoryModel!.items = [];
+      }
+      setState(() {});
+    }
+  }
+
+  Future<void> getMyEventPosts(String event_id) async {
+    print('event id = $event_id');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = await prefs.getString('token');
+    String? userId = await prefs.getString('user_id');
+    final response = await http.post(
+        Uri.parse('${baseUrl}getRooyaMyEventPostByLimite$code'),
+        headers: {"Content-Type": "application/json", "Authorization": token!},
+        body: jsonEncode(
+            {"my_event_id": event_id, "page_size": 100, "page_number": 0}));
+
+    setState(() {
+      loadEvent = true;
+    });
+
+    print('Event posts is = ${response.body}');
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['result'] == 'success') {
+        setState(() {
+          myEventPostsList = List<RooyaPostModel>.from(
+              data['data'].map((model) => RooyaPostModel.fromJson(model)));
+        });
+      } else {
+        myEventPostsList = [];
+        setState(() {});
+      }
+    } else {
+      myEventPostsList = [];
+      setState(() {});
+    }
+  }
+
+  Future<void> getAllEvent() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = await prefs.getString('token');
+    String? userId = await prefs.getString('user_id');
+    final response = await http.post(
+        Uri.parse('${baseUrl}getRooyaMyPerEventByLimite${code}'),
+        headers: {"Content-Type": "application/json", "Authorization": token!},
+        body: jsonEncode({
+          "page_size": 100,
+          "page_number": 0,
+          "event_admin": widget.userID
+        }));
+    print('myEvent ids = ${response.body}');
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['result'] == 'success') {
+        setState(() {
+          myEvetModel = List<MyEventModel>.from(
+              data['data'].map((model) => MyEventModel.fromJson(model)));
+          selected_event_id = myEvetModel[0].eventId.toString();
+        });
+        getMyEventPosts(myEvetModel[0].eventId.toString());
+        getMyEventStories(myEvetModel[0].eventId.toString());
+      } else {
+        setState(() {});
+      }
+    }
   }
 
   Future<void> getRooyaPost() async {

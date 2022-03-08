@@ -7,7 +7,7 @@ import 'package:rooya_app/Screens/Settings/Privacy/PrivacySettingsModel.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter/cupertino.dart';
 import 'NotificationSettingsModel.dart';
 
 class NotificationSeetings extends StatefulWidget {
@@ -50,7 +50,7 @@ class _NotificationSeetingsState extends State<NotificationSeetings> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(CupertinoIcons.back, color: Colors.black),
           onPressed: () {
             Get.back();
           },

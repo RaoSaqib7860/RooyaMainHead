@@ -68,7 +68,7 @@ class _MyProfileViewState extends StateMVC<MyProfileView> {
                   videoRepo.homeCon.value.getVideos();
                 },
                 child: Icon(
-                  Icons.arrow_back,
+                  CupertinoIcons.back,
                   color: settingRepo.setting.value.iconColor,
                 ),
               ),

@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import "package:velocity_x/velocity_x.dart";
-
+import 'package:flutter/cupertino.dart';
 import '../controllers/chat_list_controller.dart';
 import '../helpers/app_config.dart' as config;
 import '../helpers/helper.dart';
@@ -75,7 +75,7 @@ class _ConversationsViewState extends StateMVC<ConversationsView> {
                 Navigator.of(context).pushReplacementNamed('/home');
               },
               child: Icon(
-                Icons.arrow_back,
+                CupertinoIcons.back,
                 color: settingRepo.setting.value.iconColor,
               ),
             ),

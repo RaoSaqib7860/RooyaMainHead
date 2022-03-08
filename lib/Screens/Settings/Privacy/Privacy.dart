@@ -58,7 +58,7 @@ class _PrivacyState extends State<Privacy> {
               backgroundColor: Colors.white,
               elevation: 0,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black),
+                icon: Icon(CupertinoIcons.back, color: Colors.black),
                 onPressed: () {
                   Get.back();
                 },

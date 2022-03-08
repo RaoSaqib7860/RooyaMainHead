@@ -8,7 +8,9 @@ import 'package:rooya_app/splash.dart';
 import 'package:rooya_app/src/routes.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
+import 'package:socket_io/socket_io.dart';
 import 'package:wakelock/wakelock.dart';
+import 'AppThemes/AppThemes.dart';
 import 'Screens/Reel/ReelCamera/ReelCamera.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -34,6 +36,24 @@ T? ambiguate<T>(T? value) => value;
 
 void main() async {
   // Fetch the available cameras before initializing the app.
+  HttpOverrides.global = new MyHttpOverrides();
+  var io = new Server();
+  var nsp = io.of('/some');
+  nsp.on('connection', (client) {
+    print('connection /some');
+    client.on('msg', (data) {
+      print('data from /some => $data');
+      client.emit('fromServer', "ok 2");
+    });
+  });
+  io.on('connection', (client) {
+    print('connection default namespace');
+    client.on('msg', (data) {
+      print('data from default => $data');
+      client.emit('fromServer', "ok");
+    });
+  });
+  io.listen(4499);
   await GetStorage.init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   try {
@@ -60,7 +80,7 @@ class MyApp extends StatelessWidget {
           defaultTransition: Transition.cupertino,
           //transitionDuration: Duration(milliseconds: 700),
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: offWhiteColor,
             primarySwatch: Colors.deepPurple,
             accentColor: Colors.deepPurpleAccent,
           ),

@@ -102,7 +102,7 @@ class _HashVideosViewState extends StateMVC<HashVideosView> {
                                                     Navigator.of(context).pushReplacementNamed('/home');
                                                   },
                                                   child: Icon(
-                                                    Icons.arrow_back,
+                                                    CupertinoIcons.back,
                                                     size: 20,
                                                     color: settingRepo.setting.value.iconColor,
                                                   ),

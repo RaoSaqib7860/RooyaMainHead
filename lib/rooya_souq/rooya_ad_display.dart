@@ -16,6 +16,7 @@ import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/cupertino.dart';
 
 class RooyaAdDisplay extends StatefulWidget {
   RooyaSouqModel? rooyaSouqModel;
@@ -69,7 +70,7 @@ class _RooyaAdDisplayState extends State<RooyaAdDisplay> {
                 onPressed: () {
                   Get.back();
                 },
-                icon: Icon(Icons.arrow_back, color: Colors.black)),
+                icon: Icon(CupertinoIcons.back, color: Colors.black)),
             actions: [
               widget.rooyaSouqModel!.userId.toString() == storage.read('userID')
                   ? Center(
@@ -427,7 +428,7 @@ class _ViewSouqPicState extends State<ViewSouqPic> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            CupertinoIcons.back,
             color: Colors.white,
           ),
           onPressed: () {

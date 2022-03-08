@@ -250,7 +250,7 @@ class _ChangePasswordViewState extends StateMVC<ChangePasswordView> {
                       Navigator.of(context).pop();
                     },
                     child: Icon(
-                      Icons.arrow_back,
+                      CupertinoIcons.back,
                       color: settingRepo.setting.value.iconColor,
                     ),
                   ),

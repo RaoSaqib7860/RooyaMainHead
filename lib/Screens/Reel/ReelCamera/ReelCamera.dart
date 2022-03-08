@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:camera/camera.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,11 +12,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/filters/preset_filters.dart';
 import 'package:photofilters/widgets/photo_filter.dart';
+import 'package:rooya_app/AllCreatePosts/CreatePost/create_post.dart';
 import 'package:rooya_app/GlobalClass/SpiKitGlobal.dart';
 import 'package:rooya_app/GlobalClass/TextFieldsCustom.dart';
 import 'package:image/image.dart' as imageLib;
+import 'package:rooya_app/VideoEditor/VideoEditor.dart';
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
-import 'package:rooya_app/rooya_post/CreatePost/create_post.dart';
 import 'package:rooya_app/story/StoryImageUpload.dart';
 import 'package:rooya_app/story/uploadStroy.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
@@ -247,7 +248,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                           children: [
                             InkWell(
                               child: Icon(
-                                Icons.arrow_back_ios_rounded,
+                                CupertinoIcons.back,
                                 size: 20,
                                 color: Colors.white,
                               ),
@@ -385,9 +386,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (c) => VideoAppFile(
-                                              filePath: path,
-                                              spinSize: 50,
+                                        builder: (c) => VideoEditor(
+                                              file: File('$path'),
                                             )));
                               } else {
                                 uploadImage(path, context);
@@ -1336,9 +1336,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (c) => VideoAppFile(
-                  filePath: videoFile!.path,
-                  spinSize: 50,
+            builder: (c) => VideoEditor(
+                  file: File('${videoFile!.path}'),
                 )));
   }
 
@@ -1515,7 +1514,7 @@ class _EditImageState extends State<EditImage> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(CupertinoIcons.back, color: Colors.black)),
         ),
         body: Column(
           children: [
@@ -1710,7 +1709,7 @@ class _VideoAppFileState extends State<VideoAppFile> {
             backgroundColor: Colors.black,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_rounded),
+              icon: Icon(CupertinoIcons.back),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();

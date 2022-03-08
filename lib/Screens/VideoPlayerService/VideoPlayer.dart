@@ -79,24 +79,24 @@ class _VideoForURLState extends State<VideoForURL> {
                       decoration: BoxDecoration(color: Colors.black),
                     ),
             ),
-            _controller!.value.isPlaying
-                ? SizedBox()
-                : !initialize!
-                    ? SizedBox()
-                    : InkWell(
-                        onTap: () {
-                          setState(() {
-                            _controller!.play();
-                          });
-                        },
-                        child: Center(
-                          child: Icon(
-                            Icons.play_arrow,
-                            size: 60,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
+            // _controller!.value.isPlaying
+            //     ? SizedBox()
+            //     : !initialize!
+            //         ? SizedBox()
+            //         : InkWell(
+            //             onTap: () {
+            //               setState(() {
+            //                 _controller!.play();
+            //               });
+            //             },
+            //             child: Center(
+            //               child: Icon(
+            //                 Icons.play_arrow,
+            //                 size: 60,
+            //                 color: Colors.white,
+            //               ),
+            //             ),
+            //           )
           ],
         ),
       ),

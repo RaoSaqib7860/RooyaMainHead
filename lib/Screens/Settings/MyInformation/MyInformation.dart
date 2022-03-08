@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
+import 'package:flutter/cupertino.dart';
 
 class MyInformation extends StatefulWidget {
   const MyInformation({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _MyInformationState extends State<MyInformation> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(CupertinoIcons.back, color: Colors.black),
             onPressed: () {
               Get.back();
             },

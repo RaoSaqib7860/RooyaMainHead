@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rooya_app/create_all.dart';
+import 'package:rooya_app/AllCreatePosts/CreateAllView/create_all.dart';
 import 'package:rooya_app/events/upcoming_events.dart';
 import 'package:rooya_app/explore_uae/explore_uae.dart';
 import 'package:rooya_app/utils/AppFonts.dart';

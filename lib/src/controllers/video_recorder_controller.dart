@@ -10,14 +10,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
+//import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import "package:velocity_x/velocity_x.dart";
 import 'package:video_player/video_player.dart';
-import 'package:video_trimmer/video_trimmer.dart';
+//import 'package:video_trimmer/video_trimmer.dart';
 
 import '../helpers/global_keys.dart';
 import '../helpers/helper.dart';
@@ -40,7 +40,7 @@ class VideoRecorderController extends ControllerMVC {
   bool videoRecorded = false;
   GlobalKey<FormState> key = new GlobalKey();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final FlutterFFmpeg _flutterFFmpeg = new FlutterFFmpeg();
+  //final FlutterFFmpeg _flutterFFmpeg = new FlutterFFmpeg();
   bool showRecordingButton = false;
   ValueNotifier<bool> isUploading = new ValueNotifier(false);
   ValueNotifier<bool> disableFlipButton = new ValueNotifier(false);
@@ -106,7 +106,7 @@ class VideoRecorderController extends ControllerMVC {
   double baseScale = 1.0;
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
-  final Trimmer _trimmer = Trimmer();
+  //final Trimmer _trimmer = Trimmer();
 
   @override
   void dispose() {
@@ -606,69 +606,69 @@ class VideoRecorderController extends ControllerMVC {
     }
     // });
 
-    if (file != File("")) {
-      await _trimmer.loadVideo(videoFile: file);
-      Navigator.of(scaffoldKey.currentContext!).push(
-        MaterialPageRoute(builder: (context) {
-          return TrimmerView(
-            trimmer: _trimmer,
-            onVideoSaved: (output) async {
-              // setState(() {
-              videoPath = output;
-              // });
-              Navigator.pop(context);
-              // setState(() {
-              isProcessing = true;
-              // });
-              if (watermark != "") {
-                _flutterFFmpeg
-                    .execute(
-                        "-i $videoPath -i $watermark -filter_complex 'overlay=W-w-5:5' -c:a copy -preset ultrafast $outputVideo")
-                    .then((rc) async {
-                  // setState(() {
-                  videoPath = outputVideo;
-                  // });
-                  _flutterFFmpeg
-                      .execute(
-                          "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
-                      .then((rc) async {
-                    thumbPath = thumbImg;
-
-                    isProcessing = false;
-
-                    await _startVideoPlayer(videoPath);
-                  });
-                });
-              } else {
-                _flutterFFmpeg
-                    .execute(
-                        "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
-                    .then((rc) async {
-                  thumbPath = thumbImg;
-                  isProcessing = false;
-
-                  await _startVideoPlayer(videoPath);
-                });
-              }
-              String responseVideo = "";
-              if (responseVideo != "") {
-                pc1.open();
-              }
-            },
-            onSkip: () async {
-              Navigator.pop(context);
-              // setState(() {
-              videoPath = file.path;
-              // });
-              await _startVideoPlayer(videoPath);
-            },
-            maxLength: videoLength,
-            sound: audioFile,
-            showSkip: false,
-          );
-        }),
-      );
-    }
+    // if (file != File("")) {
+    //   await _trimmer.loadVideo(videoFile: file);
+    //   Navigator.of(scaffoldKey.currentContext!).push(
+    //     MaterialPageRoute(builder: (context) {
+    //       return TrimmerView(
+    //         trimmer: _trimmer,
+    //         onVideoSaved: (output) async {
+    //           // setState(() {
+    //           videoPath = output;
+    //           // });
+    //           Navigator.pop(context);
+    //           // setState(() {
+    //           isProcessing = true;
+    //           // });
+    //           if (watermark != "") {
+    //             _flutterFFmpeg
+    //                 .execute(
+    //                     "-i $videoPath -i $watermark -filter_complex 'overlay=W-w-5:5' -c:a copy -preset ultrafast $outputVideo")
+    //                 .then((rc) async {
+    //               // setState(() {
+    //               videoPath = outputVideo;
+    //               // });
+    //               _flutterFFmpeg
+    //                   .execute(
+    //                       "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+    //                   .then((rc) async {
+    //                 thumbPath = thumbImg;
+    //
+    //                 isProcessing = false;
+    //
+    //                 await _startVideoPlayer(videoPath);
+    //               });
+    //             });
+    //           } else {
+    //             _flutterFFmpeg
+    //                 .execute(
+    //                     "-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+    //                 .then((rc) async {
+    //               thumbPath = thumbImg;
+    //               isProcessing = false;
+    //
+    //               await _startVideoPlayer(videoPath);
+    //             });
+    //           }
+    //           String responseVideo = "";
+    //           if (responseVideo != "") {
+    //             pc1.open();
+    //           }
+    //         },
+    //         onSkip: () async {
+    //           Navigator.pop(context);
+    //           // setState(() {
+    //           videoPath = file.path;
+    //           // });
+    //           await _startVideoPlayer(videoPath);
+    //         },
+    //         maxLength: videoLength,
+    //         sound: audioFile,
+    //         showSkip: false,
+    //       );
+    //     }),
+    //   );
+    // }
   }
 
   Future<bool> uploadVideo(videoFilePath, thumbFilePath) async {
@@ -966,121 +966,121 @@ class VideoRecorderController extends ControllerMVC {
   }
 
   Future<String> stopVideoRecording() async {
-    print('1');
-    assetsAudioPlayer.pause();
-    print('pass');
-    if (!controller!.value.isRecordingVideo) {
-      print('2');
-      return "";
-    }
-    print('11111');
-    // if (!videoRepo.isOnRecordingPage.value) {
+    // print('1');
+    // assetsAudioPlayer.pause();
+    // print('pass');
+    // if (!controller!.value.isRecordingVideo) {
+    //   print('2');
     //   return "";
     // }
-    print('2222222');
-    try {
-      await controller!.stopVideoRecording().then((file) {
-        videoPath = file.path;
-        print('3');
-      });
-    } on CameraException catch (e) {
-      showCameraException(e, scaffoldKey.currentContext!);
-      print('3');
-      return "";
-    }
-    print('3333333333');
-    Directory appDirectory;
-    if (!Platform.isAndroid) {
-      appDirectory = await getApplicationDocumentsDirectory();
-      print(appDirectory);
-    } else {
-      appDirectory = (await getExternalStorageDirectory())!;
-    }
-    print('4');
-    final String outputDirectory = '${appDirectory.path}/outputVideos';
-    await Directory(outputDirectory).create(recursive: true);
-    final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-    final String outputVideo = '$outputDirectory/$currentTime.mp4';
-    final String thumbImg = '$outputDirectory/$currentTime.jpg';
-    String responseVideo = "";
-    String audioFileArgs = '';
-    String audioFileArgs2 = '';
-    String mergeAudioArgs = '';
-    String mergeAudioArgs2 = '';
-    String watermarkArgs = '';
-    if (watermark != '') {
-      watermark = " -i $watermark";
-      watermarkArgs = ",overlay=W-w-5:5";
-    }
-    print('5');
-    if (audioFile != '') {
-      audioFile = " -i $audioFile";
-      audioFileArgs = "-c:a aac -ac 2 -ar 22050";
-      audioFileArgs2 = "-shortest";
-    }
-    print('6');
-    if (soundRepo.mic.value && audioFile != '') {
-      audioFileArgs = '';
-    }
-    print('7');
-    try {
-      print('8');
-      _flutterFFmpeg
-          .execute(
-              '-i $videoPath $watermark $audioFile  -filter_complex "$mergeAudioArgs[0:v]scale=720:-2$watermarkArgs" $mergeAudioArgs2 $audioFileArgs -c:v libx264 -preset ultrafast -crf 33  $audioFileArgs2 $outputVideo')
-          .then((rc) async {
-        print('9');
-        setState(() {
-          videoPath = outputVideo;
-        });
-        _flutterFFmpeg
-            .execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
-            .then((rc) async {
-          thumbPath = thumbImg;
-          print('10');
-          try {
-            await _trimmer.loadVideo(videoFile: File(videoPath));
-          } catch (e) {
-            print("videoPath error : $e");
-          }
-          print('11');
-          setState(() {
-            isProcessing = false;
-          });
-          print('12');
-          Navigator.of(scaffoldKey.currentContext!).push(
-            MaterialPageRoute(builder: (context) {
-              return TrimmerView(
-                trimmer: _trimmer,
-                onVideoSaved: (output) async {
-                  setState(() {
-                    videoPath = output;
-                  });
-                  Navigator.pop(context);
-                  await _startVideoPlayer(videoPath);
-                  String responseVideo = "";
-                  if (responseVideo != "") {
-                    pc1.open();
-                  }
-                },
-                onSkip: () async {
-                  Navigator.pop(context);
+    // print('11111');
+    // // if (!videoRepo.isOnRecordingPage.value) {
+    // //   return "";
+    // // }
+    // print('2222222');
+    // try {
+    //   await controller!.stopVideoRecording().then((file) {
+    //     videoPath = file.path;
+    //     print('3');
+    //   });
+    // } on CameraException catch (e) {
+    //   showCameraException(e, scaffoldKey.currentContext!);
+    //   print('3');
+    //   return "";
+    // }
+    // print('3333333333');
+    // Directory appDirectory;
+    // if (!Platform.isAndroid) {
+    //   appDirectory = await getApplicationDocumentsDirectory();
+    //   print(appDirectory);
+    // } else {
+    //   appDirectory = (await getExternalStorageDirectory())!;
+    // }
+    // print('4');
+    // final String outputDirectory = '${appDirectory.path}/outputVideos';
+    // await Directory(outputDirectory).create(recursive: true);
+    // final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
+    // final String outputVideo = '$outputDirectory/$currentTime.mp4';
+    // final String thumbImg = '$outputDirectory/$currentTime.jpg';
+    // String responseVideo = "";
+    // String audioFileArgs = '';
+    // String audioFileArgs2 = '';
+    // String mergeAudioArgs = '';
+    // String mergeAudioArgs2 = '';
+    // String watermarkArgs = '';
+    // if (watermark != '') {
+    //   watermark = " -i $watermark";
+    //   watermarkArgs = ",overlay=W-w-5:5";
+    // }
+    // print('5');
+    // if (audioFile != '') {
+    //   audioFile = " -i $audioFile";
+    //   audioFileArgs = "-c:a aac -ac 2 -ar 22050";
+    //   audioFileArgs2 = "-shortest";
+    // }
+    // print('6');
+    // if (soundRepo.mic.value && audioFile != '') {
+    //   audioFileArgs = '';
+    // }
+    // print('7');
+    // try {
+    //   print('8');
+    //   _flutterFFmpeg
+    //       .execute(
+    //           '-i $videoPath $watermark $audioFile  -filter_complex "$mergeAudioArgs[0:v]scale=720:-2$watermarkArgs" $mergeAudioArgs2 $audioFileArgs -c:v libx264 -preset ultrafast -crf 33  $audioFileArgs2 $outputVideo')
+    //       .then((rc) async {
+    //     print('9');
+    //     setState(() {
+    //       videoPath = outputVideo;
+    //     });
+    //     _flutterFFmpeg
+    //         .execute("-i $videoPath -ss 00:00:00.000 -vframes 1 $thumbImg")
+    //         .then((rc) async {
+    //       thumbPath = thumbImg;
+    //       print('10');
+    //       try {
+    //         await _trimmer.loadVideo(videoFile: File(videoPath));
+    //       } catch (e) {
+    //         print("videoPath error : $e");
+    //       }
+    //       print('11');
+    //       setState(() {
+    //         isProcessing = false;
+    //       });
+    //       print('12');
+    //       Navigator.of(scaffoldKey.currentContext!).push(
+    //         MaterialPageRoute(builder: (context) {
+    //           return TrimmerView(
+    //             trimmer: _trimmer,
+    //             onVideoSaved: (output) async {
+    //               setState(() {
+    //                 videoPath = output;
+    //               });
+    //               Navigator.pop(context);
+    //               await _startVideoPlayer(videoPath);
+    //               String responseVideo = "";
+    //               if (responseVideo != "") {
+    //                 pc1.open();
+    //               }
+    //             },
+    //             onSkip: () async {
+    //               Navigator.pop(context);
+    //
+    //               await _startVideoPlayer(videoPath);
+    //             },
+    //             maxLength: videoLength,
+    //             sound: "",
+    //             showSkip: true,
+    //           );
+    //         }),
+    //       );
+    //     });
+    //   });
+    // } catch (e) {
+    //   print(e.toString());
+    // }
 
-                  await _startVideoPlayer(videoPath);
-                },
-                maxLength: videoLength,
-                sound: "",
-                showSkip: true,
-              );
-            }),
-          );
-        });
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-
-    return outputVideo;
+    return 'outputVideo';
   }
 
   startTimer(BuildContext context) {

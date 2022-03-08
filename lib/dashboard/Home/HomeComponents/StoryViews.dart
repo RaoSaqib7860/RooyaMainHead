@@ -11,7 +11,7 @@ import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:story_view/story_view.dart';
 import '../../profile.dart';
-
+import 'package:flutter/cupertino.dart';
 class MoreStories extends StatefulWidget {
   final List<Storyobjects>? storyobjects;
 
@@ -104,7 +104,7 @@ class _MoreStoriesState extends State<MoreStories> {
                             Get.back();
                           },
                           icon: Icon(
-                            Icons.arrow_back,
+                            CupertinoIcons.back,
                             color: Colors.white,
                           )),
                       CircularProfileAvatar(

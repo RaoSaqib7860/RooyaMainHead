@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'Screens/VideoPlayerService/VideoPlayer.dart';
 import 'dashboard/Home/Models/RooyaPostModel.dart';
 import 'ApiUtils/baseUrl.dart';
@@ -12,8 +12,10 @@ import 'package:sizer/sizer.dart';
 
 class ViewPic extends StatefulWidget {
   List<Attachment>? attachment;
+  final int? position;
 
-  ViewPic({Key? key, @required this.attachment}) : super(key: key);
+  ViewPic({Key? key, @required this.attachment, this.position = 0})
+      : super(key: key);
 
   @override
   _ViewPicState createState() => _ViewPicState();
@@ -21,6 +23,11 @@ class ViewPic extends StatefulWidget {
 
 class _ViewPicState extends State<ViewPic> {
   int? index = 0;
+  @override
+  void initState() {
+    index=widget.position!;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class _ViewPicState extends State<ViewPic> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            CupertinoIcons.back,
             color: Colors.white,
           ),
           onPressed: () {
@@ -46,6 +53,7 @@ class _ViewPicState extends State<ViewPic> {
               options: CarouselOptions(
                   height: height,
                   viewportFraction: 1.0,
+                  initialPage: widget.position!,
                   enlargeCenterPage: false,
                   enableInfiniteScroll: false,
                   onPageChanged: (i, dd) {
@@ -60,7 +68,8 @@ class _ViewPicState extends State<ViewPic> {
                   );
                 } else {
                   return PhotoView(
-                    imageProvider: NetworkImage("$baseImageUrl${item.attachment}"),
+                    imageProvider:
+                        NetworkImage("$baseImageUrl${item.attachment}"),
                   );
                   // return CachedNetworkImage(
                   //   imageUrl: "$baseImageUrl${item.attachment}",

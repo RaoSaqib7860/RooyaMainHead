@@ -9,6 +9,7 @@ import 'package:rooya_app/utils/ShimmerEffect.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/cupertino.dart';
 
 class RooyaSouqDisplay extends StatefulWidget {
   RooyaSouqFeatured? rooyaSouqModel;
@@ -55,7 +56,7 @@ class _RooyaSouqDisplayState extends State<RooyaSouqDisplay> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(CupertinoIcons.back, color: Colors.black)),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.030),

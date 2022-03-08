@@ -498,7 +498,7 @@ class _FollowingsViewState extends StateMVC<FollowingsView> {
                             Navigator.of(context).pop();
                           },
                           child: Icon(
-                            Icons.arrow_back,
+                            CupertinoIcons.back,
                             color: settingRepo.setting.value.iconColor,
                           ),
                         ),

@@ -1,67 +1,28 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/colors.dart';
 
 class CreateRooyaPostController extends GetxController {
-  static const MethodChannel _channel = const MethodChannel('storage_path');
 
-  static Future<String> get videoPath async {
-    print('channel calling ....');
-    final String data = await _channel.invokeMethod('getVideosPath');
-    return data;
-  }
-  static Future<String> get filePath async {
-    final String data = await _channel.invokeMethod('getFilesPath');
-    return data;
-  }
-  static Future<String> get imagesPath async {
-    final String data = await _channel.invokeMethod('getImagesPath');
-    return data;
-  }
-
-  getFilesPath() async {
-    String value = await filePath;
-    log('Files path = $value');
-    // List list = jsonDecode(value);
-    // list.forEach((element) {
-    //   List list2 = element['files'];
-    //   list2.forEach((element) {
-    //     listOfVidoeFilea.add({'video': '${element['path']}'});
-    //   });
-    // });
-  }
-  getVideoPath() async {
-    String value = await videoPath;
-    List list = jsonDecode(value);
-    list.forEach((element) {
-      List list2 = element['files'];
-      list2.forEach((element) {
-        listOfVidoeFilea.add({'video': '${element['path']}'});
-      });
-    });
-  }
-
-  getImagePath() async {
-    String value = await imagesPath;
-    List list = jsonDecode(value);
-    list.forEach((element) {
-      List list2 = element['files'];
-      list2.forEach((element) {
-        if (!listOfImageFilea.contains(element)) {
-          listOfImageFilea.add({'image': '${element}'});
-        }
-      });
-    });
+  var assetsEntity = <AssetEntity>[].obs;
+  getFilesPath()async{
+    await PhotoManager.requestPermissionExtend();
+    List<AssetPathEntity> list = await PhotoManager.getAssetPathList();
+    print('${list.length}');
+    print('AssetPathEntity = ${list}');
+    AssetPathEntity data = list[0];
+    assetsEntity.value = await data.getAssetListPaged(page: 0, size: 500);
+    // AssetEntity entity = assetsEntity[0];
+    // File? file = await entity.file;
+    // print('file ppp = ${file!.path}');
+    // print('file ppp = ${entity.type}');
   }
 
   final ImagePicker _picker = ImagePicker();
-
   onImageButtonPressed(ImageSource source, String tag) async {
     try {
       PickedFile? pickedFile;
@@ -85,7 +46,7 @@ class CreateRooyaPostController extends GetxController {
       }
     } catch (e) {}
   }
-
+  List listofAlreadySelectedFiles=[];
   gallarypress() async {
     try {
       final FilePickerResult? pickedFile;

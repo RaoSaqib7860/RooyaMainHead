@@ -78,7 +78,7 @@ class _VideoSubmitState extends StateMVC<VideoSubmit> with SingleTickerProviderS
             backgroundColor: settingRepo.setting.value.appbarColor,
             leading: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                CupertinoIcons.back,
                 color: settingRepo.setting.value.iconColor,
                 size: 25,
               ),

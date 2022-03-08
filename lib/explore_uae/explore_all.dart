@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:rooya_app/explore_uae/places_detail.dart';
 import 'package:rooya_app/utils/colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/cupertino.dart';
 
 class ExploreAll extends StatefulWidget {
   String? exploreType;
@@ -27,7 +28,7 @@ class _ExploreAllState extends State<ExploreAll> {
                    onTap: (){
                      Get.back();
                    },
-                   child: Icon(Icons.arrow_back),
+                   child: Icon(CupertinoIcons.back),
                  ),
                   SizedBox(width: 2.0.w,),
                   Expanded(child: Text('${widget.exploreType}',

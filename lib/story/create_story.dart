@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:flutter/cupertino.dart';
 //import 'package:rooya_app/ApiUtils/AuthUtils.dart';
 import 'package:rooya_app/story/CreateStoryController.dart';
 import 'package:rooya_app/story/uploadStroy.dart';
@@ -72,7 +72,7 @@ class _CreateStoryState extends State<CreateStory> {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.black)),
+                  icon: Icon(CupertinoIcons.back, color: Colors.black)),
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.030),
@@ -574,10 +574,13 @@ class _ThumbnailsState extends State<Thumbnails> {
   bool isload = false;
 
   getThubnail() async {
+    print('video path is = ${widget.thumb}');
+    if(File('${widget.thumb}').existsSync()){
+      print('video file is exists now');
+    }
     uint8list = await VideoThumbnail.thumbnailData(
       video: '${widget.thumb}',
       imageFormat: ImageFormat.PNG,
-      // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
       quality: 50,
     );
     setState(() {
@@ -590,7 +593,7 @@ class _ThumbnailsState extends State<Thumbnails> {
     return isload
         ? Image.memory(
             uint8list!,
-            fit: BoxFit.cover,
+           fit: BoxFit.cover,
           )
         : Container(
             child: spinKitGlobal(size: 15),

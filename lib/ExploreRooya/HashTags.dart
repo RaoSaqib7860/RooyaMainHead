@@ -31,7 +31,7 @@ class _HashTagsState extends State<HashTags> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.arrow_back),
+                    Icon(CupertinoIcons.back),
                     SizedBox(
                       width: 6,
                     ),

@@ -55,7 +55,7 @@ class _EditImageGlobalState extends State<EditImageGlobal> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(CupertinoIcons.back, color: Colors.black)),
         ),
         body: Column(
           children: [

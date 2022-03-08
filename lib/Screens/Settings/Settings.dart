@@ -49,7 +49,7 @@ class _SettingsState extends State<Settings> {
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(
-              Icons.arrow_back,
+              CupertinoIcons.back,
               color: Colors.black,
             ),
             onPressed: () {

@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 import 'package:crop/crop.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropping/image_cropping.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
@@ -282,3 +286,46 @@ class _CropImageClassState extends State<CropImageClass> {
     widget.imageFile!(file.path);
   }
 }
+
+void openImagePicker({File? filePath, BuildContext? context,Function(String)? donePath}) async {
+  Uint8List? imageBytes;
+  imageBytes = await filePath!.readAsBytes();
+  String path = await getFilePath();
+  if (imageBytes != null) {
+    ImageCropping.cropImage(
+      context: context!,
+      imageBytes: imageBytes,
+      onImageDoneListener: (data) async{
+        File file = await File('$path').writeAsBytes(data);
+        donePath!.call('${file.path}');
+        // setState(
+        //   () {
+        //     imageBytes = data;
+        //   },
+        // );
+      },
+      // onImageStartLoading: showLoader,
+      // onImageEndLoading: hideLoader,
+      selectedImageRatio: ImageRatio.RATIO_1_1,
+      visibleOtherAspectRatios: true,
+      squareBorderWidth: 2,
+      // squareCircleColor: AppColors.red,
+      // defaultTextColor: AppColors.black,
+      // selectedTextColor: AppColors.orange,
+      // colorForWhiteSpace: AppColors.white,
+    );
+  }
+}
+
+var rng = Random();
+Future<String> getFilePath() async {
+  Directory storageDirectory = await getApplicationDocumentsDirectory();
+  String sdPath = storageDirectory.path + "/images";
+  var d = Directory(sdPath);
+  if (!d.existsSync()) {
+    d.createSync(recursive: true);
+  }
+  return sdPath + "/test_${rng.nextInt(100)}.png";
+}
+
+

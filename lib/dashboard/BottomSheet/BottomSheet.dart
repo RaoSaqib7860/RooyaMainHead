@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rooya_app/ExploreRooya/ExploreRooya.dart';
+import 'package:rooya_app/RooyaExplore/RooyaExplore.dart';
 import 'package:rooya_app/Screens/Reel/Reel.dart';
 import 'package:rooya_app/utils/colors.dart';
 import '../../main.dart';
@@ -14,7 +16,8 @@ bool selectHome = true;
 
 class BottomSheetCustom extends StatefulWidget {
   final int? index;
-  const BottomSheetCustom({Key? key, this.index=0}) : super(key: key);
+
+  const BottomSheetCustom({Key? key, this.index = 0}) : super(key: key);
 
   @override
   _BottomSheetCustomState createState() => _BottomSheetCustomState();
@@ -86,7 +89,7 @@ class _BottomSheetCustomState extends State<BottomSheetCustom> {
   List<Widget> _buildScreens() {
     return [
       Home(),
-      ExploreRooya(),
+      RooyaExplore(),
       ReelPage(),
       RooyaSouq(),
       Menu(),
@@ -96,7 +99,16 @@ class _BottomSheetCustomState extends State<BottomSheetCustom> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-          icon: Icon(CupertinoIcons.home),
+          icon: SvgPicture.asset(
+            'assets/svg/HomeIcon.svg',
+            height: 24,
+            color: Colors.black,
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'assets/svg/HomeIcon.svg',
+            height: 24,
+            color: greyColor,
+          ),
           activeColorPrimary: Colors.black,
           inactiveColorPrimary: greyColor),
       PersistentBottomNavBarItem(

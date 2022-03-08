@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -59,7 +60,7 @@ class _CategoriSouqState extends State<CategoriSouq> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(CupertinoIcons.back, color: Colors.black)),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.030),

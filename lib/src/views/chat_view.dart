@@ -100,7 +100,7 @@ class _ChatViewState extends StateMVC<ChatView> {
                         );
                       },
                       child: Icon(
-                        Icons.arrow_back,
+                        CupertinoIcons.back,
                         color: settingRepo.setting.value.iconColor,
                       ),
                     ),

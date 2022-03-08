@@ -60,7 +60,7 @@ class _EditVideoState extends StateMVC<EditVideo> with SingleTickerProviderState
                 elevation: 1.0,
                 leading: IconButton(
                   icon: Icon(
-                    Icons.arrow_back,
+                    CupertinoIcons.back,
                     color: settingRepo.setting.value.iconColor,
                     size: 25,
                   ),

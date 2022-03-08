@@ -69,7 +69,7 @@ class _UsersProfileViewState extends StateMVC<UsersProfileView> {
                       videoRepo.homeCon.value.getVideos();
                     },
                     child: Icon(
-                      Icons.arrow_back,
+                      CupertinoIcons.back,
                       color: settingRepo.setting.value.iconColor,
                     ),
                   ),
@@ -149,7 +149,7 @@ class _UsersProfileViewState extends StateMVC<UsersProfileView> {
                                                                   Navigator.of(context).pop();
                                                                 },
                                                                 child: Icon(
-                                                                  Icons.arrow_back,
+                                                                  CupertinoIcons.back,
                                                                   size: 20,
                                                                   color: settingRepo.setting.value.iconColor,
                                                                 ),

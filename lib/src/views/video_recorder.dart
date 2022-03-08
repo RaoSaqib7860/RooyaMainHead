@@ -17,7 +17,7 @@ import 'package:rooya_app/utils/SizedConfig.dart';
 import 'package:rooya_app/utils/colors.dart';
 import "package:velocity_x/velocity_x.dart";
 import 'package:video_player/video_player.dart';
-import 'package:video_trimmer/video_trimmer.dart';
+//import 'package:video_trimmer/video_trimmer.dart';
 import 'package:get/get.dart';
 import '../controllers/video_recorder_controller.dart';
 import '../models/sound_model.dart';
@@ -1236,7 +1236,7 @@ Future<void> main() async {
 }
 
 class TrimmerView extends StatefulWidget {
-  final Trimmer trimmer;
+  //final Trimmer trimmer;
   final ValueSetter<String> onVideoSaved;
   final VoidCallback onSkip;
   final double maxLength;
@@ -1244,7 +1244,7 @@ class TrimmerView extends StatefulWidget {
   final bool showSkip;
 
   TrimmerView({
-    required this.trimmer,
+    //required this.trimmer,
     required this.onVideoSaved,
     required this.onSkip,
     required this.maxLength,
@@ -1280,28 +1280,28 @@ class _TrimmerViewState extends State<TrimmerView> {
   }
 
   Future<String> _saveVideo() async {
-    setState(() {
-      if (_startValue + widget.maxLength * 1000 < _endValue) {
-        _endValue = _startValue + widget.maxLength * 1000;
-      }
-      _progressVisibility = true;
-    });
-    String _value = "";
-
-    await widget.trimmer
-        .saveTrimmedVideo(
-            ffmpegCommand: " -preset ultrafast ",
-            applyVideoEncoding: widget.showSkip ? false : true,
-            startValue: _startValue,
-            endValue: _endValue,
-            customVideoFormat: '.mp4')
-        .then((value) {
-      setState(() {
-        _progressVisibility = true;
-        _value = value;
-      });
-    });
-    return _value;
+    // setState(() {
+    //   if (_startValue + widget.maxLength * 1000 < _endValue) {
+    //     _endValue = _startValue + widget.maxLength * 1000;
+    //   }
+    //   _progressVisibility = true;
+    // });
+    // String _value = "";
+    //
+    // await widget.trimmer
+    //     .saveTrimmedVideo(
+    //         ffmpegCommand: " -preset ultrafast ",
+    //         applyVideoEncoding: widget.showSkip ? false : true,
+    //         startValue: _startValue,
+    //         endValue: _endValue,
+    //         customVideoFormat: '.mp4')
+    //     .then((value) {
+    //   setState(() {
+    //     _progressVisibility = true;
+    //     _value = value;
+    //   });
+    // });
+    return '_value';
   }
 
   TextEditingController textCon = TextEditingController();
@@ -1319,303 +1319,303 @@ class _TrimmerViewState extends State<TrimmerView> {
               index: 2,
             ));
         return true;
-      },
-      child: Scaffold(
-        backgroundColor: settingRepo.setting.value.bgColor,
-        appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: settingRepo.setting.value.iconColor,
-              ),
-              onPressed: () async {
-                videoRepo.isOnRecordingPage.value = true;
-                videoRepo.isOnRecordingPage.notifyListeners();
-                Navigator.pushReplacementNamed(context, '/video-recorder');
-              }),
-          iconTheme: IconThemeData(
-            size: 16,
-            color: settingRepo.setting.value.textColor, //change your color here
-          ),
-          title: "Post"
-              .text
-              .uppercase
-              .bold
-              .size(18)
-              .color(settingRepo.setting.value.textColor!)
-              .make(),
-          backgroundColor: appbarColor,
-          centerTitle: true,
-        ),
-        body: Stack(
-          children: [
-            Builder(
-              builder: (context) => Center(
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 30.0),
-                  color: Colors.black,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 45,
-                        child: TextField(
-                          controller: textCon,
-                          style: TextStyle(
-                            color: settingRepo.setting.value.textColor,
-                            fontSize: 16.0,
-                          ),
-                          obscureText: false,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                              color: Colors.red,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              wordSpacing: 2.0,
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: settingRepo.setting.value.buttonColor!,
-                                width: 0.3,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: settingRepo.setting.value.buttonColor!,
-                                width: 0.3,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: settingRepo.setting.value.buttonColor!,
-                                width: 0.3,
-                              ),
-                            ),
-                            contentPadding: EdgeInsets.all(10),
-                            hintText: "Enter Description",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ),
-                      ).pSymmetric(h: 10),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Visibility(
-                        visible: _progressVisibility,
-                        child: LinearProgressIndicator(
-                          backgroundColor: Colors.red,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Expanded(
-                        child: VideoViewer(
-                            //trimmer: widget.trimmer,
-                            ),
-                      ),
-                      Center(
-                        child: TrimEditor(
-                          // trimmer: widget.trimmer,
-                          viewerHeight: 50.0,
-                          viewerWidth: MediaQuery.of(context).size.width - 50,
-                          maxVideoLength:
-                              Duration(seconds: widget.maxLength.toInt()),
-                          onChangeStart: (value) {
-                            _startValue = value;
-                          },
-                          onChangeEnd: (value) {
-                            _endValue = value;
-                          },
-                          onChangePlaybackState: (value) {
-                            if (_endValue - _startValue >=
-                                widget.maxLength * 1000 + 0.1) {
-                              setState(() {
-                                _endValue =
-                                    _startValue + widget.maxLength * 1000;
-                              });
-                            }
-                            setState(() {
-                              _isPlaying = value;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: InkWell(
-                              onTap: () async {
-                                bool playbackState =
-                                    await widget.trimmer.videPlaybackControl(
-                                  startValue: _startValue,
-                                  endValue: _endValue,
-                                );
-
-                                setState(() {
-                                  _isPlaying = playbackState;
-                                });
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3.0),
-                                    color: buttonColor),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Text(
-                                        _isPlaying ? "Pause" : "Play",
-                                        style: TextStyle(
-                                          color: settingRepo
-                                              .setting.value.buttonTextColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          fontFamily: 'RockWellStd',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              onTap: _progressVisibility
-                                  ? null
-                                  : () async {
-                                      _saveVideo().then((outputPath) async {
-                                        // widget.onVideoSaved(outputPath);
-                                        isloadinng.value = true;
-                                        setState(() {});
-                                        if (soundRepo.currentSound.value.id! >
-                                            0) {
-                                          print('OUTPUT PATH: $outputPath');
-                                          String value =
-                                              await uploadReelFiles(outputPath);
-                                          // widget.onVideoSaved(outputPath);
-                                          GetStorage storage = GetStorage();
-                                          Map mapData = {
-                                            "post_type": "reel",
-                                            "user_type": "user",
-                                            "user_id": storage.read('userID'),
-                                            "privacy": "public",
-                                            "song_id": UniqueKey().toString(),
-                                            "title_short":
-                                                "${soundRepo.currentSound.value.title}",
-                                            "cover_xl":
-                                                "${soundRepo.currentSound.value.album!.coverMedium}",
-                                            "duration": '321',
-                                            "post_description":
-                                                "${textCon.text}",
-                                            "hashtag": ["hhello"],
-                                            "tagusers": [],
-                                            "files": ["$value", ""]
-                                          };
-                                          await AuthUtils.uploadReel(
-                                              mapdata: mapData);
-                                          isloadinng.value = false;
-                                          Get.offAll(() => BottomSheetCustom(
-                                                index: 2,
-                                              ));
-                                        } else {
-                                          print('OUTPUT PATH: $outputPath');
-                                          String value =
-                                              await uploadReelFiles(outputPath);
-                                          // widget.onVideoSaved(outputPath);
-                                          GetStorage storage = GetStorage();
-                                          Map mapData = {
-                                            "post_type": "reel",
-                                            "user_type": "user",
-                                            "user_id": storage.read('userID'),
-                                            "privacy": "public",
-                                            "song_id": UniqueKey().toString(),
-                                            "title_short": "10ein93330239",
-                                            "cover_xl": "",
-                                            "duration": '321',
-                                            "post_description":
-                                                "${textCon.text}",
-                                            "hashtag": ["hhello"],
-                                            "tagusers": [],
-                                            "files": ["$value", ""]
-                                          };
-                                          await AuthUtils.uploadReel(
-                                              mapdata: mapData);
-                                          isloadinng.value = false;
-                                          Get.offAll(() => BottomSheetCustom(
-                                                index: 2,
-                                              ));
-                                        }
-                                      });
-                                    },
-                              child: Container(
-                                height: 40,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.0),
-                                  color: buttonColor,
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Text(
-                                        "Save",
-                                        style: TextStyle(
-                                          color: settingRepo
-                                              .setting.value.buttonTextColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          fontFamily: 'RockWellStd',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ).pSymmetric(h: 34, v: 5),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Obx(() => isloadinng.value
-                ? Container(
-                    height: height,
-                    width: width,
-                    decoration:
-                        BoxDecoration(color: Colors.black.withOpacity(0.5)),
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                : SizedBox())
-          ],
-        ),
-      ),
+      },child: SizedBox(),
+      // child: Scaffold(
+      //   backgroundColor: settingRepo.setting.value.bgColor,
+      //   appBar: AppBar(
+      //     elevation: 0,
+      //     leading: IconButton(
+      //         icon: Icon(
+      //           Icons.arrow_back_ios,
+      //           color: settingRepo.setting.value.iconColor,
+      //         ),
+      //         onPressed: () async {
+      //           videoRepo.isOnRecordingPage.value = true;
+      //           videoRepo.isOnRecordingPage.notifyListeners();
+      //           Navigator.pushReplacementNamed(context, '/video-recorder');
+      //         }),
+      //     iconTheme: IconThemeData(
+      //       size: 16,
+      //       color: settingRepo.setting.value.textColor, //change your color here
+      //     ),
+      //     title: "Post"
+      //         .text
+      //         .uppercase
+      //         .bold
+      //         .size(18)
+      //         .color(settingRepo.setting.value.textColor!)
+      //         .make(),
+      //     backgroundColor: appbarColor,
+      //     centerTitle: true,
+      //   ),
+      //   body: Stack(
+      //     children: [
+      //       Builder(
+      //         builder: (context) => Center(
+      //           child: Container(
+      //             padding: EdgeInsets.only(bottom: 30.0),
+      //             color: Colors.black,
+      //             child: Column(
+      //               mainAxisAlignment: MainAxisAlignment.center,
+      //               mainAxisSize: MainAxisSize.max,
+      //               children: <Widget>[
+      //                 SizedBox(
+      //                   height: 10,
+      //                 ),
+      //                 Container(
+      //                   height: 45,
+      //                   child: TextField(
+      //                     controller: textCon,
+      //                     style: TextStyle(
+      //                       color: settingRepo.setting.value.textColor,
+      //                       fontSize: 16.0,
+      //                     ),
+      //                     obscureText: false,
+      //                     keyboardType: TextInputType.text,
+      //                     decoration: InputDecoration(
+      //                       errorStyle: TextStyle(
+      //                         color: Colors.red,
+      //                         fontSize: 14.0,
+      //                         fontWeight: FontWeight.bold,
+      //                         wordSpacing: 2.0,
+      //                       ),
+      //                       border: OutlineInputBorder(
+      //                         borderSide: BorderSide(
+      //                           color: settingRepo.setting.value.buttonColor!,
+      //                           width: 0.3,
+      //                         ),
+      //                       ),
+      //                       enabledBorder: OutlineInputBorder(
+      //                         borderSide: BorderSide(
+      //                           color: settingRepo.setting.value.buttonColor!,
+      //                           width: 0.3,
+      //                         ),
+      //                       ),
+      //                       focusedBorder: OutlineInputBorder(
+      //                         borderSide: BorderSide(
+      //                           color: settingRepo.setting.value.buttonColor!,
+      //                           width: 0.3,
+      //                         ),
+      //                       ),
+      //                       contentPadding: EdgeInsets.all(10),
+      //                       hintText: "Enter Description",
+      //                       hintStyle: TextStyle(
+      //                         color: Colors.grey,
+      //                         fontSize: 15,
+      //                         fontWeight: FontWeight.w300,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ).pSymmetric(h: 10),
+      //                 SizedBox(
+      //                   height: 10,
+      //                 ),
+      //                 Visibility(
+      //                   visible: _progressVisibility,
+      //                   child: LinearProgressIndicator(
+      //                     backgroundColor: Colors.red,
+      //                   ),
+      //                 ),
+      //                 SizedBox(
+      //                   height: 10,
+      //                 ),
+      //                 Expanded(
+      //                   child: VideoViewer(
+      //                       //trimmer: widget.trimmer,
+      //                       ),
+      //                 ),
+      //                 Center(
+      //                   child: TrimEditor(
+      //                     // trimmer: widget.trimmer,
+      //                     viewerHeight: 50.0,
+      //                     viewerWidth: MediaQuery.of(context).size.width - 50,
+      //                     maxVideoLength:
+      //                         Duration(seconds: widget.maxLength.toInt()),
+      //                     onChangeStart: (value) {
+      //                       _startValue = value;
+      //                     },
+      //                     onChangeEnd: (value) {
+      //                       _endValue = value;
+      //                     },
+      //                     onChangePlaybackState: (value) {
+      //                       if (_endValue - _startValue >=
+      //                           widget.maxLength * 1000 + 0.1) {
+      //                         setState(() {
+      //                           _endValue =
+      //                               _startValue + widget.maxLength * 1000;
+      //                         });
+      //                       }
+      //                       setState(() {
+      //                         _isPlaying = value;
+      //                       });
+      //                     },
+      //                   ),
+      //                 ),
+      //                 SizedBox(
+      //                   height: 5,
+      //                 ),
+      //                 Row(
+      //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                   children: [
+      //                     Expanded(
+      //                       child: InkWell(
+      //                         onTap: () async {
+      //                           bool playbackState =
+      //                               await widget.trimmer.videPlaybackControl(
+      //                             startValue: _startValue,
+      //                             endValue: _endValue,
+      //                           );
+      //
+      //                           setState(() {
+      //                             _isPlaying = playbackState;
+      //                           });
+      //                         },
+      //                         child: Container(
+      //                           height: 40,
+      //                           width: 80,
+      //                           decoration: BoxDecoration(
+      //                               borderRadius: BorderRadius.circular(3.0),
+      //                               color: buttonColor),
+      //                           child: Center(
+      //                             child: Row(
+      //                               mainAxisAlignment:
+      //                                   MainAxisAlignment.spaceEvenly,
+      //                               children: <Widget>[
+      //                                 Text(
+      //                                   _isPlaying ? "Pause" : "Play",
+      //                                   style: TextStyle(
+      //                                     color: settingRepo
+      //                                         .setting.value.buttonTextColor,
+      //                                     fontWeight: FontWeight.bold,
+      //                                     fontSize: 15,
+      //                                     fontFamily: 'RockWellStd',
+      //                                   ),
+      //                                 ),
+      //                               ],
+      //                             ),
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     SizedBox(
+      //                       width: 15,
+      //                     ),
+      //                     Expanded(
+      //                       child: InkWell(
+      //                         onTap: _progressVisibility
+      //                             ? null
+      //                             : () async {
+      //                                 _saveVideo().then((outputPath) async {
+      //                                   // widget.onVideoSaved(outputPath);
+      //                                   isloadinng.value = true;
+      //                                   setState(() {});
+      //                                   if (soundRepo.currentSound.value.id! >
+      //                                       0) {
+      //                                     print('OUTPUT PATH: $outputPath');
+      //                                     String value =
+      //                                         await uploadReelFiles(outputPath);
+      //                                     // widget.onVideoSaved(outputPath);
+      //                                     GetStorage storage = GetStorage();
+      //                                     Map mapData = {
+      //                                       "post_type": "reel",
+      //                                       "user_type": "user",
+      //                                       "user_id": storage.read('userID'),
+      //                                       "privacy": "public",
+      //                                       "song_id": UniqueKey().toString(),
+      //                                       "title_short":
+      //                                           "${soundRepo.currentSound.value.title}",
+      //                                       "cover_xl":
+      //                                           "${soundRepo.currentSound.value.album!.coverMedium}",
+      //                                       "duration": '321',
+      //                                       "post_description":
+      //                                           "${textCon.text}",
+      //                                       "hashtag": ["hhello"],
+      //                                       "tagusers": [],
+      //                                       "files": ["$value", ""]
+      //                                     };
+      //                                     await AuthUtils.uploadReel(
+      //                                         mapdata: mapData);
+      //                                     isloadinng.value = false;
+      //                                     Get.offAll(() => BottomSheetCustom(
+      //                                           index: 2,
+      //                                         ));
+      //                                   } else {
+      //                                     print('OUTPUT PATH: $outputPath');
+      //                                     String value =
+      //                                         await uploadReelFiles(outputPath);
+      //                                     // widget.onVideoSaved(outputPath);
+      //                                     GetStorage storage = GetStorage();
+      //                                     Map mapData = {
+      //                                       "post_type": "reel",
+      //                                       "user_type": "user",
+      //                                       "user_id": storage.read('userID'),
+      //                                       "privacy": "public",
+      //                                       "song_id": UniqueKey().toString(),
+      //                                       "title_short": "10ein93330239",
+      //                                       "cover_xl": "",
+      //                                       "duration": '321',
+      //                                       "post_description":
+      //                                           "${textCon.text}",
+      //                                       "hashtag": ["hhello"],
+      //                                       "tagusers": [],
+      //                                       "files": ["$value", ""]
+      //                                     };
+      //                                     await AuthUtils.uploadReel(
+      //                                         mapdata: mapData);
+      //                                     isloadinng.value = false;
+      //                                     Get.offAll(() => BottomSheetCustom(
+      //                                           index: 2,
+      //                                         ));
+      //                                   }
+      //                                 });
+      //                               },
+      //                         child: Container(
+      //                           height: 40,
+      //                           width: 80,
+      //                           decoration: BoxDecoration(
+      //                             borderRadius: BorderRadius.circular(3.0),
+      //                             color: buttonColor,
+      //                           ),
+      //                           child: Center(
+      //                             child: Row(
+      //                               mainAxisAlignment:
+      //                                   MainAxisAlignment.spaceEvenly,
+      //                               children: <Widget>[
+      //                                 Text(
+      //                                   "Save",
+      //                                   style: TextStyle(
+      //                                     color: settingRepo
+      //                                         .setting.value.buttonTextColor,
+      //                                     fontWeight: FontWeight.bold,
+      //                                     fontSize: 15,
+      //                                     fontFamily: 'RockWellStd',
+      //                                   ),
+      //                                 ),
+      //                               ],
+      //                             ),
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                   ],
+      //                 ).pSymmetric(h: 34, v: 5),
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //       Obx(() => isloadinng.value
+      //           ? Container(
+      //               height: height,
+      //               width: width,
+      //               decoration:
+      //                   BoxDecoration(color: Colors.black.withOpacity(0.5)),
+      //               child: Center(child: CircularProgressIndicator()),
+      //             )
+      //           : SizedBox())
+      //     ],
+      //   ),
+      // ),
     );
   }
 

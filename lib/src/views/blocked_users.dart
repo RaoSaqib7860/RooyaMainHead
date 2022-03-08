@@ -219,7 +219,7 @@ class _BlockedUsersState extends StateMVC<BlockedUsers> {
                               Navigator.of(context).pop();
                             },
                             child: Icon(
-                              Icons.arrow_back,
+                              CupertinoIcons.back,
                               color: settingRepo.setting.value.iconColor,
                             ),
                           ),

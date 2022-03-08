@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'CommitModel.dart';
+import 'package:flutter/cupertino.dart';
 
 class ViewAllComments extends StatefulWidget {
   List<CommentsText>? comments;
@@ -64,7 +65,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(Icons.arrow_back, color: Colors.black)),
+            icon: Icon(CupertinoIcons.back, color: Colors.black)),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -82,6 +83,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
                       : ListView.builder(
                           physics: BouncingScrollPhysics(),
                           itemCount: listofComments.length,
+                          reverse: true,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
@@ -670,6 +672,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
       }
       listofComments = List<CommentModel>.from(
           data['data']['comment'].map((model) => CommentModel.fromJson(model)));
+      listofComments = listofComments.reversed.toList();
     }
     setState(() {
       loadComment = true;

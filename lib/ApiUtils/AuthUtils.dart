@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:rooya_app/ChatModule/ApiConfig/ApiUtils.dart';
 import 'package:rooya_app/Screens/AuthScreens/SignIn/SignInController.dart';
 import 'package:http/http.dart' as http;
 import 'package:rooya_app/Screens/AuthScreens/SignUp/SignUpController.dart';
 import 'package:rooya_app/Screens/AuthScreens/VerifyOtp/verify_otp.dart';
-import 'package:rooya_app/Screens/Reel/ReelController.dart';
 import 'package:rooya_app/Screens/Settings/General/CountryModel.dart';
 import 'package:rooya_app/Screens/Settings/General/GeneralController.dart';
 import 'package:rooya_app/dashboard/BottomSheet/BottomSheet.dart';
@@ -42,8 +42,9 @@ class AuthUtils {
   static final getCountryList = 'getCountryList';
   static final generalSetting = 'generalSetting';
   static final ggetRooyaReelByLimite = 'getRooyaReelByLimite';
-  static final addNewReelPost ='addNewReelPost';
+  static final addNewReelPost = 'addNewReelPost';
   static final getRooyaPostBySingle = 'getRooyaPostBySingle';
+  static final getRooyaPostByLimitExplore = 'getRooyaPostByLimitExplore';
 
   static Future signIn({SignInController? controller}) async {
     controller!.isLoading.value = true;
@@ -59,14 +60,17 @@ class AuthUtils {
         body: jsonEncode({
           "userinfo": controller.mUserInfoController.text,
           "userpassword": controller.mPasswordController.text,
-          "devicetoken": 'mPasswordController.text'
+          "devicetoken": '122345345'
         }));
-    controller.isLoading.value = false;
     print(response.request);
     print(response.statusCode);
     log('login response = ${response.body}');
 
     if (response.statusCode == 200) {
+      await ApiUtils.getlogin(map: {
+        "userEmail": controller.mUserInfoController.text.trim().toString(),
+        "userPassword": controller.mPasswordController.text.trim().toString()
+      });
       final data = jsonDecode(response.body);
       if (data['result'] == 'success') {
         GetStorage storage = GetStorage();
@@ -93,6 +97,7 @@ class AuthUtils {
         snackBarFailer('${data['message']}');
       }
     }
+    controller.isLoading.value = false;
   }
 
   static Future<void> signUp({SignUpController? controller}) async {
@@ -195,7 +200,7 @@ class AuthUtils {
     }
   }
 
-  static Future getgetRooyaPostBySingle({String? postId}) async {
+  static Future<dynamic> getgetRooyaPostBySingle({String? postId}) async {
     print('call story');
     print('token is =  ${await getToken()}');
     GetStorage storage = GetStorage();
@@ -205,12 +210,11 @@ class AuthUtils {
           "Content-Type": "application/json",
           "Authorization": '${await getToken()}'
         },
-        body: jsonEncode({
-          "post_id": postId,
-          "user_id": await storage.read('userID')
-        }));
+        body: jsonEncode(
+            {"post_id": postId, "user_id": await storage.read('userID')}));
     var data = jsonDecode(response.body);
-    print('getgetRooyaPostBySingle =$data');
+    print('getgetRooyaPostBySingle data = ${data['data'][0]}');
+    return data['data'][0];
   }
 
   static Future getgetRooyaPostByLimite({HomeController? controller}) async {
@@ -229,7 +233,7 @@ class AuthUtils {
           "user_id": await storage.read('userID')
         }));
     var data = jsonDecode(response.body);
-    print('getgetRooyaPostByLimite =$data');
+    log('getgetRooyaPostByLimite =$data');
     if (data['result'] == 'success') {
       controller!.listofpost.value = [];
       controller.listofpost.value = List<RooyaPostModel>.from(
@@ -238,6 +242,26 @@ class AuthUtils {
     } else {
       controller!.postLoad.value = true;
     }
+  }
+
+  static Future<dynamic> getRooyaPostByLimitExploreApi() async {
+    print('call story');
+    print('token is =  ${await getToken()}');
+    GetStorage storage = GetStorage();
+    final response = await http.post(
+        Uri.parse('$baseUrl$getRooyaPostByLimitExplore$code'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode({
+          "page_size": 100,
+          "page_number": 0,
+          "user_id": await storage.read('userID')
+        }));
+    var data = jsonDecode(response.body);
+    print('getRooyaPostByLimitExploreApi data =$data');
+    return data['data'];
   }
 
   static Future getRooyaPostByFollowing({HomeController? controller}) async {
@@ -403,7 +427,6 @@ class AuthUtils {
     }
   }
 
-
 //https://apis.rooya.com/Alphaapis/generalSetting?code=ROOYA-5574499
   static Future getgeneralSetting(
       {GeneralController? controller,
@@ -456,7 +479,8 @@ class AuthUtils {
     log('token is =  ${await getToken()}');
     GetStorage storage = GetStorage();
     final response = await http.post(
-      Uri.parse('https://rooyapis.rooyatech.com/Alphaapis/getRooyaReelByLimite?code=ROOYA-5574499'),
+      Uri.parse(
+          '${baseUrl}getRooyaReelByLimite$code'),
       body: jsonEncode({
         "page_size": "10",
         "user_id": storage.read('userID'),
@@ -464,7 +488,7 @@ class AuthUtils {
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJmdXJxYW5tdXN0YWZhIiwidXNlcl9lbWFpbCI6Im5ldGJlZTI0N0BnbWFpbC5jb20ifQ.iliVzz1MBZeuHoX0EHzYAbl0bHfSMtzuaO9xdZ0-po8',
+        "Authorization": '${await getToken()}'
       },
     );
     var data = jsonDecode(response.body);
@@ -480,11 +504,13 @@ class AuthUtils {
     print('call story');
     log('token is =  ${await getToken()}');
     final response = await http.post(
-      Uri.parse('https://rooyapis.rooyatech.com/Alphaapis/addNewReelPost?code=ROOYA-5574499'),
+      Uri.parse(
+          'https://rooyapis.rooyatech.com/Alphaapis/addNewReelPost?code=ROOYA-5574499'),
       body: jsonEncode(mapdata),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJmdXJxYW5tdXN0YWZhIiwidXNlcl9lbWFpbCI6Im5ldGJlZTI0N0BnbWFpbC5jb20ifQ.iliVzz1MBZeuHoX0EHzYAbl0bHfSMtzuaO9xdZ0-po8'
+        "Authorization":
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJmdXJxYW5tdXN0YWZhIiwidXNlcl9lbWFpbCI6Im5ldGJlZTI0N0BnbWFpbC5jb20ifQ.iliVzz1MBZeuHoX0EHzYAbl0bHfSMtzuaO9xdZ0-po8'
       },
     );
     var data = jsonDecode(response.body);

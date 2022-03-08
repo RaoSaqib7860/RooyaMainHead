@@ -1,4 +1,4 @@
-package com.app.rooya_app
+package main.rooya.com
 
 import io.flutter.embedding.android.FlutterActivity
 
