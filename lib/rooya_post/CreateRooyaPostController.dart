@@ -21,7 +21,7 @@ class CreateRooyaPostController extends GetxController {
     // print('file ppp = ${file!.path}');
     // print('file ppp = ${entity.type}');
   }
-
+//hello there
   final ImagePicker _picker = ImagePicker();
   onImageButtonPressed(ImageSource source, String tag) async {
     try {
