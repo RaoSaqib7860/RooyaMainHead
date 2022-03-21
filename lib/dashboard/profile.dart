@@ -473,231 +473,240 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               )
-            : Stack(
-                children: [
-                  SingleChildScrollView(
+            : CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                     pinned: true,
+                    elevation: 0,
+                    onStretchTrigger: () async {
+                      log('Colaps now');
+                    },
+                    floating: false,
+                    leading: Center(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.teal,
+                          ),
+                          child: Icon(
+                            Icons.arrow_back_ios_outlined,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    actions: [
+                      Container(
+                        padding: EdgeInsets.all(0.8.h),
+                        margin: EdgeInsets.symmetric(horizontal: 1.0.w),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Icon(
+                          Icons.notifications,
+                          color: primaryColor,
+                          size: 2.5.h,
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(0.8.h),
+                        margin: EdgeInsets.symmetric(horizontal: 1.0.w),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Icon(
+                          Icons.edit,
+                          color: primaryColor,
+                          size: 2.5.h,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => Settings());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(0.8.h),
+                          margin: EdgeInsets.symmetric(horizontal: 1.0.w),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: Icon(
+                            Icons.settings,
+                            color: primaryColor,
+                            size: 2.5.h,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(0.8.h),
+                        margin: EdgeInsets.symmetric(horizontal: 1.0.w),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Icon(
+                          Icons.voicemail,
+                          color: primaryColor,
+                          size: 2.5.h,
+                        ),
+                      )
+                    ],
+                    backgroundColor: Colors.white,
+                    expandedHeight: 250,
+                    collapsedHeight: 70,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Stack(
+                        children: [
+                          InkWell(
+                            child: CachedNetworkImage(
+                              imageUrl: profileInfoModel!.userCover == null
+                                  ? 'https://thumbs.dreamstime.com/b/nature-web-banner-concept-design-vector-illustration-theme-ecology-environment-natural-products-natural-healthy-life-94337908.jpg'
+                                  : '$baseImageUrl${profileInfoModel!.userCover}',
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: imageProvider)),
+                              ),
+                              placeholder: (context, url) => ShimerEffect(
+                                child: Container(
+                                  height: 15.0.h,
+                                  width: 100.0.w,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                            onTap: () {
+                              if (profileInfoModel!.userCover != null) {
+                                Attachment atachments = Attachment(
+                                    attachment:
+                                        '${profileInfoModel!.userCover}',
+                                    photoId: 1,
+                                    type: 'abc');
+                                Get.to(ViewPic(
+                                  attachment: [atachments],
+                                ));
+                              } else {
+                                Attachment atachments = Attachment(
+                                    attachment:
+                                        'https://thumbs.dreamstime.com/b/nature-web-banner-concept-design-vector-illustration-theme-ecology-environment-natural-products-natural-healthy-life-94337908.jpg',
+                                    photoId: 1,
+                                    type: '');
+                                Get.to(ViewPic(
+                                  attachment: [atachments],
+                                ));
+                              }
+                            },
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                  Colors.transparent,
+                                  Colors.white.withOpacity(0.3),
+                                  Colors.white
+                                ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter)),
+                            height: double.infinity,
+                            width: double.infinity,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 40),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
+                                    style: TextStyle(
+                                      fontFamily: AppFonts.segoeui,
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      shadows: [
+                                        Shadow(
+                                          color: const Color(0x47000000),
+                                          offset: Offset(0, 3),
+                                          blurRadius: 6,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.020,
+                                  ),
+                                  profileInfoModel!.user_verified == '1'
+                                      ? Container(
+                                          padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                              color: Colors.blue,
+                                              shape: BoxShape.circle),
+                                          child: Icon(
+                                            Icons.check,
+                                            size: 12,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : SizedBox()
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      titlePadding: EdgeInsets.only(left: 55, bottom: 10),
+                      collapseMode: CollapseMode.parallax,
+                      centerTitle: false,
+                      stretchModes: [StretchMode.zoomBackground],
+                      title: profileInfoModel!.userPicture == null
+                          ? CircularProfileAvatar(
+                              '',
+                              child: Image.asset('assets/images/logo.png'),
+                              radius: 30,
+                              borderColor: primaryColor,
+                              elevation: 5,
+                              borderWidth: 1,
+                            )
+                          : CircularProfileAvatar(
+                              '$baseImageUrl${profileInfoModel!.userPicture!}',
+                              radius: 30,
+                              borderColor: primaryColor,
+                              elevation: 5,
+                              onTap: () {
+                                Attachment atachments = Attachment(
+                                    attachment:
+                                        '${profileInfoModel!.userPicture!}',
+                                    photoId: 1,
+                                    type: 'abc');
+                                Get.to(ViewPic(
+                                  attachment: [atachments],
+                                ));
+                              },
+                              borderWidth: 1,
+                            ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          height: 29.0.h,
-                          child: Stack(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                child: CachedNetworkImage(
-                                  imageUrl: profileInfoModel!.userCover == null
-                                      ? 'https://thumbs.dreamstime.com/b/nature-web-banner-concept-design-vector-illustration-theme-ecology-environment-natural-products-natural-healthy-life-94337908.jpg'
-                                      : '$baseImageUrl${profileInfoModel!.userCover}',
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    height: 25.0.h,
-                                    width: 100.0.w,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: imageProvider)),
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 2.0.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
-                                              style: TextStyle(
-                                                fontFamily: AppFonts.segoeui,
-                                                fontSize: 16.0.sp,
-                                                color: const Color(0xffffffff),
-                                                fontWeight: FontWeight.w600,
-                                                shadows: [
-                                                  Shadow(
-                                                    color:
-                                                        const Color(0x47000000),
-                                                    offset: Offset(0, 3),
-                                                    blurRadius: 6,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: width * 0.020,
-                                            ),
-                                            profileInfoModel!.user_verified ==
-                                                    '1'
-                                                ? Container(
-                                                    padding: EdgeInsets.all(2),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.blue,
-                                                        shape: BoxShape.circle),
-                                                    child: Icon(
-                                                      Icons.check,
-                                                      size: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  )
-                                                : SizedBox()
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) => ShimerEffect(
-                                    child: Container(
-                                      height: 15.0.h,
-                                      width: 100.0.w,
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                ),
-                                onTap: () {
-                                  if (profileInfoModel!.userCover != null) {
-                                    Attachment atachments = Attachment(
-                                        attachment:
-                                            '${profileInfoModel!.userCover}',
-                                        photoId: 1,
-                                        type: 'abc');
-                                    Get.to(ViewPic(
-                                      attachment: [atachments],
-                                    ));
-                                  } else {
-                                    Attachment atachments = Attachment(
-                                        attachment:
-                                            'https://thumbs.dreamstime.com/b/nature-web-banner-concept-design-vector-illustration-theme-ecology-environment-natural-products-natural-healthy-life-94337908.jpg',
-                                        photoId: 1,
-                                        type: '');
-                                    Get.to(ViewPic(
-                                      attachment: [atachments],
-                                    ));
-                                  }
-                                },
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.0.w, vertical: 1.0.h),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(0.8.h),
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 1.0.w),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white),
-                                      child: Icon(
-                                        Icons.notifications,
-                                        color: primaryColor,
-                                        size: 2.5.h,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(0.8.h),
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 1.0.w),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white),
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: primaryColor,
-                                        size: 2.5.h,
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(() => Settings());
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(0.8.h),
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 1.0.w),
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white),
-                                        child: Icon(
-                                          Icons.settings,
-                                          color: primaryColor,
-                                          size: 2.5.h,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(0.8.h),
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 1.0.w),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white),
-                                      child: Icon(
-                                        Icons.voicemail,
-                                        color: primaryColor,
-                                        size: 2.5.h,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Container(
-                                  margin: EdgeInsets.only(left: width * 0.090),
-                                  child: profileInfoModel!.userPicture == null
-                                      ? CircularProfileAvatar(
-                                          '',
-                                          child: Image.asset(
-                                              'assets/images/logo.png'),
-                                          radius: 35,
-                                          borderColor: primaryColor,
-                                          elevation: 10,
-                                          borderWidth: 1,
-                                        )
-                                      : CircularProfileAvatar(
-                                          '$baseImageUrl${profileInfoModel!.userPicture!}',
-                                          radius: 35,
-                                          borderColor: primaryColor,
-                                          elevation: 10,
-                                          onTap: () {
-                                            Attachment atachments = Attachment(
-                                                attachment:
-                                                    '${profileInfoModel!.userPicture!}',
-                                                photoId: 1,
-                                                type: 'abc');
-                                            Get.to(ViewPic(
-                                              attachment: [atachments],
-                                            ));
-                                          },
-                                          borderWidth: 1,
-                                        ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                if (widget.userID == storage.read('userID')) {
-                                  Get.to(AllFolowFolowers(
-                                    folowers: false,
-                                    owner: true,
-                                    userID: widget.userID,
-                                    userName:
-                                        '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
-                                  ))!
-                                      .then((value) {
-                                    getProfileInfo(load: false);
-                                  });
-                                } else {
-                                  if (profileInfoModel!.private_account !=
-                                      '1') {
+                                onTap: () async {
+                                  if (widget.userID == storage.read('userID')) {
                                     Get.to(AllFolowFolowers(
                                       folowers: false,
+                                      owner: true,
                                       userID: widget.userID,
                                       userName:
                                           '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
@@ -705,251 +714,202 @@ class _ProfileState extends State<Profile> {
                                         .then((value) {
                                       getProfileInfo(load: false);
                                     });
+                                  } else {
+                                    if (profileInfoModel!.private_account !=
+                                        '1') {
+                                      Get.to(AllFolowFolowers(
+                                        folowers: false,
+                                        userID: widget.userID,
+                                        userName:
+                                            '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
+                                      ))!
+                                          .then((value) {
+                                        getProfileInfo(load: false);
+                                      });
+                                    }
                                   }
-                                }
-                              },
-                              child: Text.rich(
-                                TextSpan(
-                                  style: TextStyle(
-                                    fontFamily: AppFonts.segoeui,
-                                    fontSize: 12,
-                                    color: const Color(0xff0bab0d),
+                                },
+                                child: Text.rich(
+                                  TextSpan(
+                                    style: TextStyle(
+                                      fontFamily: AppFonts.segoeui,
+                                      fontSize: 12,
+                                      color: const Color(0xff0bab0d),
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${profileInfoModel!.totalFollowers}\n',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                          fontFamily: AppFonts.segoeui,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Followers',
+                                        style: TextStyle(
+                                          color: const Color(0xff5a5a5a),
+                                          fontSize: 13,
+                                          fontFamily: AppFonts.segoeui,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          '${profileInfoModel!.totalFollowers}\n',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15,
-                                        fontFamily: AppFonts.segoeui,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: 'Followers',
-                                      style: TextStyle(
-                                        color: const Color(0xff5a5a5a),
-                                        fontSize: 13,
-                                        fontFamily: AppFonts.segoeui,
-                                      ),
-                                    ),
-                                  ],
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ),
-                            SizedBox(
-                              width: 4.0.w,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                if (widget.userID == storage.read('userID')) {
-                                  Get.to(AllFolowFolowers(
-                                    folowers: true,
-                                    userID: widget.userID,
-                                    owner: true,
-                                    userName:
-                                        '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
-                                  ))!
-                                      .then((value) {
-                                    getProfileInfo(load: false);
-                                  });
-                                } else {
-                                  if (profileInfoModel!.private_account !=
-                                      '1') {
+                              SizedBox(
+                                width: 4.0.w,
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  if (widget.userID == storage.read('userID')) {
                                     Get.to(AllFolowFolowers(
                                       folowers: true,
                                       userID: widget.userID,
+                                      owner: true,
                                       userName:
                                           '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
                                     ))!
                                         .then((value) {
                                       getProfileInfo(load: false);
                                     });
+                                  } else {
+                                    if (profileInfoModel!.private_account !=
+                                        '1') {
+                                      Get.to(AllFolowFolowers(
+                                        folowers: true,
+                                        userID: widget.userID,
+                                        userName:
+                                            '${profileInfoModel!.userFirstname} ${profileInfoModel!.userLastname}',
+                                      ))!
+                                          .then((value) {
+                                        getProfileInfo(load: false);
+                                      });
+                                    }
                                   }
-                                }
-                              },
-                              child: Text.rich(
+                                },
+                                child: Text.rich(
+                                  TextSpan(
+                                    style: TextStyle(
+                                      fontFamily: AppFonts.segoeui,
+                                      fontSize: 12,
+                                      color: const Color(0xff0bab0d),
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${profileInfoModel!.totalFollowings}\n',
+                                        style: TextStyle(
+                                          fontFamily: AppFonts.segoeui,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Following',
+                                        style: TextStyle(
+                                          fontFamily: AppFonts.segoeui,
+                                          color: const Color(0xff5a5a5a),
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4.0.w,
+                              ),
+                              Text.rich(
                                 TextSpan(
                                   style: TextStyle(
-                                    fontFamily: AppFonts.segoeui,
+                                    color: const Color(0xff5a5a5a),
                                     fontSize: 12,
-                                    color: const Color(0xff0bab0d),
+                                    fontFamily: AppFonts.segoeui,
                                   ),
                                   children: [
                                     TextSpan(
-                                      text:
-                                          '${profileInfoModel!.totalFollowings}\n',
+                                      text: '${profileInfoModel!.totalPosts}\n',
                                       style: TextStyle(
-                                        fontFamily: AppFonts.segoeui,
-                                        fontWeight: FontWeight.w700,
+                                        color: primaryColor,
                                         fontSize: 15,
+                                        fontFamily: AppFonts.segoeui,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: 'Following',
+                                      text: 'Posts',
                                       style: TextStyle(
-                                        fontFamily: AppFonts.segoeui,
                                         color: const Color(0xff5a5a5a),
                                         fontSize: 13,
+                                        fontFamily: AppFonts.segoeui,
                                       ),
                                     ),
                                   ],
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                            ),
-                            SizedBox(
-                              width: 4.0.w,
-                            ),
-                            Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                  color: const Color(0xff5a5a5a),
-                                  fontSize: 12,
-                                  fontFamily: AppFonts.segoeui,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: '${profileInfoModel!.totalPosts}\n',
-                                    style: TextStyle(
-                                      color: primaryColor,
-                                      fontSize: 15,
-                                      fontFamily: AppFonts.segoeui,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Posts',
-                                    style: TextStyle(
-                                      color: const Color(0xff5a5a5a),
-                                      fontSize: 13,
-                                      fontFamily: AppFonts.segoeui,
-                                    ),
-                                  ),
-                                ],
+                              SizedBox(
+                                width: width * 0.030,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              width: width * 0.030,
-                            ),
-                          ],
+                            ],
+                          ),
+                          color: Colors.white,
+                          padding: EdgeInsets.only(bottom: 10),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                pushNewScreen(
-                                  context,
-                                  screen: ChatScreen(),
-                                  withNavBar: false,
-                                  // OPTIONAL VALUE. True by default.
-                                  pageTransitionAnimation:
-                                      PageTransitionAnimation.cupertino,
-                                );
-                              },
-                              child: Container(
-                                height: height * 0.045,
-                                width: width * 0.2,
-                                margin: EdgeInsets.only(
-                                  right: width * 0.030,
+                        Container(
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  pushNewScreen(
+                                    context,
+                                    screen: ChatScreen(),
+                                    withNavBar: false,
+                                    // OPTIONAL VALUE. True by default.
+                                    pageTransitionAnimation:
+                                        PageTransitionAnimation.cupertino,
+                                  );
+                                },
+                                child: Container(
+                                  height: height * 0.045,
+                                  width: width * 0.2,
+                                  margin: EdgeInsets.only(
+                                    right: width * 0.030,
+                                  ),
+                                  child: userID != widget.userID
+                                      ? Center(
+                                          child: Text(
+                                            'MESSAGE',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: AppFonts.segoeui),
+                                          ),
+                                        )
+                                      : SizedBox(),
+                                  decoration: BoxDecoration(
+                                      color: userID != widget.userID
+                                          ? greenColor
+                                          : offWhiteColor2,
+                                      borderRadius: BorderRadius.circular(5)),
                                 ),
-                                child: userID != widget.userID
-                                    ? Center(
-                                        child: Text(
-                                          'MESSAGE',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: AppFonts.segoeui),
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                decoration: BoxDecoration(
-                                    color: userID != widget.userID
-                                        ? greenColor
-                                        : offWhiteColor2,
-                                    borderRadius: BorderRadius.circular(5)),
                               ),
-                            ),
-                            SizedBox(
-                              width: 2.0.w,
-                            ),
-                            profileInfoModel!.already_requested == 'true'
-                                ? Container(
-                                    height: height * 0.045,
-                                    width: width * 0.2,
-                                    child: userID != widget.userID
-                                        ? Center(
-                                            child: Text(
-                                              'REQUESTED',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontFamily: AppFonts.segoeui),
-                                            ),
-                                          )
-                                        : SizedBox(),
-                                    decoration: BoxDecoration(
-                                        color: userID != widget.userID
-                                            ? greenColor
-                                            : offWhiteColor2,
-                                        borderRadius: BorderRadius.circular(5)),
-                                  )
-                                : InkWell(
-                                    onTap: () async {
-                                      if (profileInfoModel!.isFollow!) {
-                                        print('unFolow Call');
-                                        await unfolow();
-                                        getProfileInfo(load: false);
-                                        getRooyaPost();
-                                        getStories();
-                                        getRooyaSouqbyLimit();
-                                        createEvent();
-                                      } else {
-                                        print('Folow Call');
-                                        if (profileInfoModel!.private_account ==
-                                                '0' ||
-                                            profileInfoModel!.private_account!
-                                                    .trim() ==
-                                                '') {
-                                          await folow();
-                                          getProfileInfo(load: false);
-                                          getRooyaPost();
-                                          getStories();
-                                          getRooyaSouqbyLimit();
-                                          createEvent();
-                                        } else {
-                                          await allowfollowers();
-                                          getProfileInfo(load: false);
-                                        }
-                                      }
-                                    },
-                                    child: Container(
+                              SizedBox(
+                                width: 2.0.w,
+                              ),
+                              profileInfoModel!.already_requested == 'true'
+                                  ? Container(
                                       height: height * 0.045,
                                       width: width * 0.2,
                                       child: userID != widget.userID
                                           ? Center(
                                               child: Text(
-                                                !profileInfoModel!.isFollow!
-                                                    ? 'FOLLOW'
-                                                    : profileInfoModel!
-                                                                    .private_account ==
-                                                                '0' ||
-                                                            profileInfoModel!
-                                                                    .private_account!
-                                                                    .trim() ==
-                                                                ''
-                                                        ? 'UNFOLLOW'
-                                                        : profileInfoModel!
-                                                                    .already_requested ==
-                                                                'false'
-                                                            ? 'UNFOLLOW'
-                                                            : 'REQUESTED',
+                                                'REQUESTED',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12,
@@ -964,31 +924,82 @@ class _ProfileState extends State<Profile> {
                                               : offWhiteColor2,
                                           borderRadius:
                                               BorderRadius.circular(5)),
+                                    )
+                                  : InkWell(
+                                      onTap: () async {
+                                        if (profileInfoModel!.isFollow!) {
+                                          print('unFolow Call');
+                                          await unfolow();
+                                          getProfileInfo(load: false);
+                                          getRooyaPost();
+                                          getStories();
+                                          getRooyaSouqbyLimit();
+                                          createEvent();
+                                        } else {
+                                          print('Folow Call');
+                                          if (profileInfoModel!
+                                                      .private_account ==
+                                                  '0' ||
+                                              profileInfoModel!.private_account!
+                                                      .trim() ==
+                                                  '') {
+                                            await folow();
+                                            getProfileInfo(load: false);
+                                            getRooyaPost();
+                                            getStories();
+                                            getRooyaSouqbyLimit();
+                                            createEvent();
+                                          } else {
+                                            await allowfollowers();
+                                            getProfileInfo(load: false);
+                                          }
+                                        }
+                                      },
+                                      child: Container(
+                                        height: height * 0.045,
+                                        width: width * 0.2,
+                                        child: userID != widget.userID
+                                            ? Center(
+                                                child: Text(
+                                                  !profileInfoModel!.isFollow!
+                                                      ? 'FOLLOW'
+                                                      : profileInfoModel!
+                                                                      .private_account ==
+                                                                  '0' ||
+                                                              profileInfoModel!
+                                                                      .private_account!
+                                                                      .trim() ==
+                                                                  ''
+                                                          ? 'UNFOLLOW'
+                                                          : profileInfoModel!
+                                                                      .already_requested ==
+                                                                  'false'
+                                                              ? 'UNFOLLOW'
+                                                              : 'REQUESTED',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontFamily:
+                                                          AppFonts.segoeui),
+                                                ),
+                                              )
+                                            : SizedBox(),
+                                        decoration: BoxDecoration(
+                                            color: userID != widget.userID
+                                                ? greenColor
+                                                : offWhiteColor2,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                      ),
                                     ),
-                                  ),
-                          ],
+                            ],
+                          ),
+                          padding: EdgeInsets.only(bottom: 10),
                         ),
-                        // SizedBox(
-                        //   height: 2.0.h,
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 2.0.w),
-                        //   child: Text(
-                        //     //'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
-                        //   '',
-                        //     style: TextStyle(
-                        //       fontFamily: AppFonts.segoeui,
-                        //       fontSize: 11,
-                        //       color: const Color(0xff5a5a5a),
-                        //     ),
-                        //     textAlign: TextAlign.left,
-                        //   ),
-                        // ),
-                        SizedBox(
-                          height: 2.0.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.0.w, vertical: 10),
+                          color: Colors.white,
                           child: Row(
                             children: [
                               Expanded(
@@ -1121,52 +1132,49 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 2.0.h,
-                        ),
                         selectedValue == 0
                             ? Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                    height: 5.5.h,
+                                    color: Colors.white,
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 4.0.w),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                    child: Center(
-                                      child: TextFormField(
-                                        // controller: mMobileNumber,
-                                        cursorColor: Colors.black,
-                                        keyboardType: TextInputType.text,
-                                        style: TextStyle(
-                                          fontFamily: AppFonts.segoeui,
-                                          fontSize: 10.0.sp,
-                                          color: const Color(0xff1e1e1e),
-                                        ),
-                                        decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          isDense: true,
-                                          enabledBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          contentPadding: EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          hintText: 'Search here...',
-                                          hintStyle: TextStyle(
+                                    child: Container(
+                                      height: 5.5.h,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Center(
+                                        child: TextFormField(
+                                          // controller: mMobileNumber,
+                                          cursorColor: Colors.black,
+                                          keyboardType: TextInputType.text,
+                                          style: TextStyle(
                                             fontFamily: AppFonts.segoeui,
-                                            fontSize: 9.0.sp,
+                                            fontSize: 10.0.sp,
                                             color: const Color(0xff1e1e1e),
+                                          ),
+                                          decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            isDense: true,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                            contentPadding: EdgeInsets.only(
+                                                left: 15, right: 15),
+                                            hintText: 'Search here...',
+                                            hintStyle: TextStyle(
+                                              fontFamily: AppFonts.segoeui,
+                                              fontSize: 9.0.sp,
+                                              color: const Color(0xff1e1e1e),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 7,
                                   ),
                                   Flexible(
                                       child: ListView.builder(
@@ -2237,19 +2245,6 @@ class _ProfileState extends State<Profile> {
                                               )
                                             : Container()
                       ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        size: 20,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
                     ),
                   )
                 ],

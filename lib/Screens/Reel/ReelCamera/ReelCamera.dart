@@ -365,14 +365,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                             try {
                               final FilePickerResult? pickedFile;
                               pickedFile = await FilePicker.platform.pickFiles(
-                                type: FileType.custom,
+                                type: FileType.media,
                                 allowMultiple: false,
-                                allowedExtensions: [
-                                  'jpg',
-                                  'jpeg',
-                                  'png',
-                                  'mp4'
-                                ],
                               );
                               print('pickedFile = ${pickedFile!.paths}');
                               ambiguate(WidgetsBinding.instance)

@@ -90,9 +90,8 @@ class CreateStoryController extends GetxController{
     try {
       final FilePickerResult? pickedFile;
       pickedFile = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
+        type: FileType.media,
         allowMultiple: true,
-        allowedExtensions: ['jpg', 'jpeg', 'png', 'mp4'],
       );
       print('pickedFile = ${pickedFile!.paths}');
       pickedFile.paths.forEach((element) {

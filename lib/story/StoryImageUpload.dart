@@ -428,7 +428,6 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
         },
       );
     } else if (index == 2) {
-
       return CropSample();
       // final _controller = CropController();
       // return Crop(
@@ -456,7 +455,6 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
       //     },
       //     cornerDotBuilder: (size, edgeAlignment) => const DotControl(color: Colors.blue),
       //     );
-
 
       // return CropImageClass(
       //   path: imagePath,
@@ -738,288 +736,321 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
               builder: (context, setState) {
                 return Container(
                   height: height,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: Image.file(
-                          File(imagePath!),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.030,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: TextFieldsProfile(
-                          controller: controller,
-                          hint: 'Write your comment'.tr,
-                          uperhint: 'Write your comment'.tr,
-                          width: Get.width,
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.030,
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.030,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Container(
+                        height: height,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              height: height * 0.045,
-                              width: width * 0.210,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.025),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.grey[100]!.withOpacity(0.5),
-                              ),
-                              child: DropdownButton<String>(
-                                items: <String>[
-                                  'Public',
-                                  'My Followers',
-                                  'Only Me'
-                                ].map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: AppFonts.segoeui),
-                                    ),
-                                  );
-                                }).toList(),
-                                underline: SizedBox(),
-                                isExpanded: true,
-                                hint: Text(
-                                  '$dropDownValue',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: AppFonts.segoeui),
-                                ),
-                                onChanged: (value) {
-                                  dropDownValue = value!;
-                                  setState(() {});
-                                },
+                            Expanded(
+                              child: Image.file(
+                                File(imagePath!),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                var textController =
-                                    TextEditingController().obs;
-                                showCupertinoModalBottomSheet(
-                                  expand: false,
-                                  context: context,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (context) {
-                                    return StatefulBuilder(
-                                        builder: (context, setState) {
-                                      return Container(
-                                        height: height * 0.6,
-                                        child: Scaffold(
-                                          body: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 10),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      'Select Event',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              AppFonts.segoeui),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        showCupertinoModalBottomSheet(
-                                                          expand: false,
-                                                          context: context,
-                                                          enableDrag: true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          builder: (context) {
-                                                            return Container(
-                                                              height:
-                                                                  height * 0.6,
-                                                              child:
-                                                                  CreateMyEvet(
-                                                                onCreateCall:
-                                                                    () async {
-                                                                  getAllEvent();
-                                                                  setState(
-                                                                      () {});
-                                                                },
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) async {
-                                                          await getAllEvent();
-                                                          setState(() {});
-                                                        });
-                                                      },
-                                                      child: Container(
-                                                        height: height * 0.045,
-                                                        width: width * 0.3,
-                                                        child: Center(
-                                                          child: Text(
-                                                            'Create Event',
+                            SizedBox(
+                              height: Get.height * 0.030,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: TextFieldsProfile(
+                                controller: controller,
+                                hint: 'Write your comment'.tr,
+                                uperhint: 'Write your comment'.tr,
+                                width: Get.width,
+                              ),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.030,
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.030,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: height * 0.045,
+                                    width: width * 0.210,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width * 0.025),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Colors.grey[100]!.withOpacity(0.5),
+                                    ),
+                                    child: DropdownButton<String>(
+                                      items: <String>[
+                                        'Public',
+                                        'My Followers',
+                                        'Only Me'
+                                      ].map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: AppFonts.segoeui),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      underline: SizedBox(),
+                                      isExpanded: true,
+                                      hint: Text(
+                                        '$dropDownValue',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppFonts.segoeui),
+                                      ),
+                                      onChanged: (value) {
+                                        dropDownValue = value!;
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      var textController =
+                                          TextEditingController().obs;
+                                      showCupertinoModalBottomSheet(
+                                        expand: false,
+                                        context: context,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) {
+                                          return StatefulBuilder(
+                                              builder: (context, setState) {
+                                            return Container(
+                                              height: height * 0.6,
+                                              child: Scaffold(
+                                                body: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            'Select Event',
                                                             style: TextStyle(
                                                                 fontFamily:
                                                                     AppFonts
-                                                                        .segoeui,
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                        .segoeui),
                                                           ),
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        30)),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: height * 0.020,
-                                                ),
-                                                Expanded(
-                                                  child: ListView.builder(
-                                                    itemBuilder: (c, i) {
-                                                      return InkWell(
-                                                        onTap: () {
-                                                          selectedEventId =
-                                                              '${myEvetModel[i].eventId}';
-                                                          selectedEventtitle =
-                                                              '${myEvetModel[i].eventTitle}';
-                                                          textController
-                                                              .value.text = '';
-                                                          setState(() {});
-                                                        },
-                                                        child: Container(
-                                                          height:
-                                                              height * 0.050,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  bottom: 10),
-                                                          decoration: BoxDecoration(
-                                                              color: selectedEventId ==
-                                                                      '${myEvetModel[i].eventId}'
-                                                                  ? primaryColor
-                                                                  : Colors
-                                                                      .blueGrey[
-                                                                          50]!
-                                                                      .withOpacity(
-                                                                          0.5)),
-                                                          child: Center(
-                                                            child: Text(
-                                                              '${myEvetModel[i].eventTitle}',
-                                                              style: TextStyle(
-                                                                  color: selectedEventId ==
-                                                                          '${myEvetModel[i].eventId}'
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black),
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              showCupertinoModalBottomSheet(
+                                                                expand: false,
+                                                                context:
+                                                                    context,
+                                                                enableDrag:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                builder:
+                                                                    (context) {
+                                                                  return Container(
+                                                                    height:
+                                                                        height *
+                                                                            0.6,
+                                                                    child:
+                                                                        CreateMyEvet(
+                                                                      onCreateCall:
+                                                                          () async {
+                                                                        getAllEvent();
+                                                                        setState(
+                                                                            () {});
+                                                                      },
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then(
+                                                                  (value) async {
+                                                                await getAllEvent();
+                                                                setState(() {});
+                                                              });
+                                                            },
+                                                            child: Container(
+                                                              height: height *
+                                                                  0.045,
+                                                              width:
+                                                                  width * 0.3,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'Create Event',
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          AppFonts
+                                                                              .segoeui,
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30)),
                                                             ),
                                                           ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: height * 0.020,
+                                                      ),
+                                                      Expanded(
+                                                        child: ListView.builder(
+                                                          itemBuilder: (c, i) {
+                                                            return InkWell(
+                                                              onTap: () {
+                                                                selectedEventId =
+                                                                    '${myEvetModel[i].eventId}';
+                                                                selectedEventtitle =
+                                                                    '${myEvetModel[i].eventTitle}';
+                                                                textController
+                                                                    .value
+                                                                    .text = '';
+                                                                setState(() {});
+                                                              },
+                                                              child: Container(
+                                                                height: height *
+                                                                    0.050,
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        bottom:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: selectedEventId ==
+                                                                            '${myEvetModel[i].eventId}'
+                                                                        ? primaryColor
+                                                                        : Colors
+                                                                            .blueGrey[50]!
+                                                                            .withOpacity(0.5)),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    '${myEvetModel[i].eventTitle}',
+                                                                    style: TextStyle(
+                                                                        color: selectedEventId ==
+                                                                                '${myEvetModel[i].eventId}'
+                                                                            ? Colors.white
+                                                                            : Colors.black),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                          itemCount: myEvetModel
+                                                              .length,
                                                         ),
-                                                      );
-                                                    },
-                                                    itemCount:
-                                                        myEvetModel.length,
+                                                      ),
+                                                      SizedBox(
+                                                        height: height * 0.020,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: height * 0.020,
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            );
+                                          });
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: width * 0.2,
+                                      height: height * 0.040,
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4),
+                                      child: Center(
+                                        child: Text(
+                                          selectedEventtitle == ''
+                                              ? 'Event'
+                                              : selectedEventtitle,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppFonts.segoeui,
                                           ),
                                         ),
-                                      );
-                                    });
-                                  },
-                                );
-                              },
-                              child: Container(
-                                width: width * 0.2,
-                                height: height * 0.040,
-                                padding: EdgeInsets.symmetric(horizontal: 4),
-                                child: Center(
-                                  child: Text(
-                                    selectedEventtitle == ''
-                                        ? 'Event'
-                                        : selectedEventtitle,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: AppFonts.segoeui,
+                                      ),
+                                      decoration: BoxDecoration(
+                                          color: Colors.blueGrey[50]!
+                                              .withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
                                     ),
                                   ),
-                                ),
-                                decoration: BoxDecoration(
-                                    color:
-                                        Colors.blueGrey[50]!.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(30)),
+                                  Container(
+                                    width: width * 0.2,
+                                    height: height * 0.040,
+                                    child: Center(
+                                      child: Text(
+                                        'Preview',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppFonts.segoeui),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: Colors.blueGrey[50]!
+                                            .withOpacity(0.5),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      Navigator.of(context).pop();
+                                      onclick!.call();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 7, horizontal: 30),
+                                      decoration: BoxDecoration(
+                                          color: Colors.blueGrey[50]!
+                                              .withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Text(
+                                        'Post',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppFonts.segoeui),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            Container(
-                              width: width * 0.2,
-                              height: height * 0.040,
-                              child: Center(
-                                child: Text(
-                                  'Preview',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: AppFonts.segoeui),
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.blueGrey[50]!.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(30)),
+                            SizedBox(
+                              height: Get.height * 0.030,
                             ),
-                            InkWell(
-                              onTap: () async {
-                                Navigator.of(context).pop();
-                                onclick!.call();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 7, horizontal: 30),
-                                decoration: BoxDecoration(
-                                    color:
-                                        Colors.blueGrey[50]!.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Text(
-                                  'Post',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: AppFonts.segoeui),
-                                ),
-                              ),
-                            )
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.030,
-                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      )
                     ],
                   ),
                 );

@@ -45,12 +45,12 @@ class _CreateAllState extends State<CreateAll> {
               SizedBox(
                 height: 3.0.h,
               ),
-              Text(
-                'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: AppFonts.segoeui, fontWeight: FontWeight.w400),
-              ),
+              // Text(
+              //   'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //       fontFamily: AppFonts.segoeui, fontWeight: FontWeight.w400),
+              // ),
               SizedBox(
                 height: 3.0.h,
               ),

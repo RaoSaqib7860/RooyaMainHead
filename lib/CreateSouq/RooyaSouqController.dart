@@ -55,9 +55,8 @@ class RooyaSouqController extends GetxController {
     try {
       final FilePickerResult? pickedFile;
       pickedFile = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
+        type: FileType.image,
         allowMultiple: true,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
       );
       print('pickedFile = ${pickedFile!.paths}');
       pickedFile.paths.forEach((element) {

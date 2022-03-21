@@ -1243,13 +1243,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                                 FilePickerResult? result =
                                                     await FilePicker.platform
                                                         .pickFiles(
-                                                  type: FileType.custom,
-                                                  allowedExtensions: [
-                                                    'jpg',
-                                                    'jpeg',
-                                                    'mp4',
-                                                    'png',
-                                                  ],
+                                                  type: FileType.media,
                                                 );
                                                 if (result!.files.isNotEmpty) {
                                                   print(
