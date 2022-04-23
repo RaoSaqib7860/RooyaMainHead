@@ -136,9 +136,9 @@ class _CropImageClassState extends State<CropImageClass> {
                 Expanded(
                   child: SliderTheme(
                     data: SliderThemeData.fromPrimaryColors(
-                        primaryColor: primaryColor,
-                        primaryColorDark: primaryColor,
-                        primaryColorLight: primaryColor,
+                        primaryColor: appThemes,
+                        primaryColorDark: appThemes,
+                        primaryColorLight: appThemes,
                         valueIndicatorTextStyle:
                             TextStyle(fontSize: 14, color: Colors.white)),
                     child: Slider(
@@ -238,7 +238,7 @@ class _CropImageClassState extends State<CropImageClass> {
                     ),
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: primaryColor),
+                        shape: BoxShape.circle, color: appThemes),
                   ),
                 )
               ],
@@ -268,7 +268,7 @@ class _CropImageClassState extends State<CropImageClass> {
         //       ),
         //       padding: EdgeInsets.all(5),
         //       decoration:
-        //           BoxDecoration(shape: BoxShape.circle, color: primaryColor),
+        //           BoxDecoration(shape: BoxShape.circle, color: appThemes),
         //     ),
         //   ),
         // )

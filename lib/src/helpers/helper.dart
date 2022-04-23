@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 
 import '../repositories/settings_repository.dart' as settingRepo;
 import '../repositories/user_repository.dart' as userRepo;
@@ -220,7 +222,7 @@ class Helper {
         top: 0,
         left: 0,
         child: Material(
-          color: color != null ? color : Theme.of(context).primaryColor.withOpacity(0.85),
+          //color: color != null ? color : Theme.of(context).appThemes.withOpacity(0.85),
           child: Helper.showLoaderSpinner(settingRepo.setting.value.iconColor!),
         ),
       );

@@ -28,6 +28,7 @@ import 'package:rooya_app/widgets/VideoTrimGlobal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
+import 'GallaryViewCustom.dart';
 import 'add_hastags.dart';
 import 'add_usertags.dart';
 
@@ -90,237 +91,6 @@ class _CreatePostState extends State<CreatePost> {
           Expanded(
             child: Column(
               children: [
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Obx(
-                //         () => controller.listOfSelectedfiles.isEmpty
-                //             ? SizedBox()
-                //             : controller.listOfSelectedfiles.length == 1
-                //                 ? Container(
-                //                     height: height * 0.250,
-                //                     width: width,
-                //                     child: returnCard(
-                //                         controller.listOfSelectedfiles[0]),
-                //                   )
-                //                 : controller.listOfSelectedfiles.length == 2
-                //                     ? Row(
-                //                         children: [
-                //                           Expanded(
-                //                             child: Container(
-                //                               height: height * 0.250,
-                //                               width: width,
-                //                               child: returnCard(controller
-                //                                   .listOfSelectedfiles[0]),
-                //                             ),
-                //                           ),
-                //                           SizedBox(
-                //                             width: 1,
-                //                           ),
-                //                           Expanded(
-                //                             child: Container(
-                //                               height: height * 0.250,
-                //                               width: width,
-                //                               child: returnCard(controller
-                //                                   .listOfSelectedfiles[1]),
-                //                             ),
-                //                           )
-                //                         ],
-                //                       )
-                //                     : controller.listOfSelectedfiles.length == 3
-                //                         ? Row(
-                //                             children: [
-                //                               Expanded(
-                //                                 child: Container(
-                //                                   height: height * 0.250,
-                //                                   width: width,
-                //                                   child: returnCard(controller
-                //                                       .listOfSelectedfiles[0]),
-                //                                 ),
-                //                               ),
-                //                               SizedBox(
-                //                                 width: 1,
-                //                               ),
-                //                               Expanded(
-                //                                 child: Container(
-                //                                   height: height * 0.250,
-                //                                   width: width,
-                //                                   child: returnCard(controller
-                //                                       .listOfSelectedfiles[1]),
-                //                                 ),
-                //                               ),
-                //                               SizedBox(
-                //                                 width: 1,
-                //                               ),
-                //                               Expanded(
-                //                                 child: Container(
-                //                                   height: height * 0.250,
-                //                                   width: width,
-                //                                   child: returnCard(controller
-                //                                       .listOfSelectedfiles[2]),
-                //                                 ),
-                //                               )
-                //                             ],
-                //                           )
-                //                         : controller.listOfSelectedfiles
-                //                                     .length ==
-                //                                 4
-                //                             ? Column(
-                //                                 children: [
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[0]),
-                //                                         ),
-                //                                       ),
-                //                                       SizedBox(
-                //                                         width: 1,
-                //                                       ),
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[1]),
-                //                                         ),
-                //                                       )
-                //                                     ],
-                //                                   ),
-                //                                   SizedBox(
-                //                                     height: 1,
-                //                                   ),
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[2]),
-                //                                         ),
-                //                                       ),
-                //                                       SizedBox(
-                //                                         width: 1,
-                //                                       ),
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[3]),
-                //                                         ),
-                //                                       )
-                //                                     ],
-                //                                   ),
-                //                                 ],
-                //                               )
-                //                             : Column(
-                //                                 children: [
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[0]),
-                //                                         ),
-                //                                       ),
-                //                                       SizedBox(
-                //                                         width: 1,
-                //                                       ),
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[1]),
-                //                                         ),
-                //                                       )
-                //                                     ],
-                //                                   ),
-                //                                   SizedBox(
-                //                                     height: 1,
-                //                                   ),
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                         child: Container(
-                //                                           height:
-                //                                               height * 0.125,
-                //                                           width: width,
-                //                                           child: returnCard(
-                //                                               controller
-                //                                                   .listOfSelectedfiles[2]),
-                //                                         ),
-                //                                       ),
-                //                                       SizedBox(
-                //                                         width: 1,
-                //                                       ),
-                //                                       Expanded(
-                //                                         child: Stack(
-                //                                           children: [
-                //                                             Container(
-                //                                               height: height *
-                //                                                   0.125,
-                //                                               width: width,
-                //                                               child: returnCard(
-                //                                                   controller
-                //                                                       .listOfSelectedfiles[3]),
-                //                                             ),
-                //                                             Container(
-                //                                               height: height *
-                //                                                   0.125,
-                //                                               color: Colors
-                //                                                   .black
-                //                                                   .withOpacity(
-                //                                                       0.5),
-                //                                               child: Center(
-                //                                                   child: Text(
-                //                                                 '+${controller.listOfSelectedfiles.length - 4}',
-                //                                                 style: TextStyle(
-                //                                                     fontSize:
-                //                                                         18.0.sp,
-                //                                                     color: Colors
-                //                                                         .white),
-                //                                               )),
-                //                                             )
-                //                                           ],
-                //                                         ),
-                //                                       )
-                //                                     ],
-                //                                   ),
-                //                                 ],
-                //                               ),
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Obx(() => controller.listOfSelectedfiles.isEmpty
-                //         ? SizedBox()
-                //         : Icon(Icons.menu))
-                //   ],
-                // ),
-                // SizedBox(
-                //   height: height * 0.010,
-                // ),
                 SizedBox(
                   height: 7,
                 ),
@@ -334,7 +104,8 @@ class _CreatePostState extends State<CreatePost> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: List.generate(
                                 controller.listOfSelectedfiles.length, (index) {
-                                  print('File path is == ${controller.listOfSelectedfiles[index]}');
+                              print(
+                                  'File path is == ${controller.listOfSelectedfiles[index]}');
                               Map value = controller.listOfSelectedfiles[index];
                               return Container(
                                 key: UniqueKey(),
@@ -367,11 +138,12 @@ class _CreatePostState extends State<CreatePost> {
                                       child: InkWell(
                                         child: Icon(
                                           Icons.cancel,
-                                          color: primaryColor,
+                                          color: appThemes,
                                         ),
                                         onTap: () {
                                           controller.listOfSelectedfiles
                                               .removeAt(index);
+                                          setState(() {});
                                         },
                                       ),
                                     ),
@@ -382,7 +154,7 @@ class _CreatePostState extends State<CreatePost> {
                                           child: Icon(
                                             Icons.edit,
                                             size: 15,
-                                            color: primaryColor,
+                                            color: appThemes,
                                           ),
                                           decoration: BoxDecoration(
                                               color: Colors.white,
@@ -459,8 +231,10 @@ class _CreatePostState extends State<CreatePost> {
             child: Container(
               margin: EdgeInsets.only(top: 20),
               key: UniqueKey(),
-              decoration:
-                  BoxDecoration(color: Colors.grey[100]!.withOpacity(0.5)),
+              decoration: BoxDecoration(
+                  color: Colors.grey[100]!.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black12, width: 1)),
               child: TextFormField(
                 key: UniqueKey(),
                 controller: descriptionController,
@@ -494,6 +268,7 @@ class _CreatePostState extends State<CreatePost> {
         key: UniqueKey(),
       )
     ].obs;
+
     return SafeArea(
       child: ProgressHUD(
           inAsyncCall: isLoading,
@@ -515,61 +290,12 @@ class _CreatePostState extends State<CreatePost> {
                     Get.back();
                   },
                   icon: Icon(CupertinoIcons.back, color: Colors.black)),
-              // actions: [
-              //   InkWell(
-              //     onTap: () {
-              //       controller.gallarypress();
-              //     },
-              //     child: Icon(
-              //       Icons.photo_outlined,
-              //       size: 30,
-              //       color: primaryColor,
-              //     ),
-              //   ),
-              //   SizedBox(
-              //     width: width * 0.010,
-              //   ),
-              //   InkWell(
-              //     onTap: () {
-              //       // controller.selectLocation(context);
-              //       Get.to(CameraApp())!.then((value) {
-              //         print('path is = $newPathis');
-              //         if (newPathis.isNotEmpty) {
-              //           if (newPathis.contains('mp4')) {
-              //             if (!controller.listOfSelectedfiles
-              //                 .contains('$newPathis')) {
-              //               controller.listOfSelectedfiles
-              //                   .add({'video': '$newPathis'});
-              //             }
-              //           } else {
-              //             if (!controller.listOfSelectedfiles
-              //                 .contains('$newPathis')) {
-              //               controller.listOfSelectedfiles
-              //                   .add({'image': '$newPathis'});
-              //             }
-              //           }
-              //           newPathis = '';
-              //         }
-              //       });
-              //     },
-              //     child: Icon(
-              //       Icons.camera_alt_outlined,
-              //       size: 30,
-              //       color: primaryColor,
-              //     ),
-              //   ),
-              //   SizedBox(
-              //     width: width * 0.030,
-              //   ),
-              // ],
             ),
             body: SafeArea(
               child: Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 2.5.w),
                 child: Column(
-                  // keyboardDismissBehavior:
-                  //     ScrollViewKeyboardDismissBehavior.onDrag,
                   children: [
                     Expanded(
                       child: ReorderableColumn(
@@ -582,219 +308,71 @@ class _CreatePostState extends State<CreatePost> {
                           top = !top;
                         },
                       ),
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //       //border: Border.all(color: Colors.grey),
-                      //       borderRadius: BorderRadius.circular(1.5.h)),
-                      //   child: Column(
-                      //     children: [
-                      //       ReorderableColumn(
-                      //         children: listofColum,
-                      //         onReorder: (a, b) {
-                      //           var row = listofColum.removeAt(a);
-                      //           listofColum.insert(b, row);
-                      //           print('Changed row now');
-                      //           top = !top;
-                      //         },
-                      //       ),
-                      //       SizedBox(
-                      //         height: 10,
-                      //       ),
-                      //       // hashTags.length == 0
-                      //       //     ? SizedBox()
-                      //       //     : Container(
-                      //       //         width: 100.0.w,
-                      //       //         padding: EdgeInsets.symmetric(
-                      //       //             vertical: 10, horizontal: 5),
-                      //       //         color: Colors.grey[100]!.withOpacity(0.5),
-                      //       //         child: Text(
-                      //       //           '${hashTags.toString().replaceAll('[', '').replaceAll(']', '')}',
-                      //       //           style:
-                      //       //               TextStyle(fontFamily: AppFonts.segoeui),
-                      //       //         ),
-                      //       //       ),
-                      //       // SizedBox(
-                      //       //   height: 2.0.w,
-                      //       // ),
-                      //       // usersTags.length == 0
-                      //       //     ? SizedBox()
-                      //       //     : Container(
-                      //       //         width: 95.0.w,
-                      //       //         padding: EdgeInsets.symmetric(
-                      //       //             vertical: 5, horizontal: 5),
-                      //       //         decoration: BoxDecoration(
-                      //       //             color: Colors.grey[100]!.withOpacity(0.5),
-                      //       //             borderRadius: BorderRadius.only(
-                      //       //                 bottomRight: Radius.circular(10),
-                      //       //                 bottomLeft: Radius.circular(10))),
-                      //       //         child: Wrap(
-                      //       //           children: usersTagsPic
-                      //       //               .map((item) => Container(
-                      //       //                     height: 4.0.h,
-                      //       //                     width: 4.0.h,
-                      //       //                     margin: EdgeInsets.symmetric(
-                      //       //                         horizontal: 1),
-                      //       //                     decoration: BoxDecoration(
-                      //       //                         shape: BoxShape.circle,
-                      //       //                         image: DecorationImage(
-                      //       //                             image: NetworkImage(
-                      //       //                                 '$baseImageUrl$item'),
-                      //       //                             fit: BoxFit.cover)),
-                      //       //                   ))
-                      //       //               .toList()
-                      //       //               .cast<Widget>(),
-                      //       //         ),
-                      //       //       )
-                      //     ],
-                      //   ),
-                      // ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    // Row(
-                    //   children: [
-                    //     InkWell(
-                    //       onTap: () {
-                    //         // controller.selectLocation(context);
-                    //         Get.to(CameraApp())!.then((value) {
-                    //           print('path is = $newPathis');
-                    //           if (newPathis.isNotEmpty) {
-                    //             if (newPathis.contains('mp4')) {
-                    //               if (!controller.listOfSelectedfiles
-                    //                   .contains('$newPathis')) {
-                    //                 controller.listOfSelectedfiles
-                    //                     .add({'video': '$newPathis'});
-                    //               }
-                    //             } else {
-                    //               if (!controller.listOfSelectedfiles
-                    //                   .contains('$newPathis')) {
-                    //                 controller.listOfSelectedfiles
-                    //                     .add({'image': '$newPathis'});
-                    //               }
-                    //             }
-                    //             newPathis = '';
-                    //           }
-                    //         });
-                    //       },
-                    //       child: Icon(
-                    //         Icons.camera_alt_outlined,
-                    //         size: 40,
-                    //         color: primaryColor,
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: width * 0.010,
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         controller.gallarypress();
-                    //       },
-                    //       child: Icon(
-                    //         Icons.photo_outlined,
-                    //         size: 40,
-                    //         color: primaryColor,
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: width * 0.010,
-                    //     ),
-                    //     Expanded(
-                    //       child: Obx(
-                    //         () => Container(
-                    //           height: height * 0.060,
-                    //           margin: EdgeInsets.symmetric(
-                    //               horizontal: width * 0.030),
-                    //           child: ListView.separated(
-                    //             itemBuilder: (c, i) {
-                    //               return InkWell(
-                    //                 onTap: () {
-                    //                   if (!controller.listOfSelectedfiles
-                    //                           .contains(controller
-                    //                               .listOfVidoeFilea[i]) &&
-                    //                       controller
-                    //                               .listOfSelectedfiles.length <
-                    //                           8) {
-                    //                     controller.listOfSelectedfiles.add(
-                    //                         controller.listOfVidoeFilea[i]);
-                    //                   }
-                    //                 },
-                    //                 child: ClipRRect(
-                    //                   borderRadius: BorderRadius.circular(8),
-                    //                   child: Container(
-                    //                     height: height * 0.060,
-                    //                     width: width * 0.120,
-                    //                     child: Stack(
-                    //                       children: [
-                    //                         Container(
-                    //                           height: height * 0.060,
-                    //                           width: width * 0.120,
-                    //                           child: Thumbnails(
-                    //                             thumb: controller
-                    //                                     .listOfVidoeFilea[i]
-                    //                                 ['video'],
-                    //                           ),
-                    //                         ),
-                    //                         Center(
-                    //                           child: Icon(
-                    //                             Icons.play_circle_fill,
-                    //                             size: 20,
-                    //                             color: Colors.white,
-                    //                           ),
-                    //                         )
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               );
-                    //             },
-                    //             scrollDirection: Axis.horizontal,
-                    //             separatorBuilder:
-                    //                 (BuildContext context, int index) {
-                    //               return SizedBox(
-                    //                 width: 10,
-                    //               );
-                    //             },
-                    //             itemCount: controller.listOfVidoeFilea.length,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    //   crossAxisAlignment: CrossAxisAlignment.end,
-                    // ),
-                    // SizedBox(
-                    //   height: 15,
-                    // ),
                     Row(
                       children: [
                         InkWell(
                           onTap: () {
-                            // controller.selectLocation(context);
-                            Get.to(CameraApp())!.then((value) {
-                              print('path is = $newPathis');
-                              if (newPathis.isNotEmpty) {
-                                if (newPathis.contains('mp4')) {
-                                  if (!controller.listOfSelectedfiles
-                                      .contains('$newPathis')) {
-                                    controller.listOfSelectedfiles
-                                        .add({'video': '$newPathis'});
+                            if (controller.listOfSelectedfiles.length == 1) {
+                              if (!controller.listOfSelectedfiles[0]
+                                  .containsKey('video')) {
+                                Get.to(CameraApp())!.then((value) {
+                                  print('path is = $newPathis');
+                                  if (newPathis.isNotEmpty) {
+                                    if (newPathis.contains('mp4')) {
+                                      if (!controller.listOfSelectedfiles
+                                          .contains('$newPathis')) {
+                                        controller.listOfSelectedfiles
+                                            .add({'video': '$newPathis'});
+                                      }
+                                    } else {
+                                      if (!controller.listOfSelectedfiles
+                                          .contains('$newPathis')) {
+                                        controller.listOfSelectedfiles
+                                            .add({'image': '$newPathis'});
+                                      }
+                                    }
+                                    newPathis = '';
                                   }
-                                } else {
-                                  if (!controller.listOfSelectedfiles
-                                      .contains('$newPathis')) {
-                                    controller.listOfSelectedfiles
-                                        .add({'image': '$newPathis'});
-                                  }
-                                }
-                                newPathis = '';
+                                });
                               }
-                            });
+                            } else {
+                              Get.to(CameraApp())!.then((value) {
+                                print('path is = $newPathis');
+                                if (newPathis.isNotEmpty) {
+                                  if (newPathis.contains('mp4')) {
+                                    if (!controller.listOfSelectedfiles
+                                        .contains('$newPathis')) {
+                                      controller.listOfSelectedfiles
+                                          .add({'video': '$newPathis'});
+                                    }
+                                  } else {
+                                    if (!controller.listOfSelectedfiles
+                                        .contains('$newPathis')) {
+                                      controller.listOfSelectedfiles
+                                          .add({'image': '$newPathis'});
+                                    }
+                                  }
+                                  newPathis = '';
+                                }
+                              });
+                            }
                           },
-                          child: Icon(
-                            Icons.camera_alt_outlined,
-                            size: 40,
-                            color: Colors.black,
+                          child: Container(
+                            height: height * 0.1,
+                            width: width * 0.170,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black26, width: 1),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 40,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -802,12 +380,27 @@ class _CreatePostState extends State<CreatePost> {
                         ),
                         InkWell(
                           onTap: () {
-                            controller.gallarypress();
+                            if (controller.listOfSelectedfiles.length == 1) {
+                              if (!controller.listOfSelectedfiles[0]
+                                  .containsKey('video')) {
+                                userGallerySheet(context);
+                              }
+                            } else {
+                              userGallerySheet(context);
+                            }
                           },
-                          child: Icon(
-                            Icons.photo_outlined,
-                            size: 40,
-                            color: Colors.black,
+                          child: Container(
+                            height: height * 0.1,
+                            width: width * 0.170,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black26, width: 1),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Icon(
+                              Icons.photo_outlined,
+                              size: 40,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -816,7 +409,7 @@ class _CreatePostState extends State<CreatePost> {
                         Expanded(
                           child: Obx(
                             () => Container(
-                              height: height * 0.060,
+                              height: height * 0.1,
                               margin: EdgeInsets.symmetric(
                                   horizontal: width * 0.030),
                               child: ListView.separated(
@@ -829,86 +422,199 @@ class _CreatePostState extends State<CreatePost> {
                                             AssetType.image) {
                                           return InkWell(
                                             onTap: () {
-                                              print(
-                                                  '${controller.listOfSelectedfiles}');
-                                              File file =
-                                                  snapshot.data! as File;
-                                              if (!controller
-                                                      .listOfSelectedfiles
-                                                      .contains({
+                                              if (controller.listOfSelectedfiles
+                                                  .isEmpty) {
+                                                File file =
+                                                    snapshot.data! as File;
+                                                if (!controller
+                                                        .listOfSelectedfiles
+                                                        .contains({
+                                                      'image':
+                                                          file.path.toString()
+                                                    }) &&
+                                                    controller
+                                                            .listOfSelectedfiles
+                                                            .length <
+                                                        8) {
+                                                  controller.listOfSelectedfiles
+                                                      .add({
                                                     'image':
                                                         file.path.toString()
-                                                  }) &&
-                                                  controller.listOfSelectedfiles
-                                                          .length <
-                                                      8) {
-                                                controller.listOfSelectedfiles
-                                                    .add({
-                                                  'image': file.path.toString()
-                                                });
+                                                  });
+                                                }
+                                                setState(() {});
+                                              } else {
+                                                if (controller
+                                                        .listOfSelectedfiles
+                                                        .length ==
+                                                    1) {
+                                                  if (!controller
+                                                      .listOfSelectedfiles[0]
+                                                      .containsKey('video')) {
+                                                    File file =
+                                                        snapshot.data! as File;
+                                                    if (!controller
+                                                            .listOfSelectedfiles
+                                                            .contains({
+                                                          'image': file.path
+                                                              .toString()
+                                                        }) &&
+                                                        controller
+                                                                .listOfSelectedfiles
+                                                                .length <
+                                                            8) {
+                                                      controller
+                                                          .listOfSelectedfiles
+                                                          .add({
+                                                        'image':
+                                                            file.path.toString()
+                                                      });
+                                                    }
+                                                    setState(() {});
+                                                  }
+                                                } else {
+                                                  File file =
+                                                      snapshot.data! as File;
+                                                  if (!controller
+                                                          .listOfSelectedfiles
+                                                          .contains({
+                                                        'image':
+                                                            file.path.toString()
+                                                      }) &&
+                                                      controller
+                                                              .listOfSelectedfiles
+                                                              .length <
+                                                          8) {
+                                                    controller
+                                                        .listOfSelectedfiles
+                                                        .add({
+                                                      'image':
+                                                          file.path.toString()
+                                                    });
+                                                  }
+                                                  setState(() {});
+                                                }
                                               }
                                             },
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8),
-                                              child: Container(
-                                                height: height * 0.060,
-                                                width: width * 0.120,
-                                                child: Image.file(
-                                                  snapshot.data! as File,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                    height: height * 0.1,
+                                                    width: width * 0.170,
+                                                    child: Image.file(
+                                                      snapshot.data! as File,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  controller.listOfSelectedfiles
+                                                                  .length >=
+                                                              1 &&
+                                                          controller
+                                                              .listOfSelectedfiles[
+                                                                  0]
+                                                              .containsKey(
+                                                                  'video')
+                                                      ? Container(
+                                                          height: height * 0.1,
+                                                          width: width * 0.170,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.5)),
+                                                        )
+                                                      : SizedBox(),
+                                                ],
                                               ),
                                             ),
                                           );
                                         } else {
                                           if (controller.assetsEntity[i].type ==
-                                              AssetType.video){
+                                              AssetType.video) {
                                             File file = snapshot.data! as File;
                                             return InkWell(
                                               onTap: () {
                                                 File file =
-                                                snapshot.data! as File;
-                                                if (!controller
-                                                    .listOfSelectedfiles
-                                                    .contains({
-                                                  'video': file.path
-                                                }) &&
-                                                    controller.listOfSelectedfiles
-                                                        .length <
-                                                        8) {
-                                                  controller.listOfSelectedfiles
-                                                      .add({'video': file.path});
+                                                    snapshot.data! as File;
+                                                if (controller
+                                                        .listOfSelectedfiles
+                                                        .length ==
+                                                    0) {
+                                                  if (!controller
+                                                          .listOfSelectedfiles
+                                                          .contains({
+                                                        'video': file.path
+                                                      }) &&
+                                                      controller
+                                                              .listOfSelectedfiles
+                                                              .length <
+                                                          8) {
+                                                    controller
+                                                        .listOfSelectedfiles
+                                                        .add({
+                                                      'video': file.path
+                                                    });
+                                                  }
+                                                  setState(() {});
                                                 }
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
-                                                BorderRadius.circular(8),
+                                                    BorderRadius.circular(8),
                                                 child: Container(
-                                                  height: height * 0.060,
-                                                  width: width * 0.120,
+                                                  height: height * 0.1,
+                                                  width: width * 0.170,
                                                   child: Stack(
                                                     children: [
                                                       Container(
-                                                        height: height * 0.060,
-                                                        width: width * 0.120,
+                                                        height: height * 0.1,
+                                                        width: width * 0.170,
                                                         child: Thumbnails(
                                                           thumb: file.path,
                                                         ),
                                                       ),
                                                       Center(
                                                         child: Icon(
-                                                          Icons.play_circle_fill,
+                                                          Icons
+                                                              .play_circle_fill,
                                                           size: 20,
                                                           color: Colors.white,
                                                         ),
-                                                      )
+                                                      ),
+                                                      (controller.listOfSelectedfiles
+                                                                          .length >=
+                                                                      1 &&
+                                                                  controller
+                                                                      .listOfSelectedfiles[
+                                                                          0]
+                                                                      .containsKey(
+                                                                          'video')) ||
+                                                              controller
+                                                                      .listOfSelectedfiles
+                                                                      .length >=
+                                                                  1
+                                                          ? Container(
+                                                              height:
+                                                                  height * 0.1,
+                                                              width:
+                                                                  width * 0.170,
+                                                              decoration: BoxDecoration(
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.5)),
+                                                            )
+                                                          : SizedBox(),
                                                     ],
                                                   ),
                                                 ),
                                               ),
                                             );
-                                          }else{
+                                          } else {
                                             return SizedBox();
                                           }
                                         }
@@ -922,30 +628,6 @@ class _CreatePostState extends State<CreatePost> {
                                     // inorder to display something on the Canvas
                                     future: controller.assetsEntity[i].file,
                                   );
-                                  // return InkWell(
-                                  //   onTap: () {
-                                  //     if (!controller.listOfSelectedfiles
-                                  //             .contains(controller
-                                  //                 .listOfImageFilea[i]) &&
-                                  //         controller
-                                  //                 .listOfSelectedfiles.length <
-                                  //             8) {
-                                  //       controller.listOfSelectedfiles.add(
-                                  //           controller.listOfImageFilea[i]);
-                                  //     }
-                                  //   },
-                                  //   child: ClipRRect(
-                                  //     borderRadius: BorderRadius.circular(8),
-                                  //     child: Container(
-                                  //       height: height * 0.060,
-                                  //       width: width * 0.120,
-                                  //       child: Image.file(
-                                  //         File(controller.assetsEntity[i].file),
-                                  //         fit: BoxFit.cover,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // );
                                 },
                                 scrollDirection: Axis.horizontal,
                                 separatorBuilder:
@@ -1056,7 +738,10 @@ class _CreatePostState extends State<CreatePost> {
                                             horizontal: 10, vertical: 10),
                                         child: Column(
                                           children: [
-                                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
                                                   'Select Event',
@@ -1071,7 +756,7 @@ class _CreatePostState extends State<CreatePost> {
                                                       context: context,
                                                       enableDrag: true,
                                                       backgroundColor:
-                                                      Colors.transparent,
+                                                          Colors.transparent,
                                                       builder: (context) {
                                                         return Container(
                                                           height: height * 0.6,
@@ -1084,7 +769,7 @@ class _CreatePostState extends State<CreatePost> {
                                                           ),
                                                         );
                                                       },
-                                                    ).then((value) async{
+                                                    ).then((value) async {
                                                       await getAllEvent();
                                                       setState(() {});
                                                     });
@@ -1098,8 +783,10 @@ class _CreatePostState extends State<CreatePost> {
                                                         style: TextStyle(
                                                             fontFamily: AppFonts
                                                                 .segoeui,
-                                                            fontSize: 13,fontWeight: FontWeight.bold
-                                                            ),
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     decoration: BoxDecoration(
@@ -1133,7 +820,7 @@ class _CreatePostState extends State<CreatePost> {
                                                       decoration: BoxDecoration(
                                                           color: selectedEventId ==
                                                                   '${myEvetModel[i].eventId}'
-                                                              ? primaryColor
+                                                              ? appThemes
                                                               : Colors
                                                                   .blueGrey[50]!
                                                                   .withOpacity(
@@ -1299,6 +986,53 @@ class _CreatePostState extends State<CreatePost> {
           "event_date_on": '${dt.year}-${dt.month}-${dt.day}'
         }));
     print(' ${response.body}');
+  }
+
+  void userGallerySheet(context) {
+    showCupertinoModalBottomSheet(
+      expand: false,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: height,
+          width: width,
+          child: GallaryViewCustom(
+            assets: controller.assetsEntity,
+            allAssetsPath: controller.listOfAllAssets,
+            listofSelectedFile:
+                controller.listOfSelectedfiles.value as List<Map>,
+          ),
+        );
+      },
+    ).then((value) {
+      controller.listOfSelectedfiles.clear();
+      if (value is List) {
+        if (value.length == 1) {
+          print('${value[0]}');
+          if (value[0].toString().contains('.mp4') ||
+              value[0].toString().contains('.MP4')) {
+            if (!controller.listOfSelectedfiles.contains({'video': value[0]}) &&
+                controller.listOfSelectedfiles.length < 8) {
+              controller.listOfSelectedfiles.add({'video': value[0]});
+            }
+          } else {
+            if (!controller.listOfSelectedfiles.contains({'image': value[0]}) &&
+                controller.listOfSelectedfiles.length < 8) {
+              controller.listOfSelectedfiles.add({'image': value[0]});
+            }
+          }
+        } else {
+          for (var i in value) {
+            if (!controller.listOfSelectedfiles.contains({'image': i}) &&
+                controller.listOfSelectedfiles.length < 8) {
+              controller.listOfSelectedfiles.add({'image': i});
+            }
+          }
+        }
+      }
+      setState(() {});
+    });
   }
 
   void userTagBottomSheet(context) {

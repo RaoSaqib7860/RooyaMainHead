@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,11 +11,13 @@ import 'package:rooya_app/utils/colors.dart';
 class CreateRooyaPostController extends GetxController {
 
   var assetsEntity = <AssetEntity>[].obs;
+  var  listOfAllAssets=<AssetPathEntity>[];
   getFilesPath()async{
     await PhotoManager.requestPermissionExtend();
     List<AssetPathEntity> list = await PhotoManager.getAssetPathList();
+    listOfAllAssets=list;
     print('${list.length}');
-    print('AssetPathEntity = ${list}');
+    log('AssetPathEntity = ${list}');
     AssetPathEntity data = list[0];
     assetsEntity.value = await data.getAssetListPaged(page: 0, size: 500);
     // AssetEntity entity = assetsEntity[0];
@@ -94,7 +98,7 @@ class CreateRooyaPostController extends GetxController {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.all(7),
                       child: Text(
@@ -116,7 +120,7 @@ class CreateRooyaPostController extends GetxController {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.all(7),
                       child: Text(
@@ -138,7 +142,7 @@ class CreateRooyaPostController extends GetxController {
         });
   }
 
-  var listOfSelectedfiles = [].obs;
+  var listOfSelectedfiles = <Map>[].obs;
   var listOfVidoeFilea = [].obs;
   var listOfImageFilea = [].obs;
 }

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,137 +57,7 @@ class SplashScreenState extends StateMVC<SplashScreen> with WidgetsBindingObserv
   }
 
   pushNotifications() {
-    print("pushNotifications");
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-      print("pushNotifications3333 $message");
-      if (message != null) {
-        notificationAction(message.data);
-        setState(() {
-          redirection.value = false;
-          redirection.notifyListeners();
-        });
-      }
-    });
-    print("pushNotifications2");
-    FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
-      print("pushNotifications3");
-      RemoteNotification notification = message!.notification!;
-      print("djsadagdgsdgd ${message.data}");
-      //AndroidNotification android = message.notification?.android;
-      if (notification != null) {
-        String type = message.data['type'];
-        int id = int.parse(message.data['id']);
-        if (type == "chat") {
-          if (id != chatRepo.convId) {
-            chatRepo.myConversations(1, '');
-            ScaffoldMessenger.of(GlobalVariable.navState.currentContext!).showSnackBar(
-              SnackBar(
-                backgroundColor: settingRepo.setting.value.buttonColor,
-                action: SnackBarAction(
-                  label: 'Open',
-                  textColor: settingRepo.setting.value.textColor,
-                  onPressed: () {
-                    notificationAction(message.data);
-                  },
-                ),
-                content: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    notification.title! + " " + notification.body!,
-                    style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 16),
-                  ),
-                ),
-                duration: Duration(seconds: 5),
-                width: config.App(GlobalVariable.navState.currentContext).appWidth(90), // Width of the SnackBar.
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0, // Inner padding for SnackBar content.
-                ),
-                behavior: SnackBarBehavior.floating,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            );
-          }
-        } else {
-          ScaffoldMessenger.of(GlobalVariable.navState.currentContext!).showSnackBar(
-            SnackBar(
-              backgroundColor: settingRepo.setting.value.buttonColor,
-              action: SnackBarAction(
-                label: 'Open',
-                textColor: settingRepo.setting.value.textColor,
-                onPressed: () {
-                  notificationAction(message.data);
-                },
-              ),
-              content: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  notification.title! + " " + notification.body!,
-                  style: TextStyle(color: settingRepo.setting.value.textColor, fontSize: 16),
-                ),
-              ),
-              duration: Duration(seconds: 5),
-              width: config.App(GlobalVariable.navState.currentContext).appWidth(90), // Width of the SnackBar.
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0, // Inner padding for SnackBar content.
-              ),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-          );
-        }
-      }
-    });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      String type = message.data['type'];
-      int id = int.parse(message.data['id']);
-      if (type == "chat") {
-        if (id != chatRepo.convId) {
-          chatRepo.myConversations(1, '');
-          notificationAction(message.data);
-        }
-      } else {
-        notificationAction(message.data);
-      }
-    });
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('B new onMessageOpenedApp event was published!');
-      String type = message.data['type'];
-      int id = int.parse(message.data['id']);
-      print("ConvIDS ${chatRepo.convId}  ------ ${message.data}");
-      if (type == "chat") {
-        if (id != chatRepo.convId) {
-          print("iFFF");
-          chatRepo.myConversations(1, '');
-          // notificationAction(message.data);
-        }
-      } else {
-        print("ELSEEEE");
-        // notificationAction(message.data);
-      }
-    });
-
-    FirebaseMessaging.onBackgroundMessage((message) {
-      print('C new onMessageOpenedApp event was published!');
-      String type = message.data['type'];
-      int id = int.parse(message.data['id']);
-      if (type == "chat") {
-        if (id != chatRepo.convId) {
-          chatRepo.myConversations(1, '');
-          return notificationAction(message.data);
-        } else {
-          return notificationsList(1);
-        }
-      } else {
-        return notificationAction(message.data);
-      }
-    });
   }
 
   notificationAction(message) {
@@ -381,19 +249,9 @@ class SplashScreenState extends StateMVC<SplashScreen> with WidgetsBindingObserv
 
   Future<void> addGuestUserForFCMToken() async {
     String? platformId = await PlatformDeviceId.getDeviceId;
-    FirebaseMessaging.instance.getToken().then((value) {
-      if (value != "" && value != null) {
-        videoRepo.addGuestUser(value, platformId);
-      }
-    });
   }
 
   Future<void> updateFCMTokenForUser() async {
-    FirebaseMessaging.instance.getToken().then((value) {
-      if (value != "" && value != null) {
-        videoRepo.updateFcmToken(value);
-      }
-    });
   }
 
   void loadData() async {

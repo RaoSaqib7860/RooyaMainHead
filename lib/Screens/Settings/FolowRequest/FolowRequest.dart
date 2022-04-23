@@ -82,7 +82,7 @@ class _FolowRequestState extends State<FolowRequest> {
                           ),
                         ),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(3)),
                       ),
                     ),
@@ -106,7 +106,7 @@ class _FolowRequestState extends State<FolowRequest> {
                           ),
                         ),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(3)),
                       ),
                     ),
@@ -136,7 +136,7 @@ class _FolowRequestState extends State<FolowRequest> {
                                               '',
                                               child: Image.network(
                                                   '$baseImageUrl${allowFolowList[i].userPicture}'),
-                                              borderColor: primaryColor,
+                                              borderColor: appThemes,
                                               borderWidth: 1,
                                               elevation: 1,
                                               radius: 25,
@@ -174,7 +174,7 @@ class _FolowRequestState extends State<FolowRequest> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             30),
-                                                    color: primaryColor),
+                                                    color: appThemes),
                                               ),
                                               onTap: () {
                                                 allowfollowersAccepted(
@@ -242,7 +242,7 @@ class _FolowRequestState extends State<FolowRequest> {
                                               '',
                                               child: Image.network(
                                                   '$baseImageUrl${toFolowList[i].userPicture}'),
-                                              borderColor: primaryColor,
+                                              borderColor: appThemes,
                                               borderWidth: 1,
                                               elevation: 1,
                                               radius: 25,

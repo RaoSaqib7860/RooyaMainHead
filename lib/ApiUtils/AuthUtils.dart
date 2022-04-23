@@ -45,6 +45,7 @@ class AuthUtils {
   static final addNewReelPost = 'addNewReelPost';
   static final getRooyaPostBySingle = 'getRooyaPostBySingle';
   static final getRooyaPostByLimitExplore = 'getRooyaPostByLimitExplore';
+  static final getRooyaPostByLimiteHashTag = 'getRooyaPostByLimiteHashTag';
 
   static Future signIn({SignInController? controller}) async {
     controller!.isLoading.value = true;
@@ -255,6 +256,27 @@ class AuthUtils {
           "Authorization": '${await getToken()}'
         },
         body: jsonEncode({
+          "page_size": 100,
+          "page_number": 0,
+          "user_id": await storage.read('userID')
+        }));
+    var data = jsonDecode(response.body);
+    print('getRooyaPostByLimitExploreApi data =$data');
+    return data['data'];
+  }
+
+  static Future<dynamic> getRooyaPostByHashTagApi({String? tag}) async {
+    print('call story');
+    print('token is =  ${await getToken()}');
+    GetStorage storage = GetStorage();
+    final response = await http.post(
+        Uri.parse('$baseUrl$getRooyaPostByLimiteHashTag$code'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": '${await getToken()}'
+        },
+        body: jsonEncode({
+          "hashtag": "$tag",
           "page_size": 100,
           "page_number": 0,
           "user_id": await storage.read('userID')
@@ -479,8 +501,7 @@ class AuthUtils {
     log('token is =  ${await getToken()}');
     GetStorage storage = GetStorage();
     final response = await http.post(
-      Uri.parse(
-          '${baseUrl}getRooyaReelByLimite$code'),
+      Uri.parse('${baseUrl}getRooyaReelByLimite$code'),
       body: jsonEncode({
         "page_size": "10",
         "user_id": storage.read('userID'),

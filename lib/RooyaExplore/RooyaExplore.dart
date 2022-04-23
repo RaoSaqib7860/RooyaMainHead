@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +8,13 @@ import 'package:get/get.dart';
 import 'package:rooya_app/ApiUtils/baseUrl.dart';
 import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/RooyaExplore/RooyaExploreController.dart';
+import 'package:rooya_app/UserTagSearch/UserTagSearch.dart';
 import 'package:rooya_app/dashboard/Home/OpenSinglePost/OpenSinglePost.dart';
+import 'package:rooya_app/models/HashTagModel.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/ShimmerEffect.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class RooyaExplore extends StatefulWidget {
@@ -25,15 +30,16 @@ class _RooyaExploreState extends State<RooyaExplore> {
   @override
   void initState() {
     controller.getExplorePosts();
+    getHashTags();
     super.initState();
   }
 
-  List listOfTab = ['ALL', 'STORY', 'ROOYA', 'SOUQ', 'EVENTS', 'OFFERS'];
+  List listOfTab = ['ALL', 'ROOYA', ' # ', 'STORY', 'SOUQ'];
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 6,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 0,
@@ -42,9 +48,9 @@ class _RooyaExploreState extends State<RooyaExplore> {
             preferredSize: Size(width, height * 0.030),
             child: TabBar(
               isScrollable: true,
-              labelColor: greenColor,
+              labelColor: appThemes,
               indicatorSize: TabBarIndicatorSize.label,
-              indicatorColor: greenColor,
+              indicatorColor: appThemes,
               unselectedLabelColor: Colors.black,
               tabs: listOfTab.map((e) {
                 return Column(
@@ -285,13 +291,56 @@ class _RooyaExploreState extends State<RooyaExplore> {
               ),
             ),
             Icon(Icons.music_video),
-            Icon(Icons.camera_alt),
+            Container(
+                height: height,
+                width: width,
+                color: Colors.white,
+                child: ListView.builder(
+                  itemBuilder: (c, i) {
+                    return ListTile(
+                      leading: Text(
+                        '#',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      title: Text(
+                        '# ${controller.mRooyaHashTagList[i].hashtag}',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      onTap: () {
+                        Get.to(UserTagSearch(
+                          tag: '${controller.mRooyaHashTagList[i].hashtag}',
+                        ));
+                      },
+                    );
+                  },
+                  itemCount: controller.mRooyaHashTagList.length,
+                )),
             Icon(Icons.grade),
             Icon(Icons.email),
-            Icon(Icons.email)
           ],
         ),
       ),
     );
+  }
+
+  Future<void> getHashTags() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = await prefs.getString('token');
+    final response = await http.get(
+        Uri.parse('${baseUrl}getRooyaPostHashTag${code}'),
+        headers: {"Content-Type": "application/json", "Authorization": token!});
+    print('hash tag is = ${response.body}');
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['result'] == 'success') {
+        setState(() {
+          controller.mRooyaHashTagList = List<HashTagModel>.from(
+              data['data'].map((model) => HashTagModel.fromJson(model)));
+        });
+        setState(() {});
+      } else {
+        setState(() {});
+      }
+    }
   }
 }

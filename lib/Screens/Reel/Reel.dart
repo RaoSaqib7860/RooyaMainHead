@@ -188,7 +188,7 @@ class _ReelPageState extends State<ReelPage> {
                                                                     'assets/images/logo.png'),
                                                                 radius: 15,
                                                                 borderColor:
-                                                                    primaryColor,
+                                                                    appThemes,
                                                                 borderWidth: 1,
                                                               )
                                                             : CircularProfileAvatar(
@@ -239,7 +239,7 @@ class _ReelPageState extends State<ReelPage> {
                                                       padding:
                                                           EdgeInsets.all(7),
                                                       decoration: BoxDecoration(
-                                                          color: greenColor,
+                                                          color: appThemes,
                                                           shape:
                                                               BoxShape.circle),
                                                     ),

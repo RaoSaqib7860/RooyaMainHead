@@ -265,7 +265,7 @@ class _RooyaSouqDisplayState extends State<RooyaSouqDisplay> {
                         child: RadioListTile(
                           value: 0,
                           groupValue: _groupValue,
-                          activeColor: primaryColor,
+                          activeColor: appThemes,
                           onChanged: (newValue) => setState(() => {}),
                           title: Text(
                             'New',
@@ -283,7 +283,7 @@ class _RooyaSouqDisplayState extends State<RooyaSouqDisplay> {
                         child: RadioListTile(
                           value: 1,
                           groupValue: _groupValue,
-                          activeColor: primaryColor,
+                          activeColor: appThemes,
                           onChanged: (newValue) => setState(() => {}),
                           title: Text(
                             'Used',

@@ -65,11 +65,11 @@ class _RooyaSouqAllAdsState extends State<RooyaSouqAllAds> {
                       )),
                       Icon(
                         Icons.add_circle,
-                        color: primaryColor,
+                        color: appThemes,
                       ),
                       Icon(
                         Icons.favorite_border,
-                        color: primaryColor,
+                        color: appThemes,
                       )
                     ],
                   ),
@@ -110,7 +110,7 @@ class _RooyaSouqAllAdsState extends State<RooyaSouqAllAds> {
                         ),
                         Icon(
                           Icons.search,
-                          color: primaryColor,
+                          color: appThemes,
                           size: 3.0.h,
                         ),
                         SizedBox(
@@ -223,7 +223,7 @@ class _RooyaSouqAllAdsState extends State<RooyaSouqAllAds> {
                                         ),
                                         Icon(
                                           Icons.favorite,
-                                          color: primaryColor,
+                                          color: appThemes,
                                           size: 2.0.h,
                                         )
                                       ],

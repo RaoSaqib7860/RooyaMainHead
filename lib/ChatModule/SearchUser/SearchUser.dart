@@ -179,11 +179,11 @@ class _SearchUserState extends State<SearchUser> {
                                       //         child: Text(
                                       //       'Chat',
                                       //       style: TextStyle(
-                                      //           fontSize: 10, color: primaryColor),
+                                      //           fontSize: 10, color: appThemes),
                                       //     )),
                                       //     decoration: BoxDecoration(
                                       //         border: Border.all(
-                                      //             color: primaryColor, width: 1),
+                                      //             color: appThemes, width: 1),
                                       //         borderRadius:
                                       //             BorderRadius.circular(30)),
                                       //   ),

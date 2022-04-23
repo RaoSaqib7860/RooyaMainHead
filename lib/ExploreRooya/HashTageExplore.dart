@@ -39,7 +39,7 @@ class _HashTageExploreState extends State<HashTageExplore> {
                       hint: 'Search here',
                       posticon: Icon(
                         CupertinoIcons.search,
-                        color: greenColor,
+                        color: appThemes,
                         size: 17,
                       ),
                     ),

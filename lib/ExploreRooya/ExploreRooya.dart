@@ -33,7 +33,7 @@ class _ExploreRooyaState extends State<ExploreRooya> {
                 hint: 'Search here',
                 posticon: Icon(
                   CupertinoIcons.search,
-                  color: greenColor,
+                  color: appThemes,
                   size: 17,
                 ),
               ),

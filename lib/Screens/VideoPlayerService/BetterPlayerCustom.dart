@@ -40,6 +40,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
           autoDetectFullscreenAspectRatio: true,
           controlsConfiguration: BetterPlayerControlsConfiguration(
             showControlsOnInitialize: false,
+            backgroundColor: Colors.white,
           ),
         ),
         betterPlayerDataSource: betterPlayerDataSource);
@@ -76,7 +77,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: Stack(
         children: [
           Container(

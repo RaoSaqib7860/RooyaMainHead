@@ -464,7 +464,7 @@ class _CreateStoryState extends State<CreateStory> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: primaryColor,
+                                  color: appThemes,
                                   borderRadius: BorderRadius.circular(30)),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 50, vertical: 7),

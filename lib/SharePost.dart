@@ -78,7 +78,7 @@ class _SharePostState extends State<SharePost> {
                               //               '${widget.rooyaPostModel!.userPosted}',
                               //         )));
                             },
-                            borderColor: primaryColor,
+                            borderColor: appThemes,
                             borderWidth: 1,
                           )
                         : CircularProfileAvatar(
@@ -92,7 +92,7 @@ class _SharePostState extends State<SharePost> {
                               //               '${widget.rooyaPostModel!.userPosted}',
                               //         )));
                             },
-                            borderColor: primaryColor,
+                            borderColor: appThemes,
                             borderWidth: 1,
                           ),
                     SizedBox(
@@ -401,7 +401,7 @@ class _SharePostState extends State<SharePost> {
                             ? CupertinoIcons.heart_fill
                             : CupertinoIcons.heart,
                         color: widget.rooyaPostModel!.islike!
-                            ? primaryColor
+                            ? appThemes
                             : Colors.black54,
                         size: 20,
                       ),
@@ -595,7 +595,7 @@ class _SharePostState extends State<SharePost> {
         //   width: width,
         //   margin: EdgeInsets.symmetric(horizontal: width * 0.030),
         //   decoration: BoxDecoration(
-        //       border: Border.all(color: primaryColor, width: 1),
+        //       border: Border.all(color: appThemes, width: 1),
         //       borderRadius: BorderRadius.circular(25)),
         //   child: CommentPostFields(
         //     sendCommit: (text) {
@@ -726,7 +726,7 @@ class _SharePostState extends State<SharePost> {
                                 height: 2.0.h,
                                 color: widget.rooyaPostModel!
                                         .commentsText![index].islike!
-                                    ? primaryColor
+                                    ? appThemes
                                     : Colors.black54,
                               ),
                             ),
@@ -887,7 +887,7 @@ class _SharePostState extends State<SharePost> {
         //                                 height: 2.0.h,
         //                                 color: widget.rooyaPostModel!
         //                                     .commentsText![index].islike!
-        //                                     ? primaryColor
+        //                                     ? appThemes
         //                                     : Colors.black54,
         //                               ),
         //                             ),
@@ -1080,7 +1080,7 @@ class _SharePostState extends State<SharePost> {
                     margin: EdgeInsets.symmetric(
                         horizontal: width * 0.030, vertical: 5),
                     decoration: BoxDecoration(
-                        border: Border.all(color: primaryColor, width: 1),
+                        border: Border.all(color: appThemes, width: 1),
                         borderRadius: BorderRadius.circular(25)),
                     child: CommentPostFields(
                       initialText: '',
@@ -1158,7 +1158,7 @@ class _CommentPostFieldsState extends State<CommentPostFields> {
           icon: Icon(
             Icons.send,
             size: 20,
-            color: primaryColor,
+            color: appThemes,
           ),
         )
       ],

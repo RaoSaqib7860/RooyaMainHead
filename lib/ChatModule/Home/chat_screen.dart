@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/ChatModule/ApiConfig/ApiUtils.dart';
 import 'package:rooya_app/ChatModule/ClickController/SelectIndexController.dart';
 import 'package:rooya_app/ChatModule/GlobalWidget/Photo_View_Class.dart';
@@ -121,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: listOfSelectedMember.isNotEmpty
                       ? Container(
                           decoration:
-                              BoxDecoration(color: primaryColor.withOpacity(0.5)),
+                              BoxDecoration(color: appThemes.withOpacity(0.5)),
                           child: Row(
                             children: [
                               IconButton(

@@ -200,7 +200,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
                                                   height: 2.0.h,
                                                   color: listofComments[index]
                                                           .isLike!
-                                                      ? primaryColor
+                                                      ? appThemes
                                                       : Colors.black54,
                                                 ),
                                                 onTap: () async {
@@ -473,7 +473,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
                                                         'assets/icons/like.png',
                                                         height: 1.50.h,
                                                         color: e.reIsLike!
-                                                            ? primaryColor
+                                                            ? appThemes
                                                             : Colors.black54,
                                                       ),
                                                     ),
@@ -578,7 +578,7 @@ class _ViewAllCommentsState extends State<ViewAllComments> {
                     margin: EdgeInsets.symmetric(
                         horizontal: width * 0.030, vertical: 5),
                     decoration: BoxDecoration(
-                        border: Border.all(color: primaryColor, width: 1),
+                        border: Border.all(color: appThemes, width: 1),
                         borderRadius: BorderRadius.circular(25)),
                     child: CommentPostFields(
                       initialText: tag,

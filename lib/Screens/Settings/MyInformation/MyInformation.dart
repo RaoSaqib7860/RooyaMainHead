@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -154,11 +155,11 @@ class _MyInformationState extends State<MyInformation> {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                  color: Colors.green.withOpacity(0.10),
+                  color: appThemes.withOpacity(0.10),
                   offset: Offset(4, 4),
                   blurRadius: 3),
               BoxShadow(
-                  color: Colors.green.withOpacity(0.1),
+                  color: appThemes.withOpacity(0.1),
                   offset: Offset(-0.5, -0.5),
                   blurRadius: 1)
             ],

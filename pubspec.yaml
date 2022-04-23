@@ -98,6 +98,8 @@ dependencies:
   #video_trimmer:
   image_cropping: ^0.0.11
   crop_your_image: ^0.6.0+1
+  sliver_header_delegate:
+    path: ./packages_list/flutter_sliver_header_delegate
 
 
 
@@ -129,7 +131,7 @@ dependencies:
   uni_links: ^0.5.1
   flutter_local_notifications: 5.0.0+4
   platform_device_id: 1.0.1
-  firebase_messaging: 11.1.0
+  #firebase_messaging: 11.1.0
   video_trimmer:
     path: ./packages_list/video_trimmer
   pusher_client:
@@ -176,6 +178,7 @@ flutter:
     - assets/reelAssets/icons/
     - assets/reelAssets/images/
     - assets/reelAssets/pics/
+    - assets/BottomTabSVG/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -29,35 +29,47 @@ class _PostWith1ImageState extends State<PostWith1Image> {
                 position: 0,
               ));
             },
-            child: CachedNetworkImage(
-              imageUrl:
-                  "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
-              width: double.infinity,
-              fit: BoxFit.cover,
-              height: height * 0.3,
-              placeholder: (context, url) => ShimerEffect(
-                child: Container(
-                  height: height * 0.3,
-                  width: 100.0.w,
-                  child: Image.asset(
-                    'assets/images/home_banner.png',
-                    fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl:
+                    "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+                width: double.infinity,
+                fit: BoxFit.cover,
+                height: height * 0.250,
+                placeholder: (context, url) => ShimerEffect(
+                  child: Container(
+                    height: height * 0.250,
+                    width: 100.0.w,
+                    child: Image.asset(
+                      'assets/images/home_banner.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
+                errorWidget: (context, url, error) => Container(
+                    height: height * 0.250,
+                    width: 100.0.w,
+                    child: Center(child: Icon(Icons.image))),
               ),
-              errorWidget: (context, url, error) => Container(
-                  height: height * 0.3,
-                  width: 100.0.w,
-                  child: Center(child: Icon(Icons.image))),
             ),
           )
-        : Container(
-            height: height * 0.3,
-            width: 100.0.w,
-            child:
-            CustomVideoPlayer(
-              url:
-                  "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+        : ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              height: height * 0.250,
+              width: 100.0.w,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CustomVideoPlayer(
+                      url:
+                          "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+                    ),
+                  ),
+                  Expanded(child: SizedBox())
+                ],
+              ),
             ),
           );
   }

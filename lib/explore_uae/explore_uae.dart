@@ -51,7 +51,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                               ),
                               Icon(
                                 Icons.search,
-                                color: primaryColor,
+                                color: appThemes,
                               )
                             ],
                           ),
@@ -61,11 +61,11 @@ class _ExploreUAEState extends State<ExploreUAE> {
                           onTap: (){
                             Get.to(()=>CreateAll());
                           },
-                          child: Icon(Icons.add_circle,color: primaryColor,)),
+                          child: Icon(Icons.add_circle,color: appThemes,)),
                       SizedBox(width: 1.0.w,),
                       Icon(Icons.notifications,color: Colors.black,),
                       SizedBox(width: 1.0.w,),
-                      Icon(Icons.mail,color: primaryColor,),
+                      Icon(Icons.mail,color: appThemes,),
                     ],
                   ),
                 ),
@@ -88,7 +88,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                             enabledBorder: InputBorder.none,
                           ),
                           isExpanded: true,
-                          iconEnabledColor: primaryColor,
+                          iconEnabledColor: appThemes,
                           iconSize: 3.0.h,
 
                           itemHeight: kMinInteractiveDimension,
@@ -142,7 +142,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                           style: TextStyle(
                             fontFamily: 'Segoe UI',
                             fontSize: 12.0.sp,
-                            color: primaryColor,
+                            color: appThemes,
                           ),
                           textAlign: TextAlign.left,
                         ),)
@@ -213,7 +213,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                         style: TextStyle(
                           fontFamily: 'Segoe UI',
                           fontSize: 12.0.sp,
-                          color: primaryColor,
+                          color: appThemes,
                         ),
                         textAlign: TextAlign.left,
                       ),)
@@ -291,7 +291,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                         style: TextStyle(
                           fontFamily: 'Segoe UI',
                           fontSize: 12.0.sp,
-                          color: primaryColor,
+                          color: appThemes,
                         ),
                         textAlign: TextAlign.left,
                       ),)
@@ -362,7 +362,7 @@ class _ExploreUAEState extends State<ExploreUAE> {
                         style: TextStyle(
                           fontFamily: 'Segoe UI',
                           fontSize: 12.0.sp,
-                          color: primaryColor,
+                          color: appThemes,
                         ),
                         textAlign: TextAlign.left,
                       ),)

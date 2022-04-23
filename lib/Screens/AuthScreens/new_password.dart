@@ -100,7 +100,7 @@ class _NewPasswordState extends State<NewPassword> {
                             Icons.remove_red_eye,
                             color: isPasswordShow
                                 ? Colors.grey[500]
-                                : primaryColor,
+                                : appThemes,
                           ),
                         ),
                       ),
@@ -124,7 +124,7 @@ class _NewPasswordState extends State<NewPassword> {
                             Icons.remove_red_eye,
                             color: isConfirmPasswordShow
                                 ? Colors.grey[500]
-                                : primaryColor,
+                                : appThemes,
                           ),
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'dart:math' as math;
 
 import 'package:rooya_app/ChatModule/SearchUser/SearchUser.dart';
@@ -131,7 +132,7 @@ class _ExpendableFabState extends State<ExpendableFab>
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.close,
-                color: primaryColor,
+                color: appThemes,
               ),
             ),
           ),
@@ -247,7 +248,7 @@ class ActionButton extends StatelessWidget {
     return Material(
       shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
-      color: primaryColor,
+      color: appThemes,
       elevation: 4.0,
       child: IconTheme.merge(
         data: theme.accentIconTheme,

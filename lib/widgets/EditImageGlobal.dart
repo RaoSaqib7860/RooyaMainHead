@@ -34,7 +34,7 @@ class _EditImageGlobalState extends State<EditImageGlobal> {
           onPressed: () {
             Navigator.of(context).pop('$path');
           },
-          backgroundColor: primaryColor,
+          backgroundColor: appThemes,
           child: Icon(
             CupertinoIcons.forward,
             color: Colors.white,
@@ -95,7 +95,7 @@ class _EditImageGlobalState extends State<EditImageGlobal> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.black.withOpacity(0.3),
@@ -129,7 +129,7 @@ class _EditImageGlobalState extends State<EditImageGlobal> {
                                   offset: Offset(3, 3),
                                   blurRadius: 5)
                             ],
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(5)),
                         child: Row(
                           children: [

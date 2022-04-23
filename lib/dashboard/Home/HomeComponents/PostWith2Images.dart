@@ -27,83 +27,105 @@ class _PostWith2ImagesState extends State<PostWith2Images> {
           children: [
             Expanded(
                 child: widget.rooyaPostModel!.attachment![0].type == 'image'
-                    ? InkWell(onTap: (){
-                  Get.to(ViewPic(
-                    attachment: widget.rooyaPostModel!.attachment!,
-                    position: 0,
-                  ));
-                },
-                      child: CachedNetworkImage(
-                          imageUrl:
-                              "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
-                          height: height * 0.3,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => ShimerEffect(
-                            child: Container(
-                              height: height * 0.3,
-                              child: Image.asset(
-                                'assets/images/home_banner.png',
-                                fit: BoxFit.cover,
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(ViewPic(
+                            attachment: widget.rooyaPostModel!.attachment!,
+                            position: 0,
+                          ));
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(7),
+                              topLeft: Radius.circular(7)),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+                            height: height * 0.250,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => ShimerEffect(
+                              child: Container(
+                                height: height * 0.250,
+                                child: Image.asset(
+                                  'assets/images/home_banner.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                              height: height * 0.3,
-                              child: Center(child: Icon(Icons.image))),
-                        ),
-                    )
-                    : Container(
-                        height: height * 0.3,
-                        decoration: BoxDecoration(color: Colors.black),
-                        child: Center(
-                          child: Icon(
-                            Icons.play_circle_fill,
-                            color: Colors.white,
-                            size: 40,
+                            errorWidget: (context, url, error) => Container(
+                                height: height * 0.250,
+                                child: Center(child: Icon(Icons.image))),
                           ),
                         ),
-                      )),
+                      )
+                    : ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(7),
+                      topLeft: Radius.circular(7)),
+                      child: Container(
+                          height: height * 0.250,
+                          decoration: BoxDecoration(color: Colors.black),
+                          child: Center(
+                            child: Icon(
+                              Icons.play_circle_fill,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                    )),
             SizedBox(
               width: 1,
             ),
             Expanded(
                 child: widget.rooyaPostModel!.attachment![1].type == 'image'
-                    ? InkWell(onTap:(){
-                  Get.to(ViewPic(
-                    attachment: widget.rooyaPostModel!.attachment!,
-                    position: 1,
-                  ));
-                },
-                      child: CachedNetworkImage(
-                          imageUrl:
-                              "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
-                          height: height * 0.3,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => ShimerEffect(
-                            child: Container(
-                              height: 40.0.w,
-                              child: Image.asset(
-                                'assets/images/home_banner.png',
-                                fit: BoxFit.cover,
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(ViewPic(
+                            attachment: widget.rooyaPostModel!.attachment!,
+                            position: 1,
+                          ));
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(7),
+                              topRight: Radius.circular(7)),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
+                            height: height * 0.250,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => ShimerEffect(
+                              child: Container(
+                                height: 40.0.w,
+                                child: Image.asset(
+                                  'assets/images/home_banner.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                              height: height * 0.3,
-                              child: Center(child: Icon(Icons.image))),
-                        ),
-                    )
-                    : Container(
-                        height: height * 0.3,
-                        decoration: BoxDecoration(color: Colors.black),
-                        child: Center(
-                          child: Icon(
-                            Icons.play_circle_fill,
-                            color: Colors.white,
-                            size: 40,
+                            errorWidget: (context, url, error) => Container(
+                                height: height * 0.250,
+                                child: Center(child: Icon(Icons.image))),
                           ),
                         ),
-                      ))
+                      )
+                    : ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(7),
+                      topRight: Radius.circular(7)),
+                      child: Container(
+                          height: height * 0.250,
+                          decoration: BoxDecoration(color: Colors.black),
+                          child: Center(
+                            child: Icon(
+                              Icons.play_circle_fill,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                    ))
           ],
         )
       ],

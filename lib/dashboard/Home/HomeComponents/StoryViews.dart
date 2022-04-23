@@ -112,7 +112,7 @@ class _MoreStoriesState extends State<MoreStories> {
                             ? 'https://www.gravatar.com/avatar/test@test.com.jpg?s=200&d=mm'
                             : '$baseImageUrl${storyobjects![0].userPicture}',
                         radius: 15,
-                        borderColor: primaryColor,
+                        borderColor: appThemes,
                         borderWidth: 1,
                         onTap: () {
                           storyController.pause();

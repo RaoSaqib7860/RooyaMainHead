@@ -39,7 +39,7 @@ class CreateEvetCards extends StatelessWidget {
                             color: Colors.white,
                           ),
                           decoration: BoxDecoration(
-                              color: primaryColor, shape: BoxShape.circle),
+                              color: appThemes, shape: BoxShape.circle),
                         ),
                         SizedBox(
                           height: 4,

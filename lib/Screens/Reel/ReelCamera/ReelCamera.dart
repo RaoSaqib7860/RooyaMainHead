@@ -300,7 +300,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                         //     ),
                         //   ),
                         //   decoration: BoxDecoration(
-                        //       color: greenColor,
+                        //       color: appThemes,
                         //       borderRadius: BorderRadius.circular(30)),
                         // )
                       ],
@@ -321,7 +321,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      color: greenColor,
+                                      color: appThemes,
                                       shape: BoxShape.circle),
                                   child: IconButton(
                                     icon: controller != null &&
@@ -440,7 +440,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                                                   ),
                                                 ),
                                                 decoration: BoxDecoration(
-                                                    color: greenColor,
+                                                    color: appThemes,
                                                     shape: BoxShape.circle),
                                               ),
                                         padding: EdgeInsets.all(5),
@@ -453,7 +453,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                                         width: width * 0.180,
                                         child: Icon(
                                           Icons.camera_enhance_sharp,
-                                          color: greenColor,
+                                          color: appThemes,
                                           size: 40,
                                         ),
                                         padding: EdgeInsets.all(5),
@@ -1376,7 +1376,7 @@ class CameraApp extends StatelessWidget {
 }
 
 Future<String> cropImage(String path) async {
-  File? croppedFile = await ImageCropper.cropImage(
+  File? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
       aspectRatioPresets: Platform.isAndroid
           ? [
@@ -1487,7 +1487,7 @@ class _EditImageState extends State<EditImage> {
                           isimage: true,
                         )));
           },
-          backgroundColor: primaryColor,
+          backgroundColor: appThemes,
           child: Icon(
             CupertinoIcons.forward,
             color: Colors.white,
@@ -1549,7 +1549,7 @@ class _EditImageState extends State<EditImage> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.black.withOpacity(0.3),
@@ -1583,7 +1583,7 @@ class _EditImageState extends State<EditImage> {
                                   offset: Offset(3, 3),
                                   blurRadius: 5)
                             ],
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(5)),
                         child: Row(
                           children: [
@@ -1731,7 +1731,7 @@ class _VideoAppFileState extends State<VideoAppFile> {
                 Navigator.of(context).pop();
               }
             },
-            backgroundColor: greenColor,
+            backgroundColor: appThemes,
             child: Center(
               child: Icon(
                 Icons.play_arrow_sharp,
@@ -1845,7 +1845,7 @@ class _TrimmerViewState extends State<TrimmerView> {
               Get.offAll(() => BottomSheetCustom());
             });
           },
-          backgroundColor: greenColor,
+          backgroundColor: appThemes,
           child: Center(
             child: Text(
               'Post',
@@ -1990,7 +1990,7 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
             //   });
             // });
           },
-          backgroundColor: greenColor,
+          backgroundColor: appThemes,
           child: Center(
             child: Text(
               'Post',
@@ -2011,7 +2011,7 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
               //         Visibility(
               //           visible: _progressVisibility,
               //           child: LinearProgressIndicator(
-              //             backgroundColor: primaryColor,
+              //             backgroundColor: appThemes,
               //           ),
               //         ),
               //         SizedBox(
@@ -2037,9 +2037,9 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
               //           child: TrimEditor(
               //             //trimmer: _trimmer,
               //             viewerHeight: 50.0,
-              //             circlePaintColor: greenColor,
-              //             scrubberPaintColor: greenColor,
-              //             borderPaintColor: greenColor,
+              //             circlePaintColor: appThemes,
+              //             scrubberPaintColor: appThemes,
+              //             borderPaintColor: appThemes,
               //             viewerWidth: MediaQuery.of(context).size.width -
               //                 Get.width * 0.030,
               //             maxVideoLength: Duration(seconds: 10),
@@ -2061,7 +2061,7 @@ class _TrimmerViewforVideoState extends State<TrimmerViewforVideo> {
               //         ),
               //         Container(
               //           decoration: BoxDecoration(
-              //               color: greenColor, shape: BoxShape.circle),
+              //               color: appThemes, shape: BoxShape.circle),
               //           child: TextButton(
               //             child: _isPlaying
               //                 ? Icon(

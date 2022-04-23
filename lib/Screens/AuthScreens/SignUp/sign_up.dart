@@ -59,7 +59,7 @@ class _SignUpState extends State<SignUp> {
                     //         children: [
                     //           controller.individual.value
                     //               ? customRadio(
-                    //                   color: primaryColor, isActive: true)
+                    //                   color: appThemes, isActive: true)
                     //               : customRadio(
                     //                   color: greyColor, isActive: false),
                     //           SizedBox(
@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                     //           ),
                     //           !controller.individual.value
                     //               ? customRadio(
-                    //                   color: primaryColor, isActive: true)
+                    //                   color: appThemes, isActive: true)
                     //               : customRadio(
                     //                   color: greyColor, isActive: false),
                     //           SizedBox(
@@ -141,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               icon: Icon(
                                 Icons.calendar_today,
-                                color: primaryColor,
+                                color: appThemes,
                               ),
                               onPressed: () {
                                 _selectDate(context);
@@ -239,7 +239,7 @@ class _SignUpState extends State<SignUp> {
                                 Icons.remove_red_eye,
                                 color: !controller.isConfirmPasswordShow.value
                                     ? Colors.grey[500]
-                                    : primaryColor,
+                                    : appThemes,
                               ),
                             ),
                           ),
@@ -371,9 +371,9 @@ class _SignUpState extends State<SignUp> {
         builder: (BuildContext? context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: primaryColor,
-              accentColor: primaryColor,
-              colorScheme: ColorScheme.light(primary: primaryColor),
+            //  appThemes: appThemes,
+              accentColor: appThemes,
+              colorScheme: ColorScheme.light(primary: appThemes),
               buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             ),
             child: child!,

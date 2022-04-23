@@ -153,7 +153,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                     'Preview',
                     style: TextStyle(
                         fontSize: 14,
-                        color: primaryColor,
+                        color: appThemes,
                         fontFamily: 'segoeui'),
                   ),
                 ),
@@ -183,7 +183,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                         child: Icon(
                           Icons.filter_list,
                           color:
-                              selected_Icon == 0 ? primaryColor : Colors.white,
+                              selected_Icon == 0 ? appThemes : Colors.white,
                         ),
                       ),
                       InkWell(
@@ -195,7 +195,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                         child: Icon(
                           Icons.text_fields,
                           color:
-                              selected_Icon == 1 ? primaryColor : Colors.white,
+                              selected_Icon == 1 ? appThemes : Colors.white,
                         ),
                       ),
                       InkWell(
@@ -209,7 +209,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                         child: Icon(
                           Icons.crop,
                           color:
-                              selected_Icon == 2 ? primaryColor : Colors.white,
+                              selected_Icon == 2 ? appThemes : Colors.white,
                         ),
                       ),
                       SvgPicture.asset('assets/svg/filter.svg'),
@@ -217,7 +217,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                         child: SvgPicture.asset(
                           'assets/svg/magic.svg',
                           color:
-                              selected_Icon == 3 ? primaryColor : Colors.white,
+                              selected_Icon == 3 ? appThemes : Colors.white,
                         ),
                         onTap: () {
                           setState(() {
@@ -314,7 +314,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
               //     padding:
               //         EdgeInsets.symmetric(vertical: 7, horizontal: 40),
               //     decoration: BoxDecoration(
-              //         color: primaryColor,
+              //         color: appThemes,
               //         borderRadius: BorderRadius.circular(25)),
               //     child: Text(
               //       'POST',
@@ -935,7 +935,7 @@ class _StoryImageUploadState extends State<StoryImageUpload> {
                                                                 decoration: BoxDecoration(
                                                                     color: selectedEventId ==
                                                                             '${myEvetModel[i].eventId}'
-                                                                        ? primaryColor
+                                                                        ? appThemes
                                                                         : Colors
                                                                             .blueGrey[50]!
                                                                             .withOpacity(0.5)),

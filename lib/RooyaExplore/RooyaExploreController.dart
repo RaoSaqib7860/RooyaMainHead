@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rooya_app/ApiUtils/AuthUtils.dart';
 import 'package:rooya_app/dashboard/Home/Models/RooyaPostModel.dart';
+import 'package:rooya_app/models/HashTagModel.dart';
 
 class RooyaExploreController extends GetxController {
   var listofpost = <RooyaPostModel>[].obs;
@@ -11,4 +12,7 @@ class RooyaExploreController extends GetxController {
     listofpost.removeWhere((element) => element.attachment!.isEmpty);
     print('Completed');
   }
+
+  bool isLoading = false;
+  var mRooyaHashTagList = <HashTagModel>[];
 }

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/ExploreRooya/ExploreRooya.dart';
 import 'package:rooya_app/RooyaExplore/RooyaExplore.dart';
 import 'package:rooya_app/Screens/Reel/Reel.dart';
-import 'package:rooya_app/utils/colors.dart';
 import '../../main.dart';
 import '../Home/home.dart';
 import '../menu.dart';
@@ -40,15 +40,10 @@ class _BottomSheetCustomState extends State<BottomSheetCustom> {
         controller: persistentcontroller,
         confineInSafeArea: true,
         backgroundColor: Colors.white,
-        // Default is Colors.white.
         handleAndroidBackButtonPress: true,
-        // Default is true.
         resizeToAvoidBottomInset: true,
-        // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
         stateManagement: true,
-        // Default is true.
         hideNavigationBarWhenKeyboardShows: true,
-        // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
         onItemSelected: (index) {
           if (index != 2) {
             streamController.sink.add(10.0);
@@ -70,18 +65,15 @@ class _BottomSheetCustomState extends State<BottomSheetCustom> {
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
         itemAnimationProperties: ItemAnimationProperties(
-          // Navigation Bar's items animation properties.
           duration: Duration(milliseconds: 200),
           curve: Curves.ease,
         ),
         screenTransitionAnimation: ScreenTransitionAnimation(
-          // Screen transition animation on change of selected tab.
           animateTabTransition: true,
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle:
-            NavBarStyle.simple, // Choose the nav bar style with this property.
+        navBarStyle: NavBarStyle.simple,
       ),
     );
   }
@@ -102,42 +94,63 @@ class _BottomSheetCustomState extends State<BottomSheetCustom> {
           icon: SvgPicture.asset(
             'assets/svg/HomeIcon.svg',
             height: 24,
-            color: Colors.black,
+            color: appThemes,
           ),
           inactiveIcon: SvgPicture.asset(
             'assets/svg/HomeIcon.svg',
             height: 24,
-            color: greyColor,
+            color: Colors.black,
           ),
           activeColorPrimary: Colors.black,
-          inactiveColorPrimary: greyColor),
+          inactiveColorPrimary: Colors.black),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.explore_sharp),
+          icon: SvgPicture.asset(
+            'assets/BottomTabSVG/Explore.svg',
+            height: 40,
+            color: appThemes,
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'assets/BottomTabSVG/Explore.svg',
+            height: 40,
+            color: Colors.black,
+          ),
           activeColorPrimary: Colors.black,
-          inactiveColorPrimary: greyColor),
-      //chat_bubble_text
+          inactiveColorPrimary: Colors.black),
       PersistentBottomNavBarItem(
-        icon: Icon(
-          CupertinoIcons.circle_grid_hex,
-          color: primaryColor,
-        ),
-        activeColorPrimary: CupertinoColors.black,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-          icon: Icon(Icons.shopping_basket_outlined),
+          icon: SvgPicture.asset(
+            'assets/BottomTabSVG/Reel.svg',
+            height: 24,
+            color: appThemes,
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'assets/BottomTabSVG/Reel.svg',
+            height: 24,
+            color: Colors.black,
+          ),
           activeColorPrimary: Colors.black,
-          inactiveColorPrimary: greyColor),
+          inactiveColorPrimary: Colors.black),
+      PersistentBottomNavBarItem(
+          icon: SvgPicture.asset(
+            'assets/BottomTabSVG/Souq.svg',
+            height: 24,
+            color: appThemes,
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'assets/BottomTabSVG/Souq.svg',
+            height: 24,
+            color: Colors.black,
+          ),
+          activeColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.black),
       PersistentBottomNavBarItem(
           icon: Container(
             padding: EdgeInsets.all(5),
             child: Icon(
               Icons.menu,
-              color: primaryColor,
             ),
           ),
-          activeColorPrimary: Colors.black,
-          inactiveColorPrimary: greyColor),
+          activeColorPrimary: appThemes,
+          inactiveColorPrimary: Colors.black),
     ];
   }
 }

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -63,11 +61,6 @@ Future<bool> ifEmailExists(String email) async {
 }
 
 Future<void> updateFCMTokenForUser() async {
-  FirebaseMessaging.instance.getToken().then((value) {
-    if (value != "" && value != null) {
-      videoRepo.updateFcmToken(value);
-    }
-  });
 }
 
 Future<String> register(userProfile) async {

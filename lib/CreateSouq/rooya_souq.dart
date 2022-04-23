@@ -127,7 +127,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                         },
                         child: Icon(
                           Icons.add_circle,
-                          color: primaryColor,
+                          color: appThemes,
                         ),
                       ),
                       SizedBox(
@@ -139,7 +139,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                         },
                         child: Icon(
                           Icons.favorite_border,
-                          color: primaryColor,
+                          color: appThemes,
                         ),
                       )
                     ],
@@ -183,7 +183,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                         ),
                         Icon(
                           Icons.search,
-                          color: primaryColor,
+                          color: appThemes,
                           size: 3.0.h,
                         ),
                         SizedBox(
@@ -227,7 +227,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                               style: TextStyle(
                                                   fontFamily: AppFonts.segoeui,
                                                   fontWeight: FontWeight.bold,
-                                                  color: primaryColor),
+                                                  color: appThemes),
                                             ),
                                           ),
                                           alignment: Alignment.centerRight,
@@ -320,7 +320,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                                 enabledBorder: InputBorder.none,
                                               ),
                                               isExpanded: true,
-                                              iconEnabledColor: primaryColor,
+                                              iconEnabledColor: appThemes,
                                               iconSize: 3.0.h,
                                               itemHeight:
                                                   kMinInteractiveDimension,
@@ -502,7 +502,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                                               ? Icons.favorite
                                                               : Icons
                                                                   .favorite_border,
-                                                          color: primaryColor,
+                                                          color: appThemes,
                                                           size: 2.0.h,
                                                         ),
                                                         onTap: () async {
@@ -672,7 +672,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                       // Icon(
                                       //   Icons.arrow_forward,
                                       //   size: 20,
-                                      //   color: primaryColor,
+                                      //   color: appThemes,
                                       // )
                                     ],
                                   ),
@@ -808,7 +808,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                                                     : Icons
                                                                         .favorite_border,
                                                                 color:
-                                                                    primaryColor,
+                                                                    appThemes,
                                                                 size: 2.0.h,
                                                               ),
                                                               onTap: () async {
@@ -899,7 +899,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                           child: Icon(
                                             Icons.arrow_forward,
                                             size: 20,
-                                            color: primaryColor,
+                                            color: appThemes,
                                           ))
                                     ],
                                   ),
@@ -1014,7 +1014,7 @@ class _RooyaSouqState extends State<RooyaSouq> {
                                                               ? Icons.favorite
                                                               : Icons
                                                                   .favorite_border,
-                                                          color: primaryColor,
+                                                          color: appThemes,
                                                           size: 2.0.h,
                                                         ),
                                                         onTap: () async {

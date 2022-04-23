@@ -698,7 +698,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
                                   color: Colors.white,
                                   child: Row(
                                     children: [
-                                      Helper.showLoaderSpinner(primaryColor),
+                                      Helper.showLoaderSpinner(appThemes),
                                       SizedBox(
                                         width: 10,
                                       ),
@@ -706,7 +706,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
                                         "Downloading.. Please wait...",
                                         style: TextStyle(
                                             fontSize: 15,
-                                            color: primaryColor),
+                                            color: appThemes),
                                       ),
                                     ],
                                   ),
@@ -763,7 +763,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
                                     color:Colors.white,
                                     child: Row(
                                       children: [
-                                        Helper.showLoaderSpinner(primaryColor),
+                                        Helper.showLoaderSpinner(appThemes),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -771,7 +771,7 @@ class _PlayerWidgetState extends StateMVC<PlayerWidget> {
                                           "Downloading.. Please wait...",
                                           style: TextStyle(
                                               fontSize: 15,
-                                              color:primaryColor),
+                                              color:appThemes),
                                         ),
                                       ],
                                     ),

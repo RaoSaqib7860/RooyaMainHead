@@ -79,7 +79,7 @@ class _PasswordChangedState extends State<PasswordChanged> {
                   ),
                   Icon(
                     Icons.check_circle_outlined,
-                    color: primaryColor,
+                    color: appThemes,
                     size: 15.0.h,
                   ),
                   SizedBox(

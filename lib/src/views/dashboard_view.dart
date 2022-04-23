@@ -1380,12 +1380,11 @@ class _DashboardViewState extends StateMVC<DashboardView>
                                   start: Colors.transparent,
                                   end: Colors.transparent),
                               bubblesColor: BubblesColor(
-                                dotPrimaryColor: videoObj.isLike
-                                    ? Color(0xffee1d52)
-                                    : Color(0xffffffff),
                                 dotSecondaryColor: videoObj.isLike
                                     ? Color(0xffee1d52)
-                                    : Color(0xffffffff),
+                                    : Color(0xffffffff), dotPrimaryColor: videoObj.isLike
+                                  ? Color(0xffee1d52)
+                                  : Color(0xffffffff),
                               ),
                               likeBuilder: (bool isLiked) {
                                 return SvgPicture.asset(
@@ -3168,10 +3167,8 @@ class _DashboardViewState extends StateMVC<DashboardView>
               circleColor: CircleColor(
                   start: Colors.transparent, end: Colors.transparent),
               bubblesColor: BubblesColor(
-                dotPrimaryColor:
-                    videoObj.isLike ? Color(0xffee1d52) : Color(0xffffffff),
                 dotSecondaryColor:
-                    videoObj.isLike ? Color(0xffee1d52) : Color(0xffffffff),
+                    videoObj.isLike ? Color(0xffee1d52) : Color(0xffffffff), dotPrimaryColor: videoObj.isLike ? Color(0xffee1d52) : Color(0xffffffff),
               ),
               likeBuilder: (bool isLiked) {
                 return SvgPicture.asset(

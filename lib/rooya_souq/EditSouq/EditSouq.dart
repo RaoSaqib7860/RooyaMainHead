@@ -164,7 +164,7 @@ class _EditSouqState extends State<EditSouq> {
                   child: Icon(
                     Icons.photo_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -179,7 +179,7 @@ class _EditSouqState extends State<EditSouq> {
                   child: Icon(
                     Icons.camera_alt_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -316,7 +316,7 @@ class _EditSouqState extends State<EditSouq> {
                                           child: InkWell(
                                             child: Icon(
                                               Icons.cancel,
-                                              color: primaryColor,
+                                              color: appThemes,
                                             ),
                                             onTap: () {
                                               controller.listOfSelectedImages
@@ -331,7 +331,7 @@ class _EditSouqState extends State<EditSouq> {
                                               child: Icon(
                                                 Icons.edit,
                                                 size: 15,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               decoration: BoxDecoration(
                                                   color: Colors.white,
@@ -442,7 +442,7 @@ class _EditSouqState extends State<EditSouq> {
                             enabledBorder: InputBorder.none,
                           ),
                           isExpanded: true,
-                          iconEnabledColor: primaryColor,
+                          iconEnabledColor: appThemes,
                           iconSize: 3.0.h,
                           itemHeight: kMinInteractiveDimension,
                           items: mRooyaCatList.map((RooyaCategoryModel value) {
@@ -556,7 +556,7 @@ class _EditSouqState extends State<EditSouq> {
                             child: RadioListTile(
                               value: 0,
                               groupValue: _groupValue,
-                              activeColor: primaryColor,
+                              activeColor: appThemes,
                               onChanged: (newValue) =>
                                   setState(() => {_groupValue = 0}),
                               title: Text(
@@ -575,7 +575,7 @@ class _EditSouqState extends State<EditSouq> {
                             child: RadioListTile(
                               value: 1,
                               groupValue: _groupValue,
-                              activeColor: primaryColor,
+                              activeColor: appThemes,
                               onChanged: (newValue) =>
                                   setState(() => {_groupValue = 1}),
                               title: Text(
@@ -641,7 +641,7 @@ class _EditSouqState extends State<EditSouq> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 7),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(5)),
                         child: Center(
                           child: Text('UPDATE',

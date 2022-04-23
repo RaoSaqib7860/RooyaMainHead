@@ -106,7 +106,7 @@ class _ImageFilterViewState extends State<ImageFilterView> {
             //     padding:
             //         EdgeInsets.symmetric(vertical: 7, horizontal: 40),
             //     decoration: BoxDecoration(
-            //         color: primaryColor,
+            //         color: appThemes,
             //         borderRadius: BorderRadius.circular(25)),
             //     child: Text(
             //       'POST',

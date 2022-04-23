@@ -89,7 +89,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                               fontSize: 13, fontFamily: AppFonts.segoeui),
                           labelStyle: TextStyle(
                               fontSize: 13,
-                              color: primaryColor,
+                              color: appThemes,
                               fontFamily: AppFonts.segoeui)),
                     ),
                   ),
@@ -113,7 +113,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                                   CircularProfileAvatar(
                                     '$baseImageUrl${mRooyaUserTagList[i].userPicture}',
                                     radius: 15,
-                                    borderColor: primaryColor,
+                                    borderColor: appThemes,
                                     borderWidth: 1,
                                   ),
                                   SizedBox(
@@ -132,7 +132,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                                                 ),
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: primaryColor),
+                                                    color: appThemes),
                                                 padding: EdgeInsets.all(3),
                                               )
                                             : SizedBox()
@@ -165,7 +165,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                                     CircularProfileAvatar(
                                       '$baseImageUrl${mRooyaUserTagList[i].userPicture}',
                                       radius: 15,
-                                      borderColor: primaryColor,
+                                      borderColor: appThemes,
                                       borderWidth: 1,
                                     ),
                                     SizedBox(
@@ -184,7 +184,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                                                   ),
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
-                                                      color: primaryColor),
+                                                      color: appThemes),
                                                   padding: EdgeInsets.all(3),
                                                 )
                                               : SizedBox()
@@ -218,7 +218,7 @@ class _AddUserTagsState extends State<AddUserTags> {
                       padding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(25)),
                       child: Center(
                           child: Text(

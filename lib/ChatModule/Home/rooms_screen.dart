@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/ChatModule/slidable/expendiable.dart';
 import 'package:rooya_app/ChatModule/text_filed/app_font.dart';
 
@@ -275,7 +276,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                                     width: width * 0.060,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Colors.green),
+                                        color: appThemes),
                                     child: Center(
                                       child: Text(
                                         notificationList[index],

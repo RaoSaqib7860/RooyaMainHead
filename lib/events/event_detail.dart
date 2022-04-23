@@ -151,13 +151,13 @@ class _EventDetailsState extends State<EventDetails> {
                               '',
                               child: Image.asset('assets/images/logo.png'),
                               radius: 15,
-                              borderColor: primaryColor,
+                              borderColor: appThemes,
                               borderWidth: 1,
                             )
                           : CircularProfileAvatar(
                               '$baseImageUrl${storage.read('user_picture')}',
                               radius: 15,
-                              borderColor: primaryColor,
+                              borderColor: appThemes,
                               borderWidth: 1,
                             ),
                     ),
@@ -198,7 +198,7 @@ class _EventDetailsState extends State<EventDetails> {
                         },
                         child: Icon(
                           Icons.add_circle,
-                          color: primaryColor,
+                          color: appThemes,
                           size: 22,
                         )),
                     SizedBox(
@@ -215,7 +215,7 @@ class _EventDetailsState extends State<EventDetails> {
                     Icon(
                       Icons.mail,
                       size: 22,
-                      color: primaryColor,
+                      color: appThemes,
                     ),
                   ],
                 ),
@@ -318,7 +318,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontSize: 9.0.sp,
                                             fontWeight: FontWeight.w600,
                                             color: selectedValue == 0
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -341,7 +341,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontSize: 9.0.sp,
                                             fontWeight: FontWeight.w600,
                                             color: selectedValue == 1
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -364,7 +364,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 9.0.sp,
                                             color: selectedValue == 2
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -387,7 +387,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 9.0.sp,
                                             color: selectedValue == 3
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -410,7 +410,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 9.0.sp,
                                             color: selectedValue == 4
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -433,7 +433,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 9.0.sp,
                                             color: selectedValue == 5
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black,
                                           ),
                                           textAlign: TextAlign.center,
@@ -864,7 +864,7 @@ class _EventDetailsState extends State<EventDetails> {
                                                                     '${DateTime.parse('${widget.Upcommingmodel!.eventDate}').difference(DateTime.parse('${widget.Upcommingmodel!.eventEndDate}')).inDays.abs()} Days Event',
                                                                     style: TextStyle(
                                                                         color:
-                                                                            primaryColor,
+                                                                            appThemes,
                                                                         fontSize:
                                                                             10),
                                                                   ),
@@ -943,7 +943,7 @@ class _EventDetailsState extends State<EventDetails> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          color: primaryColor,
+                                                          color: appThemes,
                                                         ),
                                                       ),
                                                     ),
@@ -1125,7 +1125,7 @@ class _EventDetailsState extends State<EventDetails> {
                                         Icon(
                                           Icons.arrow_forward,
                                           size: 20,
-                                          color: primaryColor,
+                                          color: appThemes,
                                         )
                                       ],
                                     ),
@@ -1144,7 +1144,7 @@ class _EventDetailsState extends State<EventDetails> {
                                               child: Center(
                                                 child: Icon(
                                                   Icons.add_circle,
-                                                  color: primaryColor,
+                                                  color: appThemes,
                                                   size: 30,
                                                 ),
                                               ),
@@ -1335,7 +1335,7 @@ class _EventDetailsState extends State<EventDetails> {
                                                                           ),
                                                                         ),
                                                                         borderColor:
-                                                                            primaryColor,
+                                                                            appThemes,
                                                                         elevation:
                                                                             5,
                                                                         borderWidth:
@@ -1404,7 +1404,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontFamily: AppFonts.segoeui,
                                             fontSize: 14,
                                             color: showMyPost
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black45,
                                           ),
                                           textAlign: TextAlign.center,
@@ -1430,7 +1430,7 @@ class _EventDetailsState extends State<EventDetails> {
                                             fontFamily: AppFonts.segoeui,
                                             fontSize: 14,
                                             color: !showMyPost
-                                                ? primaryColor
+                                                ? appThemes
                                                 : Colors.black45,
                                           ),
                                           textAlign: TextAlign.center,

@@ -138,7 +138,7 @@ class _GeneralState extends State<General> {
                                           ),
                                           elevation: 5,
                                           radius: 50,
-                                          borderColor: primaryColor,
+                                          borderColor: appThemes,
                                           borderWidth: 1,
                                         ),
                                       ],
@@ -156,7 +156,7 @@ class _GeneralState extends State<General> {
                                                   'assets/images/logo.png'),
                                               elevation: 5,
                                               radius: 50,
-                                              borderColor: primaryColor,
+                                              borderColor: appThemes,
                                               borderWidth: 1,
                                             ),
                                           ],
@@ -170,7 +170,7 @@ class _GeneralState extends State<General> {
                                               '$baseImageUrl${storage.read('user_picture')}',
                                               elevation: 5,
                                               radius: 50,
-                                              borderColor: primaryColor,
+                                              borderColor: appThemes,
                                               borderWidth: 1,
                                             ),
                                           ],
@@ -221,7 +221,7 @@ class _GeneralState extends State<General> {
                                                         width: double.infinity,
                                                         height: height * 0.050,
                                                         decoration: BoxDecoration(
-                                                            color: primaryColor,
+                                                            color: appThemes,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -267,7 +267,7 @@ class _GeneralState extends State<General> {
                                                         width: double.infinity,
                                                         height: height * 0.050,
                                                         decoration: BoxDecoration(
-                                                            color: primaryColor,
+                                                            color: appThemes,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -382,7 +382,7 @@ class _GeneralState extends State<General> {
                                   enabledBorder: InputBorder.none,
                                 ),
                                 isExpanded: true,
-                                iconEnabledColor: primaryColor,
+                                iconEnabledColor: appThemes,
                                 iconSize: 3.0.h,
                                 itemHeight: kMinInteractiveDimension,
                                 items: controller.listofCountry
@@ -590,7 +590,7 @@ class _GeneralState extends State<General> {
                               ),
                             ),
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                                color: appThemes,
                                 borderRadius: BorderRadius.circular(5)),
                           ),
                         ),
@@ -634,7 +634,7 @@ class _GeneralState extends State<General> {
                                             width: double.infinity,
                                             height: height * 0.050,
                                             decoration: BoxDecoration(
-                                                color: primaryColor,
+                                                color: appThemes,
                                                 borderRadius:
                                                     BorderRadius.circular(30)),
                                             margin: EdgeInsets.symmetric(
@@ -669,7 +669,7 @@ class _GeneralState extends State<General> {
                                             width: double.infinity,
                                             height: height * 0.050,
                                             decoration: BoxDecoration(
-                                                color: primaryColor,
+                                                color: appThemes,
                                                 borderRadius:
                                                     BorderRadius.circular(30)),
                                             margin: EdgeInsets.symmetric(
@@ -706,7 +706,7 @@ class _GeneralState extends State<General> {
                           style: TextStyle(fontSize: 12, color: Colors.white),
                         ),
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: appThemes,
                             borderRadius: BorderRadius.circular(5)),
                       ),
                     ),

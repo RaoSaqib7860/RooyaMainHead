@@ -119,7 +119,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     color: Colors.white,
                   ),
                   onPressed: renderAndDisplayImage,
-                  backgroundColor: primaryColor,
+                  backgroundColor: appThemes,
                 ),
               ],
             ),

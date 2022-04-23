@@ -157,7 +157,7 @@ class _CategoriSouqState extends State<CategoriSouq> {
                                         mRooyaSouqList[index].isLike!
                                             ? Icons.favorite
                                             : Icons.favorite_border,
-                                        color: primaryColor,
+                                        color: appThemes,
                                         size: 2.0.h,
                                       ),
                                       onTap: () async {

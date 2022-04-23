@@ -64,7 +64,7 @@ class _SignInState extends State<SignIn> {
                             Icons.remove_red_eye,
                             color: controller.isPasswordShow.value
                                 ? Colors.grey[500]
-                                : primaryColor,
+                                : appThemes,
                           ),
                         ),
                       ),

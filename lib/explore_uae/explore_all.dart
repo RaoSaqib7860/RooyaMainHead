@@ -54,7 +54,7 @@ class _ExploreAllState extends State<ExploreAll> {
                           enabledBorder: InputBorder.none,
                         ),
                         isExpanded: true,
-                        iconEnabledColor: primaryColor,
+                        iconEnabledColor: appThemes,
                         iconSize: 3.0.h,
 
                         itemHeight: kMinInteractiveDimension,

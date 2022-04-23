@@ -401,7 +401,7 @@ class CustomeWidgets {
           ),
         ),
         padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColor),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: appThemes),
       ),
     );
   }

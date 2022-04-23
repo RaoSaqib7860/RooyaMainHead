@@ -68,7 +68,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 width: width,
                 sufixIcon: Icon(
                   CupertinoIcons.eye_solid,
-                  color: greenColor,
+                  color: appThemes,
                 ),
               ),
               SizedBox(
@@ -81,7 +81,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 width: width,
                 sufixIcon: Icon(
                   CupertinoIcons.eye_solid,
-                  color: greenColor,
+                  color: appThemes,
                 ),
               ),
               SizedBox(
@@ -94,7 +94,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 width: width,
                 sufixIcon: Icon(
                   CupertinoIcons.eye_solid,
-                  color: greenColor,
+                  color: appThemes,
                 ),
               ),
               SizedBox(
@@ -136,7 +136,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                      color: greenColor,
+                      color: appThemes,
                       borderRadius: BorderRadius.circular(5)),
                 ),
               ),
@@ -225,11 +225,11 @@ class _TextFieldsProfileCustomState extends State<TextFieldsProfileCustom> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                    color: Colors.green.withOpacity(0.10),
+                    color: appThemes.withOpacity(0.10),
                     offset: Offset(4, 4),
                     blurRadius: 3),
                 BoxShadow(
-                    color: Colors.green.withOpacity(0.1),
+                    color: appThemes.withOpacity(0.1),
                     offset: Offset(-0.5, -0.5),
                     blurRadius: 1)
               ],

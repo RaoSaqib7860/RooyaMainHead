@@ -11,6 +11,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:record_mp3/record_mp3.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/ChatModule/ApiConfig/ApiUtils.dart';
 import 'package:rooya_app/ChatModule/GlobalWidget/CustomAudioPlayer/CustomAudioPlayer.dart';
 import 'package:rooya_app/ChatModule/Providers/OneToOneChatProvider.dart';
@@ -143,7 +144,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                 children: [
                   selectedOneToOneChat.isNotEmpty
                       ? Container(
-                          decoration: BoxDecoration(color: primaryColor),
+                          decoration: BoxDecoration(color: appThemes),
                           child: Row(
                             children: [
                               IconButton(
@@ -586,7 +587,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                                                                                 Icon(
                                                                                                   Icons.file_copy_outlined,
                                                                                                   size: 40,
-                                                                                                  color: primaryColor,
+                                                                                                  color: appThemes,
                                                                                                 ),
                                                                                                 SizedBox(
                                                                                                   height: 5,
@@ -980,7 +981,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                                                                                 Icon(
                                                                                                   Icons.file_copy_outlined,
                                                                                                   size: 40,
-                                                                                                  color: primaryColor,
+                                                                                                  color: appThemes,
                                                                                                 ),
                                                                                                 SizedBox(
                                                                                                   height: 5,
@@ -1030,7 +1031,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                                                                         )
                                                                                       : Container(
                                                                                           padding: EdgeInsets.symmetric(vertical: height * 0.010, horizontal: width * 0.030),
-                                                                                          decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(8)),
+                                                                                          decoration: BoxDecoration(color: appThemes, borderRadius: BorderRadius.circular(8)),
                                                                                           child: Column(
                                                                                             children: [
                                                                                               Text(
@@ -1178,7 +1179,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                       ? Container(
                           height: height * 0.050,
                           padding: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(color: primaryColor),
+                          decoration: BoxDecoration(color: appThemes),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -1231,7 +1232,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                             ListTile(
                                               leading: Icon(
                                                 Icons.image,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               title: Text(
                                                 'Photo & Video',
@@ -1259,7 +1260,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                             ListTile(
                                               leading: Icon(
                                                 Icons.file_copy_outlined,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               title: Text(
                                                 'Documents',
@@ -1291,7 +1292,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                             ListTile(
                                               leading: Icon(
                                                 Icons.camera_alt_outlined,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               title: Text(
                                                 'Camera',
@@ -1303,7 +1304,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                             ListTile(
                                               leading: Icon(
                                                 Icons.location_on_outlined,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               title: Text(
                                                 'Location',
@@ -1315,7 +1316,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                             ListTile(
                                               leading: Icon(
                                                 Icons.person_outline,
-                                                color: primaryColor,
+                                                color: appThemes,
                                               ),
                                               title: Text(
                                                 'Contacts',
@@ -1331,7 +1332,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                 child: Icon(
                                   Icons.add,
                                   size: 35,
-                                  color: primaryColor,
+                                  color: appThemes,
                                 ),
                               ),
 
@@ -1345,7 +1346,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                               //               ListTile(
                               //                 leading: Icon(
                               //                   Icons.image,
-                              //                   color: primaryColor,
+                              //                   color: appThemes,
                               //                 ),
                               //                 title: Text(
                               //                   'Image',
@@ -1368,7 +1369,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                               //               ListTile(
                               //                 leading: Icon(
                               //                   Icons.image,
-                              //                   color: primaryColor,
+                              //                   color: appThemes,
                               //                 ),
                               //                 title: Text(
                               //                   'Video',
@@ -1394,7 +1395,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                               //   },
                               //   child: Icon(
                               //     Icons.camera_alt_outlined,
-                              //     color: primaryColor,
+                              //     color: appThemes,
                               //     size: 25,
                               //   ),
                               // ),
@@ -1542,7 +1543,7 @@ class _OneToOneChatState extends State<OneToOneChat> {
                                               right: 10, left: 5),
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: primaryColor),
+                                              color: appThemes),
                                         ),
                                       ),
                               )
@@ -1603,7 +1604,7 @@ class SmsPainter2 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint_0 = new Paint()
-      ..color = primaryColor
+      ..color = appThemes
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 

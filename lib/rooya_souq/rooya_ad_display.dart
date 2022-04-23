@@ -85,7 +85,7 @@ class _RooyaAdDisplayState extends State<RooyaAdDisplay> {
                           style: TextStyle(
                               fontSize: 15,
                               fontFamily: AppFonts.segoeui,
-                              color: primaryColor),
+                              color: appThemes),
                         ),
                       ),
                     )
@@ -322,7 +322,7 @@ class _RooyaAdDisplayState extends State<RooyaAdDisplay> {
                           child: RadioListTile(
                             value: 0,
                             groupValue: _groupValue,
-                            activeColor: primaryColor,
+                            activeColor: appThemes,
                             onChanged: (newValue) => setState(() => {}),
                             title: Text(
                               'New',
@@ -340,7 +340,7 @@ class _RooyaAdDisplayState extends State<RooyaAdDisplay> {
                           child: RadioListTile(
                             value: 1,
                             groupValue: _groupValue,
-                            activeColor: primaryColor,
+                            activeColor: appThemes,
                             onChanged: (newValue) => setState(() => {}),
                             title: Text(
                               'Used',

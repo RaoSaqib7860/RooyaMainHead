@@ -82,7 +82,7 @@ class _TrimmerViewGlobalState extends State<TrimmerViewGlobal> {
             //   Navigator.of(context).pop('$outputPath');
             // });
           },
-          backgroundColor: greenColor,
+          backgroundColor: appThemes,
           child: Center(
             child: Text(
               'Save',
@@ -103,7 +103,7 @@ class _TrimmerViewGlobalState extends State<TrimmerViewGlobal> {
             //         Visibility(
             //           visible: _progressVisibility,
             //           child: LinearProgressIndicator(
-            //             backgroundColor: primaryColor,
+            //             backgroundColor: appThemes,
             //           ),
             //         ),
             //         SizedBox(
@@ -123,12 +123,12 @@ class _TrimmerViewGlobalState extends State<TrimmerViewGlobal> {
             //           child: TrimEditor(
             //             //trimmer: _trimmer,
             //             viewerHeight: 50.0,
-            //             circlePaintColor: greenColor,
-            //             scrubberPaintColor: greenColor,
-            //             borderPaintColor: greenColor,
+            //             circlePaintColor: appThemes,
+            //             scrubberPaintColor: appThemes,
+            //             borderPaintColor: appThemes,
             //             showDuration: true,
             //             durationTextStyle:
-            //                 TextStyle(color: primaryColor, fontSize: 12),
+            //                 TextStyle(color: appThemes, fontSize: 12),
             //             viewerWidth: MediaQuery.of(context).size.width -
             //                 Get.width * 0.040,
             //             maxVideoLength: Duration(seconds: 10),
@@ -150,7 +150,7 @@ class _TrimmerViewGlobalState extends State<TrimmerViewGlobal> {
             //         ),
             //         Container(
             //           decoration: BoxDecoration(
-            //               color: greenColor, shape: BoxShape.circle),
+            //               color: appThemes, shape: BoxShape.circle),
             //           child: TextButton(
             //             child: _isPlaying
             //                 ? Icon(

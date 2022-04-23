@@ -790,7 +790,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                                                   : 'assets/reelAssets/icons/pause.svg',
                                               width: 30,
                                               height: 30,
-                                              color: primaryColor,
+                                              color: appThemes,
                                             ).centered()),
                                       ),
                                     ),
@@ -1094,11 +1094,11 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                                color: primaryColor.withOpacity(0.5),
+                                color: appThemes.withOpacity(0.5),
                                 width: 5)),
                         child: Container(
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: primaryColor),
+                              shape: BoxShape.circle, color: appThemes),
                         ),
                       ),
                     ),
@@ -1177,7 +1177,7 @@ class _VideoRecorderState extends StateMVC<VideoRecorder>
                           : Colors.white.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(6),
                       border: (_con.videoLength == timers[i])
-                          ? Border.all(color: primaryColor, width: 2)
+                          ? Border.all(color: appThemes, width: 2)
                           : Border.all(color: Colors.white, width: 0),
                     ),
                     child: Center(

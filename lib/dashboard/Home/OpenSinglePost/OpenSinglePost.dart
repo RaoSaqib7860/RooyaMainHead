@@ -28,8 +28,8 @@ class _OpenSinglePostState extends State<OpenSinglePost> {
     if (!widget.containData!) {
       print('post is =${widget.postId}');
       controller.getSinglePost(postId: widget.postId);
-    }else{
-      modelData=widget.model!;
+    } else {
+      modelData = widget.model!;
     }
     super.initState();
   }
@@ -67,6 +67,7 @@ class _OpenSinglePostState extends State<OpenSinglePost> {
                       )
                     : UserPost(
                         rooyaPostModel: controller.postmodel,
+                        viewFullText: true,
                         onPostLike: () {
                           setState(() {
                             controller.postmodel.islike = true;
@@ -89,19 +90,17 @@ class _OpenSinglePostState extends State<OpenSinglePost> {
               ),
             )
           : UserPost(
-              rooyaPostModel: modelData,
+              rooyaPostModel: modelData,viewFullText: true,
               onPostLike: () {
                 setState(() {
                   modelData.islike = true;
-                  modelData.likecount =
-                      modelData.likecount! + 1;
+                  modelData.likecount = modelData.likecount! + 1;
                 });
               },
               onPostUnLike: () {
                 setState(() {
                   modelData.islike = false;
-                  modelData.likecount =
-                      modelData.likecount! - 1;
+                  modelData.likecount = modelData.likecount! - 1;
                 });
               },
               comment: () async {

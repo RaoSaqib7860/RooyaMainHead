@@ -203,7 +203,7 @@ class _SettingsState extends State<Settings> {
                             storage.write('enable_allNotification', '0');
                           }
                         },
-                        activeColor: greenColor,
+                        activeColor: appThemes,
                       )
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -255,7 +255,7 @@ class _SettingsState extends State<Settings> {
                             EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: greenColor,
+                          color: appThemes,
                         ),
                       )
                     ],

@@ -143,7 +143,7 @@ class _NotificationsViewState extends StateMVC<NotificationsView> {
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
                                                         boxShadow: [
-                                                          BoxShadow(color: Theme.of(context).primaryColor, spreadRadius: 2),
+                                                        //  BoxShadow(color: Theme.of(context).appThemes, spreadRadius: 2),
                                                         ],
                                                       ),
                                                       child: ClipRRect(

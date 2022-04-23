@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rooya_app/AppThemes/AppThemes.dart';
 import 'package:rooya_app/Screens/AuthScreens/SignIn/sign_in.dart';
 import 'package:rooya_app/Screens/AuthScreens/SignUp/sign_up.dart';
 import 'package:rooya_app/utils/SizedConfig.dart';
@@ -50,9 +51,9 @@ class _SignInTabsHandleState extends State<SignInTabsHandle>
                 indicator: BoxDecoration(
                     color: Colors.white,
                     border: Border(
-                      bottom: BorderSide(color: Colors.green, width: 3),
+                      bottom: BorderSide(color: appThemes, width: 3),
                     )),
-                indicatorColor: Colors.green,
+                indicatorColor: appThemes,
                 indicatorPadding: EdgeInsets.only(top: 2),
                 labelColor: Colors.black,
                 labelStyle:

@@ -32,30 +32,35 @@ class _PostWith3ImagesState extends State<PostWith3Images> {
                       position: 0,
                     ));
                   },
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
-                    width: double.infinity,
-                    height: height * 0.3,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => ShimerEffect(
-                      child: Container(
-                        height: height * 0.3,
-                        width: 100.0.w,
-                        child: Image.asset(
-                          'assets/images/home_banner.png',
-                          fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(7),
+                        topLeft: Radius.circular(7)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "$baseImageUrl${widget.rooyaPostModel!.attachment![0].attachment}",
+                      width: double.infinity,
+                      height: height * 0.230,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => ShimerEffect(
+                        child: Container(
+                          height: height * 0.230,
+                          width: 100.0.w,
+                          child: Image.asset(
+                            'assets/images/home_banner.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
+                      errorWidget: (context, url, error) => Container(
+                          height: height * 0.230,
+                          width: 100.0.w,
+                          child: Center(child: Icon(Icons.image))),
                     ),
-                    errorWidget: (context, url, error) => Container(
-                        height: height * 0.3,
-                        width: 100.0.w,
-                        child: Center(child: Icon(Icons.image))),
                   ),
                 )
               : Container(
-                  height: height * 0.3,
+                  height: height * 0.230,
                   width: 100.0.w,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
@@ -82,18 +87,18 @@ class _PostWith3ImagesState extends State<PostWith3Images> {
                     child: CachedNetworkImage(
                       imageUrl:
                           "$baseImageUrl${widget.rooyaPostModel!.attachment![1].attachment}",
-                      height: height * 0.3,
+                      height: height * 0.230,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
-                          height: height * 0.3,
+                          height: height * 0.230,
                           child: Center(child: CircularProgressIndicator())),
                       errorWidget: (context, url, error) => Container(
-                          height: height * 0.3,
+                          height: height * 0.230,
                           child: Center(child: Icon(Icons.error))),
                     ),
                   )
                 : Container(
-                    height: height * 0.3,
+                    height: height * 0.230,
                     decoration: BoxDecoration(color: Colors.black),
                     child: Center(
                       child: Icon(
@@ -110,8 +115,8 @@ class _PostWith3ImagesState extends State<PostWith3Images> {
             child: widget.rooyaPostModel!.attachment![2].type == 'image'
                 ? ClipRRect(
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        topLeft: Radius.circular(5)),
+                        bottomRight: Radius.circular(7),
+                        topRight: Radius.circular(7)),
                     child: InkWell(
                       onTap: () {
                         Get.to(ViewPic(
@@ -122,25 +127,30 @@ class _PostWith3ImagesState extends State<PostWith3Images> {
                       child: CachedNetworkImage(
                         imageUrl:
                             "$baseImageUrl${widget.rooyaPostModel!.attachment![2].attachment}",
-                        height: height * 0.3,
+                        height: height * 0.230,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Container(
-                            height: height * 0.3,
+                            height: height * 0.230,
                             child: Center(child: CircularProgressIndicator())),
                         errorWidget: (context, url, error) => Container(
-                            height: height * 0.3,
+                            height: height * 0.230,
                             child: Center(child: Icon(Icons.error))),
                       ),
                     ),
                   )
-                : Container(
-                    height: height * 0.3,
-                    decoration: BoxDecoration(color: Colors.black),
-                    child: Center(
-                      child: Icon(
-                        Icons.play_circle_fill,
-                        color: Colors.white,
-                        size: 40,
+                : ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(7),
+                        topRight: Radius.circular(7)),
+                    child: Container(
+                      height: height * 0.230,
+                      decoration: BoxDecoration(color: Colors.black),
+                      child: Center(
+                        child: Icon(
+                          Icons.play_circle_fill,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                       ),
                     ),
                   ))

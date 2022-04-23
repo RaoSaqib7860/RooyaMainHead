@@ -101,9 +101,9 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                 color: Colors.white,
                                 border: Border(
                                   bottom:
-                                      BorderSide(color: Colors.green, width: 3),
+                                      BorderSide(color: appThemes, width: 3),
                                 )),
-                            indicatorColor: Colors.green,
+                            indicatorColor: appThemes,
                             labelColor: Colors.black,
                             labelStyle: TextStyle(fontSize: 12.0.sp),
                             unselectedLabelColor: Colors.grey,
@@ -192,14 +192,14 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                               'assets/images/logo.png'),
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         )
                                                             : CircularProfileAvatar(
                                                           '$baseImageUrl${listofFolowing[i].userPicture}',
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         ),
                                                         SizedBox(
@@ -249,14 +249,14 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                               'assets/images/logo.png'),
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         )
                                                             : CircularProfileAvatar(
                                                           '$baseImageUrl${listofFolowing[i].userPicture}',
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         ),
                                                         SizedBox(
@@ -303,7 +303,7 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                                         decoration: BoxDecoration(
                                                                             borderRadius:
                                                                             BorderRadius.circular(30),
-                                                                            color: primaryColor),
+                                                                            color: appThemes),
                                                                       ),
                                                                       onTap:
                                                                           () async {
@@ -383,7 +383,7 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                         BorderRadius.circular(30),
-                                                                        color: primaryColor),
+                                                                        color: appThemes),
                                                                   ),
                                                                   onTap:
                                                                       () {
@@ -474,14 +474,14 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                               'assets/images/logo.png'),
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         )
                                                             : CircularProfileAvatar(
                                                           '$baseImageUrl${listofFolowers[i].userPicture}',
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         ),
                                                         SizedBox(
@@ -531,14 +531,14 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                               'assets/images/logo.png'),
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         )
                                                             : CircularProfileAvatar(
                                                           '$baseImageUrl${listofFolowers[i].userPicture}',
                                                           radius: 23,
                                                           borderColor:
-                                                          primaryColor,
+                                                          appThemes,
                                                           borderWidth: 1,
                                                         ),
                                                         SizedBox(
@@ -592,7 +592,7 @@ class _AllFolowFolowersState extends State<AllFolowFolowers> {
                                                                             BorderRadius.circular(
                                                                                 30),
                                                                             color:
-                                                                            primaryColor),
+                                                                            appThemes),
                                                                       ),
                                                                       onTap:
                                                                           () async {

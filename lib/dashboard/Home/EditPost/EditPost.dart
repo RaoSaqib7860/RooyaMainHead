@@ -86,7 +86,7 @@ class _EditPostState extends State<EditPost> {
         if (!controller.listOfSelectedfiles
                 .contains('${appDocDir.path}/$name') &&
             controller.listOfSelectedfiles.length < 8) {
-          controller.listOfSelectedfiles.add('${appDocDir.path}/$name');
+         // controller.listOfSelectedfiles.add('${appDocDir.path}/$name');
         }
         if ('${appDocDir.path}/$name'.contains('mp4')) {
           if (!controller.listOfSelectedfiles
@@ -177,7 +177,7 @@ class _EditPostState extends State<EditPost> {
                   child: Icon(
                     Icons.photo_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -209,7 +209,7 @@ class _EditPostState extends State<EditPost> {
                   child: Icon(
                     Icons.camera_alt_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -426,7 +426,7 @@ class _EditPostState extends State<EditPost> {
                                                     child: InkWell(
                                                       child: Icon(
                                                         Icons.cancel,
-                                                        color: primaryColor,
+                                                        color: appThemes,
                                                       ),
                                                       onTap: () {
                                                         controller
@@ -443,7 +443,7 @@ class _EditPostState extends State<EditPost> {
                                                         child: Icon(
                                                           Icons.edit,
                                                           size: 15,
-                                                          color: primaryColor,
+                                                          color: appThemes,
                                                         ),
                                                         decoration:
                                                             BoxDecoration(
@@ -715,7 +715,7 @@ class _EditPostState extends State<EditPost> {
                             padding: EdgeInsets.symmetric(
                                 vertical: 7, horizontal: 40),
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                                color: appThemes,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Text(
                               'POST',

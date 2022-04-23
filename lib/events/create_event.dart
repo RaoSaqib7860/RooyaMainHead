@@ -117,7 +117,7 @@ class _CreateEventState extends State<CreateEvent> {
                   child: Icon(
                     Icons.photo_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -149,7 +149,7 @@ class _CreateEventState extends State<CreateEvent> {
                   child: Icon(
                     Icons.camera_alt_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -371,7 +371,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   child: InkWell(
                                     child: Icon(
                                       Icons.cancel,
-                                      color: primaryColor,
+                                      color: appThemes,
                                     ),
                                     onTap: () {
                                       controller
@@ -387,7 +387,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       child: Icon(
                                         Icons.edit,
                                         size: 15,
-                                        color: primaryColor,
+                                        color: appThemes,
                                       ),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
@@ -480,7 +480,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         fontSize: 9.0.sp,
                                         fontWeight: FontWeight.w600,
                                         color: selectedValue == 0
-                                            ? primaryColor
+                                            ? appThemes
                                             : Colors.black,
                                       ),
                                       textAlign: TextAlign.center,
@@ -503,7 +503,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 9.0.sp,
                                         color: selectedValue == 1
-                                            ? primaryColor
+                                            ? appThemes
                                             : Colors.black,
                                       ),
                                       textAlign: TextAlign.center,
@@ -526,7 +526,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 9.0.sp,
                                         color: selectedValue == 2
-                                            ? primaryColor
+                                            ? appThemes
                                             : Colors.black,
                                       ),
                                       textAlign: TextAlign.center,
@@ -549,7 +549,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 9.0.sp,
                                         color: selectedValue == 3
-                                            ? primaryColor
+                                            ? appThemes
                                             : Colors.black,
                                       ),
                                       textAlign: TextAlign.center,
@@ -572,7 +572,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 9.0.sp,
                                         color: selectedValue == 4
-                                            ? primaryColor
+                                            ? appThemes
                                             : Colors.black,
                                       ),
                                       textAlign: TextAlign.center,
@@ -917,7 +917,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         DateTime(2050, 6, 7),
                                                     theme: DatePickerTheme(
                                                         headerColor:
-                                                            primaryColor,
+                                                            appThemes,
                                                         backgroundColor:
                                                             Colors.white,
                                                         itemStyle: TextStyle(
@@ -989,7 +989,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         DateTime(2050, 6, 7),
                                                     theme: DatePickerTheme(
                                                         headerColor:
-                                                            primaryColor,
+                                                            appThemes,
                                                         backgroundColor:
                                                             Colors.white,
                                                         itemStyle: TextStyle(
@@ -1122,7 +1122,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: isPublic
-                                                              ? primaryColor
+                                                              ? appThemes
                                                               : Colors.black),
                                                       shape: BoxShape.circle),
                                                   child: Container(
@@ -1130,7 +1130,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                     width: 12,
                                                     decoration: BoxDecoration(
                                                       color: isPublic
-                                                          ? primaryColor
+                                                          ? appThemes
                                                           : Colors.black,
                                                       shape: BoxShape.circle,
                                                     ),
@@ -1199,7 +1199,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: !isPublic
-                                                              ? primaryColor
+                                                              ? appThemes
                                                               : Colors.black),
                                                       shape: BoxShape.circle),
                                                   child: Container(
@@ -1207,7 +1207,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                     width: 12,
                                                     decoration: BoxDecoration(
                                                       color: !isPublic
-                                                          ? primaryColor
+                                                          ? appThemes
                                                           : Colors.black,
                                                       shape: BoxShape.circle,
                                                     ),
@@ -1353,7 +1353,7 @@ class _CreateEventState extends State<CreateEvent> {
                                               width: 60.0.w,
                                               height: 5.0.h,
                                               decoration: BoxDecoration(
-                                                  color: primaryColor,
+                                                  color: appThemes,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30)),
@@ -1437,7 +1437,7 @@ class _CreateEventState extends State<CreateEvent> {
                               icon: Icon(
                                 Icons.arrow_back_ios_rounded,
                                 size: 20,
-                                color: primaryColor,
+                                color: appThemes,
                               )),
                           Padding(
                             padding: EdgeInsets.only(right: width * 0.080),
@@ -1459,7 +1459,7 @@ class _CreateEventState extends State<CreateEvent> {
                             color: Colors.blue.withOpacity(0.20),
                             offset: Offset(0, 3),
                             blurRadius: 5),
-                      ], color: primaryColor),
+                      ], color: appThemes),
                     ),
                     preferredSize: Size.fromHeight(height * 0.070)),
                 body: Container(

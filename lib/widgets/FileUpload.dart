@@ -161,7 +161,7 @@ class _FileUploadState extends State<FileUpload> {
               },
               child: Container(
                   decoration: BoxDecoration(
-                      color: primaryColor.withOpacity(0.8),
+                      color: appThemes.withOpacity(0.8),
                       borderRadius:
                       BorderRadius.only(topRight: Radius.circular(15))),
                   child: Icon(
@@ -178,7 +178,7 @@ class _FileUploadState extends State<FileUpload> {
               lineWidth: widget.progressLineWidth??8.0,
               percent: uploadPercent,
               // center: new Text("100%"),
-              progressColor: primaryColor,
+              progressColor: appThemes,
             ),
           )
               : Container(),
@@ -222,7 +222,7 @@ class _FileUploadState extends State<FileUpload> {
                 EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: primaryColor),
+                    color: appThemes),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[

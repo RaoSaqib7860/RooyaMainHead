@@ -120,7 +120,7 @@ class CreateNewEventController extends GetxController {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.all(7),
                       child: Text(
@@ -142,7 +142,7 @@ class CreateNewEventController extends GetxController {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.all(7),
                       child: Text(

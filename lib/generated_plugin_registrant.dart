@@ -9,8 +9,6 @@ import 'package:assets_audio_player_web/web/assets_audio_player_web.dart';
 import 'package:audio_session/audio_session_web.dart';
 import 'package:camera_web/camera_web.dart';
 import 'package:file_picker/_internal/file_picker_web.dart';
-import 'package:firebase_core_web/firebase_core_web.dart';
-import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 import 'package:flutter_facebook_auth_web/flutter_facebook_auth_web.dart';
 import 'package:flutter_keyboard_visibility_web/flutter_keyboard_visibility_web.dart';
 import 'package:fluttertoast/fluttertoast_web.dart';
@@ -36,8 +34,6 @@ void registerPlugins(Registrar registrar) {
   AudioSessionWeb.registerWith(registrar);
   CameraPlugin.registerWith(registrar);
   FilePickerWeb.registerWith(registrar);
-  FirebaseCoreWeb.registerWith(registrar);
-  FirebaseMessagingWeb.registerWith(registrar);
   FlutterFacebookAuthPlugin.registerWith(registrar);
   FlutterKeyboardVisibilityPlugin.registerWith(registrar);
   FluttertoastWebPlugin.registerWith(registrar);

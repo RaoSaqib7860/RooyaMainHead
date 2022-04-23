@@ -101,7 +101,7 @@ class _CreatePostStroryState extends State<CreatePostStrory> {
                   child: Icon(
                     Icons.photo_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -133,7 +133,7 @@ class _CreatePostStroryState extends State<CreatePostStrory> {
                   child: Icon(
                     Icons.camera_alt_outlined,
                     size: 30,
-                    color: primaryColor,
+                    color: appThemes,
                   ),
                 ),
                 SizedBox(
@@ -350,7 +350,7 @@ class _CreatePostStroryState extends State<CreatePostStrory> {
                                                     child: InkWell(
                                                       child: Icon(
                                                         Icons.cancel,
-                                                        color: primaryColor,
+                                                        color: appThemes,
                                                       ),
                                                       onTap: () {
                                                         controller
@@ -367,7 +367,7 @@ class _CreatePostStroryState extends State<CreatePostStrory> {
                                                         child: Icon(
                                                           Icons.edit,
                                                           size: 15,
-                                                          color: primaryColor,
+                                                          color: appThemes,
                                                         ),
                                                         decoration:
                                                             BoxDecoration(
@@ -641,7 +641,7 @@ class _CreatePostStroryState extends State<CreatePostStrory> {
                             padding: EdgeInsets.symmetric(
                                 vertical: 7, horizontal: 40),
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                                color: appThemes,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Text(
                               'POST',

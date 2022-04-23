@@ -87,7 +87,7 @@ class _AddHashTagsState extends State<AddHashTags> {
                               fontSize: 13, fontFamily: AppFonts.segoeui),
                           labelStyle: TextStyle(
                               fontSize: 13,
-                              color: primaryColor,
+                              color: appThemes,
                               fontFamily: AppFonts.segoeui)),
                     ),
                   ),
@@ -124,7 +124,7 @@ class _AddHashTagsState extends State<AddHashTags> {
                                                 ),
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: primaryColor),
+                                                    color: appThemes),
                                                 padding: EdgeInsets.all(3),
                                               )
                                             : SizedBox()
@@ -169,7 +169,7 @@ class _AddHashTagsState extends State<AddHashTags> {
                                                   ),
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
-                                                      color: primaryColor),
+                                                      color: appThemes),
                                                   padding: EdgeInsets.all(3),
                                                 )
                                               : SizedBox()
@@ -203,7 +203,7 @@ class _AddHashTagsState extends State<AddHashTags> {
                       padding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: appThemes,
                           borderRadius: BorderRadius.circular(25)),
                       child: Center(
                           child: Text(

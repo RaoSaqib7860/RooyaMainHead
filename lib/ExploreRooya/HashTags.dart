@@ -40,7 +40,7 @@ class _HashTagsState extends State<HashTags> {
                         hint: 'Search here',
                         posticon: Icon(
                           CupertinoIcons.search,
-                          color: greenColor,
+                          color: appThemes,
                           size: 17,
                         ),
                       ),
@@ -116,14 +116,14 @@ class _HashTagsState extends State<HashTags> {
                                   '0.5K posts',
                                   style: TextStyle(
                                       fontSize: 10,
-                                      color: greenColor,
+                                      color: appThemes,
                                       fontFamily: AppFonts.segoeui),
                                 ),
                                 Text(
                                   '0.5K posts',
                                   style: TextStyle(
                                       fontSize: 10,
-                                      color: greenColor,
+                                      color: appThemes,
                                       fontFamily: AppFonts.segoeui),
                                 ),
                                 SizedBox(

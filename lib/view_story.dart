@@ -85,7 +85,7 @@ class _ViewStoryState extends State<ViewStory> {
                                 ? 'https://www.gravatar.com/avatar/test@test.com.jpg?s=200&d=mm'
                                 : '$baseImageUrl${widget.model!.userPicture}',
                             radius: 15,
-                            borderColor: primaryColor,
+                            borderColor: appThemes,
                             borderWidth: 1,
                           ),
                           SizedBox(

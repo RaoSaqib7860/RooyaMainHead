@@ -10,7 +10,6 @@ import 'package:rooya_app/Screens/Settings/Privacy/PrivacySettingsModel.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/ProgressHUD.dart';
 import 'package:rooya_app/utils/SnackbarCustom.dart';
-import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Privacy extends StatefulWidget {
@@ -287,7 +286,7 @@ class _PrivacyState extends State<Privacy> {
                                   ),
                                 ),
                                 decoration: BoxDecoration(
-                                    color: primaryColor,
+                                    color: appThemes,
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
@@ -318,7 +317,7 @@ class _PrivacyState extends State<Privacy> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-                color: Colors.green.withOpacity(0.10),
+                color: appThemes.withOpacity(0.10),
                 offset: Offset(4, 4),
                 blurRadius: 3),
             BoxShadow(
@@ -343,7 +342,7 @@ class _PrivacyState extends State<Privacy> {
         icon: Icon(
           CupertinoIcons.chevron_down,
           size: 18,
-          color: primaryColor,
+          color: appThemes,
         ),
         isExpanded: true,
         hint: Text(

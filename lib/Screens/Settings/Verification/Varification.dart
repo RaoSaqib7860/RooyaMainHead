@@ -11,10 +11,7 @@ import 'package:rooya_app/story/uploadStroy.dart';
 import 'package:rooya_app/utils/AppFonts.dart';
 import 'package:rooya_app/utils/ProgressHUD.dart';
 import 'package:rooya_app/utils/SnackbarCustom.dart';
-import 'package:rooya_app/utils/colors.dart';
-import 'package:rooya_app/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'VarificationController.dart';
 
 class Varification extends StatefulWidget {
@@ -154,12 +151,12 @@ class _VarificationState extends State<Varification> {
                                 color: Colors.white,
                               ),
                               decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: primaryColor),
+                                  shape: BoxShape.circle, color: appThemes),
                             )),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                    color: primaryColor.withOpacity(0.5),
+                                    color: appThemes.withOpacity(0.5),
                                     width: 5)),
                           ),
                           SizedBox(
@@ -335,7 +332,7 @@ class _VarificationState extends State<Varification> {
                                       color: settingGreyColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: primaryColor.withOpacity(0.5),
+                                          color: appThemes.withOpacity(0.5),
                                           offset: Offset(0.2, 0.2), //(x,y)
                                           blurRadius: 5.0,
                                         ),
@@ -359,7 +356,7 @@ class _VarificationState extends State<Varification> {
                                               top: 11,
                                               right: 15),
                                           hintStyle: TextStyle(
-                                              color: primaryColor,
+                                              color: appThemes,
                                               fontSize: 12),
                                           hintText: "Enter message here"),
                                     ),
@@ -442,7 +439,7 @@ class _VarificationState extends State<Varification> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        color: primaryColor,
+                                        color: appThemes,
                                         borderRadius: BorderRadius.circular(5)),
                                   ),
                                 ),
@@ -489,7 +486,7 @@ class _VarificationState extends State<Varification> {
                             width: double.infinity,
                             height: height * 0.050,
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                                color: appThemes,
                                 borderRadius: BorderRadius.circular(30)),
                             margin:
                                 EdgeInsets.symmetric(horizontal: width * 0.1),
@@ -520,7 +517,7 @@ class _VarificationState extends State<Varification> {
                             width: double.infinity,
                             height: height * 0.050,
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                                color: appThemes,
                                 borderRadius: BorderRadius.circular(30)),
                             margin:
                                 EdgeInsets.symmetric(horizontal: width * 0.1),
